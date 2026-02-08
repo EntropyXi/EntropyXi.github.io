@@ -6,12 +6,12 @@
   
   <title>设计原则与数学推导 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="原则一：平移不变性 假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 (x1, y1) 还是右下角 (x2, y2)，它都是猫。 在全连接网络中，识别左上角的权重 wtop_left 和识别右下角的权重 wbottom_right 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫 我们采用参数共享的解决方案 我们不应该为图像的每个位置学习单独的检测器，而">
+  <meta name="description" content="原则一：平移不变性假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x_1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w_{top_left}$ 和识别右下角的权重 $w_{bottom_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫我们采用参数共享的解决方案我们不应该为图像的每个位置学习单">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计原则与数学推导">
 <meta property="og:url" content="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="原则一：平移不变性 假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 (x1, y1) 还是右下角 (x2, y2)，它都是猫。 在全连接网络中，识别左上角的权重 wtop_left 和识别右下角的权重 wbottom_right 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫 我们采用参数共享的解决方案 我们不应该为图像的每个位置学习单独的检测器，而">
+<meta property="og:description" content="原则一：平移不变性假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x_1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w_{top_left}$ 和识别右下角的权重 $w_{bottom_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫我们采用参数共享的解决方案我们不应该为图像的每个位置学习单">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-08T04:55:52.456Z">
 <meta property="article:modified_time" content="2026-02-08T05:35:03.415Z">
@@ -98,93 +98,31 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="原则一平移不变性">原则一：平移不变性</h3>
-<p>假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角
-<span
-class="math inline">(<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>)</span>
-还是右下角 <span
-class="math inline">(<em>x</em><sub>2</sub>, <em>y</em><sub>2</sub>)</span>，它都是猫。
-在全连接网络中，识别左上角的权重 <span
-class="math inline"><em>w</em><sub><em>t</em><em>o</em><em>p</em>_<em>l</em><em>e</em><em>f</em><em>t</em></sub></span>
-和识别右下角的权重 <span
-class="math inline"><em>w</em><sub><em>b</em><em>o</em><em>t</em><em>t</em><em>o</em><em>m</em>_<em>r</em><em>i</em><em>g</em><em>h</em><em>t</em></sub></span>
-是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫
-我们采用<strong>参数共享</strong>的解决方案
-我们不应该为图像的每个位置学习单独的检测器，而应该定义一个通用的检测器（卷积核、滤波器），让它在整个图像上<strong>滑动</strong>
-- 如果在位置<span
-class="math inline"><strong>A</strong></span>检测到了特征<span
-class="math inline"><em>f</em></span>，那么同样的检测器在位置<span
-class="math inline"><strong>B</strong></span>也应该能检测到特征<span
-class="math inline"><em>f</em></span> - 数学上，这意味着函数<span
-class="math inline"><em>f</em></span> 对于输入 <span
-class="math inline"><em>x</em></span> 的平移操作 <span
-class="math inline"><em>T</em></span> 满足 <span
-class="math inline"><em>f</em>(<em>T</em>(<em>x</em>)) = <em>f</em>(<em>x</em>)</span></p>
-<h3 id="原则二局部性定理">原则二：局部性定理</h3>
-<p>全连接试图试图建立所有像素间的联系，这是及其耗费内存的。因为图像像素具有很强的空间相关性，即像素
-<span
-class="math inline"><em>x</em><sub><em>i</em>, <em>j</em></sub></span>
-的值与其邻域（如 <span
-class="math inline"><em>x</em><sub><em>i</em> + 1, <em>j</em></sub></span>）高度相关，但与距离很远的像素（如
-<span
-class="math inline"><em>x</em><sub><em>i</em> + 500, <em>j</em> + 500</sub></span>）的相关性几乎为零
-所以我们采取<strong>稀疏连接</strong>
-我们限制神经元只与输入图像的一个小窗口（例如<span
-class="math inline">3 × 3</span>或者<span
-class="math inline">5 × 5</span>）相连，这个区域充分地减少了计算量</p>
-<h3 id="原则三层级与感受野">原则三：层级与感受野</h3>
-<p>虽然第一层只关注局部，但我们最终需要识别整张图像。局部的线条如何组合成形状，形状又如何组合成物体？
-我们使用<strong>感受野扩张</strong> - 第 1 层神经元看到 <span
-class="math inline">3 × 3</span> 的像素 - 第 2 层神经元看到第 1 层的
-<span class="math inline">3 × 3</span>
-个输出，这实际上覆盖了原始图像中更大的区域 -
-随着层数加深，高层神经元能“看见”原始图像中更广阔的区域，从而捕获<strong>全局语义信息</strong></p>
-<h2 id="数学形式化">数学形式化</h2>
-<p>我们如何从全连接公式变为卷积公式？ 对于输入图像 <span
-class="math inline"><em>X</em></span> (展开为一维向量) 和输出 <span
-class="math inline"><em>H</em></span>，全连接层定义为</p>
-<p><span
-class="math display"><em>h</em><sub><em>i</em></sub> = ∑<sub><em>j</em></sub><em>W</em><sub><em>i</em>, <em>j</em></sub><em>x</em><sub><em>j</em></sub></span>
-其中 <span
-class="math inline"><em>W</em><sub><em>i</em>, <em>j</em></sub></span>
-表示第 <span class="math inline"><em>j</em></span> 个输入像素对第 <span
-class="math inline"><em>i</em></span>
-个输出神经元的权重。这包含了所有可能的相互作用
-根据<strong>原则二</strong>，神经元 <span
-class="math inline"><em>i</em></span> 只应当受其附近的输入 <span
-class="math inline"><em>j</em></span> 影响。如果 <span
-class="math inline">|<em>i</em> − <em>j</em>| &gt; <em>Δ</em></span>（<span
-class="math inline"><em>Δ</em></span> 为邻域范围），则强制 <span
-class="math inline"><em>W</em><sub><em>i</em>, <em>j</em></sub> = 0</span>。公式变为</p>
-<p><span class="math display">$$
-h_i = \sum_{j=i-\Delta}^{i+\Delta} W_{i,j} x_j
-$$</span> 此时矩阵 <span class="math inline"><strong>W</strong></span>
-变成了带状矩阵，这是一个稀疏矩阵
-根据<strong>原则一</strong>，检测特征的权重不应依赖于具体位置 <span
-class="math inline"><em>i</em></span>，即 <span
-class="math inline"><em>W</em><sub><em>i</em>, <em>j</em></sub></span>
-不应该取决于 <span
-class="math inline"><em>i</em></span>，而只取决于输入和输出的<strong>相对位置</strong>
-<span class="math inline">(<em>i</em> − <em>j</em>)</span> 我们将 <span
-class="math inline"><em>W</em><sub><em>i</em>, <em>j</em></sub></span>
-替换为 <span
-class="math inline"><em>w</em><sub><em>i</em> − <em>j</em></sub></span>（这里
-<span class="math inline"><em>w</em></span> 就是我们的卷积核）</p>
-<p><span class="math display">$$
-h_i = \sum_{j=i-\Delta}^{i+\Delta} w_{i-j} x_j
-$$</span></p>
-<p>如果我们令 <span
-class="math inline"><em>a</em> = <em>i</em> − <em>j</em></span>，则
-<span
-class="math inline"><em>j</em> = <em>i</em> − <em>a</em></span>。通过变量代换，我们得到标准的<strong>离散卷积</strong></p>
-<p><span class="math display">$$
-h_i = \sum_{a=-\Delta}^{\Delta} w_a x_{i-a}
-$$</span></p>
-
+        <h3 id="原则一：平移不变性"><a href="#原则一：平移不变性" class="headerlink" title="原则一：平移不变性"></a>原则一：平移不变性</h3><p>假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x_1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w_{top_left}$ 和识别右下角的权重 $w_{bottom_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫<br>我们采用<strong>参数共享</strong>的解决方案<br>我们不应该为图像的每个位置学习单独的检测器，而应该定义一个通用的检测器（卷积核、滤波器），让它在整个图像上<strong>滑动</strong></p>
+<ul>
+<li>如果在位置$\mathbf{A}$检测到了特征$f$，那么同样的检测器在位置$\mathbf{B}$也应该能检测到特征$f$</li>
+<li>数学上，这意味着函数$f$ 对于输入 $x$ 的平移操作 $T$ 满足 $f(T(x)) = f(x)$</li>
+</ul>
+<h3 id="原则二：局部性定理"><a href="#原则二：局部性定理" class="headerlink" title="原则二：局部性定理"></a>原则二：局部性定理</h3><p>全连接试图试图建立所有像素间的联系，这是及其耗费内存的。因为图像像素具有很强的空间相关性，即像素 $x_{i,j}$ 的值与其邻域（如 $x_{i+1, j}$）高度相关，但与距离很远的像素（如 $x_{i+500, j+500}$）的相关性几乎为零<br>所以我们采取<strong>稀疏连接</strong><br>我们限制神经元只与输入图像的一个小窗口（例如$3\times3$或者$5\times5$）相连，这个区域充分地减少了计算量</p>
+<h3 id="原则三：层级与感受野"><a href="#原则三：层级与感受野" class="headerlink" title="原则三：层级与感受野"></a>原则三：层级与感受野</h3><p>虽然第一层只关注局部，但我们最终需要识别整张图像。局部的线条如何组合成形状，形状又如何组合成物体？<br>我们使用<strong>感受野扩张</strong></p>
+<ul>
+<li>第 1 层神经元看到 $3 \times 3$ 的像素</li>
+<li>第 2 层神经元看到第 1 层的 $3 \times 3$ 个输出，这实际上覆盖了原始图像中更大的区域</li>
+<li>随着层数加深，高层神经元能“看见”原始图像中更广阔的区域，从而捕获<strong>全局语义信息</strong></li>
+</ul>
+<h2 id="数学形式化"><a href="#数学形式化" class="headerlink" title="数学形式化"></a>数学形式化</h2><p>我们如何从全连接公式变为卷积公式？<br>对于输入图像 $X$ (展开为一维向量) 和输出 $H$，全连接层定义为</p>
+<script type="math/tex; mode=display">
+h_i = \sum_{j} W_{i,j} x_j</script><p>其中 $W_{i,j}$ 表示第 $j$ 个输入像素对第 $i$ 个输出神经元的权重。这包含了所有可能的相互作用<br>根据<strong>原则二</strong>，神经元 $i$ 只应当受其附近的输入 $j$ 影响。如果 $|i - j| &gt; \Delta$（$\Delta$ 为邻域范围），则强制 $W_{i,j} = 0$。公式变为</p>
+<script type="math/tex; mode=display">
+h_i = \sum_{j=i-\Delta}^{i+\Delta} W_{i,j} x_j</script><p>此时矩阵 $\mathbf{W}$ 变成了带状矩阵，这是一个稀疏矩阵<br>根据<strong>原则一</strong>，检测特征的权重不应依赖于具体位置 $i$，即 $W_{i, j}$ 不应该取决于 $i$，而只取决于输入和输出的<strong>相对位置</strong> $(i-j)$<br>我们将 $W_{i,j}$ 替换为 $w_{i-j}$（这里 $w$ 就是我们的卷积核）</p>
+<script type="math/tex; mode=display">
+h_i = \sum_{j=i-\Delta}^{i+\Delta} w_{i-j} x_j</script><p>如果我们令 $a = i-j$，则 $j = i-a$。通过变量代换，我们得到标准的<strong>离散卷积</strong></p>
+<script type="math/tex; mode=display">
+h_i = \sum_{a=-\Delta}^{\Delta} w_a x_{i-a}</script>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" data-id="cuidaZtDlKP6Nuy7PItleuPPF" data-title="设计原则与数学推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" data-id="cuidbxRhHsOB5sQ9P5ZIjeUMe" data-title="设计原则与数学推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -264,11 +202,11 @@ $$</span></p>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">动量法</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">LossSumExp技巧（LSE）</a>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">随机梯度下降</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">动量法</a>
           </li>
         
           <li>
@@ -276,7 +214,7 @@ $$</span></p>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">LossSumExp技巧（LSE）</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">随机梯度下降</a>
           </li>
         
       </ul>
