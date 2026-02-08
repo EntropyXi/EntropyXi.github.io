@@ -2,18 +2,10 @@
 title: 整理一下softmax回归实现中训练部分代码的思路
 tags:
   - 深度学习，线性回归
-mathjax: "true"
+mathjax: true
 date: 2026-02-08 13:00:00
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important; /* 超出宽度时显示滚动条 */
-    overflow-y: hidden;          /* 隐藏垂直滚动条 */
-    max-width: 100%;             /* 限制最大宽度为屏幕宽度 */
-    -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
-}
-</style>
+### 流程总结
 
 在训练前，我们需要利用一些函数来评估模型的分类精度
 首先，如果`y_hat`是矩阵，那么假定第二个维度存储每个类的预测分数。 我们使用`argmax`获得每行中最大元素的索引来获得预测类别。 然后我们将预测类别与真实`y`元素进行比较。 由于等式运算符“`==`”对数据类型很敏感， 因此我们将`y_hat`的数据类型转换为与`y`的数据类型一致。 结果是一个包含0（错）和1（对）的张量。 最后，我们求和会得到正确预测的数量。

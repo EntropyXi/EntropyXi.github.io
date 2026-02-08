@@ -98,27 +98,9 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: anzhiyu
 
-# Kramed configuration
-kramed:
-  gfm: true
-  pedantic: false
-  sanitize: false
-  tables: true
-  breaks: true
-  smartLists: true
-  smartypants: true
-  modifyAnchors: 0
-  autolink: true
-  mangle: true
-  decodeEntities: false
-  lazyload: false
-  prependRoot: false
-  postAsset: false
-  external_link:
-    enable: false
-    exclude: []
-    npm_link: false
-  descriptionLists: true
+# pandoc
+pandoc:
+  math: --mathjax
 
 # mathjax
 mathjax:
