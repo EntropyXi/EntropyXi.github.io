@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>共轭梯度法中参数alpha和beta的推导 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="我们在这里推导$\mathbf{p}k &#x3D; \mathbf{r}k + \beta{k-1} \mathbf{p}{k-1}$中的参数$\alpha$和$\beta$ $\alpha_k$ 的推导我们现在的目标是：在已知当前位置 $\mathbf{x}_k$ 和搜索方向 $\mathbf{p}k$ 的情况下，确定我们要走多远这意味着我们要选择一个 $\alpha_k$，使得函数 $\va">
+  <meta name="description" content="我们在这里推导$\mathbf{p}k &#x3D; \mathbf{r}_k + \beta{k-1} \mathbf{p}_{k-1}$中的参数$\alpha$和$\beta$ $\alpha_k$ 的推导我们现在的目标是：在已知当前位置 $\mathbf{x}k$ 和搜索方向 $\mathbf{p}_k$ 的情况下，确定我们要走多远这意味着我们要选择一个 $\alpha_k$，使得函数 $\varph">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="共轭梯度法中参数alpha和beta的推导">
 <meta property="og:url" content="http://example.com/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="我们在这里推导$\mathbf{p}k &#x3D; \mathbf{r}k + \beta{k-1} \mathbf{p}{k-1}$中的参数$\alpha$和$\beta$ $\alpha_k$ 的推导我们现在的目标是：在已知当前位置 $\mathbf{x}_k$ 和搜索方向 $\mathbf{p}k$ 的情况下，确定我们要走多远这意味着我们要选择一个 $\alpha_k$，使得函数 $\va">
+<meta property="og:description" content="我们在这里推导$\mathbf{p}k &#x3D; \mathbf{r}_k + \beta{k-1} \mathbf{p}_{k-1}$中的参数$\alpha$和$\beta$ $\alpha_k$ 的推导我们现在的目标是：在已知当前位置 $\mathbf{x}k$ 和搜索方向 $\mathbf{p}_k$ 的情况下，确定我们要走多远这意味着我们要选择一个 $\alpha_k$，使得函数 $\varph">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-02-08T04:55:01.434Z">
-<meta property="article:modified_time" content="2026-02-08T04:55:01.435Z">
+<meta property="article:published_time" content="2026-02-08T05:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-08T05:16:27.176Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -78,30 +78,52 @@
         <section id="main"><article id="post-数值分析/共轭梯度法中参数alpha和beta的推导" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/" class="article-date">
-  <time class="dt-published" datetime="2026-02-08T04:55:01.434Z" itemprop="datePublished">2026-02-08</time>
+  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      共轭梯度法中参数alpha和beta的推导
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>我们在这里推导$\mathbf{p}<em>k &#x3D; \mathbf{r}<em>k + \beta</em>{k-1} \mathbf{p}</em>{k-1}$中的参数$\alpha$和$\beta$</p>
-<h3 id="alpha-k-的推导"><a href="#alpha-k-的推导" class="headerlink" title="$\alpha_k$ 的推导"></a>$\alpha_k$ 的推导</h3><p>我们现在的目标是：在已知当前位置 $\mathbf{x}_k$ 和搜索方向 $\mathbf{p}<em>k$ 的情况下，确定我们要走多远<br>这意味着我们要选择一个 $\alpha_k$，使得函数 $\varphi$ 在这条直线上达到<strong>最小值</strong>。<br>我们将 $\mathbf{x}</em>{k+1} &#x3D; \mathbf{x}_k + \alpha \mathbf{p}_k$ 代入 $\varphi(\mathbf{u})$ 的表达式中，把 $\varphi$ 看作只关于 $\alpha$ 的函数 $f(\alpha)$：<br>$$f(\alpha) &#x3D; \varphi(\mathbf{x}_k + \alpha \mathbf{p}_k)$$<br>展开 $\varphi(\mathbf{u}) &#x3D; \mathbf{u}^T \mathbf{A} \mathbf{u} - 2\mathbf{u}^T \mathbf{b}$<br>$$f(\alpha) &#x3D; (\mathbf{x}_k + \alpha \mathbf{p}_k)^T \mathbf{A} (\mathbf{x}_k + \alpha \mathbf{p}_k) - 2(\mathbf{x}_k + \alpha \mathbf{p}_k)^T \mathbf{b}$$</p>
-<p>展开括号（利用 $\mathbf{A}$ 的对称性，$\mathbf{x}_k^T \mathbf{A} \mathbf{p}_k &#x3D; \mathbf{p}_k^T \mathbf{A} \mathbf{x}_k$）<br>$$f(\alpha) &#x3D; \underbrace{\mathbf{x}_k^T \mathbf{A} \mathbf{x}_k - 2\mathbf{x}<em>k^T \mathbf{b}}</em>{\text{常数项}} + 2\alpha \mathbf{p}_k^T \mathbf{A} \mathbf{x}_k + \alpha^2 \mathbf{p}_k^T \mathbf{A} \mathbf{p}_k - 2\alpha \mathbf{p}_k^T \mathbf{b}$$<br>为了求最小值，我们对 $\alpha$ 求导，并令导数为 $0$<br>$$\frac{d f(\alpha)}{d \alpha} &#x3D; 2 \mathbf{p}_k^T \mathbf{A} \mathbf{x}_k + 2\alpha \mathbf{p}_k^T \mathbf{A} \mathbf{p}_k - 2 \mathbf{p}_k^T \mathbf{b} &#x3D; 0$$</p>
-<p>整理<br>$$\alpha (\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k) + \mathbf{p}_k^T (\mathbf{A} \mathbf{x}_k - \mathbf{b}) &#x3D; 0$$</p>
-<p>因为 $\mathbf{A} \mathbf{x}_k - \mathbf{b} &#x3D; -\mathbf{r}_k$，所以<br>$$\alpha (\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k) - \mathbf{p}_k^T \mathbf{r}_k &#x3D; 0$$<br>最后解出 $\alpha$</p>
-<p>$$\alpha_k &#x3D; \frac{\mathbf{p}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}$$<br>你会发现上面的公式分子是 $\mathbf{p}_k^T \mathbf{r}_k$，但在最终算法里我们写的是 $\mathbf{r}_k^T \mathbf{r}_k$。为什么它们会相等？<br>回顾 $\mathbf{p}_k$ 的定义：$\mathbf{p}<em>k &#x3D; \mathbf{r}<em>k + \beta</em>{k-1} \mathbf{p}</em>{k-1}$。<br>两边同时左乘 $\mathbf{r}_k^T$<br>$$\mathbf{r}_k^T \mathbf{p}_k &#x3D; \mathbf{r}<em>k^T \mathbf{r}<em>k + \beta</em>{k-1} \underbrace{\mathbf{r}<em>k^T \mathbf{p}</em>{k-1}}</em>{0}$$<br>在共轭梯度法中，有一个重要的性质：<strong>当前的残差 $\mathbf{r}<em>k$ 与旧的搜索方向 $\mathbf{p}</em>{k-1}$ 正交</strong>（即 $\mathbf{r}<em>k^T \mathbf{p}</em>{k-1} &#x3D; 0$）<br>因此，分子可以简化为<br>$$\mathbf{p}_k^T \mathbf{r}_k &#x3D; \mathbf{r}_k^T \mathbf{r}_k$$<br>最终得到<br>$$\alpha_k &#x3D; \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}$$</p>
-<h3 id="beta-k-的推导"><a href="#beta-k-的推导" class="headerlink" title="$\beta_k$ 的推导"></a>$\beta_k$ 的推导</h3><p>我们在算法中定义了搜索方向的更新公式：<br>$$\mathbf{p}<em>{k+1} &#x3D; \mathbf{r}</em>{k+1} + \beta_k \mathbf{p}<em>k$$<br>我们的目标是找到一个合适的 $\beta_k$，使得新的方向 $\mathbf{p}</em>{k+1}$ 与旧的方向 $\mathbf{p}_k$ 关于矩阵 $\mathbf{A}$ <strong>共轭</strong></p>
-<h4 id="列出共轭条件"><a href="#列出共轭条件" class="headerlink" title="列出共轭条件"></a>列出共轭条件</h4><p>根据共轭梯度的定义，我们需要<br>$$\mathbf{p}<em>{k+1}^T \mathbf{A} \mathbf{p}<em>k &#x3D; 0$$<br>将 $\mathbf{p}</em>{k+1}$ 的定义代入上述条件中<br>$$(\mathbf{r}</em>{k+1} + \beta_k \mathbf{p}_k)^T \mathbf{A} \mathbf{p}<em>k &#x3D; 0$$<br>展开括号<br>$$\mathbf{r}</em>{k+1}^T \mathbf{A} \mathbf{p}_k + \beta_k \mathbf{p}_k^T \mathbf{A} \mathbf{p}<em>k &#x3D; 0$$<br>移项并求解 $\beta_k$<br>$$\beta_k &#x3D; - \frac{\mathbf{r}</em>{k+1}^T \mathbf{A} \mathbf{p}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}$$<br>这个公式虽然正确，但计算起来很麻烦（需要做矩阵乘法 $\mathbf{A}\mathbf{p}<em>k$）。我们可以利用 $\alpha_k$ 的更新公式来化简它。<br>回顾残差的更新公式：$\mathbf{r}</em>{k+1} &#x3D; \mathbf{r}_k - \alpha_k \mathbf{A} \mathbf{p}<em>k$。<br>我们可以反解出 $\mathbf{A} \mathbf{p}<em>k$：<br>$$\mathbf{A} \mathbf{p}<em>k &#x3D; -\frac{1}{\alpha_k} (\mathbf{r}</em>{k+1} - \mathbf{r}<em>k)$$<br>将这个式子代入 $\beta_k$ 分子的 $\mathbf{A} \mathbf{p}<em>k$ 中：<br>$$\text{分子} &#x3D; \mathbf{r}</em>{k+1}^T \mathbf{A} \mathbf{p}<em>k &#x3D; \mathbf{r}</em>{k+1}^T \left[ -\frac{1}{\alpha_k} (\mathbf{r}</em>{k+1} - \mathbf{r}<em>k) \right]$$<br>$$&#x3D; -\frac{1}{\alpha_k} (\mathbf{r}</em>{k+1}^T \mathbf{r}</em>{k+1} - \underbrace{\mathbf{r}</em>{k+1}^T \mathbf{r}<em>k}</em>{0})$$</p>
-<p>又因为新残差与旧残差正交 ($\mathbf{r}<em>{k+1}^T \mathbf{r}<em>k &#x3D; 0$)，所以分子简化为$$-\frac{1}{\alpha_k} \mathbf{r}</em>{k+1}^T \mathbf{r}</em>{k+1}$$现在看分母，回顾 $\alpha_k &#x3D; \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}$，所以分母其实等于：<br>$$\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k &#x3D; \frac{\mathbf{r}<em>k^T \mathbf{r}<em>k}{\alpha_k}$$化简后分子和分母相除<br>$$\beta_k &#x3D; - \frac{-\frac{1}{\alpha_k} \mathbf{r}</em>{k+1}^T \mathbf{r}</em>{k+1}}{\frac{1}{\alpha_k} \mathbf{r}_k^T \mathbf{r}_k}$$<br>消去 $-\frac{1}{\alpha_k}$ 和 $\frac{1}{\alpha_k}$，最终就得到</p>
-<p>$$\beta_k &#x3D; \frac{\mathbf{r}<em>{k+1}^T \mathbf{r}</em>{k+1}}{\mathbf{r}_k^T \mathbf{r}_k}$$</p>
-
+        <p>我们在这里推导$\mathbf{p}<em>k = \mathbf{r}_k + \beta</em>{k-1} \mathbf{p}_{k-1}$中的参数$\alpha$和$\beta$</p>
+<h3 id="alpha-k-的推导"><a href="#alpha-k-的推导" class="headerlink" title="$\alpha_k$ 的推导"></a>$\alpha_k$ 的推导</h3><p>我们现在的目标是：在已知当前位置 $\mathbf{x}<em>k$ 和搜索方向 $\mathbf{p}_k$ 的情况下，确定我们要走多远<br>这意味着我们要选择一个 $\alpha_k$，使得函数 $\varphi$ 在这条直线上达到<strong>最小值</strong>。<br>我们将 $\mathbf{x}</em>{k+1} = \mathbf{x}_k + \alpha \mathbf{p}_k$ 代入 $\varphi(\mathbf{u})$ 的表达式中，把 $\varphi$ 看作只关于 $\alpha$ 的函数 $f(\alpha)$：</p>
+<script type="math/tex; mode=display">f(\alpha) = \varphi(\mathbf{x}_k + \alpha \mathbf{p}_k)</script><p>展开 $\varphi(\mathbf{u}) = \mathbf{u}^T \mathbf{A} \mathbf{u} - 2\mathbf{u}^T \mathbf{b}$</p>
+<script type="math/tex; mode=display">f(\alpha) = (\mathbf{x}_k + \alpha \mathbf{p}_k)^T \mathbf{A} (\mathbf{x}_k + \alpha \mathbf{p}_k) - 2(\mathbf{x}_k + \alpha \mathbf{p}_k)^T \mathbf{b}</script><p>展开括号（利用 $\mathbf{A}$ 的对称性，$\mathbf{x}_k^T \mathbf{A} \mathbf{p}_k = \mathbf{p}_k^T \mathbf{A} \mathbf{x}_k$）</p>
+<script type="math/tex; mode=display">f(\alpha) = \underbrace{\mathbf{x}_k^T \mathbf{A} \mathbf{x}_k - 2\mathbf{x}_k^T \mathbf{b}}_{\text{常数项}} + 2\alpha \mathbf{p}_k^T \mathbf{A} \mathbf{x}_k + \alpha^2 \mathbf{p}_k^T \mathbf{A} \mathbf{p}_k - 2\alpha \mathbf{p}_k^T \mathbf{b}</script><p>为了求最小值，我们对 $\alpha$ 求导，并令导数为 $0$</p>
+<script type="math/tex; mode=display">\frac{d f(\alpha)}{d \alpha} = 2 \mathbf{p}_k^T \mathbf{A} \mathbf{x}_k + 2\alpha \mathbf{p}_k^T \mathbf{A} \mathbf{p}_k - 2 \mathbf{p}_k^T \mathbf{b} = 0</script><p>整理</p>
+<script type="math/tex; mode=display">\alpha (\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k) + \mathbf{p}_k^T (\mathbf{A} \mathbf{x}_k - \mathbf{b}) = 0</script><p>因为 $\mathbf{A} \mathbf{x}_k - \mathbf{b} = -\mathbf{r}_k$，所以</p>
+<script type="math/tex; mode=display">\alpha (\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k) - \mathbf{p}_k^T \mathbf{r}_k = 0</script><p>最后解出 $\alpha$</p>
+<script type="math/tex; mode=display">\alpha_k = \frac{\mathbf{p}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}</script><p>你会发现上面的公式分子是 $\mathbf{p}<em>k^T \mathbf{r}_k$，但在最终算法里我们写的是 $\mathbf{r}_k^T \mathbf{r}_k$。为什么它们会相等？<br>回顾 $\mathbf{p}_k$ 的定义：$\mathbf{p}_k = \mathbf{r}_k + \beta</em>{k-1} \mathbf{p}_{k-1}$。<br>两边同时左乘 $\mathbf{r}_k^T$</p>
+<script type="math/tex; mode=display">\mathbf{r}_k^T \mathbf{p}_k = \mathbf{r}_k^T \mathbf{r}_k + \beta_{k-1} \underbrace{\mathbf{r}_k^T \mathbf{p}_{k-1}}_{0}</script><p>在共轭梯度法中，有一个重要的性质：<strong>当前的残差 $\mathbf{r}<em>k$ 与旧的搜索方向 $\mathbf{p}</em>{k-1}$ 正交</strong>（即 $\mathbf{r}<em>k^T \mathbf{p}</em>{k-1} = 0$）<br>因此，分子可以简化为</p>
+<script type="math/tex; mode=display">\mathbf{p}_k^T \mathbf{r}_k = \mathbf{r}_k^T \mathbf{r}_k</script><p>最终得到</p>
+<script type="math/tex; mode=display">\alpha_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}</script><h3 id="beta-k-的推导"><a href="#beta-k-的推导" class="headerlink" title="$\beta_k$ 的推导"></a>$\beta_k$ 的推导</h3><p>我们在算法中定义了搜索方向的更新公式：</p>
+<script type="math/tex; mode=display">\mathbf{p}_{k+1} = \mathbf{r}_{k+1} + \beta_k \mathbf{p}_k</script><p>我们的目标是找到一个合适的 $\beta<em>k$，使得新的方向 $\mathbf{p}</em>{k+1}$ 与旧的方向 $\mathbf{p}_k$ 关于矩阵 $\mathbf{A}$ <strong>共轭</strong></p>
+<h4 id="列出共轭条件"><a href="#列出共轭条件" class="headerlink" title="列出共轭条件"></a>列出共轭条件</h4><p>根据共轭梯度的定义，我们需要</p>
+<script type="math/tex; mode=display">\mathbf{p}_{k+1}^T \mathbf{A} \mathbf{p}_k = 0</script><p>将 $\mathbf{p}_{k+1}$ 的定义代入上述条件中</p>
+<script type="math/tex; mode=display">(\mathbf{r}_{k+1} + \beta_k \mathbf{p}_k)^T \mathbf{A} \mathbf{p}_k = 0</script><p>展开括号</p>
+<script type="math/tex; mode=display">\mathbf{r}_{k+1}^T \mathbf{A} \mathbf{p}_k + \beta_k \mathbf{p}_k^T \mathbf{A} \mathbf{p}_k = 0</script><p>移项并求解 $\beta_k$</p>
+<script type="math/tex; mode=display">\beta_k = - \frac{\mathbf{r}_{k+1}^T \mathbf{A} \mathbf{p}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}</script><p>这个公式虽然正确，但计算起来很麻烦（需要做矩阵乘法 $\mathbf{A}\mathbf{p}<em>k$）。我们可以利用 $\alpha_k$ 的更新公式来化简它。<br>回顾残差的更新公式：$\mathbf{r}</em>{k+1} = \mathbf{r}_k - \alpha_k \mathbf{A} \mathbf{p}_k$。<br>我们可以反解出 $\mathbf{A} \mathbf{p}_k$：</p>
+<script type="math/tex; mode=display">\mathbf{A} \mathbf{p}_k = -\frac{1}{\alpha_k} (\mathbf{r}_{k+1} - \mathbf{r}_k)</script><p>将这个式子代入 $\beta_k$ 分子的 $\mathbf{A} \mathbf{p}_k$ 中：</p>
+<script type="math/tex; mode=display">\text{分子} = \mathbf{r}_{k+1}^T \mathbf{A} \mathbf{p}_k = \mathbf{r}_{k+1}^T \left[ -\frac{1}{\alpha_k} (\mathbf{r}_{k+1} - \mathbf{r}_k) \right]</script><script type="math/tex; mode=display">= -\frac{1}{\alpha_k} (\mathbf{r}_{k+1}^T \mathbf{r}_{k+1} - \underbrace{\mathbf{r}_{k+1}^T \mathbf{r}_k}_{0})</script><p>又因为新残差与旧残差正交 ($\mathbf{r}<em>{k+1}^T \mathbf{r}_k = 0$)，所以分子简化为$$-\frac{1}{\alpha_k} \mathbf{r}</em>{k+1}^T \mathbf{r}_{k+1}$$现在看分母，回顾 $\alpha_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}$，所以分母其实等于：</p>
+<script type="math/tex; mode=display">\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\alpha_k}$$化简后分子和分母相除
+$$\beta_k = - \frac{-\frac{1}{\alpha_k} \mathbf{r}_{k+1}^T \mathbf{r}_{k+1}}{\frac{1}{\alpha_k} \mathbf{r}_k^T \mathbf{r}_k}</script><p>消去 $-\frac{1}{\alpha_k}$ 和 $\frac{1}{\alpha_k}$，最终就得到</p>
+<script type="math/tex; mode=display">\beta_k = \frac{\mathbf{r}_{k+1}^T \mathbf{r}_{k+1}}{\mathbf{r}_k^T \mathbf{r}_k}</script>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/" data-id="cuidwaarZf7oQrtFtkWmweGuD" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/" data-id="cuidwaarZf7oQrtFtkWmweGuD" data-title="共轭梯度法中参数alpha和beta的推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -111,19 +133,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2026/02/08/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">LossSumExp技巧（LSE）</div>
     </a>
   
 </nav>
@@ -140,9 +153,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softmax%E5%9B%9E%E5%BD%92/" rel="tag">Softmax回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">卷积神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">深度学习，线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Softmax%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">Softmax回归</a> <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">卷积神经网络</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" style="font-size: 15px;">深度学习，线性回归</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" style="font-size: 10px;">线性回归</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -161,23 +188,23 @@
       <ul>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">(no title)</a>
+            <a href="/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/">共轭梯度法中参数alpha和beta的推导</a>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">(no title)</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">LossSumExp技巧（LSE）</a>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">(no title)</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/RMSProp/">(no title)</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">动量法</a>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">(no title)</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">整理一下softmax回归实现中训练部分代码的思路</a>
           </li>
         
       </ul>

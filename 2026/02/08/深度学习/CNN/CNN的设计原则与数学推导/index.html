@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>动量法 | Hexo</title>
+  <title>设计原则与数学推导 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="动量法旨在加速 SGD 在相关方向上的收敛，并抑制无关方向上的震荡。在时间步 $t$，给定目标函数 $f(\mathbf{x})$ 关于参数 $\mathbf{x}$ 的梯度 $\mathbf{g}t &#x3D; \nabla{\mathbf{x}} f(\mathbf{x}_t)$，引入速度向量 $\mathbf{v}_t$，其更新公式如下 \begin{aligned} \mathbf{v}_{t+1">
+  <meta name="description" content="原则一：平移不变性假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w{top_left}$ 和识别右下角的权重 $w_{bottom_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫我们采用参数共享的解决方案我们不应该为图像的每个位置学习单独的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动量法">
-<meta property="og:url" content="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/index.html">
+<meta property="og:title" content="设计原则与数学推导">
+<meta property="og:url" content="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="动量法旨在加速 SGD 在相关方向上的收敛，并抑制无关方向上的震荡。在时间步 $t$，给定目标函数 $f(\mathbf{x})$ 关于参数 $\mathbf{x}$ 的梯度 $\mathbf{g}t &#x3D; \nabla{\mathbf{x}} f(\mathbf{x}_t)$，引入速度向量 $\mathbf{v}_t$，其更新公式如下 \begin{aligned} \mathbf{v}_{t+1">
+<meta property="og:description" content="原则一：平移不变性假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w{top_left}$ 和识别右下角的权重 $w_{bottom_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫我们采用参数共享的解决方案我们不应该为图像的每个位置学习单独的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-02-08T05:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-08T05:18:45.350Z">
+<meta property="article:published_time" content="2026-02-08T04:55:52.456Z">
+<meta property="article:modified_time" content="2026-02-08T05:14:47.571Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="卷积神经网络">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
   
@@ -76,10 +77,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-深度学习/线性回归/动量法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-深度学习/CNN/CNN的设计原则与数学推导" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
+    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" class="article-date">
+  <time class="dt-published" datetime="2026-02-08T04:55:52.456Z" itemprop="datePublished">2026-02-08</time>
 </a>
     
   </div>
@@ -90,7 +91,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      动量法
+      设计原则与数学推导
     </h1>
   
 
@@ -98,36 +99,31 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>动量法旨在加速 SGD 在相关方向上的收敛，并抑制无关方向上的震荡。在时间步 $t$，给定目标函数 $f(\mathbf{x})$ 关于参数 $\mathbf{x}$ 的梯度 $\mathbf{g}<em>t = \nabla</em>{\mathbf{x}} f(\mathbf{x}_t)$，引入速度向量 $\mathbf{v}_t$，其更新公式如下</p>
-<script type="math/tex; mode=display">\begin{aligned}
-\mathbf{v}_{t+1} &= \mu \mathbf{v}_t + \eta \mathbf{g}_t \\
-\mathbf{x}_{t+1} &= \mathbf{x}_t - \mathbf{v}_{t+1}
-\end{aligned}</script><p>其中，$\mu \in [0, 1)$ 为 <strong>动量系数</strong>（通常取 0.9），$\eta$ 为<strong>学习率</strong></p>
-<h3 id="构造与推导"><a href="#构造与推导" class="headerlink" title="构造与推导"></a>构造与推导</h3><p>考虑一个局部呈现为狭长山谷状地损失函数表面。如果不适用动量，SGD的更新公式为$\mathbf{x}_{t+1} = \mathbf{x}_t - \eta \mathbf{g}_t$，此时出现两个问题</p>
+        <h3 id="原则一：平移不变性"><a href="#原则一：平移不变性" class="headerlink" title="原则一：平移不变性"></a>原则一：平移不变性</h3><p>假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x<em>1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w</em>{top_left}$ 和识别右下角的权重 $w_{bottom_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫<br>我们采用<strong>参数共享</strong>的解决方案<br>我们不应该为图像的每个位置学习单独的检测器，而应该定义一个通用的检测器（卷积核、滤波器），让它在整个图像上<strong>滑动</strong></p>
 <ul>
-<li>在山谷的横截面方向（高曲率，梯度大），$\mathbf{g}_t$很大，导致参数在山谷两壁间剧烈震荡</li>
-<li>在山谷的延伸方向（低曲率，梯度小），$\mathbf{g}_t$很小，导致收敛的速度极慢<br>而我们所需要的是，我们希望算法能够记住之前的更新方向，在震荡方向上相互抵消，在平缓方向上累积速度</li>
+<li>如果在位置$\mathbf{A}$检测到了特征$f$，那么同样的检测器在位置$\mathbf{B}$也应该能检测到特征$f$</li>
+<li>数学上，这意味着函数$f$ 对于输入 $x$ 的平移操作 $T$ 满足 $f(T(x)) = f(x)$</li>
 </ul>
-<p>我们需要引入一个<strong>时间平滑</strong>机制</p>
-<ol>
-<li>如果连续多次的方向一致（平滑），步长应增大</li>
-<li>如果连续梯度的方向相反（震荡），步长应减小</li>
-</ol>
-<p><strong>所以</strong>，我们将当前的更新向量不再仅仅设为当前梯度，而是设为当前梯度与过去梯度的<strong>指数加权移动平均</strong><br>定义累积变量 $\mathbf{v}_t$。在 $t=0$ 时，$\mathbf{v}_0 = 0$。<br>在 $t=1$ 时，$\mathbf{v}_1 = \eta \mathbf{g}_0$。<br>在 $t=2$ 时，我们要保留 $\mathbf{v}_1$ 的一部分，并加上新的梯度：$\mathbf{v}_2 = \mu \mathbf{v}_1 + \eta \mathbf{g}_1$。<br>展开递归式：</p>
-<script type="math/tex; mode=display">\mathbf{v}_{t+1} = \eta \mathbf{g}_t + \mu (\eta \mathbf{g}_{t-1} + \mu \mathbf{v}_{t-1}) = \eta \sum_{\tau=0}^{t} \mu^{t-\tau} \mathbf{g}_\tau</script><p>观察此式：</p>
+<h3 id="原则二：局部性定理"><a href="#原则二：局部性定理" class="headerlink" title="原则二：局部性定理"></a>原则二：局部性定理</h3><p>全连接试图试图建立所有像素间的联系，这是及其耗费内存的。因为图像像素具有很强的空间相关性，即像素 $x<em>{i,j}$ 的值与其邻域（如 $x</em>{i+1, j}$）高度相关，但与距离很远的像素（如 $x_{i+500, j+500}$）的相关性几乎为零<br>所以我们采取<strong>稀疏连接</strong><br>我们限制神经元只与输入图像的一个小窗口（例如$3\times3$或者$5\times5$）相连，这个区域充分地减少了计算量</p>
+<h3 id="原则三：层级与感受野"><a href="#原则三：层级与感受野" class="headerlink" title="原则三：层级与感受野"></a>原则三：层级与感受野</h3><p>虽然第一层只关注局部，但我们最终需要识别整张图像。局部的线条如何组合成形状，形状又如何组合成物体？<br>我们使用<strong>感受野扩张</strong></p>
 <ul>
-<li>当梯度方向一致时（$\text{sign}(\mathbf{g}<em>t) = \text{sign}(\mathbf{g}</em>{t-1})$），$\mathbf{v}$ 的模长会增大，起到加速作用。</li>
-<li>当梯度方向改变时（$\text{sign}(\mathbf{g}<em>t) \neq \text{sign}(\mathbf{g}</em>{t-1})$），正负项在求和中互相抵消，起到抑制震荡作用。</li>
+<li>第 1 层神经元看到 $3 \times 3$ 的像素</li>
+<li>第 2 层神经元看到第 1 层的 $3 \times 3$ 个输出，这实际上覆盖了原始图像中更大的区域</li>
+<li>随着层数加深，高层神经元能“看见”原始图像中更广阔的区域，从而捕获<strong>全局语义信息</strong></li>
 </ul>
-
+<h2 id="数学形式化"><a href="#数学形式化" class="headerlink" title="数学形式化"></a>数学形式化</h2><p>我们如何从全连接公式变为卷积公式？<br>对于输入图像 $X$ (展开为一维向量) 和输出 $H$，全连接层定义为</p>
+<script type="math/tex; mode=display">h_i = \sum_{j} W_{i,j} x_j</script><p>其中 $W<em>{i,j}$ 表示第 $j$ 个输入像素对第 $i$ 个输出神经元的权重。这包含了所有可能的相互作用<br>根据<strong>原则二</strong>，神经元 $i$ 只应当受其附近的输入 $j$ 影响。如果 $|i - j| &gt; \Delta$（$\Delta$ 为邻域范围），则强制 $W</em>{i,j} = 0$。公式变为</p>
+<script type="math/tex; mode=display">h_i = \sum_{j=i-\Delta}^{i+\Delta} W_{i,j} x_j</script><p>此时矩阵 $\mathbf{W}$ 变成了带状矩阵，这是一个稀疏矩阵<br>根据<strong>原则一</strong>，检测特征的权重不应依赖于具体位置 $i$，即 $W<em>{i, j}$ 不应该取决于 $i$，而只取决于输入和输出的<strong>相对位置</strong> $(i-j)$<br>我们将 $W</em>{i,j}$ 替换为 $w_{i-j}$（这里 $w$ 就是我们的卷积核）</p>
+<script type="math/tex; mode=display">h_i = \sum_{j=i-\Delta}^{i+\Delta} w_{i-j} x_j</script><p>如果我们令 $a = i-j$，则 $j = i-a$。通过变量代换，我们得到标准的<strong>离散卷积</strong></p>
+<script type="math/tex; mode=display">h_i = \sum_{a=-\Delta}^{\Delta} w_a x_{i-a}</script>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/" data-id="cuid237ghmf02mTGiVd2OHxRO" data-title="动量法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" data-id="cuidRFe3iwxnezN18Jk5R9g4I" data-title="设计原则与数学推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">卷积神经网络</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
 
     </footer>
   </div>
@@ -135,19 +131,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/Adam%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/RMSProp/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Adam算法
+          RMSProp
         
       </div>
     </a>
   
   
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/02/08/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">整理一下softmax回归实现中训练部分代码的思路</div>
+      <div class="article-nav-title">Hello World</div>
     </a>
   
 </nav>
