@@ -5,6 +5,9 @@ on:
     branches:
       - source # 当 source 分支有推送时触发
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

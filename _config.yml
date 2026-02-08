@@ -98,8 +98,8 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: anzhiyu
 
-# Marked configuration
-marked:
+# Kramed configuration
+kramed:
   gfm: true
   pedantic: false
   sanitize: false
