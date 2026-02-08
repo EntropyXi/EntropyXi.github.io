@@ -73,6 +73,279 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-深度学习/Adam算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="偏差">偏差</h3>
+<p>我们完成了Momentum和RMSProp 如果我们将两者拼凑在一起 1.
+更新一阶矩（动量）</p>
+<p><span
+class="math display"><em>m</em><sub><em>t</em></sub> = <em>β</em><sub>1</sub><em>m</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>1</sub>)<strong>g</strong><sub><em>t</em></sub></span></p>
+<ol start="2" type="1">
+<li>更新二阶矩（自适应项）</li>
+</ol>
+<p><span
+class="math display"><em>v</em><sub><em>t</em></sub> = <em>β</em><sub>2</sub><em>v</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>2</sub>)<strong>g</strong><sub><em>t</em></sub><sup>2</sup></span></p>
+<ol start="3" type="1">
+<li>参数更新</li>
+</ol>
+<p><span class="math display">$$
+\mathbf{x}_{t+1} = \mathbf{x}_t - \eta \frac{m_t}{\sqrt{v_t} + \epsilon}
+$$</span></p>
+<p>其中 <span class="math inline"><em>β</em><sub>1</sub></span> 通常为
+0.9，<span class="math inline"><em>β</em><sub>2</sub></span> 通常为
+0.999 接下来让我们看看当<span
+class="math inline"><em>t</em> = 1</span>时发生了什么 假设我们将<span
+class="math inline"><em>m</em><sub>0</sub>, <em>v</em><sub>0</sub></span>初始化为<span
+class="math inline"><strong>0</strong></span>向量 带入公式</p>
+<p><span
+class="math display"><em>v</em><sub>1</sub> = <em>β</em><sub>2</sub> ⋅ 0 + (1 − <em>β</em><sub>2</sub>)<strong>g</strong><sub>1</sub><sup>2</sup> = (1 − 0.999)<strong>g</strong><sub>1</sub><sup>2</sup> = 0.001 ⋅ <strong>g</strong><sub>1</sub><sup>2</sup></span></p>
+<p>我们观察到，计算出的二阶矩估计值仅为真实梯度平方的0.001倍！
+这意味着估计值严重偏向于0 如果直接用这个<span
+class="math inline"><em>v</em><sub><em>t</em></sub></span>去做分母<span
+class="math inline">$\sqrt{v_1}$</span>，分母会极小，导致更新步长会爆炸性地变大（或者在
+<span class="math inline"><em>m</em><sub><em>t</em></sub></span>
+上导致步长极小，取决于分子分母谁偏得更多）
+这种<strong>初始化偏差</strong>会导致训练初期极其不稳定</p>
+<h3 id="修正">修正</h3>
+<p>为了消除这个偏差，我们需要从统计学角度推导一个修正系数</p>
+<p><strong>我们先作一个期望分析</strong>
+假设真实梯度的二阶矩是平稳的（Stationary），记为 <span
+class="math inline"><em>E</em>[<strong>g</strong><sup>2</sup>]</span>。我们希望我们的估计量
+<span class="math inline"><em>v</em><sub><em>t</em></sub></span>
+是<strong>无偏</strong>的，即希望 <span
+class="math inline"><em>E</em>[<em>v</em><sub><em>t</em></sub>] = <em>E</em>[<strong>g</strong><sup>2</sup>]</span></p>
+<p>让我们展开 <span
+class="math inline"><em>v</em><sub><em>t</em></sub></span> 的递归式</p>
+<p><span class="math display">$$
+v_t = (1-\beta_2) \sum_{i=1}^t \beta_2^{t-i} \mathbf{g}_i^2
+$$</span></p>
+<p>对两边求期望 <span class="math inline"><em>E</em>[⋅]</span></p>
+<p><span class="math display">$$
+\begin{aligned}
+E[v_t] &amp;= E\left[ (1-\beta_2) \sum_{i=1}^t \beta_2^{t-i}
+\mathbf{g}_i^2 \right] \\ &amp;= (1-\beta_2) \sum_{i=1}^t \beta_2^{t-i}
+E[\mathbf{g}_i^2] \\ &amp;\approx (1-\beta_2) E[\mathbf{g}^2]
+\sum_{i=1}^t \beta_2^{t-i}
+\end{aligned}
+$$</span></p>
+<p>这里 <span class="math inline">$\sum_{i=1}^t \beta_2^{t-i}$</span>
+是一个等比数列求和，其值为</p>
+<p><span class="math display">$$
+\sum_{k=0}^{t-1} \beta_2^k = \frac{1 - \beta_2^t}{1 - \beta_2}
+$$</span></p>
+<p>代回期望公式</p>
+<p><span class="math display">$$
+\begin{aligned}
+E[v_t] &amp;\approx (1-\beta_2) E[\mathbf{g}^2] \cdot \frac{1 -
+\beta_2^t}{1 - \beta_2} \\ &amp;= E[\mathbf{g}^2] \cdot (1 - \beta_2^t)
+\end{aligned}$$</span></p>
+<p><strong>我们发现</strong>，</p>
+<p><span
+class="math display"><em>E</em>[<em>v</em><sub><em>t</em></sub>] = 真实值 × (1 − <em>β</em><sub>2</sub><sup><em>t</em></sup>)</span></p>
+<p>为了得到真实值，我们必须人为的除以系数<span
+class="math inline">1 − <em>β</em><sub>2</sub><sup><em>t</em></sup></span>
+- 当 <span class="math inline"><em>t</em></span> 很小时，<span
+class="math inline"><em>β</em><sub>2</sub><sup><em>t</em></sup> = 0.999</span>，修正因子
+<span class="math inline">1 − 0.999 = 0.001</span>。我们把 <span
+class="math inline"><em>v</em><sub><em>t</em></sub></span> 除以 <span
+class="math inline">0.001</span>，正好把它放大了 1000 倍，还原了真实量级
+- 当 <span class="math inline"><em>t</em></span> 很大时，<span
+class="math inline"><em>β</em><sub>2</sub><sup><em>t</em></sup> → 0</span>，修正因子
+<span class="math inline"> → 1</span>。此时不再需要修正，因为 EMA
+已经积累了足够的数据，偏差自然消失了 同理，对一阶矩 <span
+class="math inline"><em>m</em><sub><em>t</em></sub></span> 也需要除以
+<span
+class="math inline">(1 − <em>β</em><sub>1</sub><sup><em>t</em></sup>)</span></p>
+<p>结合上述所有推导，我们得到完整的Adam算法流程 <strong>迭代过程 (在时刻
+<span class="math inline"><em>t</em></span>)</strong>：
+<strong>计算梯度</strong>：</p>
+<p><span
+class="math display"><strong>g</strong><sub><em>t</em></sub> = ∇<em>f</em>(<strong>x</strong><sub><em>t</em> − 1</sub>)</span></p>
+<p><strong>更新一阶矩</strong>：</p>
+<p><span
+class="math display"><em>m</em><sub><em>t</em></sub> = <em>β</em><sub>1</sub><em>m</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>1</sub>)<strong>g</strong><sub><em>t</em></sub></span></p>
+<p><strong>更新二阶矩</strong>：</p>
+<p><span
+class="math display"><em>v</em><sub><em>t</em></sub> = <em>β</em><sub>2</sub><em>v</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>2</sub>)<strong>g</strong><sub><em>t</em></sub><sup>2</sup></span></p>
+<p><strong>计算偏差修正后的一阶矩</strong>：</p>
+<p><span class="math display">$$
+\hat{m}_t = \frac{m_t}{1 - \beta_1^t}
+$$</span></p>
+<p><strong>计算偏差修正后的二阶矩</strong>：</p>
+<p><span class="math display">$$
+\hat{v}_t = \frac{v_t}{1 - \beta_2^t}
+$$</span></p>
+<p><strong>计算参数更新</strong>：</p>
+<p><span class="math display">$$
+\mathbf{x}_t = \mathbf{x}_{t-1} - \alpha \cdot
+\frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
+$$</span></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/" data-id="cuidmiFksDbyY757a_Qqd4faQ" data-title="Adam算法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-深度学习/线性回归/整理一下softmax回归实现中训练部分代码的思路" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/" class="article-date">
+  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">整理一下softmax回归实现中训练部分代码的思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在训练前，我们需要利用一些函数来评估模型的分类精度
+首先，如果<code>y_hat</code>是矩阵，那么假定第二个维度存储每个类的预测分数。
+我们使用<code>argmax</code>获得每行中最大元素的索引来获得预测类别。
+然后我们将预测类别与真实<code>y</code>元素进行比较。
+由于等式运算符“<code>==</code>”对数据类型很敏感，
+因此我们将<code>y_hat</code>的数据类型转换为与<code>y</code>的数据类型一致。
+结果是一个包含0（错）和1（对）的张量。
+最后，我们求和会得到正确预测的数量。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">accuracy</span>(<span class="params">y_hat, y</span>): </span><br><span class="line">    <span class="string">&quot;&quot;&quot;计算预测正确的数量&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(y_hat.shape) &gt; <span class="number">1</span> <span class="keyword">and</span> y_hat.shape[<span class="number">1</span>] &gt; <span class="number">1</span>: <span class="comment"># 如果是一个矩阵</span></span><br><span class="line">        y_hat = y_hat.argmax(axis=<span class="number">1</span>) <span class="comment"># 获取每一行的最大值</span></span><br><span class="line">    cmp = y_hat.astype(y.dtype) == y <span class="comment"># 判断最大值是否与y中的每一行真实的最大值相同</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">float</span>(cmp.astype(y.dtype).<span class="built_in">sum</span>()) <span class="comment"># 返回一个正确预测的数量</span></span><br></pre></td></tr></table></figure>
+同样，对于任意数据迭代器data_iter可访问的数据集，我们可以评估在任意模型net的精度
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">evaluate_accuracy</span>(<span class="params">net, data_iter</span>): </span><br><span class="line">    <span class="string">&quot;&quot;&quot;计算在指定数据集上模型的精度&quot;&quot;&quot;</span></span><br><span class="line">    metric = Accumulator(<span class="number">2</span>)  <span class="comment"># 正确预测数、预测总数</span></span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter: <span class="comment"># 在迭代器中获取数据</span></span><br><span class="line">        metric.add(accuracy(net(X), y), d2l.size(y)) <span class="comment"># 计算正确数量</span></span><br><span class="line">    <span class="keyword">return</span> metric[<span class="number">0</span>] / metric[<span class="number">1</span>] <span class="comment"># 返回精度</span></span><br></pre></td></tr></table></figure> 这里我们定义了一个类Accmulator，用于对多个变量进行累加
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Accumulator</span>: </span><br><span class="line">    <span class="string">&quot;&quot;&quot;在n个变量上累加&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = [<span class="number">0.0</span>] * n <span class="comment"># 在声明实例时n有多少就代表着他想返回的精度的条例有多少</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, *args</span>):</span><br><span class="line">	    <span class="comment"># 用于对列表中的每一项加上（正确数量，数据总量）</span></span><br><span class="line">        <span class="variable language_">self</span>.data = [a + <span class="built_in">float</span>(b) <span class="keyword">for</span> a, b <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="variable language_">self</span>.data, args)]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reset</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = [<span class="number">0.0</span>] * <span class="built_in">len</span>(<span class="variable language_">self</span>.data)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">	    <span class="comment"># 定义了__getitem__方法说明了这个类创建的实例可以被索引化</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.data[idx]</span><br></pre></td></tr></table></figure></p>
+<h2 id="训练">训练</h2>
+<p>我们先考虑在一个轮次中我们是怎么训练的，这一切还是在代码里用注释讲清楚比较好
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_epoch_ch3</span>(<span class="params">net, train_iter, loss, updater</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;训练模型一个迭代周期&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 将模型设置为训练模式 设置为训练模式时 模型会自动计算梯度</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(net, torch.nn.Module):</span><br><span class="line">        net.train()</span><br><span class="line">    <span class="comment"># 此时metric.add()方法能返回的是训练损失总和、训练准确度总和、样本数</span></span><br><span class="line">    metric = Accumulator(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> train_iter:</span><br><span class="line">        <span class="comment"># 计算梯度并更新参数</span></span><br><span class="line">        y_hat = net(X)</span><br><span class="line">        <span class="comment"># 计算损失</span></span><br><span class="line">        l = loss(y_hat, y)</span><br><span class="line">        <span class="comment"># 在这里开始我们根据优化器的情况分成两种情况</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(updater, torch.optim.Optimizer):</span><br><span class="line">            <span class="comment"># 使用PyTorch内置的优化器和损失函数</span></span><br><span class="line">            updater.zero_grad() <span class="comment"># 梯度清空 不然梯度就会被累加</span></span><br><span class="line">            l.mean().backward() <span class="comment"># 计算平均梯度</span></span><br><span class="line">            updater.step() <span class="comment"># 自动管理 net.parameters()</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 使用定制的优化器和损失函数</span></span><br><span class="line">            l.<span class="built_in">sum</span>().backward() <span class="comment"># 计算总梯度</span></span><br><span class="line">            updater(X.shape[<span class="number">0</span>]) <span class="comment"># 把总梯度平均化</span></span><br><span class="line">        metric.add(<span class="built_in">float</span>(l.<span class="built_in">sum</span>()), accuracy(y_hat, y), y.numel())</span><br><span class="line">    <span class="comment"># 返回训练损失和训练精度</span></span><br><span class="line">    <span class="keyword">return</span> metric[<span class="number">0</span>] / metric[<span class="number">2</span>], metric[<span class="number">1</span>] / metric[<span class="number">2</span>]</span><br></pre></td></tr></table></figure> 训练的完整实现 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_ch3</span>(<span class="params">net, train_iter, test_iter, loss, num_epochs, updater</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;训练模型&quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    animator = Animator(xlabel=&#x27;epoch&#x27;, xlim=[1, num_epochs], ylim=[0.3, 0.9],</span></span><br><span class="line"><span class="string">                        legend=[&#x27;train loss&#x27;, &#x27;train acc&#x27;, &#x27;test acc&#x27;])</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">        train_metrics = train_epoch_ch3(net, train_iter, loss, updater) <span class="comment"># 训练一次</span></span><br><span class="line">        test_acc = evaluate_accuracy(net, test_iter) <span class="comment"># 测试集的精度</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;animator.add(epoch + 1, train_metrics + (test_acc,))&#x27;&#x27;&#x27;</span></span><br><span class="line">    train_loss, train_acc = train_metrics <span class="comment"># 返回训练集loss和精度</span></span><br><span class="line">    <span class="comment"># 如果不符合要求 则报错并抛出后面的值</span></span><br><span class="line">    <span class="keyword">assert</span> train_loss &lt; <span class="number">0.5</span>, train_loss</span><br><span class="line">    <span class="keyword">assert</span> train_acc &lt;= <span class="number">1</span> <span class="keyword">and</span> train_acc &gt; <span class="number">0.7</span>, train_acc</span><br><span class="line">    <span class="keyword">assert</span> test_acc &lt;= <span class="number">1</span> <span class="keyword">and</span> test_acc &gt; <span class="number">0.7</span>, test_acc</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/" data-id="cuiduAPI0fwg4ThwIwQOIgKYF" data-title="整理一下softmax回归实现中训练部分代码的思路" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">深度学习，线性回归</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-深度学习/线性回归/LossSumExp技巧（LSE）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">LossSumExp技巧（LSE）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算<span
+class="math inline">$\frac{exp(x_i)}{\sum
+exp(x_j)}$</span>，然后再把计算出来的softmax概率直接传给 log
+计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致log(0)报错。这在数值上是十分脆弱的。</p>
+<p>所以我们使用LSE技巧，在损失函数内部，将这两部合并计算 -
+核心逻辑：框架（如 PyTorch 的 nn.CrossEntropyLoss
+）要求你传入未规范化的预测 -
+内部黑盒：在损失函数内部，它并不会先算概率再算对数，而是利用数学恒等式将这两步合并计算
+- 数学原理：它计算的是<span
+class="math inline">log (∑<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub>))</span>，并使用了平移技巧（减去最大值c）</p>
+<p><span
+class="math display"><em>L</em><em>o</em><em>g</em><em>S</em><em>u</em><em>m</em><em>E</em><em>x</em><em>p</em>(<em>x</em>) = <em>c</em> + log ∑<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub> − <em>c</em>),  其中c=max(x)</span></p>
+<ul>
+<li>优势：这种合并计算的方式在计算机底层是极其稳定的，永远不会出现NaN（不是数字）或无穷大的错误</li>
+</ul>
+<p>接下来我们证明等价性： 其中softmax公式：<span
+class="math inline">$\tilde{y}_i=\frac{exp(x_i)}{\sum_j
+exp(x_j)}$</span> 交叉熵损失（针对单样本）：<span
+class="math inline"><em>L</em> = −log (<em>ỹ</em><sub><em>y</em></sub>)</span></p>
+<p>将softmax的定义带入到损失函数L中</p>
+<p><span class="math display">$$
+L=-\log(\tilde{y}_i=\frac{exp(x_i)}{\sum_j exp(x_j)})
+$$</span></p>
+<p>利用对数的运算法则展开</p>
+<p><span
+class="math display"><em>L</em> = −[log (<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub>)) − <em>l</em><em>o</em><em>g</em>(∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))]</span></p>
+<p>因为<span
+class="math inline">log (<em>e</em><em>x</em><em>p</em>(<em>x</em>)) = <em>x</em></span>，所以</p>
+<p><span
+class="math display"><em>L</em> = −[<em>x</em><sub><em>i</em></sub> − <em>l</em><em>o</em><em>g</em>(∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))]</span></p>
+<p>展开</p>
+<p><span
+class="math display"><em>L</em> = −<em>x</em><sub><em>i</em></sub> + log (∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))</span></p>
+<p>得证</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/" data-id="cuidbWN5EfGeSFLVxpwSTSfpS" data-title="LossSumExp技巧（LSE）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">深度学习，线性回归</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-数值分析/共轭梯度法中参数alpha和beta的推导" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/" class="article-date">
@@ -253,85 +526,11 @@ $$</span></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/" data-id="cuidZ9Y3AtzThzfCLHxAYnG8s" data-title="共轭梯度法中参数alpha和beta的推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/" data-id="cuid_Ur1-eQzapKTT2wfXkizO" data-title="共轭梯度法中参数alpha和beta的推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/" rel="tag">数值分析</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-深度学习/线性回归/LossSumExp技巧（LSE）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">LossSumExp技巧（LSE）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算<span
-class="math inline">$\frac{exp(x_i)}{\sum
-exp(x_j)}$</span>，然后再把计算出来的softmax概率直接传给 log
-计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致log(0)报错。这在数值上是十分脆弱的。</p>
-<p>所以我们使用LSE技巧，在损失函数内部，将这两部合并计算 -
-核心逻辑：框架（如 PyTorch 的 nn.CrossEntropyLoss
-）要求你传入未规范化的预测 -
-内部黑盒：在损失函数内部，它并不会先算概率再算对数，而是利用数学恒等式将这两步合并计算
-- 数学原理：它计算的是<span
-class="math inline">log (∑<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub>))</span>，并使用了平移技巧（减去最大值c）</p>
-<p><span
-class="math display"><em>L</em><em>o</em><em>g</em><em>S</em><em>u</em><em>m</em><em>E</em><em>x</em><em>p</em>(<em>x</em>) = <em>c</em> + log ∑<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub> − <em>c</em>),  其中c=max(x)</span></p>
-<ul>
-<li>优势：这种合并计算的方式在计算机底层是极其稳定的，永远不会出现NaN（不是数字）或无穷大的错误</li>
-</ul>
-<p>接下来我们证明等价性： 其中softmax公式：<span
-class="math inline">$\tilde{y}_i=\frac{exp(x_i)}{\sum_j
-exp(x_j)}$</span> 交叉熵损失（针对单样本）：<span
-class="math inline"><em>L</em> = −log (<em>ỹ</em><sub><em>y</em></sub>)</span></p>
-<p>将softmax的定义带入到损失函数L中</p>
-<p><span class="math display">$$
-L=-\log(\tilde{y}_i=\frac{exp(x_i)}{\sum_j exp(x_j)})
-$$</span></p>
-<p>利用对数的运算法则展开</p>
-<p><span
-class="math display"><em>L</em> = −[log (<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub>)) − <em>l</em><em>o</em><em>g</em>(∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))]</span></p>
-<p>因为<span
-class="math inline">log (<em>e</em><em>x</em><em>p</em>(<em>x</em>)) = <em>x</em></span>，所以</p>
-<p><span
-class="math display"><em>L</em> = −[<em>x</em><sub><em>i</em></sub> − <em>l</em><em>o</em><em>g</em>(∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))]</span></p>
-<p>展开</p>
-<p><span
-class="math display"><em>L</em> = −<em>x</em><sub><em>i</em></sub> + log (∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))</span></p>
-<p>得证</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/" data-id="cuid6gviPBCDGASEUWaNrL5_0" data-title="LossSumExp技巧（LSE）" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">深度学习，线性回归</a></li></ul>
 
     </footer>
   </div>
@@ -423,156 +622,11 @@ class="math inline">sign(<strong>g</strong><sub><em>t</em></sub>) ≠ sign(<
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/" data-id="cuidSz8MRLOT608mnRuJy6IvI" data-title="动量法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/" data-id="cuid0BNglD0cCbxDVQS6TaDiH" data-title="动量法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-深度学习/Adam算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="偏差">偏差</h3>
-<p>我们完成了Momentum和RMSProp 如果我们将两者拼凑在一起 1.
-更新一阶矩（动量）</p>
-<p><span
-class="math display"><em>m</em><sub><em>t</em></sub> = <em>β</em><sub>1</sub><em>m</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>1</sub>)<strong>g</strong><sub><em>t</em></sub></span></p>
-<ol start="2" type="1">
-<li>更新二阶矩（自适应项）</li>
-</ol>
-<p><span
-class="math display"><em>v</em><sub><em>t</em></sub> = <em>β</em><sub>2</sub><em>v</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>2</sub>)<strong>g</strong><sub><em>t</em></sub><sup>2</sup></span></p>
-<ol start="3" type="1">
-<li>参数更新</li>
-</ol>
-<p><span class="math display">$$
-\mathbf{x}_{t+1} = \mathbf{x}_t - \eta \frac{m_t}{\sqrt{v_t} + \epsilon}
-$$</span></p>
-<p>其中 <span class="math inline"><em>β</em><sub>1</sub></span> 通常为
-0.9，<span class="math inline"><em>β</em><sub>2</sub></span> 通常为
-0.999 接下来让我们看看当<span
-class="math inline"><em>t</em> = 1</span>时发生了什么 假设我们将<span
-class="math inline"><em>m</em><sub>0</sub>, <em>v</em><sub>0</sub></span>初始化为<span
-class="math inline"><strong>0</strong></span>向量 带入公式</p>
-<p><span
-class="math display"><em>v</em><sub>1</sub> = <em>β</em><sub>2</sub> ⋅ 0 + (1 − <em>β</em><sub>2</sub>)<strong>g</strong><sub>1</sub><sup>2</sup> = (1 − 0.999)<strong>g</strong><sub>1</sub><sup>2</sup> = 0.001 ⋅ <strong>g</strong><sub>1</sub><sup>2</sup></span></p>
-<p>我们观察到，计算出的二阶矩估计值仅为真实梯度平方的0.001倍！
-这意味着估计值严重偏向于0 如果直接用这个<span
-class="math inline"><em>v</em><sub><em>t</em></sub></span>去做分母<span
-class="math inline">$\sqrt{v_1}$</span>，分母会极小，导致更新步长会爆炸性地变大（或者在
-<span class="math inline"><em>m</em><sub><em>t</em></sub></span>
-上导致步长极小，取决于分子分母谁偏得更多）
-这种<strong>初始化偏差</strong>会导致训练初期极其不稳定</p>
-<h3 id="修正">修正</h3>
-<p>为了消除这个偏差，我们需要从统计学角度推导一个修正系数</p>
-<p><strong>我们先作一个期望分析</strong>
-假设真实梯度的二阶矩是平稳的（Stationary），记为 <span
-class="math inline"><em>E</em>[<strong>g</strong><sup>2</sup>]</span>。我们希望我们的估计量
-<span class="math inline"><em>v</em><sub><em>t</em></sub></span>
-是<strong>无偏</strong>的，即希望 <span
-class="math inline"><em>E</em>[<em>v</em><sub><em>t</em></sub>] = <em>E</em>[<strong>g</strong><sup>2</sup>]</span></p>
-<p>让我们展开 <span
-class="math inline"><em>v</em><sub><em>t</em></sub></span> 的递归式</p>
-<p><span class="math display">$$
-v_t = (1-\beta_2) \sum_{i=1}^t \beta_2^{t-i} \mathbf{g}_i^2
-$$</span></p>
-<p>对两边求期望 <span class="math inline"><em>E</em>[⋅]</span></p>
-<p><span class="math display">$$
-\begin{aligned}
-E[v_t] &amp;= E\left[ (1-\beta_2) \sum_{i=1}^t \beta_2^{t-i}
-\mathbf{g}_i^2 \right] \\ &amp;= (1-\beta_2) \sum_{i=1}^t \beta_2^{t-i}
-E[\mathbf{g}_i^2] \\ &amp;\approx (1-\beta_2) E[\mathbf{g}^2]
-\sum_{i=1}^t \beta_2^{t-i}
-\end{aligned}
-$$</span></p>
-<p>这里 <span class="math inline">$\sum_{i=1}^t \beta_2^{t-i}$</span>
-是一个等比数列求和，其值为</p>
-<p><span class="math display">$$
-\sum_{k=0}^{t-1} \beta_2^k = \frac{1 - \beta_2^t}{1 - \beta_2}
-$$</span></p>
-<p>代回期望公式</p>
-<p><span class="math display">$$
-\begin{aligned}
-E[v_t] &amp;\approx (1-\beta_2) E[\mathbf{g}^2] \cdot \frac{1 -
-\beta_2^t}{1 - \beta_2} \\ &amp;= E[\mathbf{g}^2] \cdot (1 - \beta_2^t)
-\end{aligned}$$</span></p>
-<p><strong>我们发现</strong>，</p>
-<p><span
-class="math display"><em>E</em>[<em>v</em><sub><em>t</em></sub>] = 真实值 × (1 − <em>β</em><sub>2</sub><sup><em>t</em></sup>)</span></p>
-<p>为了得到真实值，我们必须人为的除以系数<span
-class="math inline">1 − <em>β</em><sub>2</sub><sup><em>t</em></sup></span>
-- 当 <span class="math inline"><em>t</em></span> 很小时，<span
-class="math inline"><em>β</em><sub>2</sub><sup><em>t</em></sup> = 0.999</span>，修正因子
-<span class="math inline">1 − 0.999 = 0.001</span>。我们把 <span
-class="math inline"><em>v</em><sub><em>t</em></sub></span> 除以 <span
-class="math inline">0.001</span>，正好把它放大了 1000 倍，还原了真实量级
-- 当 <span class="math inline"><em>t</em></span> 很大时，<span
-class="math inline"><em>β</em><sub>2</sub><sup><em>t</em></sup> → 0</span>，修正因子
-<span class="math inline"> → 1</span>。此时不再需要修正，因为 EMA
-已经积累了足够的数据，偏差自然消失了 同理，对一阶矩 <span
-class="math inline"><em>m</em><sub><em>t</em></sub></span> 也需要除以
-<span
-class="math inline">(1 − <em>β</em><sub>1</sub><sup><em>t</em></sup>)</span></p>
-<p>结合上述所有推导，我们得到完整的Adam算法流程 <strong>迭代过程 (在时刻
-<span class="math inline"><em>t</em></span>)</strong>：
-<strong>计算梯度</strong>：</p>
-<p><span
-class="math display"><strong>g</strong><sub><em>t</em></sub> = ∇<em>f</em>(<strong>x</strong><sub><em>t</em> − 1</sub>)</span></p>
-<p><strong>更新一阶矩</strong>：</p>
-<p><span
-class="math display"><em>m</em><sub><em>t</em></sub> = <em>β</em><sub>1</sub><em>m</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>1</sub>)<strong>g</strong><sub><em>t</em></sub></span></p>
-<p><strong>更新二阶矩</strong>：</p>
-<p><span
-class="math display"><em>v</em><sub><em>t</em></sub> = <em>β</em><sub>2</sub><em>v</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em><sub>2</sub>)<strong>g</strong><sub><em>t</em></sub><sup>2</sup></span></p>
-<p><strong>计算偏差修正后的一阶矩</strong>：</p>
-<p><span class="math display">$$
-\hat{m}_t = \frac{m_t}{1 - \beta_1^t}
-$$</span></p>
-<p><strong>计算偏差修正后的二阶矩</strong>：</p>
-<p><span class="math display">$$
-\hat{v}_t = \frac{v_t}{1 - \beta_2^t}
-$$</span></p>
-<p><strong>计算参数更新</strong>：</p>
-<p><span class="math display">$$
-\mathbf{x}_t = \mathbf{x}_{t-1} - \alpha \cdot
-\frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
-$$</span></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/" data-id="cuidLhiqRTgpXVJHhNM13C2rs" data-title="Adam算法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
 
     </footer>
   </div>
@@ -609,65 +663,11 @@ $$</span></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/" data-id="cuidd8flCoe2oZ0ihknyKUdix" data-title="随机梯度下降" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/" data-id="cuidx-LgFhSKqXG2n8eTZoOaf" data-title="随机梯度下降" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-深度学习/线性回归/整理一下softmax回归实现中训练部分代码的思路" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/" class="article-date">
-  <time class="dt-published" datetime="2026-02-08T05:00:00.000Z" itemprop="datePublished">2026-02-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">整理一下softmax回归实现中训练部分代码的思路</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在训练前，我们需要利用一些函数来评估模型的分类精度
-首先，如果<code>y_hat</code>是矩阵，那么假定第二个维度存储每个类的预测分数。
-我们使用<code>argmax</code>获得每行中最大元素的索引来获得预测类别。
-然后我们将预测类别与真实<code>y</code>元素进行比较。
-由于等式运算符“<code>==</code>”对数据类型很敏感，
-因此我们将<code>y_hat</code>的数据类型转换为与<code>y</code>的数据类型一致。
-结果是一个包含0（错）和1（对）的张量。
-最后，我们求和会得到正确预测的数量。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">accuracy</span>(<span class="params">y_hat, y</span>): </span><br><span class="line">    <span class="string">&quot;&quot;&quot;计算预测正确的数量&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(y_hat.shape) &gt; <span class="number">1</span> <span class="keyword">and</span> y_hat.shape[<span class="number">1</span>] &gt; <span class="number">1</span>: <span class="comment"># 如果是一个矩阵</span></span><br><span class="line">        y_hat = y_hat.argmax(axis=<span class="number">1</span>) <span class="comment"># 获取每一行的最大值</span></span><br><span class="line">    cmp = y_hat.astype(y.dtype) == y <span class="comment"># 判断最大值是否与y中的每一行真实的最大值相同</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">float</span>(cmp.astype(y.dtype).<span class="built_in">sum</span>()) <span class="comment"># 返回一个正确预测的数量</span></span><br></pre></td></tr></table></figure>
-同样，对于任意数据迭代器data_iter可访问的数据集，我们可以评估在任意模型net的精度
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">evaluate_accuracy</span>(<span class="params">net, data_iter</span>): </span><br><span class="line">    <span class="string">&quot;&quot;&quot;计算在指定数据集上模型的精度&quot;&quot;&quot;</span></span><br><span class="line">    metric = Accumulator(<span class="number">2</span>)  <span class="comment"># 正确预测数、预测总数</span></span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter: <span class="comment"># 在迭代器中获取数据</span></span><br><span class="line">        metric.add(accuracy(net(X), y), d2l.size(y)) <span class="comment"># 计算正确数量</span></span><br><span class="line">    <span class="keyword">return</span> metric[<span class="number">0</span>] / metric[<span class="number">1</span>] <span class="comment"># 返回精度</span></span><br></pre></td></tr></table></figure> 这里我们定义了一个类Accmulator，用于对多个变量进行累加
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Accumulator</span>: </span><br><span class="line">    <span class="string">&quot;&quot;&quot;在n个变量上累加&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = [<span class="number">0.0</span>] * n <span class="comment"># 在声明实例时n有多少就代表着他想返回的精度的条例有多少</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, *args</span>):</span><br><span class="line">	    <span class="comment"># 用于对列表中的每一项加上（正确数量，数据总量）</span></span><br><span class="line">        <span class="variable language_">self</span>.data = [a + <span class="built_in">float</span>(b) <span class="keyword">for</span> a, b <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="variable language_">self</span>.data, args)]</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reset</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.data = [<span class="number">0.0</span>] * <span class="built_in">len</span>(<span class="variable language_">self</span>.data)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">	    <span class="comment"># 定义了__getitem__方法说明了这个类创建的实例可以被索引化</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.data[idx]</span><br></pre></td></tr></table></figure></p>
-<h2 id="训练">训练</h2>
-<p>我们先考虑在一个轮次中我们是怎么训练的，这一切还是在代码里用注释讲清楚比较好
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_epoch_ch3</span>(<span class="params">net, train_iter, loss, updater</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;训练模型一个迭代周期&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 将模型设置为训练模式 设置为训练模式时 模型会自动计算梯度</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(net, torch.nn.Module):</span><br><span class="line">        net.train()</span><br><span class="line">    <span class="comment"># 此时metric.add()方法能返回的是训练损失总和、训练准确度总和、样本数</span></span><br><span class="line">    metric = Accumulator(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">for</span> X, y <span class="keyword">in</span> train_iter:</span><br><span class="line">        <span class="comment"># 计算梯度并更新参数</span></span><br><span class="line">        y_hat = net(X)</span><br><span class="line">        <span class="comment"># 计算损失</span></span><br><span class="line">        l = loss(y_hat, y)</span><br><span class="line">        <span class="comment"># 在这里开始我们根据优化器的情况分成两种情况</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(updater, torch.optim.Optimizer):</span><br><span class="line">            <span class="comment"># 使用PyTorch内置的优化器和损失函数</span></span><br><span class="line">            updater.zero_grad() <span class="comment"># 梯度清空 不然梯度就会被累加</span></span><br><span class="line">            l.mean().backward() <span class="comment"># 计算平均梯度</span></span><br><span class="line">            updater.step() <span class="comment"># 自动管理 net.parameters()</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 使用定制的优化器和损失函数</span></span><br><span class="line">            l.<span class="built_in">sum</span>().backward() <span class="comment"># 计算总梯度</span></span><br><span class="line">            updater(X.shape[<span class="number">0</span>]) <span class="comment"># 把总梯度平均化</span></span><br><span class="line">        metric.add(<span class="built_in">float</span>(l.<span class="built_in">sum</span>()), accuracy(y_hat, y), y.numel())</span><br><span class="line">    <span class="comment"># 返回训练损失和训练精度</span></span><br><span class="line">    <span class="keyword">return</span> metric[<span class="number">0</span>] / metric[<span class="number">2</span>], metric[<span class="number">1</span>] / metric[<span class="number">2</span>]</span><br></pre></td></tr></table></figure> 训练的完整实现 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_ch3</span>(<span class="params">net, train_iter, test_iter, loss, num_epochs, updater</span>):  <span class="comment">#@save</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;训练模型&quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    animator = Animator(xlabel=&#x27;epoch&#x27;, xlim=[1, num_epochs], ylim=[0.3, 0.9],</span></span><br><span class="line"><span class="string">                        legend=[&#x27;train loss&#x27;, &#x27;train acc&#x27;, &#x27;test acc&#x27;])</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">        train_metrics = train_epoch_ch3(net, train_iter, loss, updater) <span class="comment"># 训练一次</span></span><br><span class="line">        test_acc = evaluate_accuracy(net, test_iter) <span class="comment"># 测试集的精度</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;animator.add(epoch + 1, train_metrics + (test_acc,))&#x27;&#x27;&#x27;</span></span><br><span class="line">    train_loss, train_acc = train_metrics <span class="comment"># 返回训练集loss和精度</span></span><br><span class="line">    <span class="comment"># 如果不符合要求 则报错并抛出后面的值</span></span><br><span class="line">    <span class="keyword">assert</span> train_loss &lt; <span class="number">0.5</span>, train_loss</span><br><span class="line">    <span class="keyword">assert</span> train_acc &lt;= <span class="number">1</span> <span class="keyword">and</span> train_acc &gt; <span class="number">0.7</span>, train_acc</span><br><span class="line">    <span class="keyword">assert</span> test_acc &lt;= <span class="number">1</span> <span class="keyword">and</span> test_acc &gt; <span class="number">0.7</span>, test_acc</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/" data-id="cuid2aRhWSrQzMfhGQznM9JtB" data-title="整理一下softmax回归实现中训练部分代码的思路" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">深度学习，线性回归</a></li></ul>
 
     </footer>
   </div>
@@ -798,11 +798,11 @@ class="math inline"><strong>g</strong><sub><em>t</em></sub></span> -
 计算梯度平方的移动平均</p>
 <p><span
 class="math display"><em>v</em><sub><em>t</em></sub> = <em>β</em><em>v</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em>)<em>g</em><sub><em>t</em></sub><sup>2</sup></span></p>
-<p>（这里常用符号 <span
+<p>这里常用符号 <span
 class="math inline"><em>v</em><sub><em>t</em></sub></span> 或 <span
 class="math inline"><em>h</em><sub><em>t</em></sub></span> 表示累积量
 <span
-class="math inline"><em>E</em>[<em>g</em><sup>2</sup>]<sub><em>t</em></sub></span>）</p>
+class="math inline"><em>E</em>[<em>g</em><sup>2</sup>]<sub><em>t</em></sub></span></p>
 <ul>
 <li>参数更新</li>
 </ul>
@@ -814,7 +814,7 @@ $$</span></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RMSProp/" data-id="cuidbS0AznKmtpsXu5NIZHCvg" data-title="RMSProp" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RMSProp/" data-id="cuiduwPPbu1-jW_EOS1S6oaL_" data-title="RMSProp" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -937,7 +937,7 @@ $$</span></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" data-id="cuidvp5G1JgXc6VHVwseUh-UE" data-title="设计原则与数学推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" data-id="cuidJqBVOuzCAcg2Tg0-YgRXZ" data-title="设计原则与数学推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1000,7 +1000,7 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/hello-world/" data-id="cuid39O7R-9dmAOVh_gxS3KWx" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/hello-world/" data-id="cuidyO5XRggfvh3O054vHLMeW" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1177,11 +1177,8 @@ class="math inline"><em>A</em><em>r</em> = <em>λ</em><em>u</em> − <em
            \end{aligned}
            $$</span></p>
 <p>因为<span class="math inline"><em>u</em></span>和<span
-class="math inline"><em>v</em></span>的大小相等，所以</p>
-<pre><code>   $$
-   r(Ar)=\lambda(||u||^2-||v||^2)=0
-   $$
-   </code></pre>
+class="math inline"><em>v</em></span>的大小相等，所以 <span
+class="math display"><em>r</em>(<em>A</em><em>r</em>) = <em>λ</em>(||<em>u</em>||<sup>2</sup> − ||<em>v</em>||<sup>2</sup>) = 0</span></p>
 <p>点积为0，说明两者确实是垂直的。 而且因为我们设定的<span
 class="math inline"><em>b</em></span>是全1向量，这就导致<span
 class="math inline"><em>b</em></span>在正特征值空间的分量，和在负特征值空间的分量，<strong>恰好大小相等</strong>
@@ -1190,8 +1187,7 @@ class="math inline"><em>b</em></span>在正特征值空间的分量，和在负�
 class="math inline"><em>b</em></span>是随机生成的向量，那么<span
 class="math inline">||<em>u</em>||</span>和<span
 class="math inline">||<em>v</em>||</span>就不一定完全相等，垂直条件就会被破坏，那条横线可能就会变成一条”稍微有点斜率“的线，但依然会很慢</p>
-<ul>
-<li><p>那我们在推完为什么图像会有”折线“出现时，我们对于<span
+<p>那我们在推理完为什么图像会有”折线“出现时，我们对于<span
 class="math inline"><strong>A</strong><sub><strong>2</strong></sub></span>的收敛速度的问题就十分显然了</p>
 <p>因为奇次项的系数为0，我们就相当于在这个什么都没干，就相当于这个奇次项<strong>停摆</strong>了。所以每当迭代到奇数步时，我们的误差收敛会停滞。这就意味着，我们对比<span
 class="math inline"><em>A</em><sub>1</sub></span>执行了<span
@@ -1201,13 +1197,12 @@ class="math inline">$\frac{m}{2}$</span>次！换句话说，对于<span
 class="math inline"><em>A</em><sub>2</sub></span>，我们其实是在构建<span
 class="math inline"><em>p</em>(<em>A</em><sub>2</sub><sup>2</sup>)</span>，有效迭代次数直接砍半了，自然地，收敛速度也会收到影响。这就解释了图像上显示的<span
 class="math inline"><em>A</em><sub>2</sub></span>收敛速度显著慢于<span
-class="math inline"><em>A</em><sub>1</sub></span>的现象。</p></li>
-</ul>
+class="math inline"><em>A</em><sub>1</sub></span>的现象。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/01/23/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/260123_%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E4%BA%8E%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%BD%B1%E5%93%8D%E7%9A%84%E8%A7%A3%E9%87%8A/" data-id="cuid2OATBMknW4FSSLuVLoyAI" data-title="特征值分布的对称性对于误差的影响的解释" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/01/23/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/260123_%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E4%BA%8E%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%BD%B1%E5%93%8D%E7%9A%84%E8%A7%A3%E9%87%8A/" data-id="cuidRo3PKwS8S9UxIO5PBmrtZ" data-title="特征值分布的对称性对于误差的影响的解释" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1266,7 +1261,11 @@ class="math inline"><em>A</em><sub>1</sub></span>的现象。</p></li>
       <ul>
         
           <li>
-            <a href="/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/">共轭梯度法中参数alpha和beta的推导</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">整理一下softmax回归实现中训练部分代码的思路</a>
           </li>
         
           <li>
@@ -1274,15 +1273,11 @@ class="math inline"><em>A</em><sub>1</sub></span>的现象。</p></li>
           </li>
         
           <li>
+            <a href="/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/">共轭梯度法中参数alpha和beta的推导</a>
+          </li>
+        
+          <li>
             <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">动量法</a>
-          </li>
-        
-          <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
-          </li>
-        
-          <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">随机梯度下降</a>
           </li>
         
       </ul>
