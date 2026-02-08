@@ -6,15 +6,15 @@
   
   <title>特征值分布的对称性对于误差的影响的解释 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="我们设$\mathbf{I}$是一个$100 \times 100$单位矩阵，$\mathbf{Z}$是一个$100\times100$的零矩阵，$\mathbf{b}$是一个$200\times1$的全1向量设$\mathbf{B}&#x3D;\begin{bmatrix} 1 &amp; &amp; &amp; \ &amp; 2 &amp; &amp; \ &amp; &amp; \ddot">
+  <meta name="description" content="我们设$\mathbf{I}$是一个$100 \times 100$单位矩阵，$\mathbf{Z}$是一个$100\times100$的零矩阵，$\mathbf{b}$是一个$200\times1$的全1向量设$\mathbf{B}&#x3D;\begin{bmatrix} 1 &amp; &amp; &amp; \ &amp; 2 &amp; &amp; \ &amp; &amp; \ddots &amp;am">
 <meta property="og:type" content="article">
 <meta property="og:title" content="特征值分布的对称性对于误差的影响的解释">
 <meta property="og:url" content="http://example.com/2026/01/23/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/260123_%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E4%BA%8E%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%BD%B1%E5%93%8D%E7%9A%84%E8%A7%A3%E9%87%8A/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="我们设$\mathbf{I}$是一个$100 \times 100$单位矩阵，$\mathbf{Z}$是一个$100\times100$的零矩阵，$\mathbf{b}$是一个$200\times1$的全1向量设$\mathbf{B}&#x3D;\begin{bmatrix} 1 &amp; &amp; &amp; \ &amp; 2 &amp; &amp; \ &amp; &amp; \ddot">
+<meta property="og:description" content="我们设$\mathbf{I}$是一个$100 \times 100$单位矩阵，$\mathbf{Z}$是一个$100\times100$的零矩阵，$\mathbf{b}$是一个$200\times1$的全1向量设$\mathbf{B}&#x3D;\begin{bmatrix} 1 &amp; &amp; &amp; \ &amp; 2 &amp; &amp; \ &amp; &amp; \ddots &amp;am">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-23T04:46:14.000Z">
-<meta property="article:modified_time" content="2026-02-08T04:51:56.739Z">
+<meta property="article:modified_time" content="2026-02-08T05:05:32.850Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -35,7 +35,9 @@
   
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -95,7 +97,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>我们设$\mathbf{I}$是一个$100 \times 100$单位矩阵，$\mathbf{Z}$是一个$100\times100$的零矩阵，$\mathbf{b}$是一个$200\times1$的全1向量<br>设$\mathbf{B}&#x3D;\begin{bmatrix} 1 &amp; &amp; &amp; \ &amp; 2 &amp; &amp; \ &amp; &amp; \ddots &amp; \ &amp; &amp; &amp; 100 \end{bmatrix}$<br>然后，令$\mathbf{A_1}&#x3D;\begin{bmatrix} \mathbf{B} &amp; \mathbf{I} \ \mathbf{Z} &amp; \mathbf{B} \end{bmatrix}$ ，$\mathbf{A_2}&#x3D;\begin{bmatrix} \mathbf{B} &amp; \mathbf{I} \ \mathbf{Z} &amp; \mathbf{-B} \end{bmatrix}$<br>我们使用GMRES算法，分别绘制$\mathbf{A_1}$与$\mathbf{A_2}$的残差收敛图，如下图所示<br>![[特征值分布的对称性对于误差的影响的解释.png]]</p>
+        <p>我们设$\mathbf{I}$是一个$100 \times 100$单位矩阵，$\mathbf{Z}$是一个$100\times100$的零矩阵，$\mathbf{b}$是一个$200\times1$的全1向量<br>设$\mathbf{B}=\begin{bmatrix} 1 &amp; &amp; &amp; \ &amp; 2 &amp; &amp; \ &amp; &amp; \ddots &amp; \ &amp; &amp; &amp; 100 \end{bmatrix}$<br>然后，令$\mathbf{A_1}=\begin{bmatrix} \mathbf{B} &amp; \mathbf{I} \ \mathbf{Z} &amp; \mathbf{B} \end{bmatrix}$ ，$\mathbf{A_2}=\begin{bmatrix} \mathbf{B} &amp; \mathbf{I} \ \mathbf{Z} &amp; \mathbf{-B} \end{bmatrix}$<br>我们使用GMRES算法，分别绘制$\mathbf{A_1}$与$\mathbf{A_2}$的残差收敛图，如下图所示<br>![[特征值分布的对称性对于误差的影响的解释.png]]</p>
 <p>我们关注两个问题</p>
 <h4 id="1-为什么-A-1-的收敛曲线是光滑的，而-A-2-的是带有折线的？"><a href="#1-为什么-A-1-的收敛曲线是光滑的，而-A-2-的是带有折线的？" class="headerlink" title="1.为什么$A_1$的收敛曲线是光滑的，而$A_2$的是带有折线的？"></a>1.为什么$A_1$的收敛曲线是光滑的，而$A_2$的是带有折线的？</h4><h4 id="2-为什么-A-1-收敛得更快，而-A-2-收敛极其缓慢？"><a href="#2-为什么-A-1-收敛得更快，而-A-2-收敛极其缓慢？" class="headerlink" title="2.为什么$A_1$收敛得更快，而$A_2$收敛极其缓慢？"></a>2.为什么$A_1$收敛得更快，而$A_2$收敛极其缓慢？</h4><p>我们先来回顾一下Arnoldi迭代<br><strong>Arnoldi 迭代本质上是在构造一组正交多项式</strong><br>我们生成的基向量$q_1,q_2,q_3\dots$，其实他们代表了$\mathbf{A}$的不同次幂作用在$\mathbf{b}$上</p>
 <ul>
@@ -103,23 +105,34 @@
 <li>$q_2$：来自$Aq_1$（并减去了$q_1$分量）<br>   本质：包含$Ab$和$b$，即1次多项式$\phi_1(A)b$</li>
 <li>$q_3$：来自$Aq_2$<br>   本质：2次多项式$\phi_2(A)b$<br>这意味着，你的矩阵$Q_m$的每一列，本质上都是一个以向量形式存在的，作用在$b$上的多项式</li>
 </ul>
-<p>然后，GMRES算法本质上是在求解一个最小二乘问题，也就是我们通过了这个算法得到了一个用来”形容“$z$的最优多项式，$$min||H_{m}z-||b||e_{1}||$$<br>我们会得到一个解向量$\mathbf{y}&#x3D;[y_1,y_2,\dots,y_m]^T$（就是$z$）<br>这是配方，它告诉我们对于多项式的每一项，我们应该取多少项的$q_m$<br>因为$y$是让残差最小的“最优配方”，所以它组合出来的多项式，自然就是最优多项式</p>
-<p>而我们去寻找这个最优多项式，要去令残差$\mathbf{r}&#x3D;p(A)\mathbf{b}$最小，本质上也是去<strong>把多项式中特征值的位置（大小）压低。</strong><br>这是什么意思？<br>我们知道，在矩阵$A$张成的空间里，任何一个向量$b$都可以写成这些特征向量的叠加：$$\mathbf{b}&#x3D;y_1\mathbf{v_1}+y_2\mathbf{v_2}+\dots+y_n\mathbf{v_n}$$<br>又有$p(A)\mathbf{v_i}&#x3D;p(\lambda_i)\mathbf{v_i}$，所以，残差$\mathbf{r}&#x3D;p(A)\mathbf{b}$就可以表示为<br>$$<br>\begin{aligned}<br>\mathbf{r} &amp;&#x3D; p(A)\mathbf{b} \<br>		   &amp;&#x3D; p(A)(y_1\mathbf{y_1}+\dots+y_n\mathbf{v_n}) \<br>		   &amp;&#x3D; y_1p(\lambda_1)\mathbf{v_1}+\dots+y_np(\lambda_n)\mathbf{v_n}<br>\end{aligned}<br>$$<br>所以$$||\mathbf{r}|| \approx \sum ||c_ip(\lambda_i)v_i||$$<br>我们会发现，如果我们要让残差最小，我们得让$p(\lambda)$最小，如果你想让残差逼近0，那你就得让$p(\lambda)&#x3D;0$</p>
+<p>然后，GMRES算法本质上是在求解一个最小二乘问题，也就是我们通过了这个算法得到了一个用来”形容“$z$的最优多项式，<script type="math/tex">min||H_{m}z-||b||e_{1}||</script><br>我们会得到一个解向量$\mathbf{y}=[y_1,y_2,\dots,y_m]^T$（就是$z$）<br>这是配方，它告诉我们对于多项式的每一项，我们应该取多少项的$q_m$<br>因为$y$是让残差最小的“最优配方”，所以它组合出来的多项式，自然就是最优多项式</p>
+<p>而我们去寻找这个最优多项式，要去令残差$\mathbf{r}=p(A)\mathbf{b}$最小，本质上也是去<strong>把多项式中特征值的位置（大小）压低。</strong><br>这是什么意思？<br>我们知道，在矩阵$A$张成的空间里，任何一个向量$b$都可以写成这些特征向量的叠加：<script type="math/tex">\mathbf{b}=y_1\mathbf{v_1}+y_2\mathbf{v_2}+\dots+y_n\mathbf{v_n}</script><br>又有$p(A)\mathbf{v_i}=p(\lambda_i)\mathbf{v_i}$，所以，残差$\mathbf{r}=p(A)\mathbf{b}$就可以表示为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbf{r} &= p(A)\mathbf{b} \\
+           &= p(A)(y_1\mathbf{y_1}+\dots+y_n\mathbf{v_n}) \\
+           &= y_1p(\lambda_1)\mathbf{v_1}+\dots+y_np(\lambda_n)\mathbf{v_n}
+\end{aligned}</script><p>所以<script type="math/tex">||\mathbf{r}|| \approx \sum ||c_ip(\lambda_i)v_i||</script><br>我们会发现，如果我们要让残差最小，我们得让$p(\lambda)$最小，如果你想让残差逼近0，那你就得让$p(\lambda)=0$</p>
 <p>现在准备工作准备得差不多，我们可以开始看问题了</p>
 <ul>
 <li>首先，<strong>为什么$A_2$的收敛图像会带有折线？</strong><br>  观察$A_2$的结构，它是一个稀疏矩阵且对角线上的元素值是关于原点对称的，所以我们可以近似认为，这个矩阵的特征值是关于原点对称的。<br>  我们注意到，奇数步时多项式的最高次项是奇数项<ul>
-<li>而奇次函数是反对称的：$f(\lambda)&#x3D;-f(-\lambda)$</li>
-<li>这就意味这，如果你想去用奇次项去压低正特征值处的误差，负特征值处的误差就会被放大了。例如，现在我们有一个奇次函数$f(x)&#x3D;1+cx$，矩阵有特征值1和-1，我们先令$f(1)\approx0$，即$1+c·(1)\approx0$，我们取理想值$c&#x3D;-1$，此时$p(1)&#x3D;1+(-1)·1&#x3D;0$，正特征值处的误差被消除了。那我们再看$\lambda&#x3D;-1$处发生了什么，同样的$c&#x3D;-1$，那么$f(-1)&#x3D;1+(-1)·(-1)&#x3D;1+1&#x3D;2$，这与我们上面所提出的一致！误差不仅没变小，反而变大了一倍。所以GMRES在构造最优多项式时，会把系数<strong>0</strong>分配给奇数步。</li>
+<li>而奇次函数是反对称的：$f(\lambda)=-f(-\lambda)$</li>
+<li>这就意味这，如果你想去用奇次项去压低正特征值处的误差，负特征值处的误差就会被放大了。例如，现在我们有一个奇次函数$f(x)=1+cx$，矩阵有特征值1和-1，我们先令$f(1)\approx0$，即$1+c·(1)\approx0$，我们取理想值$c=-1$，此时$p(1)=1+(-1)·1=0$，正特征值处的误差被消除了。那我们再看$\lambda=-1$处发生了什么，同样的$c=-1$，那么$f(-1)=1+(-1)·(-1)=1+1=2$，这与我们上面所提出的一致！误差不仅没变小，反而变大了一倍。所以GMRES在构造最优多项式时，会把系数<strong>0</strong>分配给奇数步。 </li>
 </ul>
 </li>
 </ul>
 <p>所以这就说明了为什么$A_2$的收敛图像会时不时出现一条折线：折线是在奇数步产生的，在奇数步时算法给奇次项系数分配了0这个数，这就会导致在奇数步时实际的多项式仍然与上一步（偶数）的相同，导致误差完全没有发生变化。所以画出来的局部误差图是一条从平滑下降直线突变到斜率为0的直线。拓展到整个迭代过程，就产生了断断续续的折线。</p>
-<p>那我们还是很想知道的是，为什么GMRES算法会能给奇次项分配<strong>0</strong>？<br>其实GMRES并不是主动去选0，而是因为在奇数步时，生成的那个新方向，刚好和我们想去的方向垂直。<br>	<br>GMRES 算法在第 $k$ 步时试图寻找一 个系数 $\alpha$，使得新残差 $||\mathbf{r}<em>{new}|| &#x3D; ||\mathbf{r}</em>{old} - \alpha \mathbf{q}<em>{new}||$ 最小。根据最小二乘法原理，最优的 $\alpha$ 实际上是 $\mathbf{r}</em>{old}$ 在新方向 $\mathbf{q}_{new}$ 上的<strong>正交投影</strong>：</p>
-<p>$$\alpha &#x3D; \frac{\mathbf{r}<em>{old} \cdot \mathbf{q}</em>{new}}{||\mathbf{q}_{new}||^2}$$</p>
-<p>在奇数步时，由于矩阵特征值的对称性以及初始向量的平衡性，我们要证明在当前残差向量 $\mathbf{r}<em>{old}$ 与新生成的方向 $\mathbf{q}</em>{new}$ 是相互垂直（正交）的，即点积为 0。</p>
-<p><strong>为什么奇数步时新方向与残差向量方向垂直？</strong><br>因为我们有两个关于远点对称的特征值，所以我们可以认为，残差向量$r$，一定由这两个特征值对应的特征向量组成，且这两个向量正交。<br> 我们<strong>假设r在正负两个方向的分量长度相等（”平衡“）</strong>。我们可以把$\mathbf{r}$写成：$r&#x3D;u+v$，显然$||u||&#x3D;||v||$。我们尝试迈出奇数步，算出新方向$q_{new}&#x3D;Ar$，因为$r$的分解，所以我们又可以写成$Ar&#x3D;\lambda u-\lambda v&#x3D;\lambda(u-v)$。现在我们来看残差向量和新向量的点积 $$<br>		   \begin{aligned}<br>		   r·(Ar) &amp;&#x3D; (u+v)·\lambda(u-v) \<br>		          &amp;&#x3D; \lambda[(u+v)(u-v)] \<br>		          &amp;&#x3D; \lambda[u·u-u·v+v·u-v·v] \<br>		          &amp;&#x3D; \lambda(||u||^2-||v||^2)<br>		   \end{aligned}<br>		   $$<br>	   因为$u$和$v$的大小相等，所以$$r(Ar)&#x3D;\lambda(||u||^2-||v||^2)&#x3D;0$$<br>	   点积为0，说明两者确实是垂直的。<br>	   而且因为我们设定的$b$是全1向量，这就导致$b$在正特征值空间的分量，和在负特征值空间的分量，<strong>恰好大小相等</strong><br>	   正是这种完美的对称性，导致了完美的垂直，进而导致了完美的停滞（横线）。<br>	   如果$b$是随机生成的向量，那么$||u||$和$||v||$就不一定完全相等，垂直条件就会被破坏，那条横线可能就会变成一条”稍微有点斜率“的线，但依然会很慢
-	   </p>
-<ul>
+<p>那我们还是很想知道的是，为什么GMRES算法会能给奇次项分配<strong>0</strong>？<br>其实GMRES并不是主动去选0，而是因为在奇数步时，生成的那个新方向，刚好和我们想去的方向垂直。</p>
+<p>GMRES 算法在第 $k$ 步时试图寻找一 个系数 $\alpha$，使得新残差 $||\mathbf{r}<em>{new}|| = ||\mathbf{r}</em>{old} - \alpha \mathbf{q}<em>{new}||$ 最小。根据最小二乘法原理，最优的 $\alpha$ 实际上是 $\mathbf{r}</em>{old}$ 在新方向 $\mathbf{q}_{new}$ 上的<strong>正交投影</strong>：</p>
+<script type="math/tex; mode=display">\alpha = \frac{\mathbf{r}_{old} \cdot \mathbf{q}_{new}}{||\mathbf{q}_{new}||^2}</script><p>在奇数步时，由于矩阵特征值的对称性以及初始向量的平衡性，我们要证明在当前残差向量 $\mathbf{r}<em>{old}$ 与新生成的方向 $\mathbf{q}</em>{new}$ 是相互垂直（正交）的，即点积为 0。</p>
+<p><strong>为什么奇数步时新方向与残差向量方向垂直？</strong><br>因为我们有两个关于远点对称的特征值，所以我们可以认为，残差向量$r$，一定由这两个特征值对应的特征向量组成，且这两个向量正交。<br> 我们<strong>假设r在正负两个方向的分量长度相等（”平衡“）</strong>。我们可以把$\mathbf{r}$写成：$r=u+v$，显然$||u||=||v||$。我们尝试迈出奇数步，算出新方向$q_{new}=Ar$，因为$r$的分解，所以我们又可以写成$Ar=\lambda u-\lambda v=\lambda(u-v)$。现在我们来看残差向量和新向量的点积 $$<br>           \begin{aligned}<br>           r·(Ar) &amp;= (u+v)·\lambda(u-v) \<br>                  &amp;= \lambda[(u+v)(u-v)] \<br>                  &amp;= \lambda[u·u-u·v+v·u-v·v] \<br>                  &amp;= \lambda(||u||^2-||v||^2)<br>           \end{aligned}</p>
+<pre><code>       $$
+   因为$u$和$v$的大小相等，所以$$r(Ar)=\lambda(||u||^2-||v||^2)=0$$
+   点积为0，说明两者确实是垂直的。
+   而且因为我们设定的$b$是全1向量，这就导致$b$在正特征值空间的分量，和在负特征值空间的分量，**恰好大小相等**
+   正是这种完美的对称性，导致了完美的垂直，进而导致了完美的停滞（横线）。
+   如果$b$是随机生成的向量，那么$||u||$和$||v||$就不一定完全相等，垂直条件就会被破坏，那条横线可能就会变成一条”稍微有点斜率“的线，但依然会很慢
+</code></pre><ul>
 <li><p>那我们在推完为什么图像会有”折线“出现时，我们对于$\mathbf{A_2}$的收敛速度的问题就十分显然了</p>
 <p>  因为奇次项的系数为0，我们就相当于在这个什么都没干，就相当于这个奇次项<strong>停摆</strong>了。所以每当迭代到奇数步时，我们的误差收敛会停滞。这就意味着，我们对比$A_1$执行了$m$次迭代，由于我们的奇数步”瘫痪了“，实际上$A_2$只迭代了$\frac{m}{2}$次！换句话说，对于$A_2$，我们其实是在构建$p(A_2^2)$，有效迭代次数直接砍半了，自然地，收敛速度也会收到影响。这就解释了图像上显示的$A_2$收敛速度显著慢于$A_1$的现象。</p>
 </li>
