@@ -14,7 +14,7 @@
 <meta property="og:description" content="原则一：平移不变性假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w{top_left}$ 和识别右下角的权重 $w_{bottom_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫我们采用参数共享的解决方案我们不应该为图像的每个位置学习单独的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-08T04:55:52.456Z">
-<meta property="article:modified_time" content="2026-02-08T05:14:47.571Z">
+<meta property="article:modified_time" content="2026-02-08T05:25:36.752Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="卷积神经网络">
 <meta property="article:tag" content="深度学习">
@@ -112,14 +112,18 @@
 <li>随着层数加深，高层神经元能“看见”原始图像中更广阔的区域，从而捕获<strong>全局语义信息</strong></li>
 </ul>
 <h2 id="数学形式化"><a href="#数学形式化" class="headerlink" title="数学形式化"></a>数学形式化</h2><p>我们如何从全连接公式变为卷积公式？<br>对于输入图像 $X$ (展开为一维向量) 和输出 $H$，全连接层定义为</p>
-<script type="math/tex; mode=display">h_i = \sum_{j} W_{i,j} x_j</script><p>其中 $W<em>{i,j}$ 表示第 $j$ 个输入像素对第 $i$ 个输出神经元的权重。这包含了所有可能的相互作用<br>根据<strong>原则二</strong>，神经元 $i$ 只应当受其附近的输入 $j$ 影响。如果 $|i - j| &gt; \Delta$（$\Delta$ 为邻域范围），则强制 $W</em>{i,j} = 0$。公式变为</p>
-<script type="math/tex; mode=display">h_i = \sum_{j=i-\Delta}^{i+\Delta} W_{i,j} x_j</script><p>此时矩阵 $\mathbf{W}$ 变成了带状矩阵，这是一个稀疏矩阵<br>根据<strong>原则一</strong>，检测特征的权重不应依赖于具体位置 $i$，即 $W<em>{i, j}$ 不应该取决于 $i$，而只取决于输入和输出的<strong>相对位置</strong> $(i-j)$<br>我们将 $W</em>{i,j}$ 替换为 $w_{i-j}$（这里 $w$ 就是我们的卷积核）</p>
-<script type="math/tex; mode=display">h_i = \sum_{j=i-\Delta}^{i+\Delta} w_{i-j} x_j</script><p>如果我们令 $a = i-j$，则 $j = i-a$。通过变量代换，我们得到标准的<strong>离散卷积</strong></p>
-<script type="math/tex; mode=display">h_i = \sum_{a=-\Delta}^{\Delta} w_a x_{i-a}</script>
+<script type="math/tex; mode=display">
+h_i = \sum_{j} W_{i,j} x_j</script><p>其中 $W<em>{i,j}$ 表示第 $j$ 个输入像素对第 $i$ 个输出神经元的权重。这包含了所有可能的相互作用<br>根据<strong>原则二</strong>，神经元 $i$ 只应当受其附近的输入 $j$ 影响。如果 $|i - j| &gt; \Delta$（$\Delta$ 为邻域范围），则强制 $W</em>{i,j} = 0$。公式变为</p>
+<script type="math/tex; mode=display">
+h_i = \sum_{j=i-\Delta}^{i+\Delta} W_{i,j} x_j</script><p>此时矩阵 $\mathbf{W}$ 变成了带状矩阵，这是一个稀疏矩阵<br>根据<strong>原则一</strong>，检测特征的权重不应依赖于具体位置 $i$，即 $W<em>{i, j}$ 不应该取决于 $i$，而只取决于输入和输出的<strong>相对位置</strong> $(i-j)$<br>我们将 $W</em>{i,j}$ 替换为 $w_{i-j}$（这里 $w$ 就是我们的卷积核）</p>
+<script type="math/tex; mode=display">
+h_i = \sum_{j=i-\Delta}^{i+\Delta} w_{i-j} x_j</script><p>如果我们令 $a = i-j$，则 $j = i-a$。通过变量代换，我们得到标准的<strong>离散卷积</strong></p>
+<script type="math/tex; mode=display">
+h_i = \sum_{a=-\Delta}^{\Delta} w_a x_{i-a}</script>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" data-id="cuidkojFcwGnqSiLiLZxgcOwJ" data-title="设计原则与数学推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" data-id="cuidnWsPn7NdjbJXsqaDGlFMS" data-title="设计原则与数学推导" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -199,19 +203,19 @@
           </li>
         
           <li>
+            <a href="/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/">共轭梯度法中参数alpha和beta的推导</a>
+          </li>
+        
+          <li>
             <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">LossSumExp技巧（LSE）</a>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">随机梯度下降</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">动量法</a>
           </li>
         
           <li>
             <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">整理一下softmax回归实现中训练部分代码的思路</a>
-          </li>
-        
-          <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">动量法</a>
           </li>
         
       </ul>
