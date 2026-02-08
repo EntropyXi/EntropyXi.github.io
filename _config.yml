@@ -98,6 +98,38 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: anzhiyu
 
+# Marked configuration
+marked:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true
+  modifyAnchors: 0
+  autolink: true
+  mangle: true
+  decodeEntities: false
+  lazyload: false
+  prependRoot: false
+  postAsset: false
+  external_link:
+    enable: false
+    exclude: []
+    npm_link: false
+  descriptionLists: true
+
+# mathjax
+mathjax:
+  tags: none # ams, none, all
+  single_dollars: true # enable single dollar signs
+  cjk_width: 0.9 # width of CJK characters
+  normal_width: 0.6 # width of normal characters
+  append_css: true # append css to each page
+  every_page: false # process every page
+  extension_options: {} # MathJax extension options
+
 # math:
 #   engine: 'mathjax'
 #   mathjax:
