@@ -9,4 +9,3 @@ _multiconfig.yml
 .obsidian/
 .vscode/
 *.swp
-package-lock.json
