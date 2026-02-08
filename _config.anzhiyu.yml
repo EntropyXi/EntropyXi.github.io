@@ -31,11 +31,20 @@ nav:
         - name: 博客
           link: /
           icon: /img/favicon.ico
-    - title: 项目
+    - title: 文章分类
       item:
-        - name: 安知鱼图床
-          link: https://image.anheyu.com/
-          icon: https://image.anheyu.com/favicon.ico
+        - name: 数值分析
+          link: /categories/数值分析/
+          icon: anzhiyu-icon-chart-line
+        - name: 深度学习
+          link: /categories/深度学习/
+          icon: anzhiyu-icon-brain
+        - name: 线性回归
+          link: /categories/深度学习/线性回归/
+          icon: anzhiyu-icon-chart-area
+        - name: CNN
+          link: /categories/深度学习/CNN/
+          icon: anzhiyu-icon-layer-group
 
 # mourn （哀悼日，指定日期网站简单变灰，不包括滚动条）
 # 注意： 仅网站首页变灰，其他页面正常显示
