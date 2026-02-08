@@ -15,7 +15,9 @@ date: 2026-02-08 13:00:00
 }
 </style>
 我们在这里推导$\mathbf{p}_k = \mathbf{r}_k + \beta_{k-1} \mathbf{p}_{k-1}$中的参数$\alpha$和$\beta$
+
 ### $\alpha_k$ 的推导
+
 我们现在的目标是：在已知当前位置 $\mathbf{x}_k$ 和搜索方向 $\mathbf{p}_k$ 的情况下，确定我们要走多远
 这意味着我们要选择一个 $\alpha_k$，使得函数 $\varphi$ 在这条直线上达到**最小值**。
 我们将 $\mathbf{x}_{k+1} = \mathbf{x}_k + \alpha \mathbf{p}_k$ 代入 $\varphi(\mathbf{u})$ 的表达式中，把 $\varphi$ 看作只关于 $\alpha$ 的函数 $f(\alpha)$：
