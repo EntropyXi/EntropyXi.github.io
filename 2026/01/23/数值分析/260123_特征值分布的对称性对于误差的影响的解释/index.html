@@ -14,7 +14,7 @@
 <meta property="og:description" content="我们设$\mathbf{I}$是一个$100 \times 100$单位矩阵，$\mathbf{Z}$是一个$100\times100$的零矩阵，$\mathbf{b}$是一个$200\times1$的全1向量设$\mathbf{B}&#x3D;\begin{bmatrix} 1 &amp; &amp; &amp; \ &amp; 2 &amp; &amp; \ &amp; &amp; \ddots &amp;am">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-23T04:46:14.000Z">
-<meta property="article:modified_time" content="2026-02-08T05:31:15.327Z">
+<meta property="article:modified_time" content="2026-02-08T05:35:27.697Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="数值分析">
 <meta name="twitter:card" content="summary">
@@ -106,7 +106,8 @@
 <li>$q_2$：来自$Aq_1$（并减去了$q_1$分量）<br>   本质：包含$Ab$和$b$，即1次多项式$\phi_1(A)b$</li>
 <li>$q_3$：来自$Aq_2$<br>   本质：2次多项式$\phi_2(A)b$<br>这意味着，你的矩阵$Q_m$的每一列，本质上都是一个以向量形式存在的，作用在$b$上的多项式</li>
 </ul>
-<p>然后，GMRES算法本质上是在求解一个最小二乘问题，也就是我们通过了这个算法得到了一个用来”形容“$z$的最优多项式，<script type="math/tex">min||H_{m}z-||b||e_{1}||</script><br>我们会得到一个解向量$\mathbf{y}=[y_1,y_2,\dots,y_m]^T$（就是$z$）<br>这是配方，它告诉我们对于多项式的每一项，我们应该取多少项的$q_m$<br>因为$y$是让残差最小的“最优配方”，所以它组合出来的多项式，自然就是最优多项式</p>
+<p>然后，GMRES算法本质上是在求解一个最小二乘问题，也就是我们通过了这个算法得到了一个用来”形容“$z$的最优多项式，</p>
+<script type="math/tex; mode=display">min||H_{m}z-||b||e_{1}||</script><p>我们会得到一个解向量$\mathbf{y}=[y_1,y_2,\dots,y_m]^T$（就是$z$）<br>这是配方，它告诉我们对于多项式的每一项，我们应该取多少项的$q_m$<br>因为$y$是让残差最小的“最优配方”，所以它组合出来的多项式，自然就是最优多项式</p>
 <p>而我们去寻找这个最优多项式，要去令残差$\mathbf{r}=p(A)\mathbf{b}$最小，本质上也是去<strong>把多项式中特征值的位置（大小）压低。</strong><br>这是什么意思？<br>我们知道，在矩阵$A$张成的空间里，任何一个向量$b$都可以写成这些特征向量的叠加：</p>
 <script type="math/tex; mode=display">
 \mathbf{b}=y_1\mathbf{v_1}+y_2\mathbf{v_2}+\dots+y_n\mathbf{v_n}</script><p>又有$p(A)\mathbf{v_i}=p(\lambda_i)\mathbf{v_i}$，所以，残差$\mathbf{r}=p(A)\mathbf{b}$就可以表示为</p>
@@ -139,6 +140,7 @@
                   &= \lambda[u·u-u·v+v·u-v·v] \\
                   &= \lambda(||u||^2-||v||^2)
            \end{aligned}</script><pre><code>   因为$u$和$v$的大小相等，所以
+
    $$
    r(Ar)=\lambda(||u||^2-||v||^2)=0
    $$
@@ -155,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/01/23/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/260123_%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E4%BA%8E%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%BD%B1%E5%93%8D%E7%9A%84%E8%A7%A3%E9%87%8A/" data-id="cuidvMeCyjnFD1We2L06Ks5sU" data-title="特征值分布的对称性对于误差的影响的解释" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/01/23/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/260123_%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E4%BA%8E%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%BD%B1%E5%93%8D%E7%9A%84%E8%A7%A3%E9%87%8A/" data-id="cuidokea9m8dt7S_z9IGSu0mc" data-title="特征值分布的对称性对于误差的影响的解释" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -226,15 +228,15 @@
       <ul>
         
           <li>
+            <a href="/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/">共轭梯度法中参数alpha和beta的推导</a>
+          </li>
+        
+          <li>
             <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
           </li>
         
           <li>
             <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/">LossSumExp技巧（LSE）</a>
-          </li>
-        
-          <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/">动量法</a>
           </li>
         
           <li>
