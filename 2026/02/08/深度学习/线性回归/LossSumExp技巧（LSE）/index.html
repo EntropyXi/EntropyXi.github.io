@@ -6,15 +6,15 @@
   
   <title>LossSumExp技巧（LSE） | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算$\frac{exp(x_i)}{\sum exp(x_j)}$，然后再把计算出来的softmax概率直接传给 log 计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致lo">
+  <meta name="description" content="在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算$\frac{exp(x_i)}{\sum exp(x_j)}$，然后再把计算出来的softmax概率直接传给 log 计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LossSumExp技巧（LSE）">
 <meta property="og:url" content="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算$\frac{exp(x_i)}{\sum exp(x_j)}$，然后再把计算出来的softmax概率直接传给 log 计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致lo">
+<meta property="og:description" content="在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算$\frac{exp(x_i)}{\sum exp(x_j)}$，然后再把计算出来的softmax概率直接传给 log 计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-08T05:00:00.000Z">
-<meta property="article:modified_time" content="2026-02-08T05:36:48.663Z">
+<meta property="article:modified_time" content="2026-02-08T06:24:45.079Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="深度学习，线性回归">
 <meta name="twitter:card" content="summary">
@@ -98,32 +98,45 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算$\frac{exp(x_i)}{\sum exp(x_j)}$，然后再把计算出来的softmax概率直接传给 log 计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致log(0)报错。这在数值上是十分脆弱的。</p>
-<p>所以我们使用LSE技巧，在损失函数内部，将这两部合并计算</p>
+        <p>在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算<span
+class="math inline">$\frac{exp(x_i)}{\sum
+exp(x_j)}$</span>，然后再把计算出来的softmax概率直接传给 log
+计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致log(0)报错。这在数值上是十分脆弱的。</p>
+<p>所以我们使用LSE技巧，在损失函数内部，将这两部合并计算 -
+核心逻辑：框架（如 PyTorch 的 nn.CrossEntropyLoss
+）要求你传入未规范化的预测 -
+内部黑盒：在损失函数内部，它并不会先算概率再算对数，而是利用数学恒等式将这两步合并计算
+- 数学原理：它计算的是<span
+class="math inline">log (∑<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub>))</span>，并使用了平移技巧（减去最大值c）</p>
+<p><span
+class="math display"><em>L</em><em>o</em><em>g</em><em>S</em><em>u</em><em>m</em><em>E</em><em>x</em><em>p</em>(<em>x</em>) = <em>c</em> + log ∑<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub> − <em>c</em>),  其中c=max(x)</span></p>
 <ul>
-<li>核心逻辑：框架（如 PyTorch 的 nn.CrossEntropyLoss ）要求你传入未规范化的预测</li>
-<li>内部黑盒：在损失函数内部，它并不会先算概率再算对数，而是利用数学恒等式将这两步合并计算</li>
-<li>数学原理：它计算的是$\log(\sum exp(x_i))$，并使用了平移技巧（减去最大值c）</li>
-</ul>
-<script type="math/tex; mode=display">
-LogSumExp(x)=c+\log\sum exp(x_i-c),\quad \text{其中c=max(x)}</script><ul>
 <li>优势：这种合并计算的方式在计算机底层是极其稳定的，永远不会出现NaN（不是数字）或无穷大的错误</li>
 </ul>
-<p>接下来我们证明等价性：<br>其中softmax公式：$\tilde{y}_i=\frac{exp(x_i)}{\sum_j exp(x_j)}$<br>交叉熵损失（针对单样本）：$L=-\log(\tilde{y}_y)$</p>
+<p>接下来我们证明等价性： 其中softmax公式：<span
+class="math inline">$\tilde{y}_i=\frac{exp(x_i)}{\sum_j
+exp(x_j)}$</span> 交叉熵损失（针对单样本）：<span
+class="math inline"><em>L</em> = −log (<em>ỹ</em><sub><em>y</em></sub>)</span></p>
 <p>将softmax的定义带入到损失函数L中</p>
-<script type="math/tex; mode=display">
-L=-\log(\tilde{y}_i=\frac{exp(x_i)}{\sum_j exp(x_j)})</script><p>利用对数的运算法则展开</p>
-<script type="math/tex; mode=display">
-L=-[\log(exp(x_i))-log(\sum_{j}exp(x_j))]</script><p>因为$\log(exp(x))=x$，所以</p>
-<script type="math/tex; mode=display">
-L=-[x_i-log(\sum_{j}exp(x_j))]</script><p>展开</p>
-<script type="math/tex; mode=display">
-L=-x_i+\log(\sum_{j}exp(x_j))</script><p>得证</p>
+<p><span class="math display">$$
+L=-\log(\tilde{y}_i=\frac{exp(x_i)}{\sum_j exp(x_j)})
+$$</span></p>
+<p>利用对数的运算法则展开</p>
+<p><span
+class="math display"><em>L</em> = −[log (<em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>i</em></sub>)) − <em>l</em><em>o</em><em>g</em>(∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))]</span></p>
+<p>因为<span
+class="math inline">log (<em>e</em><em>x</em><em>p</em>(<em>x</em>)) = <em>x</em></span>，所以</p>
+<p><span
+class="math display"><em>L</em> = −[<em>x</em><sub><em>i</em></sub> − <em>l</em><em>o</em><em>g</em>(∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))]</span></p>
+<p>展开</p>
+<p><span
+class="math display"><em>L</em> = −<em>x</em><sub><em>i</em></sub> + log (∑<sub><em>j</em></sub><em>e</em><em>x</em><em>p</em>(<em>x</em><sub><em>j</em></sub>))</span></p>
+<p>得证</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/" data-id="cuidVyqMtVXdPz6PJgJ_MWtcv" data-title="LossSumExp技巧（LSE）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/" data-id="cuid6gviPBCDGASEUWaNrL5_0" data-title="LossSumExp技巧（LSE）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -211,7 +224,7 @@ L=-x_i+\log(\sum_{j}exp(x_j))</script><p>得证</p>
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">整理一下softmax回归实现中训练部分代码的思路</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
           </li>
         
           <li>

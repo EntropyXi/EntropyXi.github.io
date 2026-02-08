@@ -6,15 +6,15 @@
   
   <title>RMSProp | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="RMSProp 是一种 自适应学习率方法。它通过计算梯度的二阶矩的指数加权移动平均，来对每个参数的学习率进行独立缩放  \begin{aligned} E[\mathbf{g}^2]_t &amp;&#x3D; \beta E[\mathbf{g}^2]_{t-1} + (1-\beta) (\mathbf{g}_t \odot \mathbf{g}_t) \\ \mathbf{x}_{t+1} &amp;&#x3D; \mathb">
+  <meta name="description" content="RMSProp 是一种 自适应学习率方法。它通过计算梯度的二阶矩的指数加权移动平均，来对每个参数的学习率进行独立缩放 $$ \begin{aligned} E[\mathbf{g}^2]_t &amp;&#x3D; \beta E[\mathbf{g}^2]_{t-1} + (1-\beta) (\mathbf{g}_t \odot \mathbf{g}_t) \\ \mathbf{x}_{t+">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RMSProp">
 <meta property="og:url" content="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RMSProp/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="RMSProp 是一种 自适应学习率方法。它通过计算梯度的二阶矩的指数加权移动平均，来对每个参数的学习率进行独立缩放  \begin{aligned} E[\mathbf{g}^2]_t &amp;&#x3D; \beta E[\mathbf{g}^2]_{t-1} + (1-\beta) (\mathbf{g}_t \odot \mathbf{g}_t) \\ \mathbf{x}_{t+1} &amp;&#x3D; \mathb">
+<meta property="og:description" content="RMSProp 是一种 自适应学习率方法。它通过计算梯度的二阶矩的指数加权移动平均，来对每个参数的学习率进行独立缩放 $$ \begin{aligned} E[\mathbf{g}^2]_t &amp;&#x3D; \beta E[\mathbf{g}^2]_{t-1} + (1-\beta) (\mathbf{g}_t \odot \mathbf{g}_t) \\ \mathbf{x}_{t+">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-08T04:57:13.420Z">
-<meta property="article:modified_time" content="2026-02-08T05:34:50.373Z">
+<meta property="article:modified_time" content="2026-02-08T06:24:01.810Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
@@ -98,62 +98,122 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>RMSProp 是一种 <strong>自适应学习率</strong>方法。它通过计算梯度的<strong>二阶矩</strong>的指数加权移动平均，来对每个参数的学习率进行独立缩放</p>
-<script type="math/tex; mode=display">
+        <p>RMSProp 是一种
+<strong>自适应学习率</strong>方法。它通过计算梯度的<strong>二阶矩</strong>的指数加权移动平均，来对每个参数的学习率进行独立缩放</p>
+<p><span class="math display">$$
 \begin{aligned}
-E[\mathbf{g}^2]_t &= \beta E[\mathbf{g}^2]_{t-1} + (1-\beta) (\mathbf{g}_t \odot \mathbf{g}_t) \\
-\mathbf{x}_{t+1} &= \mathbf{x}_t - \frac{\eta}{\sqrt{E[\mathbf{g}^2]_t + \epsilon}} \odot \mathbf{g}_t
-\end{aligned}</script><p>其中</p>
+E[\mathbf{g}^2]_t &amp;= \beta E[\mathbf{g}^2]_{t-1} + (1-\beta)
+(\mathbf{g}_t \odot \mathbf{g}_t) \\
+\mathbf{x}_{t+1} &amp;= \mathbf{x}_t -
+\frac{\eta}{\sqrt{E[\mathbf{g}^2]_t + \epsilon}} \odot \mathbf{g}_t
+\end{aligned}
+$$</span></p>
+<p>其中</p>
 <ul>
-<li>$\odot$ 表示哈达玛积，即逐元素相乘。</li>
-<li>$E[\mathbf{g}^2]_t$ 是梯度平方的累积量。</li>
-<li>$\beta$ 是<strong>衰减率</strong>（典型值为 0.9 或 0.99）。</li>
-<li>$\epsilon$ 是防止分母为零的<strong>平滑项</strong>。</li>
+<li><span class="math inline">⊙</span> 表示哈达玛积，即逐元素相乘。</li>
+<li><span
+class="math inline"><em>E</em>[<strong>g</strong><sup>2</sup>]<sub><em>t</em></sub></span>
+是梯度平方的累积量。</li>
+<li><span class="math inline"><em>β</em></span>
+是<strong>衰减率</strong>（典型值为 0.9 或 0.99）。</li>
+<li><span class="math inline"><em>ϵ</em></span>
+是防止分母为零的<strong>平滑项</strong>。</li>
 </ul>
-<h3 id="构造与推导"><a href="#构造与推导" class="headerlink" title="构造与推导"></a>构造与推导</h3><p>我们从RMSProp的根源，<strong>AdaGrad</strong>开始讲起</p>
-<p>动量法解决了全局震荡的问题，但是我们的所有参数共用一个学习率$\eta$<br>在处理稀疏特征或尺度差异巨大的参数（例如深度nn的网络）时，我们希望</p>
+<h3 id="构造与推导">构造与推导</h3>
+<p>我们从RMSProp的根源，<strong>AdaGrad</strong>开始讲起</p>
+<p>动量法解决了全局震荡的问题，但是我们的所有参数共用一个学习率<span
+class="math inline"><em>η</em></span>
+在处理稀疏特征或尺度差异巨大的参数（例如深度nn的网络）时，我们希望</p>
 <ul>
 <li>对于频繁更新或梯度很大的参数，降低其学习率，防止其发散</li>
 <li>对于频繁更新或梯度很大的参数，增大其学习率</li>
 </ul>
-<p>为了实现上述目标，我们需要构造一个调节器，这个调节器应该与该方向上的历史梯度的幅度成反比<br>那么，我们该如何衡量一个参数在过去一段时间内的梯度<strong>大小</strong>？<br>简单的累加梯度$\sum g_t$肯定是不行的，因为正负梯度会互相抵消（实际上是剧烈震荡）<br>因此，我们必须累加梯度的<strong>平方</strong><br>定义$r_t$为知道$t$时刻的所有梯度的平方和</p>
-<script type="math/tex; mode=display">
-r_t=\sum_{\tau=1}^{t}g_\tau^2</script><p>现在，我们使用$r_t$作为分母，对全局学习率进行归一化，这就是AdaGrad的核心公式</p>
-<script type="math/tex; mode=display">
-w_{i+1}=w_i-\frac{\eta}{r_t+\epsilon}\odot g_t</script><ul>
-<li>$\epsilon$是一个防止分母为0的常数</li>
-</ul>
-<h4 id="AdaGrad的致命缺陷"><a href="#AdaGrad的致命缺陷" class="headerlink" title="AdaGrad的致命缺陷"></a>AdaGrad的致命缺陷</h4><p>虽然AdaGrad解决了“各向异性”问题，但是在深层神经网络学习的优化场景中，他暴露出了一个致命的问题<br>我们观察$r_t$的定义</p>
-<script type="math/tex; mode=display">
-r_t = \sum_{\tau=1}^{t} g_\tau^2 = r_{t-1} + g_t^2</script><p>由于$g_t^2$是非负的，我们会发现，整个式子是单调递增的，也就是说$r_t$是单调递增的！<br>随着训练迭代次数$t$趋近于$\infty$</p>
+<p>为了实现上述目标，我们需要构造一个调节器，这个调节器应该与该方向上的历史梯度的幅度成反比
+那么，我们该如何衡量一个参数在过去一段时间内的梯度<strong>大小</strong>？
+简单的累加梯度<span
+class="math inline">∑<em>g</em><sub><em>t</em></sub></span>肯定是不行的，因为正负梯度会互相抵消（实际上是剧烈震荡）
+因此，我们必须累加梯度的<strong>平方</strong> 定义<span
+class="math inline"><em>r</em><sub><em>t</em></sub></span>为知道<span
+class="math inline"><em>t</em></span>时刻的所有梯度的平方和</p>
+<p><span class="math display">$$
+r_t=\sum_{\tau=1}^{t}g_\tau^2
+$$</span></p>
+<p>现在，我们使用<span
+class="math inline"><em>r</em><sub><em>t</em></sub></span>作为分母，对全局学习率进行归一化，这就是AdaGrad的核心公式</p>
+<p><span class="math display">$$
+w_{i+1}=w_i-\frac{\eta}{r_t+\epsilon}\odot g_t
+$$</span></p>
 <ul>
-<li>$r_t\to\infty$</li>
-<li>有效学习率$\frac{\eta}{\sqrt{r_t+\epsilon}}\to0$<br>如果在找到最小值之前，学习率就已经减小到几乎为0，参数更新就会停止，无法到达最优解，这在深度神经网络中是不可接受的</li>
+<li><span
+class="math inline"><em>ϵ</em></span>是一个防止分母为0的常数</li>
 </ul>
-<p>所以我们引入<strong>RMSProp</strong>修正<br>我们需要一种方法，既能衡量梯度的大小，又只关注最近的历史，而不是从盘古开天辟地（$t=1$）开始累积<br>我们可以通过<strong>指数加权移动平均</strong>来实现。我们不再直接求和，而是使用一个<strong>衰减系数</strong>$\beta$</p>
-<h3 id="RMSProp-的构造步骤"><a href="#RMSProp-的构造步骤" class="headerlink" title="RMSProp 的构造步骤"></a>RMSProp 的构造步骤</h3><p>我们将 AdaGrad 的累积公式：</p>
-<script type="math/tex; mode=display">
-r_t = r_{t-1} + g_t^2</script><p>修改为 RMSProp 的加权更新公式：</p>
-<script type="math/tex; mode=display">
-E[g^2]_t = \beta \cdot \underbrace{E[g^2]_{t-1}}_{\text{历史信息}} + (1-\beta) \cdot \underbrace{g_t^2}_{\text{当前信息}}</script><p><strong>步骤解析</strong>：</p>
-<ol>
-<li>每经过一步，旧的累积量 $E[g^2]_{t-1}$ 就会乘以 $\beta$（例如 0.9）。这意味着很久以前的梯度信息会以 $0.9, 0.81, 0.729…$ 的速度迅速衰减，不再主导分母</li>
-<li>当前的梯度平方 $g_t^2$ 被赋予权重 $(1-\beta)$ 加入累积量</li>
-<li>这种方式使得 $E[g^2]_t$ 不再是单调递增的，它变成了一个在该参数梯度平均强度附近的<strong>滑动窗口估计量</strong><br>结合上述推导，我们得到了RMSProp的完整形式<br>对于参数 $\mathbf{w}$ 和梯度 $\mathbf{g}_t$</li>
-</ol>
+<h4 id="adagrad的致命缺陷">AdaGrad的致命缺陷</h4>
+<p>虽然AdaGrad解决了“各向异性”问题，但是在深层神经网络学习的优化场景中，他暴露出了一个致命的问题
+我们观察<span
+class="math inline"><em>r</em><sub><em>t</em></sub></span>的定义</p>
+<p><span class="math display">$$
+r_t = \sum_{\tau=1}^{t} g_\tau^2 = r_{t-1} + g_t^2
+$$</span></p>
+<p>由于<span
+class="math inline"><em>g</em><sub><em>t</em></sub><sup>2</sup></span>是非负的，我们会发现，整个式子是单调递增的，也就是说<span
+class="math inline"><em>r</em><sub><em>t</em></sub></span>是单调递增的！
+随着训练迭代次数<span class="math inline"><em>t</em></span>趋近于<span
+class="math inline">∞</span></p>
 <ul>
-<li>计算梯度平方的移动平均</li>
+<li><span
+class="math inline"><em>r</em><sub><em>t</em></sub> → ∞</span></li>
+<li>有效学习率<span
+class="math inline">$\frac{\eta}{\sqrt{r_t+\epsilon}}\to0$</span></li>
 </ul>
-<script type="math/tex; mode=display">
-v_t = \beta v_{t-1} + (1-\beta) g_t^2
-$$（这里常用符号 $v_t$ 或 $h_t$ 表示累积量 $E[g^2]_t$）
-- 参数更新</script><p>w_{t+1} = w_t - \frac{\eta}{\sqrt{v_t + \epsilon}} g_t</p>
-<p>$$<br>这就得到了我们最后的公式</p>
+<p>如果在找到最小值之前，学习率就已经减小到几乎为0，参数更新就会停止，无法到达最优解，这在深度神经网络中是不可接受的</p>
+<p>所以我们引入<strong>RMSProp</strong>修正
+我们需要一种方法，既能衡量梯度的大小，又只关注最近的历史，而不是从盘古开天辟地（<span
+class="math inline"><em>t</em> = 1</span>）开始累积
+我们可以通过<strong>指数加权移动平均</strong>来实现。我们不再直接求和，而是使用一个<strong>衰减系数</strong><span
+class="math inline"><em>β</em></span></p>
+<h3 id="rmsprop-的构造步骤">RMSProp 的构造步骤</h3>
+<p>我们将 AdaGrad 的累积公式：</p>
+<p><span
+class="math display"><em>r</em><sub><em>t</em></sub> = <em>r</em><sub><em>t</em> − 1</sub> + <em>g</em><sub><em>t</em></sub><sup>2</sup></span></p>
+<p>修改为 RMSProp 的加权更新公式：</p>
+<p><span class="math display">$$
+E[g^2]_t = \beta \cdot \underbrace{E[g^2]_{t-1}}_{\text{历史信息}} +
+(1-\beta) \cdot \underbrace{g_t^2}_{\text{当前信息}}
+$$</span></p>
+<p><strong>步骤解析</strong>： 1. 每经过一步，旧的累积量 <span
+class="math inline"><em>E</em>[<em>g</em><sup>2</sup>]<sub><em>t</em> − 1</sub></span>
+就会乘以 <span class="math inline"><em>β</em></span>（例如
+0.9）。这意味着很久以前的梯度信息会以 <span
+class="math inline">0.9, 0.81, 0.729...</span>
+的速度迅速衰减，不再主导分母 2. 当前的梯度平方 <span
+class="math inline"><em>g</em><sub><em>t</em></sub><sup>2</sup></span>
+被赋予权重 <span class="math inline">(1 − <em>β</em>)</span> 加入累积量
+3. 这种方式使得 <span
+class="math inline"><em>E</em>[<em>g</em><sup>2</sup>]<sub><em>t</em></sub></span>
+不再是单调递增的，它变成了一个在该参数梯度平均强度附近的<strong>滑动窗口估计量</strong>
+结合上述推导，我们得到了RMSProp的完整形式 对于参数 <span
+class="math inline"><strong>w</strong></span> 和梯度 <span
+class="math inline"><strong>g</strong><sub><em>t</em></sub></span> -
+计算梯度平方的移动平均</p>
+<p><span
+class="math display"><em>v</em><sub><em>t</em></sub> = <em>β</em><em>v</em><sub><em>t</em> − 1</sub> + (1 − <em>β</em>)<em>g</em><sub><em>t</em></sub><sup>2</sup></span></p>
+<p>（这里常用符号 <span
+class="math inline"><em>v</em><sub><em>t</em></sub></span> 或 <span
+class="math inline"><em>h</em><sub><em>t</em></sub></span> 表示累积量
+<span
+class="math inline"><em>E</em>[<em>g</em><sup>2</sup>]<sub><em>t</em></sub></span>）</p>
+<ul>
+<li>参数更新</li>
+</ul>
+<p><span class="math display">$$
+w_{t+1} = w_t - \frac{\eta}{\sqrt{v_t + \epsilon}} g_t
+$$</span></p>
+<p>这就得到了我们最后的公式</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RMSProp/" data-id="cuid8j8RjSxPEmzjtWFiKzlzD" data-title="RMSProp" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RMSProp/" data-id="cuidbS0AznKmtpsXu5NIZHCvg" data-title="RMSProp" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -165,11 +225,11 @@ $$（这里常用符号 $v_t$ 或 $h_t$ 表示累积量 $E[g^2]_t$）
     
 <nav id="article-nav">
   
-    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Adam算法
+          整理一下softmax回归实现中训练部分代码的思路
         
       </div>
     </a>
@@ -241,7 +301,7 @@ $$（这里常用符号 $v_t$ 或 $h_t$ 表示累积量 $E[g^2]_t$）
           </li>
         
           <li>
-            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/">整理一下softmax回归实现中训练部分代码的思路</a>
+            <a href="/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/">Adam算法</a>
           </li>
         
           <li>
