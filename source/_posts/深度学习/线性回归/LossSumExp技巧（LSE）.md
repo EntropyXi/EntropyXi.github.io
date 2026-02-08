@@ -4,6 +4,9 @@ date: 2026-02-08 13:00:00
 mathjax: true
 tags:
   - 深度学习，线性回归
+categories:
+  - 深度学习
+  - 线性回归
 ---
 <style>
 /* 强制让 MathJax 公式容器支持横向滚动 */

@@ -4,6 +4,8 @@ tags:
 title: 共轭梯度法中参数alpha和beta的推导
 mathjax: "true"
 date: 2026-02-08 13:00:00
+categories:
+  - 数值分析
 ---
 <style>
 /* 强制让 MathJax 公式容器支持横向滚动 */

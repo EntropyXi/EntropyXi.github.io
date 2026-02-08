@@ -4,6 +4,8 @@ Date: 2026-02-08 13:00:00
 tags:
   - 深度学习
 mathjax: true
+categories:
+  - 深度学习
 ---
 <style>
 /* 强制让 MathJax 公式容器支持横向滚动 */

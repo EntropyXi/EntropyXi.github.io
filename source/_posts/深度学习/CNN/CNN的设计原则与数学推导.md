@@ -4,6 +4,9 @@ Date: 2026-02-08 13:00:00
 tags:
   - 卷积神经网络
 mathjax: true
+categories:
+  - 深度学习
+  - CNN
 ---
 <style>
 /* 强制让 MathJax 公式容器支持横向滚动 */
