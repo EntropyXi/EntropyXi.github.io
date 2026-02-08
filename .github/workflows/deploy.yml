@@ -4,14 +4,13 @@ on:
   push:
     branches:
       - source # 只有源码分支有推送时触发
+  workflow_dispatch: # 允许手动触发
 
-# 设置权限以允许部署到 GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 确保只有一个并发部署
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -22,6 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -30,12 +31,20 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          # 显式安装可能缺失的主题依赖
+          npm install hexo-renderer-pug hexo-renderer-stylus --save
 
       - name: Generate Static Files
         run: |
           npx hexo clean
           npx hexo generate
+          # 检查生成结果，防止上传空文件夹
+          if [ ! -f public/index.html ]; then
+            echo "Error: index.html not found in public directory!"
+            exit 1
+          fi
           touch public/.nojekyll
 
       - name: Upload Artifact
