@@ -7,7 +7,7 @@ title: EntropyXi的个人博客
 subtitle: ''
 description: ''
 keywords:
-author: EntropiXi
+author: EntropyXi
 language: en
 timezone: ''
 
@@ -89,14 +89,27 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
-ignore:
+# include:
+# exclude:
+# ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: anzhiyu
+
+# math:
+#   engine: 'mathjax'
+#   mathjax:
+#     # src: custom_mathjax_source
+#     config:
+#       tex:
+#         inlineMath: [['$', '$'], ['\\(', '\\)']]
+#         displayMath: [['$$', '$$'], ['\\[', '\\]']]
+#         tags: 'none'
+#       options:
+#         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+#         ignoreHtmlClass: 'tex2jax_ignore'
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
