@@ -433,9 +433,9 @@ crisp:
 # --------------------------------------
 footer:
   owner:
-    enable: true
+    enable: false
     since: 2024
-  custom_text:
+  custom_text: Powered By <a href="https://hexo.io/zh-cn/">Hexo</a> and <a href="https://docs.anheyu.com/">Anzhiyu</a>
   runtime:
     enable: true
     launch_time: 2024/02/01 00:00:00 # 网站上线时间
