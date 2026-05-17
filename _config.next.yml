@@ -1,0 +1,209 @@
+# ===============================================================
+# NexT Theme Configuration for EntropyXi's Blog
+# ===============================================================
+
+# ---------------------------------------------------------------
+# Scheme Settings
+# ---------------------------------------------------------------
+# Pisces: clean two-column layout, best for long-form technical notes
+scheme: Pisces
+
+# Dark Mode - allow readers to toggle
+darkmode: true
+
+# ---------------------------------------------------------------
+# Favicon
+# ---------------------------------------------------------------
+favicon:
+  small: /images/favicon-16x16-next.png
+  medium: /images/favicon-32x32-next.png
+
+# ---------------------------------------------------------------
+# Menu Settings
+# ---------------------------------------------------------------
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  about: /about/ || fa fa-user
+
+menu_settings:
+  icons: true
+  badges: false
+
+# ---------------------------------------------------------------
+# Sidebar Settings
+# ---------------------------------------------------------------
+sidebar:
+  # Right side feels more natural for reading flow with TOC
+  position: right
+  width_expanded: 280
+  width_dual_column: 220
+  # Show sidebar on posts (for TOC), hide on index
+  display: post
+  padding: 16
+  offset: 12
+
+# Sidebar Avatar
+avatar:
+  rounded: true
+  rotated: false
+
+# Posts / Categories / Tags count in sidebar
+site_state: true
+
+# Social Links
+social:
+  GitHub: https://github.com/EntropyXi || fab fa-github
+  E-Mail: mailto:25804170@qq.com || fa fa-envelope
+
+# ---------------------------------------------------------------
+# Table of Contents Settings
+# ---------------------------------------------------------------
+toc:
+  enable: true
+  # List numbers help navigate math derivations
+  number: true
+  wrap: true
+  # Expand all headings so readers can see the full derivation structure
+  expand_all: true
+  # Posts use up to h5 (#####) headings
+  max_depth: 5
+
+# ---------------------------------------------------------------
+# Footer Settings
+# ---------------------------------------------------------------
+footer:
+  since: 2025
+  icon:
+    name: fa fa-code
+    animated: false
+    color: "#4b90e2"
+  powered:
+    enable: true
+
+# ---------------------------------------------------------------
+# Post Settings
+# ---------------------------------------------------------------
+excerpt_description: true
+read_more_btn: true
+
+post_meta:
+  item_text: true
+  created_at: true
+  updated_at:
+    enable: true
+    another_day: true
+  categories: true
+
+# Word count
+symbols_count_time:
+  separated_meta: true
+  item_text_total: false
+
+tag_icon: true
+
+# ---------------------------------------------------------------
+# Code Blocks
+# ---------------------------------------------------------------
+codeblock:
+  # Code Highlight theme
+  # All available themes: https://theme-next.js.org/highlight/
+  theme:
+    light: default
+    dark: atom-one-dark
+  prism:
+    light: prism
+    dark: prism-dark
+  # Add copy button on codeblock
+  copy_button:
+    enable: true
+    style: mac
+  # Fold code block
+  fold:
+    enable: false
+    height: 500
+  # Display language name
+  language: true
+
+# ---------------------------------------------------------------
+# Back to Top
+# ---------------------------------------------------------------
+back2top:
+  enable: true
+  # Show scroll percentage
+  scrollpercent: true
+
+# ---------------------------------------------------------------
+# Reading Progress
+# ---------------------------------------------------------------
+reading_progress:
+  enable: true
+  # Progress bar at top
+  position: top
+  color: "#4b90e2"
+  height: 3px
+
+# ---------------------------------------------------------------
+# Math Formulas - CRITICAL for this blog
+# ---------------------------------------------------------------
+math:
+  # Only load MathJax on pages with `mathjax: true` in frontmatter
+  every_page: false
+  mathjax:
+    enable: true
+    # `none` avoids conflict with `$` in Markdown
+    tags: none
+
+# ---------------------------------------------------------------
+# Font Settings - Optimized for Chinese technical content
+# ---------------------------------------------------------------
+font:
+  enable: false
+  # System font stack with excellent CJK support
+  # No Google Fonts dependency for fast loading in China
+  global:
+    external: false
+    family: '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif'
+    size: 1.0
+  headings:
+    external: false
+    family: '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif'
+  posts:
+    external: false
+    family: '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif'
+  codes:
+    external: false
+    family: '"Source Code Pro", "Fira Code", Consolas, Monaco, "Courier New", monospace'
+
+# ---------------------------------------------------------------
+# SEO
+# ---------------------------------------------------------------
+index_with_subtitle: true
+exturl: false
+
+# ---------------------------------------------------------------
+# Pjax - faster page navigation
+# ---------------------------------------------------------------
+pjax: true
+
+# ---------------------------------------------------------------
+# FancyBox - image zoom
+# ---------------------------------------------------------------
+fancybox: true
+
+# ---------------------------------------------------------------
+# Creative Commons License
+# ---------------------------------------------------------------
+creative_commons:
+  license: by-nc-sa
+  size: small
+  sidebar: false
+  post: true
+
+# ---------------------------------------------------------------
+# Custom Styles
+# ---------------------------------------------------------------
+custom_file_path:
+  style: source/_data/styles.styl

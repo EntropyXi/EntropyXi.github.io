@@ -4,11 +4,11 @@
 
 # Site
 title: EntropyXi的个人博客
-subtitle: ''
-description: ''
+subtitle: '深度学习与数值分析笔记'
+description: '深度学习、扩散模型、流匹配与数值分析的技术笔记'
 keywords:
 author: EntropyXi
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
@@ -96,7 +96,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: anzhiyu
+theme: next
 
 # pandoc
 pandoc:
