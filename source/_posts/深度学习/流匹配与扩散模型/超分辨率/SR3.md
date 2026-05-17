@@ -7,6 +7,8 @@ tags:
 mathjax: true
 categories:
   - 深度学习
+  - 流匹配与扩散模型
+  - 超分辨率
 ---
 <style>
 /* 强制让 MathJax 公式容器支持横向滚动 */
