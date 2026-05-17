@@ -75,7 +75,33 @@ body {
 }
 
 // -----------------------------------------------------------
-// 5. Code Blocks - Clean and readable
+// 5. Note Callouts - Theorem, definition, remark blocks
+// -----------------------------------------------------------
+.post-body .note {
+  border-radius: 6px;
+  margin: 1.5em 0;
+  padding: 1em 1.2em;
+  border-left: 4px solid #4b90e2;
+
+  // Flat style looks best for math notes
+  &.flat {
+    border-left-width: 4px;
+  }
+
+  // Keep math formulas readable inside notes
+  .mjx-container {
+    margin: 0.6em 0;
+  }
+}
+
+html[data-theme="dark"] .post-body .note {
+  // Slightly lighter border in dark mode
+  border-left-color: #6db3f2;
+  background: rgba(75, 144, 226, 0.08);
+}
+
+// -----------------------------------------------------------
+// 6. Code Blocks - Clean and readable
 // -----------------------------------------------------------
 code {
   color: #c7254e;
@@ -147,23 +173,40 @@ html {
   --color-border: #e8e8e8;
 }
 
-@media (prefers-color-scheme: dark) {
-  // In dark mode, lighter borders
-  html[data-theme="dark"] {
-    --color-border: #333;
+html[data-theme="dark"] {
+  --color-border: #333;
 
-    code {
-      color: #f08d49;
-      background: #2d2d2d;
-    }
+  code {
+    color: #f08d49;
+    background: #2d2d2d;
+  }
 
-    figure.highlight {
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    }
+  figure.highlight {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
 
-    .post-body img {
-      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  .post-body img {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  // MathJax formulas - make visible in dark mode
+  .mjx-container {
+    color: #e0e0e0 !important;
+
+    // Inline math
+    &[display="false"] {
+      color: #e0e0e0 !important;
     }
+  }
+
+  // MathJax SVG output - invert black vectors to light
+  .MathJax_SVG, .MathJax_SVG_Display {
+    filter: invert(0.88) hue-rotate(180deg);
+  }
+
+  // MathJax CHTML output
+  .MathJax_CHTML {
+    color: #e0e0e0;
   }
 }
 
@@ -177,5 +220,10 @@ html {
   }
   .main-inner {
     padding: 0 12px;
+  }
+
+  // Shrink math formulas on mobile
+  .mjx-container {
+    font-size: 0.88em !important;
   }
 }

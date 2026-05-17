@@ -206,6 +206,18 @@ local_search:
 fancybox: true
 
 # ---------------------------------------------------------------
+# Note Tags - Callout blocks for theorems, definitions, caveats
+# Usage: {% note info %}content{% endnote %}
+# Styles: simple | modern | flat | disabled
+# Types: default | primary | success | info | warning | danger
+# ---------------------------------------------------------------
+note:
+  style: flat
+  icons: true
+  light_bg_offset: 0
+  dark_bg_offset: 0
+
+# ---------------------------------------------------------------
 # Creative Commons License
 # ---------------------------------------------------------------
 creative_commons:
