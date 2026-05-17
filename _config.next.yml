@@ -200,7 +200,7 @@ creative_commons:
   license: by-nc-sa
   size: small
   sidebar: false
-  post: true
+  post: false
 
 # ---------------------------------------------------------------
 # Custom Styles
