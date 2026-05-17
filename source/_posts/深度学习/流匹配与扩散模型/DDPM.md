@@ -31,8 +31,8 @@ $q(x_t|x_0)=N(x_0,t\beta)$
 
 但是我们会发现，以这样的方式来进行加噪会导致方差爆炸($t\beta$项)，而我们想要的这个纯粹的噪声一般指的是标准高斯分布，所以我们做出以下变化
 
-$q(x_t|x_{t-1})=\sqrt{1-\beta}x_{t-1}+\sqrt{\beta}·\epsilon$
-$q(x_t|x_0)=\sqrt{\bar{\alpha}_t}x_0+\sqrt{(1-\bar{\alpha}_t)}·\epsilon$
+$q(x_t|x_{t-1})=\sqrt{1-\beta}x_{t-1}+\sqrt{\beta}\cdot\epsilon$
+$q(x_t|x_0)=\sqrt{\bar{\alpha}_t}x_0+\sqrt{(1-\bar{\alpha}_t)}\cdot\epsilon$
 $\text{where} \quad \bar{\alpha}_t=(1-\beta)^t$
 因为$t\to\infty,\quad\bar{\alpha}_t\to0,\quad((1-\bar{\alpha}_t)\to1)$
 这就达成了我们的结果。
@@ -88,7 +88,7 @@ The Final Loss
 $\mathcal{L} = \mathbb{E}_q \left[ \sum_{t>1} \frac{\beta_t^2}{2\sigma_t^2 \alpha_t (1 - \bar{\alpha}_t)} \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$
 但是，求和的时间复杂度还是太大了。我们需要一种方法，能够在每次迭代时只计算极少数（甚至一个）时间步的损失，但同时保证这种简化后的计算方向（即梯度）在统计意义上仍然指向全局最优解。
 我们认为KL散度是离散均匀分布的，所以我们可以写成
-$$T·\mathbb{E}_{q, t} \left[ \frac{\beta_t^2}{2\sigma_t^2 \alpha_t (1 - \bar{\alpha}_t)} \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$$
+$$T\cdot\mathbb{E}_{q, t} \left[ \frac{\beta_t^2}{2\sigma_t^2 \alpha_t (1 - \bar{\alpha}_t)} \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$$
 在SGD中，目标函数乘以一个大于0的常数不会改变极值点位置。因此我们通常丢弃常数T，得到最终形式
 $$\mathbb{E}_{q, t} \left[ \frac{\beta_t^2}{2\sigma_t^2 \alpha_t (1 - \bar{\alpha}_t)} \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$$
 $\mathcal{L} =  \sum_{t>1} \mathbb{E}_q \left[\frac{\beta_t^2}{2\sigma_t^2 \alpha_t (1 - \bar{\alpha}_t)} \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$

@@ -56,10 +56,10 @@ $$\mathcal{L}(\theta) = \sum_t \left[ \| f_\theta(x_t, y_0, g(y_0), t) - x_0 \|_
 ### UPSR 的训练过程
 ![[Pasted image 20260418200617.png]]
 ### Appendix
-##### $u(·)$的设计
+##### u(·)的设计
 论文将区域特定扰动的权重系数与不确定性估计之间的关系建模为一个单调递增函数 $u'(\cdot)$，随后进行对角化处理
 $$w_u(\boldsymbol{y}_0) = u(\boldsymbol{\psi}_{est}(\boldsymbol{y}_0)) = \text{diag}(u'(\boldsymbol{\psi}_{est}(\boldsymbol{y}_0)))$$
-然后 $u'(·)$ 就被构造为
+然后 u'(·) 就被构造为
 $$u'(\psi) = 
 \begin{cases} 
 \frac{(1 - b_u)}{\psi_{max}} \psi + b_u & \text{if } 0 \le \psi \le \psi_{max} \\
