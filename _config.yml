@@ -30,6 +30,17 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
 
+# RSS
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  content: false
+
+# Sitemap
+sitemap:
+  path: sitemap.xml
+
 # Search
 search:
   path: search.xml

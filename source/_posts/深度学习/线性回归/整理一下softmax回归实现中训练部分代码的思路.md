@@ -36,6 +36,7 @@ class Accumulator:
     def __init__(self, n):
         self.data = [0.0] * n # 在声明实例时n有多少就代表着他想返回的精度的条例有多少
     def add(self, *args):
+<!-- more -->
 	    # 用于对列表中的每一项加上（正确数量，数据总量）
         self.data = [a + float(b) for a, b in zip(self.data, args)]
     def reset(self):

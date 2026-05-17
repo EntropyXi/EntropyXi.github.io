@@ -16,6 +16,7 @@ categories:
     -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
 }
 </style>
+<!-- more -->
 ### 偏差
 我们完成了Momentum和RMSProp
 如果我们将两者拼凑在一起

@@ -18,6 +18,7 @@ categories:
     -webkit-overflow-scrolling: touch;
 }
 </style>
+<!-- more -->
 
 ### Motivation
 我们希望把一个存粹的噪声转化成一张可读图片（去噪）  

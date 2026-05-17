@@ -17,6 +17,7 @@ categories:
 }
 </style>
 我们在这里推导$\mathbf{p}_k = \mathbf{r}_k + \beta_{k-1} \mathbf{p}_{k-1}$中的参数$\alpha$和$\beta$
+<!-- more -->
 
 ### $\alpha_k$ 的推导
 

@@ -19,6 +19,7 @@ categories:
     -webkit-overflow-scrolling: touch;
 }
 </style>
+<!-- more -->
 
 ### Motivation
 传统的超分辨率方法，如SRResnet等回归模型，直接采用均方误差。这种方法在数学上等价于在给定条件 $\mathbf{x}$ 下求解目标分布的**条件期望** $\mathbb{E}[\mathbf{y} \mid \mathbf{x}]$。然而，求期望，求平均的操作会导致多种可能的高频纹理被平均化，从而产生过度平滑的视觉效果。而 GAN 等生成对抗网络又存在训练不稳定和病态性问题

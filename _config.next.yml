@@ -43,6 +43,7 @@ sidebar:
   # Show sidebar on posts (for TOC), hide on index
   display: post
   padding: 16
+  # Sidebar offset from top menubar in pixels
   offset: 12
 
 # Sidebar Avatar
@@ -218,6 +219,15 @@ note:
   dark_bg_offset: 0
 
 # ---------------------------------------------------------------
+# ---------------------------------------------------------------
+# Busuanzi - Page view counter
+# ---------------------------------------------------------------
+busuanzi_count:
+  enable: true
+  site_uv: true
+  site_pv: true
+  page_pv: true
+
 # Creative Commons License
 # ---------------------------------------------------------------
 creative_commons:

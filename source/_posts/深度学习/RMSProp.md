@@ -16,6 +16,7 @@ categories:
     -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
 }
 </style>
+<!-- more -->
 
 RMSProp 是一种 **自适应学习率**方法。它通过计算梯度的**二阶矩**的指数加权移动平均，来对每个参数的学习率进行独立缩放
 
