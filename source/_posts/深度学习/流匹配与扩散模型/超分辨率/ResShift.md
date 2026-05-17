@@ -3,6 +3,7 @@ title: ResShift
 date: 2026-05-17 14:00:00
 tags:
   - 深度学习
+  - 流匹配与扩散模型
 mathjax: true
 categories:
   - 深度学习

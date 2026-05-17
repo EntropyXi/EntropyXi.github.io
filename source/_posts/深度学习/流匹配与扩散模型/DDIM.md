@@ -3,6 +3,7 @@ title: DDIM
 date: 2026-05-10 20:11:00
 tags:
   - 深度学习
+  - 流匹配与扩散模型
 mathjax: true
 categories:
   - 深度学习

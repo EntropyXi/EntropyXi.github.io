@@ -3,6 +3,7 @@ title: DDPM
 date: 2026-03-15 21:40:00
 tags:
   - 深度学习
+  - 流匹配与扩散模型
 mathjax: true
 categories:
   - 深度学习
