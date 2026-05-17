@@ -213,17 +213,62 @@ html[data-theme="dark"] {
 // -----------------------------------------------------------
 // 11. Responsive - Narrower screens
 // -----------------------------------------------------------
-@media (max-width: 767px) {
-  .post-body {
-    font-size: 0.98em;
-    line-height: 1.75;
+
+// Tablet: collapse sidebar, widen content
+@media (max-width: 991px) {
+  .sidebar-toggle, .sidebar {
+    display: none !important;
+  }
+  .main {
+    width: 100% !important;
+    padding-left: 0;
+    padding-right: 0;
   }
   .main-inner {
-    padding: 0 12px;
+    max-width: 100%;
+    padding: 0 16px;
+  }
+}
+
+// Phone: tighten spacing, shrink math, prevent overflow
+@media (max-width: 767px) {
+  .post-body {
+    font-size: 0.95em;
+    line-height: 1.7;
+    // Prevent any child element from bursting out
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
-  // Shrink math formulas on mobile
-  .mjx-container {
-    font-size: 0.88em !important;
+  .main-inner {
+    padding: 0 8px;
+  }
+
+  // Prevent post content from exceeding viewport
+  .post-body {
+    * { max-width: 100% !important; }
+    img { max-width: 100%; }
+    a { max-width: none !important; }
+    .note { max-width: none !important; }
+  }
+
+  // Math containers - aggressive shrink + scroll fallback
+  .mjx-container, .MathJax, .MathJax_Display, .MathJax_CHTML {
+    font-size: 0.80em !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  // Inline CHTML math
+  mjx-container[jax="CHTML"] {
+    display: inline !important;
+    overflow-wrap: break-word;
+  }
+
+  // Table-based formulas (aligned, cases, matrices etc.)
+  .mjx-table {
+    font-size: 0.90em;
   }
 }
