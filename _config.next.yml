@@ -189,6 +189,18 @@ exturl: false
 pjax: true
 
 # ---------------------------------------------------------------
+# Local Search
+# ---------------------------------------------------------------
+local_search:
+  enable: true
+  # Show top 1 result per article, show all results by setting to -1
+  top_n_per_article: 1
+  # Unescape html strings to the readable one
+  unescape: false
+  # Preload the search data when the page loads
+  preload: false
+
+# ---------------------------------------------------------------
 # FancyBox - image zoom
 # ---------------------------------------------------------------
 fancybox: true
