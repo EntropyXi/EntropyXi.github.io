@@ -219,3 +219,4 @@ creative_commons:
 # ---------------------------------------------------------------
 custom_file_path:
   style: source/_data/styles.styl
+  postBodyEnd: source/_data/post-body-end.njk
