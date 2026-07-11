@@ -86,6 +86,16 @@ git push origin source
 
 推送 `source` 分支后，GitHub Actions 自动构建并部署到 GitHub Pages。
 
+## 本地验证
+
+```bash
+npm ci
+npm run check
+npm run server
+```
+
+`npm run check` 验证 frontmatter、生成站点并检查生成的 HTML 是否存在已知回归问题。
+
 ## 项目结构
 
 ```
