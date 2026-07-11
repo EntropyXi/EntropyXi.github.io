@@ -105,8 +105,10 @@ Blog_file/
 ├── _config.yml              # Hexo 主配置
 ├── _config.next.yml         # NexT 主题配置
 ├── .github/workflows/       # GitHub Actions 部署
-└── themes/                  # 本地主题（通过 npm 安装）
+└── themes/                  # 通过 npm 管理的主题（NexT）
 ```
+
+NexT 主题通过 npm 安装，仅通过 `_config.next.yml` 和 `source/_data/` 进行自定义。
 
 ## 优化清单
 
