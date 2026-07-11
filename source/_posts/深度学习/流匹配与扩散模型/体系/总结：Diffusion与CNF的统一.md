@@ -12,6 +12,8 @@ categories:
 ---
 <!-- more -->
 
+本系列笔记从SDE出发，经过DDPM反向推导、ODE概率流、连续正则化流到流匹配条件路径，最终揭示了扩散模型与连续归一化流之间的深层统一关系。
+
 $$s_\theta \approx \nabla_x\log p_t(x)$$
 $$\frac{dx}{dt}=f_t(x)-\frac{1}{2}g_t^2s_\theta(x,t)$$
 所以 Diffusion 可以被解释为一个以 score 间接定义速度场的 CNF 

@@ -10,6 +10,10 @@ categories:
   - 深度学习
   - 线性回归
 ---
+<!-- more -->
+
+以Softmax回归为例，从数据加载、模型定义、损失计算到反向传播，逐步梳理深度学习模型训练代码的标准范式，帮助建立完整的训练流程认知。
+
 ### 流程总结
 
 在训练前，我们需要利用一些函数来评估模型的分类精度
@@ -38,7 +42,6 @@ class Accumulator:
     def __init__(self, n):
         self.data = [0.0] * n # 在声明实例时n有多少就代表着他想返回的精度的条例有多少
     def add(self, *args):
-<!-- more -->
 	    # 用于对列表中的每一项加上（正确数量，数据总量）
         self.data = [a + float(b) for a, b in zip(self.data, args)]
     def reset(self):
