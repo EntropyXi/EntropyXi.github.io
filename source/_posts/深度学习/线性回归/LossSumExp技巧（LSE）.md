@@ -4,7 +4,8 @@ description: 解释Log-Sum-Exp数值稳定技巧的数学原理，分析Softmax�
 date: 2026-02-08 13:00:00
 mathjax: true
 tags:
-  - 深度学习，线性回归
+  - 深度学习
+  - 线性回归
 categories:
   - 深度学习
   - 线性回归

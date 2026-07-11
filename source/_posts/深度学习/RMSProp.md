@@ -1,7 +1,7 @@
 ---
 title: RMSProp
 description: 介绍RMSProp算法如何通过指数加权移动平均对历史梯度平方做归一化，解决AdaGrad学习率单调递减的问题，使训练更加稳定。
-Date: 2026-02-08 13:00:00
+date: 2026-02-08 13:00:00
 tags:
   - 深度学习
 mathjax: true

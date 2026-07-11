@@ -8,7 +8,8 @@
     "deploy": "hexo deploy",
     "server": "hexo server",
     "verify": "node scripts/verify-build.js",
-    "check": "npm run clean && npm run build && npm run verify"
+    "audit:frontmatter": "node scripts/audit-frontmatter.js",
+    "check": "npm run audit:frontmatter && npm run clean && npm run build && npm run verify"
   },
   "hexo": {
     "version": "8.1.1"
@@ -31,5 +32,8 @@
     "hexo-theme-landscape": "^1.0.0",
     "hexo-theme-next": "^8.27.0",
     "hexo-wordcount": "^6.0.1"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3"
   }
 }
