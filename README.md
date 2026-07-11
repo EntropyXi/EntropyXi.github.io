@@ -13,7 +13,7 @@
 | 公式渲染 | MathJax 3 客户端 |
 | 评论 | Giscus（GitHub Discussions） |
 | 搜索 | hexo-generator-searchdb 本地搜索 |
-| 访问统计 | 不蒜子 (busuanzi) |
+| 访问统计 | 暂停展示（生产统计数据核实后再启用） |
 | CI/CD | GitHub Actions → GitHub Pages |
 
 ## 写一篇新笔记

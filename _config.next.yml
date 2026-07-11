@@ -223,10 +223,11 @@ note:
 # Busuanzi - Page view counter
 # ---------------------------------------------------------------
 busuanzi_count:
-  enable: true
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  # Disabled until production counters can be verified as credible.
+  enable: false
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # Creative Commons License
 # ---------------------------------------------------------------
