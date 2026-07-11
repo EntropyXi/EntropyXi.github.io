@@ -1,5 +1,6 @@
 ---
 title: DDPM
+description: 系统推导去噪扩散概率模型的核心原理，包括前向加噪过程的马尔可夫性质、反向去噪的变分下界推导以及ε参数化下的简化训练目标。
 date: 2026-03-15 21:40:00
 tags:
   - 深度学习
@@ -9,15 +10,6 @@ categories:
   - 深度学习
   - 流匹配与扩散模型
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
-}
-</style>
 <!-- more -->
 
 ### Motivation

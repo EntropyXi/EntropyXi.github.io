@@ -1,5 +1,6 @@
 ---
 title: SR3
+description: 剖析SR3论文将条件扩散模型应用于图像超分辨率的方法架构，分析低分辨率图像作为条件输入时的特征融合策略与训练细节。
 date: 2026-05-17 14:00:00
 tags:
   - 深度学习
@@ -10,15 +11,6 @@ categories:
   - 流匹配与扩散模型
   - 超分辨率
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
-}
-</style>
 <!-- more -->
 
 ### Motivation

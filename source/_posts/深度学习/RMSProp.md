@@ -1,5 +1,6 @@
 ---
 title: RMSProp
+description: 介绍RMSProp算法如何通过指数加权移动平均对历史梯度平方做归一化，解决AdaGrad学习率单调递减的问题，使训练更加稳定。
 Date: 2026-02-08 13:00:00
 tags:
   - 深度学习
@@ -7,15 +8,6 @@ mathjax: true
 categories:
   - 深度学习
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important; /* 超出宽度时显示滚动条 */
-    overflow-y: hidden;          /* 隐藏垂直滚动条 */
-    max-width: 100%;             /* 限制最大宽度为屏幕宽度 */
-    -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
-}
-</style>
 <!-- more -->
 
 RMSProp 是一种 **自适应学习率**方法。它通过计算梯度的**二阶矩**的指数加权移动平均，来对每个参数的学习率进行独立缩放

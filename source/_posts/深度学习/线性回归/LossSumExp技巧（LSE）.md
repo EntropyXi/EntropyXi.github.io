@@ -1,5 +1,6 @@
 ---
 title: LossSumExp技巧（LSE）
+description: 解释Log-Sum-Exp数值稳定技巧的数学原理，分析Softmax计算中指数溢出问题如何通过减去最大值得到缓解，是深度学习中的经典数值技巧。
 date: 2026-02-08 13:00:00
 mathjax: true
 tags:
@@ -8,15 +9,6 @@ categories:
   - 深度学习
   - 线性回归
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important; /* 超出宽度时显示滚动条 */
-    overflow-y: hidden;          /* 隐藏垂直滚动条 */
-    max-width: 100%;             /* 限制最大宽度为屏幕宽度 */
-    -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
-}
-</style>
 <!-- more -->
 
 在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算$\frac{exp(x_i)}{\sum exp(x_j)}$，然后再把计算出来的softmax概率直接传给 log 计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致log(0)报错。这在数值上是十分脆弱的。

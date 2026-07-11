@@ -2,20 +2,12 @@
 tags:
   - 数值分析
 title: 共轭梯度法中参数alpha和beta的推导
+description: 推导共轭梯度法中步长参数α_k与方向参数β_k的解析表达式，从精确线搜索和共轭关系出发给出完整的数学推导过程。
 mathjax: "true"
 date: 2026-02-08 13:00:00
 categories:
   - 数值分析
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important; /* 超出宽度时显示滚动条 */
-    overflow-y: hidden;          /* 隐藏垂直滚动条 */
-    max-width: 100%;             /* 限制最大宽度为屏幕宽度 */
-    -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
-}
-</style>
 我们在这里推导$\mathbf{p}_k = \mathbf{r}_k + \beta_{k-1} \mathbf{p}_{k-1}$中的参数$\alpha$和$\beta$
 <!-- more -->
 

@@ -1,5 +1,6 @@
 ---
 title: Adam算法
+description: 梳理Adam优化器如何融合动量法与RMSProp的自适应学习率，阐释偏差校正机制及其收敛性质，是当前最广泛使用的深度学习优化器之一。
 tags:
   - 深度学习
 mathjax: "true"
@@ -7,15 +8,6 @@ date: 2026-02-08 13:00:00
 categories:
   - 深度学习
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important; /* 超出宽度时显示滚动条 */
-    overflow-y: hidden;          /* 隐藏垂直滚动条 */
-    max-width: 100%;             /* 限制最大宽度为屏幕宽度 */
-    -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
-}
-</style>
 <!-- more -->
 ### 偏差
 我们完成了Momentum和RMSProp

@@ -1,5 +1,6 @@
 ---
 title: CNN的设计原则与数学推导
+description: 从局部连接、权值共享与平移等变性三个核心设计原则出发，给出卷积神经网络中卷积运算与池化层的数学表达及反向传播推导。
 Date: 2026-02-08 13:00:00
 tags:
   - 卷积神经网络
@@ -8,15 +9,6 @@ categories:
   - 深度学习
   - CNN
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important; /* 超出宽度时显示滚动条 */
-    overflow-y: hidden;          /* 隐藏垂直滚动条 */
-    max-width: 100%;             /* 限制最大宽度为屏幕宽度 */
-    -webkit-overflow-scrolling: touch; /* 优化移动端滑动体验 */
-}
-</style>
 <!-- more -->
 ### 原则一：平移不变性
 假设我们需要检测图像中是否有“一只猫”。无论这只猫位于图像的左上角 $(x_1, y_1)$ 还是右下角 $(x_2, y_2)$，它都是猫。 在全连接网络中，识别左上角的权重 $w_{top\_left}$ 和识别右下角的权重 $w_{bottom\_right}$ 是完全独立的。这意味着模型必须在不同位置重新学习什么是“猫

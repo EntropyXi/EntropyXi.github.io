@@ -1,5 +1,6 @@
 ---
 title: 整理一下softmax回归实现中训练部分代码的思路
+description: 以Softmax回归为例梳理深度学习模型训练代码的标准范式，包括数据加载、模型定义、损失计算与反向传播四个核心步骤。
 tags:
   - 深度学习，线性回归
 mathjax: true

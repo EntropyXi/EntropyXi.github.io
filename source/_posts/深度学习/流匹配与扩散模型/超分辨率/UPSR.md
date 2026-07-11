@@ -1,5 +1,6 @@
 ---
 title: UPSR
+description: 分析UPSR如何利用预训练扩散模型的先验知识实现盲超分辨率，讨论其潜在空间策略与退化估计器的协同设计思路。
 date: 2026-05-17 14:00:00
 tags:
   - 深度学习
@@ -10,15 +11,6 @@ categories:
   - 流匹配与扩散模型
   - 超分辨率
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
-}
-</style>
 <!-- more -->
 
 ### Motivation

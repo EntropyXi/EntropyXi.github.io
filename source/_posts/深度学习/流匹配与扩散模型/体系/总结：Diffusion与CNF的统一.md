@@ -1,5 +1,6 @@
 ---
 title: 总结：Diffusion与CNF的统一
+description: 对扩散模型与连续正则化流进行统一总结，梳理SDE、ODE、CNF与流匹配之间的等价关系与转换路径，形成完整的生成模型理论体系。
 date: 2026-05-17 14:00:00
 tags:
   - 深度学习
@@ -9,15 +10,6 @@ categories:
   - 深度学习
   - 流匹配与扩散模型
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
-}
-</style>
 <!-- more -->
 
 $$s_\theta \approx \nabla_x\log p_t(x)$$

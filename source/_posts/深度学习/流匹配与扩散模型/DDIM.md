@@ -1,5 +1,6 @@
 ---
 title: DDIM
+description: 分析去噪扩散隐式模型的确定性采样机制，解释DDIM如何通过非马尔可夫前向过程实现少步快速采样同时保持生成质量。
 date: 2026-05-10 20:11:00
 tags:
   - 深度学习
@@ -9,15 +10,6 @@ categories:
   - 深度学习
   - 流匹配与扩散模型
 ---
-<style>
-/* 强制让 MathJax 公式容器支持横向滚动 */
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
-}
-</style>
 <!-- more -->
 
 ### Motivation
