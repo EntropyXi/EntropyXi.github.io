@@ -29,19 +29,23 @@ if (require.main === module) {
   }
 
   for (const file of htmlFiles) {
-    const html = fs.readFileSync(file, 'utf8');
-    const relative = path.relative(root, file).replaceAll('\\', '/');
-    const description = html.match(/<meta name="description" content="([^"]*)"/i)?.[1] ?? '';
+  const html = fs.readFileSync(file, 'utf8');
+  const relative = path.relative(root, file).replaceAll('\\', '/');
+  const description = html.match(/<meta name="description" content="([^"]*)"/i)?.[1] ?? '';
 
-    if (/\.mjx-container|MathJax_Display/.test(description)) {
-      errors.push(`${relative}: meta description contains CSS`);
-    }
-    if (relative.endsWith('/README/index.html')) {
-      errors.push(`${relative}: README was published as a post`);
-    }
-    if (/<article[\s\S]*?\$\$[\s\S]*?<\/article>/i.test(html)) {
+  if (/\.mjx-container|MathJax_Display/.test(description)) {
+    errors.push(`${relative}: meta description contains CSS`);
+  }
+  if (relative.endsWith('/README/index.html')) {
+    errors.push(`${relative}: README was published as a post`);
+  }
+  const articleBody = html.match(/<article[\s\S]*?<\/article>/i)?.[0] ?? '';
+  if (articleBody) {
+    const bodyWithoutPandocMath = articleBody.replace(/<span\s+class="math display">[\s\S]*?<\/span>/g, '').replace(/<span\s+class="math inline">[\s\S]*?<\/span>/g, '');
+    if (/\$\$/.test(bodyWithoutPandocMath)) {
       errors.push(`${relative}: display-math delimiters leaked into article HTML`);
     }
+  }
     if (relative.match(/^\d{4}\/\d{2}\/\d{2}\//) && !description.trim()) {
       errors.push(`${relative}: post has no meta description`);
     }
