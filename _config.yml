@@ -120,15 +120,7 @@ theme: next
 pandoc:
   math: --mathjax
 
-# mathjax
-mathjax:
-  tags: none # ams, none, all
-  single_dollars: true # enable single dollar signs
-  cjk_width: 0.9 # width of CJK characters
-  normal_width: 0.6 # width of normal characters
-  append_css: true # append css to each page
-  every_page: false # process every page
-  extension_options: {} # MathJax extension options
+# mathjax: removed top-level block; NexT theme now owns MathJax loading
 
 # math:
 #   engine: 'mathjax'

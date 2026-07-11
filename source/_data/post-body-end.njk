@@ -1,15 +1,3 @@
-<script>
-// Pre-configure MathJax linebreaks for mobile formula rendering
-(function() {
-  var saved = window.MathJax && window.MathJax.tex ? window.MathJax.tex : {};
-  window.MathJax = window.MathJax || {};
-  window.MathJax.tex = window.MathJax.tex || {};
-  window.MathJax.tex.inlineMath = saved.inlineMath || [['$','$']];
-  window.MathJax.tex.tags = saved.tags || 'none';
-  window.MathJax.tex.linebreaks = { automatic: true };
-})();
-</script>
-
 {% if page.comments !== false %}
 <div class="post-comments">
   <script src="https://giscus.app/client.js"

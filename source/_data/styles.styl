@@ -69,9 +69,16 @@ body {
   padding-left: 0.3em;
 }
 
-// Inline math should not break
-.mjx-container[display="false"] {
-  display: inline !important;
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+mjx-container[jax="CHTML"]:not([display="true"]) {
+  display: inline;
 }
 
 // -----------------------------------------------------------
@@ -259,12 +266,6 @@ html[data-theme="dark"] {
     overflow-x: auto !important;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-  }
-
-  // Inline CHTML math
-  mjx-container[jax="CHTML"] {
-    display: inline !important;
-    overflow-wrap: break-word;
   }
 
   // Table-based formulas (aligned, cases, matrices etc.)
