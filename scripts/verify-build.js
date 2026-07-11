@@ -20,6 +20,14 @@ if (require.main === module) {
   }
 
   walk(root);
+
+  const postPages = htmlFiles.filter(file =>
+    path.relative(root, file).replaceAll('\\', '/').match(/^\d{4}\/\d{2}\/\d{2}\//)
+  );
+  if (postPages.length !== 22) {
+    errors.push(`expected 22 generated posts, found ${postPages.length}`);
+  }
+
   for (const file of htmlFiles) {
     const html = fs.readFileSync(file, 'utf8');
     const relative = path.relative(root, file).replaceAll('\\', '/');
