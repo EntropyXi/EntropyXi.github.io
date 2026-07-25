@@ -24,8 +24,20 @@ if (require.main === module) {
   const postPages = htmlFiles.filter(file =>
     path.relative(root, file).replaceAll('\\', '/').match(/^\d{4}\/\d{2}\/\d{2}\//)
   );
-  if (postPages.length !== 22) {
-    errors.push(`expected 22 generated posts, found ${postPages.length}`);
+
+  const postsRoot = path.resolve(__dirname, '..', 'source', '_posts');
+  const expectedPostCount = (function count(dir) {
+    let n = 0;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) n += count(full);
+      else if (entry.name.endsWith('.md')) n += 1;
+    }
+    return n;
+  })(postsRoot);
+
+  if (postPages.length !== expectedPostCount) {
+    errors.push(`expected ${expectedPostCount} generated posts, found ${postPages.length}`);
   }
 
   for (const file of htmlFiles) {
