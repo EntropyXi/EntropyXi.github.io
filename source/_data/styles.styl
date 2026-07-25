@@ -58,7 +58,11 @@ body {
 // -----------------------------------------------------------
 // 4. MathJax Display - Prevent overflow & improve readability
 // -----------------------------------------------------------
-.MathJax_Display, .mjx-container {
+// Display math only: spacing + horizontal scroll for long formulas.
+// Inline math must NOT inherit these (margin/padding/overflow break its
+// baseline alignment and inject gaps into running text).
+mjx-container[display="true"], .MathJax_Display {
+  display: block;
   // Allow horizontal scroll for very long formulas
   overflow-x: auto !important;
   overflow-y: hidden;
@@ -67,18 +71,17 @@ body {
   margin: 1.2em 0;
   // Subtle left padding for visual hierarchy
   padding-left: 0.3em;
-}
-
-mjx-container[jax="CHTML"][display="true"] {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
-mjx-container[jax="CHTML"]:not([display="true"]) {
+// Inline math: flow naturally with the text, no extra box styling
+mjx-container:not([display="true"]) {
   display: inline;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  max-width: none;
+  vertical-align: baseline;
 }
 
 // -----------------------------------------------------------
@@ -259,13 +262,19 @@ html[data-theme="dark"] {
     .note { max-width: none !important; }
   }
 
-  // Math containers - aggressive shrink + scroll fallback
-  .mjx-container, .MathJax, .MathJax_Display, .MathJax_CHTML {
+  // Display math containers - aggressive shrink + scroll fallback
+  mjx-container[display="true"], .MathJax_Display, .MathJax_CHTML {
     font-size: 0.80em !important;
     max-width: 100% !important;
     overflow-x: auto !important;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+  }
+
+  // Inline math - keep it at text size, no scroll, natural flow
+  mjx-container:not([display="true"]) {
+    font-size: 1em !important;
+    overflow: visible;
   }
 
   // Table-based formulas (aligned, cases, matrices etc.)
