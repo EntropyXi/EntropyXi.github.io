@@ -118,7 +118,8 @@ theme: next
 
 # pandoc
 pandoc:
-  math: --mathjax
+  args:
+    - --mathjax
 
 # mathjax: removed top-level block; NexT theme now owns MathJax loading
 
