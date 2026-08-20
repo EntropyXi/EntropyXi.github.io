@@ -3,13 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate",
-    "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server",
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "build": "npm run build:site",
+    "build:site": "astro build",
+    "check": "npm run check:types && npm run test:unit -- --run && npm run test:e2e",
+    "check:types": "astro check",
+    "test:unit": "vitest",
+    "test:e2e": "playwright test",
+    "legacy:clean": "hexo clean",
+    "legacy:build": "hexo generate",
+    "legacy:check": "npm run audit:frontmatter && npm run legacy:clean && npm run legacy:build && npm run verify",
+    "legacy:server": "hexo server",
+    "legacy:deploy": "hexo deploy",
     "verify": "node scripts/verify-build.js",
-    "audit:frontmatter": "node scripts/audit-frontmatter.js",
-    "check": "npm run audit:frontmatter && npm run clean && npm run build && npm run verify"
+    "audit:frontmatter": "node scripts/audit-frontmatter.js"
   },
   "hexo": {
     "version": "8.1.1"
