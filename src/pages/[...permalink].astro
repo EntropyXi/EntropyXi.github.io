@@ -5,20 +5,32 @@ import PostLayout from "@/layouts/PostLayout.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
+  prev: { title: string; permalink: string } | undefined;
+  next: { title: string; permalink: string } | undefined;
 }
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => data.draft !== true);
-  return posts.map((post) => ({
+  const sorted = posts.sort((a, b) => {
+    const dateA = new Date(a.data.date).getTime();
+    const dateB = new Date(b.data.date).getTime();
+    if (dateB !== dateA) return dateB - dateA;
+    return b.data.permalink.localeCompare(a.data.permalink);
+  });
+  return sorted.map((post, index) => ({
     params: { permalink: post.data.permalink },
-    props: { post },
+    props: {
+      post,
+      prev: index > 0 ? sorted[index - 1]?.data : undefined,
+      next: index < sorted.length - 1 ? sorted[index + 1]?.data : undefined,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<PostLayout post={post} headings={headings}>
+<PostLayout post={post} headings={headings} prev={prev} next={next}>
   <Content />
 </PostLayout>

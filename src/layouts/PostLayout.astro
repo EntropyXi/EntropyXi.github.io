@@ -2,15 +2,23 @@
 import type { CollectionEntry } from "astro:content";
 import type { MarkdownHeading } from "astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import "@/styles/prose.css";
 import { formatPostDate } from "@/lib/date/format-date";
+import { buildPostPath } from "@/lib/routing/post-path";
+import "@/styles/prose.css";
+
+interface PostLink {
+  title: string;
+  permalink: string;
+}
 
 interface Props {
   post: CollectionEntry<"blog">;
   headings: MarkdownHeading[];
+  prev: PostLink | undefined;
+  next: PostLink | undefined;
 }
 
-const { post, headings } = Astro.props;
+const { post, headings, prev, next } = Astro.props;
 const { data } = post;
 const toc = headings.filter(
   (heading) => heading.depth === 2 || heading.depth === 3,
@@ -31,8 +39,8 @@ const toc = headings.filter(
     </header>
     {
       toc.length > 0 && (
-        <nav class="post-toc" aria-label="文章目录">
-          <p class="post-toc-title">目录</p>
+        <details class="post-toc" open>
+          <summary>目录</summary>
           <ul>
             {toc.map((heading) => (
               <li class={`toc-depth-${heading.depth}`}>
@@ -40,11 +48,57 @@ const toc = headings.filter(
               </li>
             ))}
           </ul>
-        </nav>
+        </details>
       )
     }
     <div class="prose" data-pagefind-body>
       <slot />
     </div>
+    <nav class="post-pagination" aria-label="文章前后篇">
+      {
+        prev && (
+          <a class="post-pagination-link" href={buildPostPath(prev.permalink)}>
+            <span class="post-pagination-label">上一篇</span>
+            <span>{prev.title}</span>
+          </a>
+        )
+      }
+      {
+        next && (
+          <a
+            class="post-pagination-link post-pagination-link-next"
+            href={buildPostPath(next.permalink)}
+          >
+            <span class="post-pagination-label">下一篇</span>
+            <span>{next.title}</span>
+          </a>
+        )
+      }
+    </nav>
   </article>
 </BaseLayout>
+
+<script>
+  function initCodeCopyButtons(): void {
+    document.querySelectorAll("pre.astro-code").forEach((pre) => {
+      if (pre.querySelector(".code-copy-button")) return;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "code-copy-button";
+      button.textContent = "复制";
+      button.addEventListener("click", () => {
+        const code = pre.querySelector("code")?.textContent ?? "";
+        void navigator.clipboard.writeText(code).then(() => {
+          button.textContent = "已复制";
+          window.setTimeout(() => {
+            button.textContent = "复制";
+          }, 1500);
+        });
+      });
+      pre.appendChild(button);
+    });
+  }
+
+  initCodeCopyButtons();
+  document.addEventListener("astro:page-load", initCodeCopyButtons);
+</script>
