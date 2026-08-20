@@ -95,6 +95,13 @@ const toc = headings.filter(
           }, 1500);
         });
       });
+      const language = (pre as HTMLElement).dataset.language ?? "";
+      if (language) {
+        const label = document.createElement("span");
+        label.className = "code-language-label";
+        label.textContent = language;
+        pre.appendChild(label);
+      }
       pre.appendChild(button);
     });
   }

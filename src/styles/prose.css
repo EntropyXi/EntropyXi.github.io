@@ -199,3 +199,14 @@
   font-size: 0.8rem;
   cursor: pointer;
 }
+
+.code-language-label {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  color: var(--color-code-text, #e2e8f0);
+  font-family:
+    "Source Code Pro", "Fira Code", Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
