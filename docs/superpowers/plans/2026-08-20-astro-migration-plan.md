@@ -772,16 +772,16 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 
 任务：
 
-- [ ] 安装 Astro、TypeScript 支持和必要官方集成。
-- [ ] 建立 `astro.config.ts`，配置 `site`、`trailingSlash: 'always'`、静态输出、`publicDir: 'astro-public'` 和 Markdown processor 候选；Hexo 继续独占其生成目录 `public/`。
-- [ ] 建立 `tsconfig.json` 严格配置与路径别名。
-- [ ] 建立 ESLint、可解析 `.astro` 的 Stylelint、Prettier、`.prettierignore`、EditorConfig 和固定 LF 的 `.gitattributes`。
-- [ ] 建立基础目录、`BaseLayout`、空首页和 404。
-- [ ] 建立 Vitest 与 Playwright 最小可运行测试。
-- [ ] 更新 `.gitignore` 排除 Astro、dist、Pagefind 和测试产物。
-- [ ] 按 §12.2 显式保留 `legacy:clean`、`legacy:build`、`legacy:check`；新旧 `build`/`check` 的语义写入 README，禁止同名覆盖后仍按旧含义验收。
-- [ ] 在真实文章扫描结果上完成数学渲染 spike，决定分隔符和构建期/客户端策略，写 ADR 后才能进入阶段 2。
-- [ ] 验证 `/sitemap.xml`、`/atom.xml`、旧 `search.xml` endpoint 的最小输出与 XML 解析测试。
+- [x] 安装 Astro、TypeScript 支持和必要官方集成。
+- [x] 建立 `astro.config.ts`，配置 `site`、`trailingSlash: 'always'`、静态输出、`publicDir: 'astro-public'` 和 Markdown processor 候选；Hexo 继续独占其生成目录 `public/`。
+- [x] 建立 `tsconfig.json` 严格配置与路径别名。
+- [x] 建立 ESLint、可解析 `.astro` 的 Stylelint、Prettier、`.prettierignore`、EditorConfig 和固定 LF 的 `.gitattributes`。
+- [x] 建立基础目录、`BaseLayout`、空首页和 404。
+- [x] 建立 Vitest 与 Playwright 最小可运行测试。
+- [x] 更新 `.gitignore` 排除 Astro、dist、Pagefind 和测试产物。
+- [x] 按 §12.2 显式保留 `legacy:clean`、`legacy:build`、`legacy:check`；新旧 `build`/`check` 的语义写入 README，禁止同名覆盖后仍按旧含义验收。
+- [x] 在真实文章扫描结果上完成数学渲染 spike，决定分隔符和构建期/客户端策略，写 ADR 后才能进入阶段 2。
+- [x] 验证 `/sitemap.xml`、`/atom.xml`、旧 `search.xml` endpoint 的最小输出与 XML 解析测试。
 
 退出条件：`npm run check:types`、Lint、单元测试、Astro build 和最小 E2E 全部通过。
 
