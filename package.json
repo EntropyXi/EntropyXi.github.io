@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "build": "npm run build:site",
-    "build:site": "astro build",
+    "build:site": "npm run copy:vendor && astro build",
     "check": "npm run format:check && npm run lint && npm run check:types && npm run test:unit -- --run && npm run test:e2e",
     "check:types": "astro check",
     "test:unit": "vitest",
@@ -20,7 +20,8 @@
     "legacy:server": "hexo server",
     "legacy:deploy": "hexo deploy",
     "verify": "node scripts/verify-build.js",
-    "audit:frontmatter": "node scripts/audit-frontmatter.js"
+    "audit:frontmatter": "node scripts/audit-frontmatter.js",
+    "copy:vendor": "tsx scripts/copy-vendor-assets.ts"
   },
   "hexo": {
     "version": "8.1.1"
@@ -43,7 +44,8 @@
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.0.0",
     "hexo-theme-next": "^8.27.0",
-    "hexo-wordcount": "^6.0.1"
+    "hexo-wordcount": "^6.0.1",
+    "mathjax": "^3.2.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

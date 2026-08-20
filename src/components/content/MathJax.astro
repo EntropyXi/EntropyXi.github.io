@@ -1,0 +1,26 @@
+---
+// 仅文章页按需使用：保留 TeX 分隔符，浏览器端 MathJax 3 渲染。
+---
+
+<script is:inline>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],
+      displayMath: [['$$', '$$']],
+      processEscapes: true,
+      tags: 'none',
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+      ignoreHtmlClass: 'tex2jax_ignore',
+    },
+    chtml: {
+      scale: 0.95,
+    },
+  };
+</script>
+<script
+  is:inline
+  src="/vendor/mathjax/tex-mml-chtml.js"
+  defer
+></script>

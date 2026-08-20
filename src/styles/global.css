@@ -51,6 +51,17 @@ canvas {
   height: auto;
 }
 
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+mjx-container:not([display="true"]) {
+  display: inline;
+}
+
 main {
   width: 100%;
   max-width: var(--max-width-content);
