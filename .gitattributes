@@ -1,0 +1,10 @@
+# Auto-detect text files; normalize line endings to LF in the working tree
+* text=auto eol=lf
+
+# Lockfile must stay LF (npm requires consistent line endings)
+package-lock.json text eol=lf
+
+# Normalize these files and exclude them from export archives
+.gitattributes export-ignore
+.gitignore export-ignore
+.editorconfig export-ignore
