@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+public
+astro-public
+package-lock.json
+playwright-report
+test-results
+source/_posts
+src/content/blog
