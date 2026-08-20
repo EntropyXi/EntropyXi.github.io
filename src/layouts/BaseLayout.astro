@@ -1,6 +1,6 @@
 ---
 import "@/styles/global.css";
-import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from "@/data/site";
+import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE, SITE_URL } from "@/data/site";
 import { buildPageTitle } from "@/lib/seo/page-title";
 
 interface Props {
@@ -12,6 +12,7 @@ const { title, description } = Astro.props;
 const pageTitle = buildPageTitle(title);
 const pageDescription =
   description.trim() === "" ? SITE_DESCRIPTION : description.trim();
+const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
 ---
 
 <!doctype html>
@@ -22,6 +23,12 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <header class="site-header">
@@ -29,6 +36,11 @@ const pageDescription =
         <p class="site-header-title"><a href="/">{SITE_TITLE}</a></p>
         <nav class="site-nav" aria-label="主导航">
           <a href="/">首页</a>
+          <a href="/archives/">归档</a>
+          <a href="/categories/">分类</a>
+          <a href="/tags/">标签</a>
+          <a href="/about/">关于</a>
+          <a href="/search/">搜索</a>
         </nav>
       </div>
     </header>
