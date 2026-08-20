@@ -1,0 +1,2681 @@
+{
+  "schemaVersion": 1,
+  "generatedFromCommit": "6a608104915fd163a857d064ac7ffe03f8d52f20",
+  "html": [
+    {
+      "pathname": "/2026/01/23/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/260123_%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E4%BA%8E%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%BD%B1%E5%93%8D%E7%9A%84%E8%A7%A3%E9%87%8A/",
+      "relativeFile": "2026/01/23/数值分析/260123_特征值分布的对称性对于误差的影响的解释/index.html",
+      "kind": "article",
+      "title": "特征值分布的对称性对于误差的影响的解释",
+      "description": "分析矩阵特征值的对称分布如何影响数值误差的传播与积累，借助条件数与特征值敏感性解释对称正定矩阵在数值计算中误差表现更优的原因。",
+      "canonical": "https://entropyxi.github.io/2026/01/23/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/260123_%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E5%B8%83%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E4%BA%8E%E8%AF%AF%E5%B7%AE%E7%9A%84%E5%BD%B1%E5%93%8D%E7%9A%84%E8%A7%A3%E9%87%8A/",
+      "publishedTime": "2026-01-23T04:46:14.000Z",
+      "tags": [
+        "数值分析"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/",
+      "relativeFile": "2026/02/08/数值分析/共轭梯度法中参数alpha和beta的推导/index.html",
+      "kind": "article",
+      "title": "共轭梯度法中参数alpha和beta的推导",
+      "description": "推导共轭梯度法中步长参数α_k与方向参数β_k的解析表达式，从精确线搜索和共轭关系出发给出完整的数学推导过程。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95%E4%B8%AD%E5%8F%82%E6%95%B0alpha%E5%92%8Cbeta%E7%9A%84%E6%8E%A8%E5%AF%BC/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "数值分析"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/",
+      "relativeFile": "2026/02/08/深度学习/Adam算法/index.html",
+      "kind": "article",
+      "title": "Adam算法",
+      "description": "梳理Adam优化器如何融合动量法与RMSProp的自适应学习率，阐释偏差校正机制及其收敛性质，是当前最广泛使用的深度学习优化器之一。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/Adam%E7%AE%97%E6%B3%95/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/",
+      "relativeFile": "2026/02/08/深度学习/CNN/CNN的设计原则与数学推导/index.html",
+      "kind": "article",
+      "title": "CNN的设计原则与数学推导",
+      "description": "从局部连接、权值共享与平移等变性三个核心设计原则出发，给出卷积神经网络中卷积运算与池化层的数学表达及反向传播推导。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/CNN%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E4%B8%8E%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "卷积神经网络"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RMSProp/",
+      "relativeFile": "2026/02/08/深度学习/RMSProp/index.html",
+      "kind": "article",
+      "title": "RMSProp",
+      "description": "介绍RMSProp算法如何通过指数加权移动平均对历史梯度平方做归一化，解决AdaGrad学习率单调递减的问题，使训练更加稳定。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RMSProp/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/",
+      "relativeFile": "2026/02/08/深度学习/线性回归/LossSumExp技巧（LSE）/index.html",
+      "kind": "article",
+      "title": "LossSumExp技巧（LSE）",
+      "description": "解释Log-Sum-Exp数值稳定技巧的数学原理，分析Softmax计算中指数溢出问题如何通过减去最大值得到缓解，是深度学习中的经典数值技巧。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/LossSumExp%E6%8A%80%E5%B7%A7%EF%BC%88LSE%EF%BC%89/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/",
+      "relativeFile": "2026/02/08/深度学习/线性回归/动量法/index.html",
+      "kind": "article",
+      "title": "动量法",
+      "description": "推导动量法如何通过累积历史梯度来加速SGD收敛，分析指数加权移动平均的作用机理以及动量参数β的选择对优化轨迹的影响。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E5%8A%A8%E9%87%8F%E6%B3%95/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/",
+      "relativeFile": "2026/02/08/深度学习/线性回归/整理一下softmax回归实现中训练部分代码的思路/index.html",
+      "kind": "article",
+      "title": "整理一下softmax回归实现中训练部分代码的思路",
+      "description": "以Softmax回归为例梳理深度学习模型训练代码的标准范式，包括数据加载、模型定义、损失计算与反向传播四个核心步骤。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8Bsoftmax%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0%E4%B8%AD%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%9D%E8%B7%AF/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ]
+    },
+    {
+      "pathname": "/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/",
+      "relativeFile": "2026/02/08/深度学习/线性回归/随机梯度下降/index.html",
+      "kind": "article",
+      "title": "随机梯度下降",
+      "description": "从梯度下降的基本原理出发，对比批量梯度下降与随机梯度下降的收敛行为和计算效率，讨论学习率调度与随机梯度的噪声特性。",
+      "canonical": "https://entropyxi.github.io/2026/02/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/",
+      "publishedTime": "2026-02-08T05:00:00.000Z",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ]
+    },
+    {
+      "pathname": "/2026/03/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDPM/",
+      "relativeFile": "2026/03/15/深度学习/流匹配与扩散模型/DDPM/index.html",
+      "kind": "article",
+      "title": "DDPM",
+      "description": "系统推导去噪扩散概率模型的核心原理，包括前向加噪过程的马尔可夫性质、反向去噪的变分下界推导以及ε参数化下的简化训练目标。",
+      "canonical": "https://entropyxi.github.io/2026/03/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDPM/",
+      "publishedTime": "2026-03-15T13:40:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/04/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E6%9D%A1%E4%BB%B6%E7%94%9F%E6%88%90/",
+      "relativeFile": "2026/04/18/深度学习/流匹配与扩散模型/条件生成/index.html",
+      "kind": "article",
+      "title": "条件生成",
+      "description": "聚焦基于扩散模型的条件生成技术，讨论分类器引导与无分类器引导两种范式及其混合策略，推导CFG中条件与无条件得分函数的线性组合形式。",
+      "canonical": "https://entropyxi.github.io/2026/04/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E6%9D%A1%E4%BB%B6%E7%94%9F%E6%88%90/",
+      "publishedTime": "2026-04-18T08:10:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDIM/",
+      "relativeFile": "2026/05/10/深度学习/流匹配与扩散模型/DDIM/index.html",
+      "kind": "article",
+      "title": "DDIM",
+      "description": "分析去噪扩散隐式模型的确定性采样机制，解释DDIM如何通过非马尔可夫前向过程实现少步快速采样同时保持生成质量。",
+      "canonical": "https://entropyxi.github.io/2026/05/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDIM/",
+      "publishedTime": "2026-05-10T12:11:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/1.%20%E4%BB%8ESDE%E5%BC%80%E5%A7%8B/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/体系/1. 从SDE开始/index.html",
+      "kind": "article",
+      "title": "1. 从SDE开始",
+      "description": "从随机微分方程出发，推导扩散过程的正向转移、反向时间动力学以及分数函数在逆过程中的核心作用，建立扩散模型的SDE统一框架。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/1.%20%E4%BB%8ESDE%E5%BC%80%E5%A7%8B/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/2.%20%E7%BB%93%E6%9E%9C%E5%80%92%E6%8E%A8/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/体系/2. 结果倒推/index.html",
+      "kind": "article",
+      "title": "2. 结果倒推",
+      "description": "从DDPM的离散加噪公式出发，逆向推出对应的连续时间SDE形式，展示离散扩散与连续SDE之间的等方差关系与极限推导。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/2.%20%E7%BB%93%E6%9E%9C%E5%80%92%E6%8E%A8/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/3.%20%E5%9B%9E%E8%BF%87%E5%A4%B4%E7%9C%8BODE/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/体系/3. 回过头看ODE/index.html",
+      "kind": "article",
+      "title": "3. 回过头看ODE",
+      "description": "引入概率流ODE作为SDE的确定性等价形式，推导PF-ODE与反向SDE共享相同边缘分布的条件，为后续连续归一化流奠定理论基础。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/3.%20%E5%9B%9E%E8%BF%87%E5%A4%B4%E7%9C%8BODE/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/4.%20%E8%BF%9E%E7%BB%AD%E6%AD%A3%E5%88%99%E5%8C%96%E6%B5%81%E4%B8%8E%E6%B5%81%E5%8C%B9%E9%85%8D%E7%9A%84%E8%BF%9B%E5%85%A5/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/体系/4. 连续正则化流与流匹配的进入/index.html",
+      "kind": "article",
+      "title": "4. 连续正则化流与流匹配的进入",
+      "description": "介绍连续正则化流的基本概念，推导CNF的瞬时变量变换公式，过渡到流匹配的向量场学习框架并建立与扩散模型的对应关系。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/4.%20%E8%BF%9E%E7%BB%AD%E6%AD%A3%E5%88%99%E5%8C%96%E6%B5%81%E4%B8%8E%E6%B5%81%E5%8C%B9%E9%85%8D%E7%9A%84%E8%BF%9B%E5%85%A5/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/5.%20%E6%9D%A1%E4%BB%B6%E8%B7%AF%E5%BE%84%E7%9A%84%E9%80%89%E6%8B%A9%E4%B8%8EFM%20loss%E7%9A%84%E6%8E%A8%E5%AF%BC/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/体系/5. 条件路径的选择与FM loss的推导/index.html",
+      "kind": "article",
+      "title": "5. 条件路径的选择与FM loss的推导",
+      "description": "分析流匹配中条件概率路径的设计选择，推导条件流匹配与无条件流匹配损失函数的等价的充分条件，并给出相关证明。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/5.%20%E6%9D%A1%E4%BB%B6%E8%B7%AF%E5%BE%84%E7%9A%84%E9%80%89%E6%8B%A9%E4%B8%8EFM%20loss%E7%9A%84%E6%8E%A8%E5%AF%BC/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/%E6%80%BB%E7%BB%93%EF%BC%9ADiffusion%E4%B8%8ECNF%E7%9A%84%E7%BB%9F%E4%B8%80/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/体系/总结：Diffusion与CNF的统一/index.html",
+      "kind": "article",
+      "title": "总结：Diffusion与CNF的统一",
+      "description": "对扩散模型与连续正则化流进行统一总结，梳理SDE、ODE、CNF与流匹配之间的等价关系与转换路径，形成完整的生成模型理论体系。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/%E6%80%BB%E7%BB%93%EF%BC%9ADiffusion%E4%B8%8ECNF%E7%9A%84%E7%BB%9F%E4%B8%80/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/%E8%A1%A5%E5%85%85%EF%BC%9A%E4%BB%8E%E7%A6%BB%E6%95%A3%E6%96%B9%E5%90%91%E8%80%8C%E6%9D%A5%E7%9A%84%E6%8E%A8%E5%AF%BC/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/体系/补充：从离散方向而来的推导/index.html",
+      "kind": "article",
+      "title": "补充：从离散方向而来的推导",
+      "description": "从离散扩散模型的DDPM框架出发，推导连续时间极限下的SDE形式并引出分数函数的参数化表示，作为离散到连续视角的补充桥梁。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E4%BD%93%E7%B3%BB/%E8%A1%A5%E5%85%85%EF%BC%9A%E4%BB%8E%E7%A6%BB%E6%95%A3%E6%96%B9%E5%90%91%E8%80%8C%E6%9D%A5%E7%9A%84%E6%8E%A8%E5%AF%BC/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/ResShift/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/超分辨率/ResShift/index.html",
+      "kind": "article",
+      "title": "ResShift",
+      "description": "解读ResShift论文如何将图像超分辨率建模为从低分辨率到高分辨率的残差扩散过程，分析其偏移扩散的设计动机与高效采样策略。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/ResShift/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/SR3/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/超分辨率/SR3/index.html",
+      "kind": "article",
+      "title": "SR3",
+      "description": "剖析SR3论文将条件扩散模型应用于图像超分辨率的方法架构，分析低分辨率图像作为条件输入时的特征融合策略与训练细节。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/SR3/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/UPSR/",
+      "relativeFile": "2026/05/17/深度学习/流匹配与扩散模型/超分辨率/UPSR/index.html",
+      "kind": "article",
+      "title": "UPSR",
+      "description": "分析UPSR如何利用预训练扩散模型的先验知识实现盲超分辨率，讨论其潜在空间策略与退化估计器的协同设计思路。",
+      "canonical": "https://entropyxi.github.io/2026/05/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/UPSR/",
+      "publishedTime": "2026-05-17T06:00:00.000Z",
+      "tags": [
+        "流匹配与扩散模型",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/07/20/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/%E4%BB%8E%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%88%B0%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%9A%84%E4%BA%8C%E7%BB%B4%E5%8D%B7%E7%A7%AF/",
+      "relativeFile": "2026/07/20/信号与系统/从信号与系统到图像处理的二维卷积/index.html",
+      "kind": "article",
+      "title": "从信号与系统到图像处理的二维卷积",
+      "description": "从二维冲激分解与线性平移不变性推导二维卷积，解释图像处理中局部卷积、感受野、权重共享的来源，并对比数学卷积与深度学习中的 Conv2d。",
+      "canonical": "https://entropyxi.github.io/2026/07/20/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/%E4%BB%8E%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%88%B0%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%9A%84%E4%BA%8C%E7%BB%B4%E5%8D%B7%E7%A7%AF/",
+      "publishedTime": "2026-07-20T02:00:00.000Z",
+      "tags": [
+        "信号与系统"
+      ]
+    },
+    {
+      "pathname": "/2026/07/20/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/%E9%98%B6%E8%B7%83%E3%80%81%E5%86%B2%E6%BF%80%E3%80%81%E6%97%B6%E4%B8%8D%E5%8F%98%E6%80%A7%E5%92%8C%E7%BA%BF%E6%80%A7/",
+      "relativeFile": "2026/07/20/信号与系统/阶跃、冲激、时不变性和线性/index.html",
+      "kind": "article",
+      "title": "阶跃、冲激、时不变性和线性",
+      "description": "梳理离散与连续时间下单位阶跃、单位冲激的定义与相互关系，解释阶跃导数为冲激的广义函数意义，并引出系统的时不变性与线性。",
+      "canonical": "https://entropyxi.github.io/2026/07/20/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/%E9%98%B6%E8%B7%83%E3%80%81%E5%86%B2%E6%BF%80%E3%80%81%E6%97%B6%E4%B8%8D%E5%8F%98%E6%80%A7%E5%92%8C%E7%BA%BF%E6%80%A7/",
+      "publishedTime": "2026-07-20T02:00:00.000Z",
+      "tags": [
+        "信号与系统"
+      ]
+    },
+    {
+      "pathname": "/2026/07/20/%E6%A6%82%E7%8E%87%E8%AE%BA/%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E5%8D%8F%E6%96%B9%E5%B7%AE%E5%87%BD%E6%95%B0/",
+      "relativeFile": "2026/07/20/概率论/协方差与协方差函数/index.html",
+      "kind": "article",
+      "title": "协方差与协方差函数",
+      "description": "从定义出发梳理协方差、协方差矩阵与协方差函数的计算公式与性质，并过渡到随机过程中协方差函数与平稳过程的关系。",
+      "canonical": "https://entropyxi.github.io/2026/07/20/%E6%A6%82%E7%8E%87%E8%AE%BA/%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E5%8D%8F%E6%96%B9%E5%B7%AE%E5%87%BD%E6%95%B0/",
+      "publishedTime": "2026-07-20T02:00:00.000Z",
+      "tags": [
+        "概率论"
+      ]
+    },
+    {
+      "pathname": "/2026/07/20/%E6%A6%82%E7%8E%87%E8%AE%BA/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/",
+      "relativeFile": "2026/07/20/概率论/贝叶斯推断的基本思想/index.html",
+      "kind": "article",
+      "title": "贝叶斯推断的基本思想",
+      "description": "从概率到分布的思维转变出发，拆解贝叶斯公式中先验、似然、后验与归一化项的作用，并从联合分布两种分解角度理解贝叶斯推断的本质。",
+      "canonical": "https://entropyxi.github.io/2026/07/20/%E6%A6%82%E7%8E%87%E8%AE%BA/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/",
+      "publishedTime": "2026-07-20T02:00:00.000Z",
+      "tags": [
+        "概率论"
+      ]
+    },
+    {
+      "pathname": "/2026/07/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/Context%20Recall/",
+      "relativeFile": "2026/07/25/深度学习/RAG学习/Context Recall/index.html",
+      "kind": "article",
+      "title": "Context Recall",
+      "description": "介绍RAG检索阶段的Context Recall指标，说明其衡量参考答案事实被检索上下文覆盖的程度，并解析LLM-based实现的原理与局限。",
+      "canonical": "https://entropyxi.github.io/2026/07/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/Context%20Recall/",
+      "publishedTime": "2026-07-25T02:00:00.000Z",
+      "tags": [
+        "RAG学习",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/07/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/Response%20Relevancy/",
+      "relativeFile": "2026/07/25/深度学习/RAG学习/Response Relevancy/index.html",
+      "kind": "article",
+      "title": "Response Relevancy",
+      "description": "讲解Response Relevancy指标如何通过反向生成问题并计算与用户问题的余弦相似度，来评价RAG回答是否切题，并分析其实现与局限。",
+      "canonical": "https://entropyxi.github.io/2026/07/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/Response%20Relevancy/",
+      "publishedTime": "2026-07-25T02:00:00.000Z",
+      "tags": [
+        "RAG学习",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/07/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%87%86%E7%A1%AE%E5%BA%A6%EF%BC%88Context%20Precision%EF%BC%89/",
+      "relativeFile": "2026/07/25/深度学习/RAG学习/上下文准确度（Context Precision）/index.html",
+      "kind": "article",
+      "title": "上下文准确度（Context Precision）",
+      "description": "梳理Ragas中Context Precision指标族，涵盖LLM驱动、无参考答案、非LLM字符串匹配与ID比对四种变体的原理与适用场景。",
+      "canonical": "https://entropyxi.github.io/2026/07/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%87%86%E7%A1%AE%E5%BA%A6%EF%BC%88Context%20Precision%EF%BC%89/",
+      "publishedTime": "2026-07-25T02:00:00.000Z",
+      "tags": [
+        "RAG学习",
+        "深度学习"
+      ]
+    },
+    {
+      "pathname": "/2026/08/05/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/WSL2%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E6%8E%92%E6%9F%A5%EF%BC%9A%E4%BB%8EDISM_COM%E6%8D%9F%E5%9D%8F%E5%88%B0NetCfg%E6%AE%8B%E7%95%99/",
+      "relativeFile": "2026/08/05/技术随笔/WSL2安装失败排查：从DISM_COM损坏到NetCfg残留/index.html",
+      "kind": "article",
+      "title": "WSL2 安装失败排查：从 DISM COM 损坏到 NetCfg 残留",
+      "description": "WSL2 安装失败排查实录。BIOS 虚拟化已开启、HypervisorPresent=True，wsl --install 却静默失败，VirtualMachinePlatform 一重启就回滚。最终定位为三个问题叠加：DISM COM 注册损坏、MuMu 模拟器的 VirtualBox 驱动残留、VMware 与 LDPlayer 遗留的 NetCfg 通知对象失效。记录了从修复 DISM C",
+      "canonical": "https://entropyxi.github.io/2026/08/05/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/WSL2%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E6%8E%92%E6%9F%A5%EF%BC%9A%E4%BB%8EDISM_COM%E6%8D%9F%E5%9D%8F%E5%88%B0NetCfg%E6%AE%8B%E7%95%99/",
+      "publishedTime": "2026-08-05T02:00:00.000Z",
+      "tags": [
+        "WSL",
+        "Windows",
+        "故障排查",
+        "虚拟化"
+      ]
+    },
+    {
+      "pathname": "/about/",
+      "relativeFile": "about/index.html",
+      "kind": "about",
+      "title": "关于本人",
+      "description": "Entropy_Xi\r 是一名软件工程专业的学生\r 目前正在学习C/C++,\r Python, Ai4sci，扩散模型与超分辨率\r EMAIL: zengzhaoxi.g@gmail.com\r 欢迎交流学习\r Student\r at SCAU, interested in computer science, rl, diffusion, llm",
+      "canonical": "https://entropyxi.github.io/about/",
+      "publishedTime": "2026-02-07T16:00:00.000Z",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/01/",
+      "relativeFile": "archives/2026/01/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/01/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/02/",
+      "relativeFile": "archives/2026/02/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/02/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/03/",
+      "relativeFile": "archives/2026/03/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/03/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/04/",
+      "relativeFile": "archives/2026/04/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/04/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/05/",
+      "relativeFile": "archives/2026/05/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/05/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/05/page/2/",
+      "relativeFile": "archives/2026/05/page/2/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/05/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/07/",
+      "relativeFile": "archives/2026/07/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/07/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/08/",
+      "relativeFile": "archives/2026/08/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/08/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/",
+      "relativeFile": "archives/2026/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/page/2/",
+      "relativeFile": "archives/2026/page/2/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/page/3/",
+      "relativeFile": "archives/2026/page/3/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/page/3/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/2026/page/4/",
+      "relativeFile": "archives/2026/page/4/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/2026/page/4/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/",
+      "relativeFile": "archives/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/page/2/",
+      "relativeFile": "archives/page/2/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/page/3/",
+      "relativeFile": "archives/page/3/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/page/3/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/archives/page/4/",
+      "relativeFile": "archives/page/4/index.html",
+      "kind": "archive",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/archives/page/4/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/",
+      "relativeFile": "categories/index.html",
+      "kind": "category",
+      "title": "categories",
+      "description": "",
+      "canonical": "https://entropyxi.github.io/categories/",
+      "publishedTime": "2026-08-20T11:37:11.437Z",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/",
+      "relativeFile": "categories/信号与系统/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/",
+      "relativeFile": "categories/技术随笔/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/",
+      "relativeFile": "categories/数值分析/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/",
+      "relativeFile": "categories/概率论/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/",
+      "relativeFile": "categories/深度学习/CNN/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/CNN/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/",
+      "relativeFile": "categories/深度学习/RAG学习/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/RAG%E5%AD%A6%E4%B9%A0/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/",
+      "relativeFile": "categories/深度学习/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/2/",
+      "relativeFile": "categories/深度学习/page/2/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/3/",
+      "relativeFile": "categories/深度学习/page/3/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/3/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/",
+      "relativeFile": "categories/深度学习/流匹配与扩散模型/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/page/2/",
+      "relativeFile": "categories/深度学习/流匹配与扩散模型/page/2/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/",
+      "relativeFile": "categories/深度学习/流匹配与扩散模型/超分辨率/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/",
+      "relativeFile": "categories/深度学习/线性回归/index.html",
+      "kind": "category",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/",
+      "relativeFile": "index.html",
+      "kind": "home",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/page/2/",
+      "relativeFile": "page/2/index.html",
+      "kind": "page",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/page/3/",
+      "relativeFile": "page/3/index.html",
+      "kind": "page",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/page/3/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/page/4/",
+      "relativeFile": "page/4/index.html",
+      "kind": "page",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/page/4/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/RAG%E5%AD%A6%E4%B9%A0/",
+      "relativeFile": "tags/RAG学习/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/RAG%E5%AD%A6%E4%B9%A0/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/WSL/",
+      "relativeFile": "tags/WSL/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/WSL/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/Windows/",
+      "relativeFile": "tags/Windows/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/Windows/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/",
+      "relativeFile": "tags/index.html",
+      "kind": "tag",
+      "title": "tags",
+      "description": "",
+      "canonical": "https://entropyxi.github.io/tags/",
+      "publishedTime": "2026-08-20T11:37:11.438Z",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/",
+      "relativeFile": "tags/信号与系统/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/",
+      "relativeFile": "tags/卷积神经网络/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/",
+      "relativeFile": "tags/故障排查/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/",
+      "relativeFile": "tags/数值分析/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/",
+      "relativeFile": "tags/概率论/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/",
+      "relativeFile": "tags/流匹配与扩散模型/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/page/2/",
+      "relativeFile": "tags/流匹配与扩散模型/page/2/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/",
+      "relativeFile": "tags/深度学习/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/2/",
+      "relativeFile": "tags/深度学习/page/2/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/2/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/3/",
+      "relativeFile": "tags/深度学习/page/3/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/page/3/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/",
+      "relativeFile": "tags/线性回归/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/",
+      "publishedTime": "",
+      "tags": []
+    },
+    {
+      "pathname": "/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/",
+      "relativeFile": "tags/虚拟化/index.html",
+      "kind": "tag",
+      "title": "EntropyXi的个人博客",
+      "description": "深度学习、扩散模型、流匹配与数值分析的技术笔记",
+      "canonical": "https://entropyxi.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/",
+      "publishedTime": "",
+      "tags": []
+    }
+  ],
+  "assets": [
+    {
+      "pathname": "/atom.xml",
+      "relativeFile": "atom.xml",
+      "size": 28695,
+      "sha256": "653ef648e7d7664244874c239d09f4fd973407579406c877d574047351381f14"
+    },
+    {
+      "pathname": "/css/main.css",
+      "relativeFile": "css/main.css",
+      "size": 63919,
+      "sha256": "59631bfc7f347872d78adebd69d4c651362db39ad0b7ccdc7049ad31fa41a3b1"
+    },
+    {
+      "pathname": "/css/noscript.css",
+      "relativeFile": "css/noscript.css",
+      "size": 881,
+      "sha256": "4e519d870cc065f121c7b66f888a462341ffdb73f47c40a21a27b1c726898eaa"
+    },
+    {
+      "pathname": "/images/apple-touch-icon-next.png",
+      "relativeFile": "images/apple-touch-icon-next.png",
+      "size": 1544,
+      "sha256": "29860d159e98475120111ce64229326db66e7b26ddb3755d22ba978619483b8e"
+    },
+    {
+      "pathname": "/images/avatar.gif",
+      "relativeFile": "images/avatar.gif",
+      "size": 1785,
+      "sha256": "2c7bc9a72ea65ded6f24e685fb1c4d70559441dfa42ab811d4952378e473e8ff"
+    },
+    {
+      "pathname": "/images/eigenvalue-error.png",
+      "relativeFile": "images/eigenvalue-error.png",
+      "size": 176100,
+      "sha256": "2bce39dd7e152719121200945183345676c15b51b7bb316e6268714c1966c6ea"
+    },
+    {
+      "pathname": "/images/favicon-16x16-next.png",
+      "relativeFile": "images/favicon-16x16-next.png",
+      "size": 435,
+      "sha256": "cfcea605c8cde23994622f00fbf5e1aeb357aedcca375f128b8f91b58ed009ed"
+    },
+    {
+      "pathname": "/images/favicon-32x32-next.png",
+      "relativeFile": "images/favicon-32x32-next.png",
+      "size": 640,
+      "sha256": "298a1d8af7fa05f0d20704860273f9ace0a950ac554d2274c8bd1627213d718e"
+    },
+    {
+      "pathname": "/images/logo-algolia-nebula-blue-full.svg",
+      "relativeFile": "images/logo-algolia-nebula-blue-full.svg",
+      "size": 4904,
+      "sha256": "df61bd27d2d4430019207915dcf61923cea622b42019b4973912f337683e4a1e"
+    },
+    {
+      "pathname": "/images/logo.svg",
+      "relativeFile": "images/logo.svg",
+      "size": 647,
+      "sha256": "0c4d4b4f618d3949d6882d320e8af863d30e039c4ff1527d4ca606e4ea6fd7a0"
+    },
+    {
+      "pathname": "/js/bookmark.js",
+      "relativeFile": "js/bookmark.js",
+      "size": 1676,
+      "sha256": "63988ce3babe58f62d68b50999817b238c91af33c3752bcb546e117ab8f25ce6"
+    },
+    {
+      "pathname": "/js/comments-buttons.js",
+      "relativeFile": "js/comments-buttons.js",
+      "size": 923,
+      "sha256": "b5a279ad5857388b3ca19633be19bb8e3b5f84ae34c085a8da0ca7b991d98f74"
+    },
+    {
+      "pathname": "/js/comments.js",
+      "relativeFile": "js/comments.js",
+      "size": 666,
+      "sha256": "0b68f77fdf599de6ddbeeb6f15ec7a854404a7f8802267517ebbf871fa1281e6"
+    },
+    {
+      "pathname": "/js/config.js",
+      "relativeFile": "js/config.js",
+      "size": 1704,
+      "sha256": "a65fc965d74fd991d506c10053cefb721c7b0df5e8e637e2ad48e589a0a05378"
+    },
+    {
+      "pathname": "/js/motion.js",
+      "relativeFile": "js/motion.js",
+      "size": 3734,
+      "sha256": "f545516f07b3824b837e864dc6f9a28d514471eb216212744e255a74d779ccba"
+    },
+    {
+      "pathname": "/js/next-boot.js",
+      "relativeFile": "js/next-boot.js",
+      "size": 2768,
+      "sha256": "02f1f4283c610ab2a2650d8785e756854efb813df61a06923785cb6e906826a6"
+    },
+    {
+      "pathname": "/js/pjax.js",
+      "relativeFile": "js/pjax.js",
+      "size": 1575,
+      "sha256": "6eb2b2a041cf55b7ff66b6aa9a2e7d7a0c15690e0c73b7e4a5f299bce12c85e5"
+    },
+    {
+      "pathname": "/js/schedule.js",
+      "relativeFile": "js/schedule.js",
+      "size": 4539,
+      "sha256": "67bc904bf1eb02b92342f9a2d9633fcc261fe462c64487d0f95b8b126cc88873"
+    },
+    {
+      "pathname": "/js/sidebar.js",
+      "relativeFile": "js/sidebar.js",
+      "size": 1977,
+      "sha256": "3b86726489e2c057c90aeb267baa374588de985ab72a57da2cccb897826d2553"
+    },
+    {
+      "pathname": "/js/third-party/addtoany.js",
+      "relativeFile": "js/third-party/addtoany.js",
+      "size": 200,
+      "sha256": "deb550392eb0967726663c0836531b7314f38d5856a45eb218ab95f011bdcb31"
+    },
+    {
+      "pathname": "/js/third-party/analytics/baidu-analytics.js",
+      "relativeFile": "js/third-party/analytics/baidu-analytics.js",
+      "size": 162,
+      "sha256": "bf4f8e2b67ade34be2e84b8d961d2e883c5f014a0acb7eb51568cd682d00da09"
+    },
+    {
+      "pathname": "/js/third-party/analytics/google-analytics.js",
+      "relativeFile": "js/third-party/analytics/google-analytics.js",
+      "size": 1549,
+      "sha256": "e8bdbb42f624dab1d3baad70e05a2e9c64d50ad63943d2784d9ccacadc44c205"
+    },
+    {
+      "pathname": "/js/third-party/analytics/growingio.js",
+      "relativeFile": "js/third-party/analytics/growingio.js",
+      "size": 201,
+      "sha256": "7a699ce20979fe864b658d5bdb523a495df115ccf704192fd9be76231101e519"
+    },
+    {
+      "pathname": "/js/third-party/analytics/matomo.js",
+      "relativeFile": "js/third-party/analytics/matomo.js",
+      "size": 603,
+      "sha256": "c1a493d2c18b98f78a2a553d06de603623cf8407fd6c2411ce4debae3ed28d62"
+    },
+    {
+      "pathname": "/js/third-party/chat/chatra.js",
+      "relativeFile": "js/third-party/chat/chatra.js",
+      "size": 401,
+      "sha256": "5055149bb623986abaceaf665f36a72a1dcfde0aba633047a62403ad9d488a2a"
+    },
+    {
+      "pathname": "/js/third-party/chat/tidio.js",
+      "relativeFile": "js/third-party/chat/tidio.js",
+      "size": 226,
+      "sha256": "c57cedb9455e918501f13866bbbc6966d708cb8446f53502a2a0d21c0f846597"
+    },
+    {
+      "pathname": "/js/third-party/comments/changyan.js",
+      "relativeFile": "js/third-party/comments/changyan.js",
+      "size": 961,
+      "sha256": "eeb21d4f4ccfa366c4cde3a4fb00d7264c615f051e6ad2fa97a88771f14bce09"
+    },
+    {
+      "pathname": "/js/third-party/comments/disqus.js",
+      "relativeFile": "js/third-party/comments/disqus.js",
+      "size": 1271,
+      "sha256": "a39f51bcaa3c90bcd451b5efda3293e15effc9dd0b4572bb08391301b5b5d9e1"
+    },
+    {
+      "pathname": "/js/third-party/comments/disqusjs.js",
+      "relativeFile": "js/third-party/comments/disqusjs.js",
+      "size": 727,
+      "sha256": "e26a913800e6dd3deb95d45e8807db4e698f55d0d4b9d31d8be2c08b6f1357d8"
+    },
+    {
+      "pathname": "/js/third-party/comments/gitalk.js",
+      "relativeFile": "js/third-party/comments/gitalk.js",
+      "size": 1279,
+      "sha256": "1174cdfd68e57b71a81ef3b18f3660c9058cddcba9e89a048c6f026a4a884446"
+    },
+    {
+      "pathname": "/js/third-party/comments/isso.js",
+      "relativeFile": "js/third-party/comments/isso.js",
+      "size": 379,
+      "sha256": "dc017cf597d19c3236de6d7594eb9180c31433c1ac7ad98c2e6ccd2d5b7c30ff"
+    },
+    {
+      "pathname": "/js/third-party/comments/livere.js",
+      "relativeFile": "js/third-party/comments/livere.js",
+      "size": 447,
+      "sha256": "4e100de440ef27bfc4f69048115c85d8d9bdea0183dce31b70435150fbe88912"
+    },
+    {
+      "pathname": "/js/third-party/comments/utterances.js",
+      "relativeFile": "js/third-party/comments/utterances.js",
+      "size": 538,
+      "sha256": "4e4f0d790afb4415ca2a6b367641d2fb79110966d1d92892b15957f142da7bca"
+    },
+    {
+      "pathname": "/js/third-party/fancybox.js",
+      "relativeFile": "js/third-party/fancybox.js",
+      "size": 1151,
+      "sha256": "53a75598f2ecd1f953cb2cd7c4cadf93b3fa9b03e403df7386f39d6425392e60"
+    },
+    {
+      "pathname": "/js/third-party/math/katex.js",
+      "relativeFile": "js/third-party/math/katex.js",
+      "size": 181,
+      "sha256": "a7ecca1b64c25edcfaf44dd8fdec12493059d7ab31b5364909a30d1260c9fe8c"
+    },
+    {
+      "pathname": "/js/third-party/math/mathjax.js",
+      "relativeFile": "js/third-party/math/mathjax.js",
+      "size": 934,
+      "sha256": "0862a3f8e53cd45dc191799f1ca5b89d0b73e7e8beb298f26355519933ffcb42"
+    },
+    {
+      "pathname": "/js/third-party/pace.js",
+      "relativeFile": "js/third-party/pace.js",
+      "size": 130,
+      "sha256": "e6698b5600d31270e845477fc05b8055a8af42173f8c84aa079b752695e16dc9"
+    },
+    {
+      "pathname": "/js/third-party/quicklink.js",
+      "relativeFile": "js/third-party/quicklink.js",
+      "size": 944,
+      "sha256": "bd96813a38a389dabf2de084c7e099d45d5e4eb0d275c1e7f38705ac1cf3724b"
+    },
+    {
+      "pathname": "/js/third-party/search/algolia-search.js",
+      "relativeFile": "js/third-party/search/algolia-search.js",
+      "size": 5005,
+      "sha256": "ca39d75628db65cd99a948084873cf76c7141be6464bdba8e02d8527616ef9a1"
+    },
+    {
+      "pathname": "/js/third-party/search/local-search.js",
+      "relativeFile": "js/third-party/search/local-search.js",
+      "size": 3572,
+      "sha256": "57f3e68f8cc92b18a2a454f0d3b07e7d135f3254028b7985506d6c295c457d81"
+    },
+    {
+      "pathname": "/js/third-party/statistics/firestore.js",
+      "relativeFile": "js/third-party/statistics/firestore.js",
+      "size": 1794,
+      "sha256": "4cc96bedc0d31eb54e93dc64dde046412d778e05e9d8c262e8807971754d3bb0"
+    },
+    {
+      "pathname": "/js/third-party/statistics/lean-analytics.js",
+      "relativeFile": "js/third-party/statistics/lean-analytics.js",
+      "size": 3974,
+      "sha256": "418575989c8e18ac60745c679eb9f9ce51ac5b230c397ba0a86d0b416fe6573a"
+    },
+    {
+      "pathname": "/js/third-party/tags/mermaid.js",
+      "relativeFile": "js/third-party/tags/mermaid.js",
+      "size": 1174,
+      "sha256": "fc2b2ebed93ecb585f0994b60c71671e7c79403b1a97c8a79c65bd6e6d5f5d2a"
+    },
+    {
+      "pathname": "/js/third-party/tags/pdf.js",
+      "relativeFile": "js/third-party/tags/pdf.js",
+      "size": 647,
+      "sha256": "0f1d48995a83f9f64757d3d4d58479c618cc5a04f1a65b89e55a21ef6e1706d0"
+    },
+    {
+      "pathname": "/js/third-party/tags/wavedrom.js",
+      "relativeFile": "js/third-party/tags/wavedrom.js",
+      "size": 302,
+      "sha256": "6f03c9672b42508aacd9c7b4cf34f633ec47ba0a8ac1c1d526f428a20479496c"
+    },
+    {
+      "pathname": "/js/utils.js",
+      "relativeFile": "js/utils.js",
+      "size": 20563,
+      "sha256": "a0e032e7ab63416c6ef83ce0a7ba7ccdfad2870c332f87ba385fd66a7a45c8dc"
+    },
+    {
+      "pathname": "/search.xml",
+      "relativeFile": "search.xml",
+      "size": 291588,
+      "sha256": "0da247baccccd4d5f8eeff1de01baac5b6aa0d3491ae167df780a52d0c17a2da"
+    },
+    {
+      "pathname": "/sitemap.xml",
+      "relativeFile": "sitemap.xml",
+      "size": 15756,
+      "sha256": "e61490ccca099cc36567939cb735c8e1f43301d8ba2035aff4067bc9c33f0ae3"
+    }
+  ],
+  "posts": [
+    {
+      "sourceRelative": "_posts/信号与系统/从信号与系统到图像处理的二维卷积.md",
+      "title": "从信号与系统到图像处理的二维卷积",
+      "date": "2026-07-20 10:00:00",
+      "description": "从二维冲激分解与线性平移不变性推导二维卷积，解释图像处理中局部卷积、感受野、权重共享的来源，并对比数学卷积与深度学习中的 Conv2d。",
+      "tags": [
+        "信号与系统"
+      ],
+      "categories": [
+        "信号与系统"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "6f8522d8712e0c97755eb34239698c778741ec3196e0bac999e952ca0bf1811a",
+      "math": {
+        "inlineDollarFormulaCount": 43,
+        "displayDollarFormulaCount": 55,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "cases": 2,
+          "aligned": 4,
+          "bmatrix": 3
+        },
+        "commands": {
+          "text": 33,
+          "rightarrow": 3,
+          "qquad": 3,
+          "in": 2,
+          "mathbb": 2,
+          "mapsto": 1,
+          "delta": 16,
+          "sum": 20,
+          "infty": 8,
+          "boxed": 10,
+          "xrightarrow": 1,
+          "left": 1,
+          "right": 1,
+          "operatorname": 4,
+          "neq": 3,
+          "quad": 1,
+          "mathrm": 2,
+          "frac": 2,
+          "ldots": 1,
+          "times": 13,
+          "circ": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/信号与系统/阶跃、冲激、时不变性和线性.md",
+      "title": "阶跃、冲激、时不变性和线性",
+      "date": "2026-07-20 10:00:00",
+      "description": "梳理离散与连续时间下单位阶跃、单位冲激的定义与相互关系，解释阶跃导数为冲激的广义函数意义，并引出系统的时不变性与线性。",
+      "tags": [
+        "信号与系统"
+      ],
+      "categories": [
+        "信号与系统"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "6988a7a82a4ce9287294c9966ed811493c52f82d3d098f271a54c4079e93165a",
+      "math": {
+        "inlineDollarFormulaCount": 33,
+        "displayDollarFormulaCount": 29,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "cases": 2
+        },
+        "commands": {
+          "cases": 3,
+          "quad": 9,
+          "geq": 3,
+          "delta": 23,
+          "neq": 2,
+          "Delta": 12,
+          "sum": 1,
+          "infty": 14,
+          "text": 4,
+          "frac": 5,
+          "int": 7,
+          "le": 1,
+          "cdot": 1,
+          "to": 3,
+          "longrightarrow": 1,
+          "tau": 8
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/技术随笔/WSL2安装失败排查：从DISM_COM损坏到NetCfg残留.md",
+      "title": "WSL2 安装失败排查：从 DISM COM 损坏到 NetCfg 残留",
+      "date": "2026-08-05 10:00:00",
+      "description": "WSL2 安装失败排查实录。BIOS 虚拟化已开启、HypervisorPresent=True，wsl --install 却静默失败，VirtualMachinePlatform 一重启就回滚。最终定位为三个问题叠加：DISM COM 注册损坏、MuMu 模拟器的 VirtualBox 驱动残留、VMware 与 LDPlayer 遗留的 NetCfg 通知对象失效。记录了从修复 DISM COM、清理残留驱动到重建注册的完整排查过程。",
+      "tags": [
+        "WSL",
+        "Windows",
+        "虚拟化",
+        "故障排查"
+      ],
+      "categories": [
+        "技术随笔"
+      ],
+      "mathjaxRaw": null,
+      "mathEnabled": false,
+      "normalizedBodySha256": "fa2e7ad08a741658fcf0204a0f8c5a61e432715529a140a2541db2f6943c8f73",
+      "math": {
+        "inlineDollarFormulaCount": 0,
+        "displayDollarFormulaCount": 0,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {}
+      }
+    },
+    {
+      "sourceRelative": "_posts/数值分析/260123_特征值分布的对称性对于误差的影响的解释.md",
+      "title": "特征值分布的对称性对于误差的影响的解释",
+      "date": "2026-01-23 12:46:14",
+      "description": "分析矩阵特征值的对称分布如何影响数值误差的传播与积累，借助条件数与特征值敏感性解释对称正定矩阵在数值计算中误差表现更优的原因。",
+      "tags": [
+        "数值分析"
+      ],
+      "categories": [
+        "数值分析"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "db57f2cf84c15e1b6553616c6ef71b64295174c1f30d15773b6cbbc380b61dab",
+      "math": {
+        "inlineDollarFormulaCount": 87,
+        "displayDollarFormulaCount": 7,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "aligned": 2,
+          "bmatrix": 3
+        },
+        "commands": {
+          "min": 1,
+          "mathbf": 49,
+          "dots": 5,
+          "lambda": 17,
+          "approx": 3,
+          "sum": 1,
+          "alpha": 4,
+          "frac": 2,
+          "cdot": 9,
+          "times": 3,
+          "ddots": 1,
+          "phi": 3
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/数值分析/共轭梯度法中参数alpha和beta的推导.md",
+      "title": "共轭梯度法中参数alpha和beta的推导",
+      "date": "2026-02-08 13:00:00",
+      "description": "推导共轭梯度法中步长参数α_k与方向参数β_k的解析表达式，从精确线搜索和共轭关系出发给出完整的数学推导过程。",
+      "tags": [
+        "数值分析"
+      ],
+      "categories": [
+        "数值分析"
+      ],
+      "mathjaxRaw": "true",
+      "mathEnabled": true,
+      "normalizedBodySha256": "a5d59f1e0e6008ac89e3810ce356ddd4b3ab1f0e6a483410b2b4748dca98ff9f",
+      "math": {
+        "inlineDollarFormulaCount": 45,
+        "displayDollarFormulaCount": 22,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "alpha": 37,
+          "varphi": 5,
+          "mathbf": 174,
+          "underbrace": 3,
+          "text": 2,
+          "frac": 16,
+          "beta": 14,
+          "left": 1,
+          "right": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/概率论/协方差与协方差函数.md",
+      "title": "协方差与协方差函数",
+      "date": "2026-07-20 10:00:00",
+      "description": "从定义出发梳理协方差、协方差矩阵与协方差函数的计算公式与性质，并过渡到随机过程中协方差函数与平稳过程的关系。",
+      "tags": [
+        "概率论"
+      ],
+      "categories": [
+        "概率论"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "8054c914d8c504d740d56d6ff1e375532001ef2d9ef09da0fa9a6a6483614630",
+      "math": {
+        "inlineDollarFormulaCount": 12,
+        "displayDollarFormulaCount": 26,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "pmatrix": 3
+        },
+        "commands": {
+          "infty": 2,
+          "quad": 3,
+          "mu": 9,
+          "sum": 8,
+          "rho": 1,
+          "frac": 1,
+          "sqrt": 2,
+          "mathbf": 7,
+          "vdots": 4,
+          "boldsymbol": 3,
+          "Sigma": 6,
+          "left": 2,
+          "right": 2,
+          "operatorname": 7,
+          "cdots": 2,
+          "ddots": 1,
+          "geq": 1,
+          "in": 3,
+          "boxed": 1,
+          "longmapsto": 1,
+          "leq": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/概率论/贝叶斯推断的基本思想.md",
+      "title": "贝叶斯推断的基本思想",
+      "date": "2026-07-20 10:00:00",
+      "description": "从概率到分布的思维转变出发，拆解贝叶斯公式中先验、似然、后验与归一化项的作用，并从联合分布两种分解角度理解贝叶斯推断的本质。",
+      "tags": [
+        "概率论"
+      ],
+      "categories": [
+        "概率论"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "561de298e959c937e9c68ae4bbe03801241fcc0ca72194524b593ac393e982fd",
+      "math": {
+        "inlineDollarFormulaCount": 41,
+        "displayDollarFormulaCount": 12,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "theta": 57,
+          "mid": 20,
+          "frac": 5,
+          "int": 1,
+          "text": 7,
+          "sum": 2,
+          "times": 2
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/Adam算法.md",
+      "title": "Adam算法",
+      "date": "2026-02-08 13:00:00",
+      "description": "梳理Adam优化器如何融合动量法与RMSProp的自适应学习率，阐释偏差校正机制及其收敛性质，是当前最广泛使用的深度学习优化器之一。",
+      "tags": [
+        "深度学习"
+      ],
+      "categories": [
+        "深度学习"
+      ],
+      "mathjaxRaw": "true",
+      "mathEnabled": true,
+      "normalizedBodySha256": "40e2f2f32ba52d0052661295f47d8f42185448d9f8ae8229e15618855ffd1d1b",
+      "math": {
+        "inlineDollarFormulaCount": 26,
+        "displayDollarFormulaCount": 15,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "aligned": 2
+        },
+        "commands": {
+          "beta": 35,
+          "mathbf": 22,
+          "eta": 1,
+          "frac": 6,
+          "sqrt": 3,
+          "epsilon": 2,
+          "cdot": 6,
+          "sum": 6,
+          "left": 1,
+          "right": 1,
+          "approx": 2,
+          "text": 1,
+          "times": 1,
+          "nabla": 1,
+          "hat": 4,
+          "alpha": 1,
+          "to": 2
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/CNN/CNN的设计原则与数学推导.md",
+      "title": "CNN的设计原则与数学推导",
+      "date": "2026-02-08 13:00:00",
+      "description": "从局部连接、权值共享与平移等变性三个核心设计原则出发，给出卷积神经网络中卷积运算与池化层的数学表达及反向传播推导。",
+      "tags": [
+        "卷积神经网络"
+      ],
+      "categories": [
+        "深度学习",
+        "CNN"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "692cdf45c579f3b82f08b05dbe136d47cf29d194f9c6094b04d6138ea11c2421",
+      "math": {
+        "inlineDollarFormulaCount": 39,
+        "displayDollarFormulaCount": 4,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "sum": 4,
+          "Delta": 8,
+          "mathbf": 3,
+          "times": 4
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/RAG学习/Context Recall.md",
+      "title": "Context Recall",
+      "date": "2026-07-25 10:00:00",
+      "description": "介绍RAG检索阶段的Context Recall指标，说明其衡量参考答案事实被检索上下文覆盖的程度，并解析LLM-based实现的原理与局限。",
+      "tags": [
+        "深度学习",
+        "RAG学习"
+      ],
+      "categories": [
+        "深度学习",
+        "RAG学习"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "9c3854aae0d33b9181c6ba24543e3aa2fae146ddbd4099f54e39f923cb166ce4",
+      "math": {
+        "inlineDollarFormulaCount": 2,
+        "displayDollarFormulaCount": 18,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "cases": 1
+        },
+        "commands": {
+          "text": 28,
+          "longrightarrow": 1,
+          "ldots": 1,
+          "operatorname": 7,
+          "frac": 6,
+          "sum": 1,
+          "qquad": 2,
+          "xrightarrow": 5,
+          "mathrm": 3,
+          "cap": 1,
+          "boxed": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/RAG学习/Response Relevancy.md",
+      "title": "Response Relevancy",
+      "date": "2026-07-25 10:00:00",
+      "description": "讲解Response Relevancy指标如何通过反向生成问题并计算与用户问题的余弦相似度，来评价RAG回答是否切题，并分析其实现与局限。",
+      "tags": [
+        "深度学习",
+        "RAG学习"
+      ],
+      "categories": [
+        "深度学习",
+        "RAG学习"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "dcfe3bcbe25ffa324a0385562bf132997467bb07e308fdcbbfb345307cc5b4c7",
+      "math": {
+        "inlineDollarFormulaCount": 9,
+        "displayDollarFormulaCount": 22,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "cos": 2,
+          "mathrm": 2,
+          "text": 18,
+          "xrightarrow": 7,
+          "ldots": 3,
+          "longrightarrow": 2,
+          "operatorname": 7,
+          "frac": 7,
+          "cdot": 4,
+          "sum": 3,
+          "qquad": 2,
+          "left": 1,
+          "right": 1,
+          "mathbf": 1,
+          "times": 1,
+          "leq": 2,
+          "theta": 1,
+          "Longrightarrow": 2,
+          "boxed": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/RAG学习/上下文准确度（Context Precision）.md",
+      "title": "上下文准确度（Context Precision）",
+      "date": "2026-07-25 10:00:00",
+      "description": "梳理Ragas中Context Precision指标族，涵盖LLM驱动、无参考答案、非LLM字符串匹配与ID比对四种变体的原理与适用场景。",
+      "tags": [
+        "深度学习",
+        "RAG学习"
+      ],
+      "categories": [
+        "深度学习",
+        "RAG学习"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "7a12e05d9a3d66f4f408d0c93bbe7f57588a175f4fafc70a07a201d1678f1093",
+      "math": {
+        "inlineDollarFormulaCount": 5,
+        "displayDollarFormulaCount": 3,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "cases": 1
+        },
+        "commands": {
+          "text": 13,
+          "frac": 3,
+          "sum": 2,
+          "left": 1,
+          "cdot": 1,
+          "right": 1,
+          "max": 1,
+          "geq": 1,
+          "tau": 1,
+          "cap": 1,
+          "in": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/RMSProp.md",
+      "title": "RMSProp",
+      "date": "2026-02-08 13:00:00",
+      "description": "介绍RMSProp算法如何通过指数加权移动平均对历史梯度平方做归一化，解决AdaGrad学习率单调递减的问题，使训练更加稳定。",
+      "tags": [
+        "深度学习"
+      ],
+      "categories": [
+        "深度学习"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "3468014f665c95447643b7eea66c29a7a6fbfe36c9b6b71dc970c88f7e347aee",
+      "math": {
+        "inlineDollarFormulaCount": 30,
+        "displayDollarFormulaCount": 8,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "aligned": 1
+        },
+        "commands": {
+          "mathbf": 11,
+          "beta": 10,
+          "odot": 4,
+          "frac": 4,
+          "eta": 5,
+          "sqrt": 3,
+          "epsilon": 6,
+          "sum": 3,
+          "tau": 4,
+          "cdot": 2,
+          "underbrace": 2,
+          "text": 2,
+          "infty": 2,
+          "to": 2
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/DDIM.md",
+      "title": "DDIM",
+      "date": "2026-05-10 20:11:00",
+      "description": "分析去噪扩散隐式模型的确定性采样机制，解释DDIM如何通过非马尔可夫前向过程实现少步快速采样同时保持生成质量。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "0a787caff72b6553ea3d1de82f1a27cb8dd82ca5e721992015920cc9a5c053ed",
+      "math": {
+        "inlineDollarFormulaCount": 120,
+        "displayDollarFormulaCount": 52,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "mid": 28,
+          "mathcal": 20,
+          "left": 19,
+          "sqrt": 58,
+          "alpha": 79,
+          "mathbf": 29,
+          "right": 19,
+          "prod": 5,
+          "beta": 4,
+          "epsilon": 49,
+          "quad": 6,
+          "sim": 10,
+          "theta": 29,
+          "mathbb": 2,
+          "sigma": 51,
+          "frac": 14,
+          "approx": 2,
+          "hat": 9,
+          "underbrace": 3,
+          "text": 6,
+          "eta": 13,
+          "gamma": 3,
+          "sum": 1,
+          "tau": 23,
+          "cdots": 4,
+          "Rightarrow": 2,
+          "mapsto": 3,
+          "to": 2,
+          "bar": 7,
+          "mathrm": 7,
+          "ll": 1,
+          "times": 2
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/DDPM.md",
+      "title": "DDPM",
+      "date": "2026-03-15 21:40:00",
+      "description": "系统推导去噪扩散概率模型的核心原理，包括前向加噪过程的马尔可夫性质、反向去噪的变分下界推导以及ε参数化下的简化训练目标。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "a651488c2b1f8253aaf8a9240d77ea0e974bffa7d9c68bcc56cf8595f61efbf0",
+      "math": {
+        "inlineDollarFormulaCount": 48,
+        "displayDollarFormulaCount": 5,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "frac": 19,
+          "mathcal": 3,
+          "tilde": 5,
+          "mu": 9,
+          "beta": 18,
+          "mathbf": 1,
+          "cdot": 3,
+          "mathbb": 4,
+          "left": 6,
+          "sigma": 7,
+          "alpha": 28,
+          "bar": 21,
+          "epsilon": 14,
+          "theta": 21,
+          "right": 6,
+          "sqrt": 12,
+          "text": 1,
+          "quad": 3,
+          "to": 3,
+          "infty": 1,
+          "prod": 3,
+          "limits": 3,
+          "log": 10,
+          "dots": 6,
+          "int": 2,
+          "leq": 1,
+          "sum": 5,
+          "hat": 2
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/体系/1. 从SDE开始.md",
+      "title": "1. 从SDE开始",
+      "date": "2026-05-17 14:00:00",
+      "description": "从随机微分方程出发，推导扩散过程的正向转移、反向时间动力学以及分数函数在逆过程中的核心作用，建立扩散模型的SDE统一框架。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "3f02d87c7c13a5e50e7bee2d3c8650a391645eb93b0f737dd015c39fa02036f8",
+      "math": {
+        "inlineDollarFormulaCount": 31,
+        "displayDollarFormulaCount": 13,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "aligned": 4,
+          "equation": 8,
+          "align": 2
+        },
+        "commands": {
+          "quad": 6,
+          "Delta": 62,
+          "sqrt": 2,
+          "epsilon": 2,
+          "mid": 19,
+          "mathcal": 1,
+          "left": 26,
+          "right": 26,
+          "propto": 3,
+          "exp": 5,
+          "frac": 9,
+          "lVert": 1,
+          "rVert": 1,
+          "bigl": 1,
+          "log": 24,
+          "bigr": 1,
+          "tag": 11,
+          "approx": 2,
+          "cdot": 1,
+          "nabla": 18,
+          "partial": 2,
+          "int": 2,
+          "tilde": 2,
+          "mathbb": 11,
+          "notag": 1,
+          "underset": 1,
+          "mu": 2,
+          "arg": 1,
+          "min": 1,
+          "theta": 6,
+          "sim": 1,
+          "to": 4
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/体系/2. 结果倒推.md",
+      "title": "2. 结果倒推",
+      "date": "2026-05-17 14:00:00",
+      "description": "从DDPM的离散加噪公式出发，逆向推出对应的连续时间SDE形式，展示离散扩散与连续SDE之间的等方差关系与极限推导。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "e68ffd25dca89508168b42a99914495b3d19b762779985eaf1256de986b96226",
+      "math": {
+        "inlineDollarFormulaCount": 8,
+        "displayDollarFormulaCount": 6,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "equation": 4,
+          "aligned": 1,
+          "align": 1
+        },
+        "commands": {
+          "bar": 26,
+          "alpha": 15,
+          "beta": 11,
+          "Delta": 18,
+          "mid": 4,
+          "int": 1,
+          "sqrt": 3,
+          "epsilon": 6,
+          "bigl": 2,
+          "bigr": 2,
+          "Bigl": 1,
+          "Bigr": 1,
+          "frac": 9,
+          "ln": 1,
+          "qquad": 1,
+          "left": 2,
+          "right": 2,
+          "nabla": 1,
+          "log": 1,
+          "to": 3,
+          "quad": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/体系/3. 回过头看ODE.md",
+      "title": "3. 回过头看ODE",
+      "date": "2026-05-17 14:00:00",
+      "description": "引入概率流ODE作为SDE的确定性等价形式，推导PF-ODE与反向SDE共享相同边缘分布的条件，为后续连续归一化流奠定理论基础。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "7628bea386e3b12763861ad57415ec68e504ccd2defee0900f239261e2552106",
+      "math": {
+        "inlineDollarFormulaCount": 15,
+        "displayDollarFormulaCount": 12,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "equation": 8,
+          "aligned": 2
+        },
+        "commands": {
+          "int": 2,
+          "delta": 19,
+          "mathbb": 7,
+          "left": 17,
+          "right": 17,
+          "nabla": 27,
+          "bigl": 8,
+          "bigr": 8,
+          "Delta": 19,
+          "sqrt": 5,
+          "epsilon": 6,
+          "approx": 2,
+          "cdot": 14,
+          "frac": 14,
+          "partial": 4,
+          "sigma": 10,
+          "log": 4,
+          "alpha": 1,
+          "to": 1,
+          "leq": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/体系/4. 连续正则化流与流匹配的进入.md",
+      "title": "4. 连续正则化流与流匹配的进入",
+      "date": "2026-05-17 14:00:00",
+      "description": "介绍连续正则化流的基本概念，推导CNF的瞬时变量变换公式，过渡到流匹配的向量场学习框架并建立与扩散模型的对应关系。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "b5a1d1dbfe40e65c85e053b456dadc6618eec69fdd93b9c7e7c40fa1199ba837",
+      "math": {
+        "inlineDollarFormulaCount": 12,
+        "displayDollarFormulaCount": 12,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "left": 3,
+          "frac": 5,
+          "nabla": 4,
+          "log": 3,
+          "right": 3,
+          "phi": 6,
+          "mapsto": 1,
+          "partial": 2,
+          "cdot": 2,
+          "bigl": 3,
+          "bigr": 3,
+          "sim": 2,
+          "text": 2,
+          "qquad": 2,
+          "mid": 6,
+          "delta": 1,
+          "mathcal": 1,
+          "mathrm": 1,
+          "theta": 4,
+          "mathbb": 2,
+          "nu": 2,
+          "sigma": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/体系/5. 条件路径的选择与FM loss的推导.md",
+      "title": "5. 条件路径的选择与FM loss的推导",
+      "date": "2026-05-17 14:00:00",
+      "description": "分析流匹配中条件概率路径的设计选择，推导条件流匹配与无条件流匹配损失函数的等价的充分条件，并给出相关证明。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "416f0c47159c81e8107083b8fafb5b4af84627fa89cf8b2f212a2b1cbce0e821",
+      "math": {
+        "inlineDollarFormulaCount": 26,
+        "displayDollarFormulaCount": 40,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "aligned": 3
+        },
+        "commands": {
+          "frac": 22,
+          "partial": 15,
+          "nabla": 9,
+          "cdot": 6,
+          "bigl": 12,
+          "bigr": 12,
+          "qquad": 5,
+          "sim": 10,
+          "mathrm": 6,
+          "phi": 12,
+          "in": 1,
+          "mid": 57,
+          "delta": 2,
+          "nu": 23,
+          "int": 9,
+          "mathbb": 23,
+          "left": 28,
+          "right": 28,
+          "xrightarrow": 1,
+          "text": 6,
+          "log": 3,
+          "mathcal": 9,
+          "top": 2,
+          "star": 1,
+          "theta": 9,
+          "rho": 5,
+          "Longrightarrow": 3,
+          "epsilon": 10,
+          "quad": 1,
+          "alpha": 17,
+          "beta": 18,
+          "dot": 11,
+          "tag": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/体系/总结：Diffusion与CNF的统一.md",
+      "title": "总结：Diffusion与CNF的统一",
+      "date": "2026-05-17 14:00:00",
+      "description": "对扩散模型与连续正则化流进行统一总结，梳理SDE、ODE、CNF与流匹配之间的等价关系与转换路径，形成完整的生成模型理论体系。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "3c0607555635a5c1ce984635376996202754954569cf2d18e45d94a4a725f45a",
+      "math": {
+        "inlineDollarFormulaCount": 0,
+        "displayDollarFormulaCount": 2,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "theta": 2,
+          "approx": 1,
+          "nabla": 1,
+          "log": 1,
+          "frac": 2
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/体系/补充：从离散方向而来的推导.md",
+      "title": "补充：从离散方向而来的推导",
+      "date": "2026-05-17 14:00:00",
+      "description": "从离散扩散模型的DDPM框架出发，推导连续时间极限下的SDE形式并引出分数函数的参数化表示，作为离散到连续视角的补充桥梁。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "75c4e01aa6fed170f8b6251d7e47a63ea19029c3eee32afc1690661511fd9c98",
+      "math": {
+        "inlineDollarFormulaCount": 16,
+        "displayDollarFormulaCount": 12,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "Delta": 21,
+          "left": 3,
+          "right": 3,
+          "sigma": 3,
+          "gamma": 11,
+          "varepsilon": 1,
+          "sqrt": 7,
+          "beta": 13,
+          "epsilon": 4,
+          "frac": 8,
+          "nabla": 7,
+          "log": 3,
+          "partial": 3,
+          "approx": 1,
+          "to": 2
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/条件生成.md",
+      "title": "条件生成",
+      "date": "2026-04-18 16:10:00",
+      "description": "聚焦基于扩散模型的条件生成技术，讨论分类器引导与无分类器引导两种范式及其混合策略，推导CFG中条件与无条件得分函数的线性组合形式。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "cb28f0d2e49e6968f3707a3ec37c379732dfdc44581776e08454bd7ac4638511",
+      "math": {
+        "inlineDollarFormulaCount": 6,
+        "displayDollarFormulaCount": 8,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "aligned": 4
+        },
+        "commands": {
+          "alpha": 8,
+          "beta": 6,
+          "quad": 2,
+          "nabla": 13,
+          "log": 11,
+          "frac": 3,
+          "dot": 3,
+          "underbrace": 1,
+          "text": 1,
+          "hat": 3,
+          "mid": 8,
+          "varnothing": 2,
+          "eta": 2,
+          "theta": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/超分辨率/ResShift.md",
+      "title": "ResShift",
+      "date": "2026-05-17 14:00:00",
+      "description": "解读ResShift论文如何将图像超分辨率建模为从低分辨率到高分辨率的残差扩散过程，分析其偏移扩散的设计动机与高效采样策略。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型",
+        "超分辨率"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "c3c31fbcac1e887e9328bba6d5b36fe767687f336c76903ced670f6ba371c1ec",
+      "math": {
+        "inlineDollarFormulaCount": 100,
+        "displayDollarFormulaCount": 58,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "cases": 1
+        },
+        "commands": {
+          "alpha": 26,
+          "eta": 79,
+          "mid": 20,
+          "mathcal": 19,
+          "left": 21,
+          "kappa": 41,
+          "mathbf": 33,
+          "right": 21,
+          "sqrt": 19,
+          "epsilon": 18,
+          "quad": 4,
+          "sim": 7,
+          "theta": 19,
+          "mu": 6,
+          "Sigma": 3,
+          "propto": 2,
+          "frac": 29,
+          "min": 2,
+          "sum": 2,
+          "mathrm": 2,
+          "Vert": 1,
+          "text": 7,
+          "approx": 3,
+          "hat": 6,
+          "ne": 3,
+          "exp": 3,
+          "log": 2,
+          "sigma": 2,
+          "beta": 2,
+          "bar": 2,
+          "to": 6,
+          "cdots": 1,
+          "in": 1,
+          "mathbb": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/超分辨率/SR3.md",
+      "title": "SR3",
+      "date": "2026-05-17 14:00:00",
+      "description": "剖析SR3论文将条件扩散模型应用于图像超分辨率的方法架构，分析低分辨率图像作为条件输入时的特征融合策略与训练细节。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型",
+        "超分辨率"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "a67468c220a2046728698e018447a3b7281f04cb656673e87a5acb0d25c33fe2",
+      "math": {
+        "inlineDollarFormulaCount": 40,
+        "displayDollarFormulaCount": 9,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "mathbf": 66,
+          "mid": 10,
+          "mathcal": 7,
+          "sqrt": 16,
+          "beta": 10,
+          "bar": 16,
+          "alpha": 21,
+          "boldsymbol": 16,
+          "epsilon": 12,
+          "quad": 1,
+          "sim": 1,
+          "frac": 13,
+          "tilde": 6,
+          "mu": 8,
+          "left": 4,
+          "right": 4,
+          "theta": 12,
+          "mathbb": 1,
+          "gamma": 5,
+          "sigma": 1,
+          "Delta": 5,
+          "texttt": 1,
+          "cdot": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/流匹配与扩散模型/超分辨率/UPSR.md",
+      "title": "UPSR",
+      "date": "2026-05-17 14:00:00",
+      "description": "分析UPSR如何利用预训练扩散模型的先验知识实现盲超分辨率，讨论其潜在空间策略与退化估计器的协同设计思路。",
+      "tags": [
+        "深度学习",
+        "流匹配与扩散模型"
+      ],
+      "categories": [
+        "深度学习",
+        "流匹配与扩散模型",
+        "超分辨率"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "24e3b7e56507b5febd440e979c4eb4792cc894c15950ddb52058ed839b91fa57",
+      "math": {
+        "inlineDollarFormulaCount": 34,
+        "displayDollarFormulaCount": 11,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "cases": 1
+        },
+        "commands": {
+          "epsilon": 4,
+          "psi": 17,
+          "hat": 2,
+          "frac": 9,
+          "mid": 6,
+          "mathcal": 5,
+          "alpha": 8,
+          "kappa": 4,
+          "mathbf": 4,
+          "left": 4,
+          "eta": 10,
+          "right": 4,
+          "theta": 3,
+          "sum": 1,
+          "lambda": 2,
+          "boldsymbol": 5,
+          "text": 3,
+          "le": 2,
+          "to": 2,
+          "cdot": 4,
+          "in": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/线性回归/LossSumExp技巧（LSE）.md",
+      "title": "LossSumExp技巧（LSE）",
+      "date": "2026-02-08 13:00:00",
+      "description": "解释Log-Sum-Exp数值稳定技巧的数学原理，分析Softmax计算中指数溢出问题如何通过减去最大值得到缓解，是深度学习中的经典数值技巧。",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ],
+      "categories": [
+        "深度学习",
+        "线性回归"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "d73b19bfa027a06a7af5bfe8e21dfc62201b0b0529bec7ca826ce2ae75ff8fc4",
+      "math": {
+        "inlineDollarFormulaCount": 5,
+        "displayDollarFormulaCount": 5,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {
+          "log": 7,
+          "sum": 8,
+          "quad": 1,
+          "text": 1,
+          "tilde": 3,
+          "frac": 3
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/线性回归/动量法.md",
+      "title": "动量法",
+      "date": "2026-02-08 13:00:00",
+      "description": "推导动量法如何通过累积历史梯度来加速SGD收敛，分析指数加权移动平均的作用机理以及动量参数β的选择对优化轨迹的影响。",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ],
+      "categories": [
+        "深度学习",
+        "线性回归"
+      ],
+      "mathjaxRaw": "true",
+      "mathEnabled": true,
+      "normalizedBodySha256": "fd6362316c15512ebf81783481e268c754f363b42f6e2e4782707ea680308e62",
+      "math": {
+        "inlineDollarFormulaCount": 21,
+        "displayDollarFormulaCount": 2,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {
+          "aligned": 1
+        },
+        "commands": {
+          "mathbf": 35,
+          "mu": 6,
+          "eta": 8,
+          "sum": 1,
+          "tau": 3,
+          "nabla": 1,
+          "in": 1,
+          "text": 4,
+          "neq": 1
+        }
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/线性回归/整理一下softmax回归实现中训练部分代码的思路.md",
+      "title": "整理一下softmax回归实现中训练部分代码的思路",
+      "date": "2026-02-08 13:00:00",
+      "description": "以Softmax回归为例梳理深度学习模型训练代码的标准范式，包括数据加载、模型定义、损失计算与反向传播四个核心步骤。",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ],
+      "categories": [
+        "深度学习",
+        "线性回归"
+      ],
+      "mathjaxRaw": true,
+      "mathEnabled": true,
+      "normalizedBodySha256": "0cad5e27b15b767cdee0d26ce72b4bb70c8f060e04cc709a0feff793d9dc6fb9",
+      "math": {
+        "inlineDollarFormulaCount": 0,
+        "displayDollarFormulaCount": 0,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {}
+      }
+    },
+    {
+      "sourceRelative": "_posts/深度学习/线性回归/随机梯度下降.md",
+      "title": "随机梯度下降",
+      "date": "2026-02-08 13:00:00",
+      "description": "从梯度下降的基本原理出发，对比批量梯度下降与随机梯度下降的收敛行为和计算效率，讨论学习率调度与随机梯度的噪声特性。",
+      "tags": [
+        "深度学习",
+        "线性回归"
+      ],
+      "categories": [
+        "深度学习",
+        "线性回归"
+      ],
+      "mathjaxRaw": "true",
+      "mathEnabled": true,
+      "normalizedBodySha256": "a1f3a83c8ddacfca1c09d63a87eecea7f905662e75eb263a09423c2b672ac01f",
+      "math": {
+        "inlineDollarFormulaCount": 0,
+        "displayDollarFormulaCount": 0,
+        "parenthesesFormulaCount": 0,
+        "bracketFormulaCount": 0,
+        "unclosed": {
+          "inlineDollar": 0,
+          "displayDollar": 0,
+          "parentheses": 0,
+          "bracket": 0
+        },
+        "environments": {},
+        "commands": {}
+      }
+    }
+  ],
+  "summary": {
+    "htmlCount": 81,
+    "assetCount": 48,
+    "postCount": 30,
+    "mathPostCount": 29,
+    "kinds": {
+      "article": 30,
+      "about": 1,
+      "archive": 16,
+      "category": 14,
+      "home": 1,
+      "page": 3,
+      "tag": 16
+    },
+    "math": {
+      "inlineDollarFormulaCount": 854,
+      "displayDollarFormulaCount": 468,
+      "parenthesesFormulaCount": 0,
+      "bracketFormulaCount": 0,
+      "unclosedFormulaCount": 0
+    },
+    "mathjaxRawTypes": {
+      "null": 1,
+      "boolean": 25,
+      "string": 4,
+      "number": 0,
+      "other": 0
+    }
+  }
+}
