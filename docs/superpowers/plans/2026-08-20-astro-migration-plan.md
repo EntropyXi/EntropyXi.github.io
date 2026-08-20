@@ -791,19 +791,19 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 
 任务：
 
-- [ ] 定义内容 collection schema。
-- [ ] 编写幂等 `migrate-content.ts`，只从 `source/_posts/**/*.md` 读取，排除隐藏目录。
-- [ ] 统一日期为带 `+08:00` 的 ISO 8601。
-- [ ] 逐篇比较旧站渲染日期与新值，证明补 `+08:00` 符合旧站语义；差异逐篇记录，不凭假设批量修正。
-- [ ] 统一 `mathjax` 为 `math` 布尔值。
-- [ ] 为每篇文章生成并冻结 legacy permalink。
-- [ ] 删除或忽略 `<!-- more -->`，保留 `description`。
-- [ ] 保持 Markdown 正文、公式和引用内容不变；只有数学 ADR 明确批准的分隔符归一化可加入差异白名单。
-- [ ] 把现有有效图片迁到 `astro-public/<旧资源 pathname>` 并修正引用，保持资源 URL 等价。
-- [ ] 对缺失 Obsidian 图片生成阻塞报告，逐项补资源或明确删除引用。
-- [ ] 确认 `体系框架图.jpg` 的归属。
-- [ ] 建立 content audit 并让错误信息定位到文件和字段。
-- [ ] 比较统一 LF、剔除 frontmatter 与 `<!-- more -->` 后的正文哈希；若数学 ADR 批准分隔符归一化，脚本必须把该类差异单独列出，其他差异一律阻塞。
+- [x] 定义内容 collection schema。
+- [x] 编写幂等 `migrate-content.ts`，只从 `source/_posts/**/*.md` 读取，排除隐藏目录。
+- [x] 统一日期为带 `+08:00` 的 ISO 8601。
+- [x] 逐篇比较旧站渲染日期与新值，证明补 `+08:00` 符合旧站语义；差异逐篇记录，不凭假设批量修正。
+- [x] 统一 `mathjax` 为 `math` 布尔值。
+- [x] 为每篇文章生成并冻结 legacy permalink。
+- [x] 删除或忽略 `<!-- more -->`，保留 `description`。
+- [x] 保持 Markdown 正文、公式和引用内容不变；只有数学 ADR 明确批准的分隔符归一化可加入差异白名单。
+- [x] 把现有有效图片迁到 `astro-public/<旧资源 pathname>` 并修正引用，保持资源 URL 等价。
+- [x] 对缺失 Obsidian 图片生成阻塞报告，逐项补资源或明确删除引用。
+- [x] 确认 `体系框架图.jpg` 的归属。
+- [x] 建立 content audit 并让错误信息定位到文件和字段。
+- [x] 比较统一 LF、剔除 frontmatter 与 `<!-- more -->` 后的正文哈希；若数学 ADR 批准分隔符归一化，脚本必须把该类差异单独列出，其他差异一律阻塞。
 
 退出条件：30 篇内容全部通过 schema，资源无悬空引用，permalink 全局唯一且等于旧 URL manifest。
 
