@@ -72,3 +72,25 @@
   color: var(--color-muted);
   margin: 0 0 1.5rem;
 }
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-form input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.search-results .post-card a {
+  color: var(--color-accent);
+  font-weight: 600;
+}

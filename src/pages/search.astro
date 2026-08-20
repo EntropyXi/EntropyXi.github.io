@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/styles/home.css";
+---
+
+<BaseLayout title="搜索" description="搜索文章">
+  <h1 class="page-title">搜索</h1>
+  <form class="search-form" role="search" onsubmit="return false">
+    <label for="search-input">搜索文章</label>
+    <input
+      id="search-input"
+      type="search"
+      autocomplete="off"
+      placeholder="输入中文或英文关键词"
+    />
+  </form>
+  <ul class="search-results post-list" aria-live="polite"></ul>
+</BaseLayout>
+
+<script>
+  const input = document.getElementById("search-input") as HTMLInputElement;
+  const results = document.querySelector(".search-results") as HTMLUListElement;
+  let debounce = 0;
+
+  async function runSearch(query: string): Promise<void> {
+    results.replaceChildren();
+    if (query.trim() === "") return;
+    const pagefindUrl = "/pagefind/pagefind.js";
+    const pagefind = await import(/* -ignore */ pagefindUrl);
+    const search = await pagefind.search(query.trim());
+    if (search.results.length === 0) {
+      const item = document.createElement("li");
+      item.className = "post-card";
+      item.textContent = "没有找到相关文章。";
+      results.appendChild(item);
+      return;
+    }
+    for (const result of search.results) {
+      const data = await result.data();
+      const item = document.createElement("li");
+      item.className = "post-card";
+      const link = document.createElement("a");
+      link.href = data.url;
+      link.textContent = data.meta?.title ?? data.url;
+      const excerpt = document.createElement("p");
+      excerpt.className = "post-card-description";
+      excerpt.innerHTML = data.excerpt ?? "";
+      item.appendChild(link);
+      item.appendChild(excerpt);
+      results.appendChild(item);
+    }
+  }
+
+  input.addEventListener("input", () => {
+    window.clearTimeout(debounce);
+    debounce = window.setTimeout(() => void runSearch(input.value), 250);
+  });
+</script>

@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "preview": "astro preview",
-    "build": "npm run build:site",
+    "build": "npm run build:site && npm run build:search",
     "build:site": "npm run copy:vendor && astro build",
-    "check": "npm run format:check && npm run lint && npm run check:types && npm run audit:content && npm run test:unit -- --run && npm run test:e2e",
+    "check": "npm run format:check && npm run lint && npm run check:types && npm run audit:content && npm run test:unit -- --run && npm run test:e2e && npm run audit:output",
     "check:types": "astro check",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
@@ -23,7 +23,9 @@
     "audit:frontmatter": "node scripts/audit-frontmatter.js",
     "copy:vendor": "tsx scripts/copy-vendor-assets.ts",
     "migrate:content": "tsx scripts/migrate-content.ts",
-    "audit:content": "tsx scripts/audit-content.ts"
+    "audit:content": "tsx scripts/audit-content.ts",
+    "build:search": "pagefind --site dist",
+    "audit:output": "tsx scripts/audit-output.ts"
   },
   "hexo": {
     "version": "8.1.1"
@@ -60,6 +62,7 @@
     "eslint": "^10.8.1",
     "eslint-plugin-astro": "^1.7.0",
     "gray-matter": "^4.0.3",
+    "pagefind": "^1.5.2",
     "postcss-html": "^2.0.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
