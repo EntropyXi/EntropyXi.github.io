@@ -752,17 +752,17 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 
 任务：
 
-- [ ] 确认工作树干净并记录当前 commit。
-- [ ] 创建 `codex/astro-migration` 分支。
-- [ ] 运行现有 `npm run check`，保存通过结果。
-- [ ] 生成旧站 manifest：全部文章、分页、归档年月、分类、标签、静态资源、`search.xml`、RSS 与 Sitemap URL，以及每页 canonical、title、description、渲染日期、分类和标签。
-- [ ] 用生产站爬取结果与本地 Hexo manifest 交叉核对，冻结真实的百分号编码、空格、全角标点、大小写、重定向和尾斜杠；不一致时以生产可访问行为为准并记录原因。
-- [ ] 审计 30 篇 frontmatter 是否具备 title、description、date、tags、categories；缺字段不得静默合成，必须生成逐篇人工确认清单。
-- [ ] 扫描全部数学分隔符和环境，确认 `\(...\)`、`\[...\]` 的真实使用情况并生成公式夹具输入。
-- [ ] 选取首页、归档、分类、标签、关于和 5 篇复杂公式文章，保存基准截图。
-- [ ] 记录当前 Giscus 配置、搜索、RSS、Sitemap 与部署行为。
-- [ ] 标记 Hexo 可回滚点，例如 `pre-astro-migration`。
-- [ ] 在本阶段不得改变生产部署。
+- [x] 确认工作树干净并记录当前 commit。
+- [x] 创建 `codex/astro-migration` 分支。
+- [x] 运行现有 `npm run check`，保存通过结果。
+- [x] 生成旧站 manifest：全部文章、分页、归档年月、分类、标签、静态资源、`search.xml`、RSS 与 Sitemap URL，以及每页 canonical、title、description、渲染日期、分类和标签。
+- [x] 用生产站爬取结果与本地 Hexo manifest 交叉核对，冻结真实的百分号编码、空格、全角标点、大小写、重定向和尾斜杠；不一致时以生产可访问行为为准并记录原因。
+- [x] 审计 30 篇 frontmatter 是否具备 title、description、date、tags、categories；缺字段不得静默合成，必须生成逐篇人工确认清单。
+- [x] 扫描全部数学分隔符和环境，确认 `\(...\)`、`\[...\]` 的真实使用情况并生成公式夹具输入。
+- [x] 选取首页、归档、分类、标签、关于和 5 篇复杂公式文章，保存基准截图。
+- [x] 记录当前 Giscus 配置、搜索、RSS、Sitemap 与部署行为。
+- [x] 标记 Hexo 可回滚点，例如 `pre-astro-migration`。
+- [x] 在本阶段不得改变生产部署。
 
 退出条件：旧站可重复构建，URL 清单与截图基准已入库，回滚点可定位。
 

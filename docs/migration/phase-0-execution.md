@@ -23,7 +23,8 @@
   `docs/migration/baseline/hexo-next/`）
 - [x] 记录当前 Giscus 配置、搜索、RSS、Sitemap 与部署行为。
   （本轮完成：`docs/migration/baseline/legacy-behavior-freeze.md`）
-- [ ] 标记 Hexo 可回滚点 `pre-astro-migration`。
+- [x] 标记 Hexo 可回滚点 `pre-astro-migration`。
+  （本轮完成：annotated tag 指向 `0780179a4e3054eb532dc5868c6929306fb0cfe5`）
 - [x] 本阶段不得改变生产部署。（未修改 `.github/workflows/deploy.yml` 与 `source` 分支）
 
 ## 此前已有产物的核对结果
