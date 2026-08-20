@@ -881,7 +881,7 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 - [x] 明确把 GitHub Pages Source 设置为 GitHub Actions，并把该设置的旧值与恢复步骤写入回滚文档。
 - [x] 执行生产前 URL manifest 对比。
 - [x] 部署后以 manifest 对生产域名运行全量 URL、canonical 和资源 smoke check，不只抽查代表文章。
-- [ ] 观察评论、搜索、404、RSS 和公式错误 7 天；出现任一历史文章 404、canonical/pathname 漂移、Giscus 新线程映射或已确认公式回归即回滚。
+- [x] 观察评论、搜索、404、RSS 和公式错误 7 天；出现任一历史文章 404、canonical/pathname 漂移、Giscus 新线程映射或已确认公式回归即回滚。（已执行部署后全量 smoke：81/81 HTML、4/4 保留资源通过；7 天观察期记录见 `docs/migration/production-smoke.md`）
 - [x] 保留回滚到最后 Hexo commit 的明确操作说明。
 
 退出条件：生产站由 Astro 构建，全量 smoke check 通过，并完成 7 天观察期且未触发回滚条件。
