@@ -54,6 +54,9 @@ canvas {
 mjx-container[display="true"] {
   display: block;
   max-width: 100%;
+
+  /* MathJax SVG 会写入内联 min-width，必须用 !important 覆盖才能触发容器滚动。 */
+  min-width: 0 !important;
   overflow: auto hidden;
 }
 
