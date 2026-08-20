@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import PaginationNav from "@/components/content/PaginationNav.astro";
+import PostList from "@/components/content/PostList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { postsInYear, sortPostsByDateDesc } from "@/lib/content/aggregate";
+import { paginate, totalPages } from "@/lib/routing/pagination";
+import "@/styles/home.css";
+
+export async function getStaticPaths() {
+  const allPosts = sortPostsByDateDesc(
+    await getCollection("blog", ({ data }) => data.draft !== true),
+  );
+  const routes = [];
+  for (const year of new Set(
+    allPosts.map((post) => post.data.date.slice(0, 4)),
+  )) {
+    const posts = sortPostsByDateDesc(postsInYear(allPosts, year));
+    const pages = totalPages(posts.length);
+    for (let page = 2; page <= pages; page += 1) {
+      routes.push({
+        params: { year, page: String(page) },
+        props: { allPosts, year, page },
+      });
+    }
+  }
+  return routes;
+}
+
+const { allPosts, year, page } = Astro.props;
+const posts = sortPostsByDateDesc(postsInYear(allPosts, year));
+const pages = totalPages(posts.length);
+const pagePosts = paginate(posts, page);
+const href = (pageNumber: number) =>
+  pageNumber === 1
+    ? `/archives/${year}/`
+    : `/archives/${year}/page/${pageNumber}/`;
+---
+
+<BaseLayout
+  title={`归档 ${year} 第 ${page} 页`}
+  description={`${year} 年文章归档`}
+>
+  <h1 class="page-title">{year} 年归档</h1>
+  <PostList posts={pagePosts} />
+  <PaginationNav currentPage={page} pages={pages} href={href} />
+</BaseLayout>

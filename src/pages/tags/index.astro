@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { buildTagPath } from "@/lib/content/aggregate";
+
+const posts = await getCollection("blog", ({ data }) => data.draft !== true);
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+---
+
+<BaseLayout title="标签" description="文章标签">
+  <h1 class="page-title">标签</h1>
+  <ul class="post-list">
+    {
+      tags.map((tag) => (
+        <li class="post-card">
+          <a href={buildTagPath(tag)}>{tag}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

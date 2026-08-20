@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import PaginationNav from "@/components/content/PaginationNav.astro";
+import PostList from "@/components/content/PostList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { sortPostsByDateDesc } from "@/lib/content/aggregate";
+import { paginate, totalPages } from "@/lib/routing/pagination";
+import "@/styles/home.css";
+
+const posts = sortPostsByDateDesc(
+  await getCollection("blog", ({ data }) => data.draft !== true),
+);
+const pages = totalPages(posts.length);
+const pagePosts = paginate(posts, 1);
+const href = (page: number) =>
+  page === 1 ? "/archives/" : `/archives/page/${page}/`;
+---
+
+<BaseLayout title="归档" description="全部文章归档">
+  <h1 class="page-title">归档</h1>
+  <PostList posts={pagePosts} />
+  <PaginationNav currentPage={1} pages={pages} href={href} />
+</BaseLayout>

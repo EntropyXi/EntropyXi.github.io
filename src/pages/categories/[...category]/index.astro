@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import PaginationNav from "@/components/content/PaginationNav.astro";
+import PostList from "@/components/content/PostList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  buildCategoryPath,
+  postsInCategory,
+  sortPostsByDateDesc,
+} from "@/lib/content/aggregate";
+import { paginate, totalPages } from "@/lib/routing/pagination";
+import "@/styles/home.css";
+
+export async function getStaticPaths() {
+  const allPosts = sortPostsByDateDesc(
+    await getCollection("blog", ({ data }) => data.draft !== true),
+  );
+  const paths = new Set<string>();
+  for (const post of allPosts) {
+    for (let index = 1; index <= post.data.categories.length; index += 1) {
+      paths.add(post.data.categories.slice(0, index).join("/"));
+    }
+  }
+  return [...paths].map((path) => ({
+    params: { category: path },
+    props: { allPosts, path },
+  }));
+}
+
+const { allPosts, path } = Astro.props;
+const segments = path.split("/");
+const posts = sortPostsByDateDesc(postsInCategory(allPosts, segments));
+const pages = totalPages(posts.length);
+const pagePosts = paginate(posts, 1);
+const basePath = buildCategoryPath(segments);
+const href = (page: number) =>
+  page === 1 ? basePath : `${basePath}page/${page}/`;
+---
+
+<BaseLayout title={`分类：${path}`} description={`分类：${path}`}>
+  <h1 class="page-title">分类：{path}</h1>
+  <PostList posts={pagePosts} />
+  <PaginationNav currentPage={1} pages={pages} href={href} />
+</BaseLayout>

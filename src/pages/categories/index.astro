@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { buildCategoryPath } from "@/lib/content/aggregate";
+
+const posts = await getCollection("blog", ({ data }) => data.draft !== true);
+const categoryPaths = [
+  ...new Set(
+    posts.flatMap((post) =>
+      post.data.categories.map((_, index, array) =>
+        array.slice(0, index + 1).join("/"),
+      ),
+    ),
+  ),
+].sort();
+---
+
+<BaseLayout title="分类" description="文章分类">
+  <h1 class="page-title">分类</h1>
+  <ul class="post-list">
+    {
+      categoryPaths.map((path) => (
+        <li class="post-card">
+          <a href={buildCategoryPath(path.split("/"))}>{path}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
