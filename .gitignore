@@ -4,6 +4,12 @@ db.json
 *.log
 node_modules/
 public/
+dist/
+.astro/
+test-results/
+playwright-report/
+blob-report/
+coverage/
 .deploy*/
 _multiconfig.yml
 .obsidian/
