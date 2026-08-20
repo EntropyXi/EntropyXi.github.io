@@ -16,15 +16,15 @@
 - [x] 运行现有 `npm run check`，保存通过结果。（本轮复核）
 - [x] 生成旧站 manifest。（此前已完成：`tests/fixtures/legacy-baseline.json`）
 - [x] 用生产站爬取结果与本地 Hexo manifest 交叉核对。（此前已完成：
-  `docs/migration/baseline/production-verification.json`）
+      `docs/migration/baseline/production-verification.json`）
 - [x] 审计 30 篇 frontmatter。（此前已建立 `scripts/audit-frontmatter.js`，本轮复核通过）
 - [x] 扫描全部数学分隔符和环境。（此前已完成，结果固化在 legacy baseline 的 `summary.math`）
 - [x] 保存首页、归档、分类、标签、关于和 5 篇复杂公式文章基准截图。（此前已完成：
-  `docs/migration/baseline/hexo-next/`）
+      `docs/migration/baseline/hexo-next/`）
 - [x] 记录当前 Giscus 配置、搜索、RSS、Sitemap 与部署行为。
-  （本轮完成：`docs/migration/baseline/legacy-behavior-freeze.md`）
+      （本轮完成：`docs/migration/baseline/legacy-behavior-freeze.md`）
 - [x] 标记 Hexo 可回滚点 `pre-astro-migration`。
-  （本轮完成：annotated tag 指向 `0780179a4e3054eb532dc5868c6929306fb0cfe5`）
+      （本轮完成：annotated tag 指向 `0780179a4e3054eb532dc5868c6929306fb0cfe5`）
 - [x] 本阶段不得改变生产部署。（未修改 `.github/workflows/deploy.yml` 与 `source` 分支）
 
 ## 此前已有产物的核对结果

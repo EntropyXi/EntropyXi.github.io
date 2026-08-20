@@ -37,10 +37,12 @@
 ### Task 1: Add a failing generated-site verifier
 
 **Files:**
+
 - Create: `scripts/verify-build.js`
 - Modify: `package.json`
 
 **Interfaces:**
+
 - Consumes: generated files under `public/`.
 - Produces: exit code `0` when required pages and metadata are valid; non-zero with one line per violation.
 
@@ -119,12 +121,14 @@ git commit -m "test: detect broken generated blog output"
 ### Task 2: Remove the conflicting MathJax initialization
 
 **Files:**
+
 - Modify: `source/_data/post-body-end.njk:1-11`
 - Modify: `_config.yml:120-130`
 - Modify: `_config.next.yml:150-158`
 - Modify: `source/_data/styles.styl`
 
 **Interfaces:**
+
 - Consumes: posts marked `mathjax: true`.
 - Produces: NexT-owned MathJax loading with no early replacement of `window.MathJax`.
 
@@ -214,11 +218,13 @@ git commit -m "fix: restore NexT MathJax rendering"
 ### Task 3: Remove inline CSS from posts and repair descriptions
 
 **Files:**
+
 - Modify: all `source/_posts/**/*.md` files containing `<style>`.
 - Modify: `scaffolds/post.md`.
 - Modify: `scripts/verify-build.js`.
 
 **Interfaces:**
+
 - Consumes: global formula styles from `source/_data/styles.styl`.
 - Produces: clean page descriptions and a reusable post template.
 
@@ -248,16 +254,15 @@ Make `scaffolds/post.md` begin with:
 
 ```yaml
 ---
-title: {{ title }}
-date: {{ date }}
-updated: {{ date }}
+title: { { title } }
+date: { { date } }
+updated: { { date } }
 description:
 tags: []
 categories: []
 mathjax: true
 comments: true
 ---
-
 <!-- more -->
 ```
 
@@ -287,10 +292,12 @@ git commit -m "fix: generate clean post descriptions"
 ### Task 4: Stop publishing the series README as an article
 
 **Files:**
+
 - Move: `source/_posts/深度学习/流匹配与扩散模型/体系/README.md` to `docs/content/flow-matching-series.md`
 - Modify: `scripts/verify-build.js`
 
 **Interfaces:**
+
 - Consumes: internal series notes.
 - Produces: 22 intentional posts and no `/README/` permalink.
 
@@ -337,11 +344,13 @@ git commit -m "fix: exclude internal series README from posts"
 ### Task 5: Validate and normalize frontmatter
 
 **Files:**
+
 - Create: `scripts/audit-frontmatter.js`
 - Modify: `package.json`
 - Modify: affected `source/_posts/**/*.md`.
 
 **Interfaces:**
+
 - Consumes: YAML frontmatter from every Markdown post.
 - Produces: errors for missing title/date/description/categories/tags, combined comma-like tag strings, and future dates.
 
@@ -354,42 +363,47 @@ Expected: `package.json` and `package-lock.json` record `gray-matter` under deve
 - [x] **Step 2: Create `scripts/audit-frontmatter.js`**
 
 ```js
-const fs = require('node:fs');
-const path = require('node:path');
-const matter = require('gray-matter');
+const fs = require("node:fs");
+const path = require("node:path");
+const matter = require("gray-matter");
 
-const root = path.resolve(__dirname, '..', 'source', '_posts');
+const root = path.resolve(__dirname, "..", "source", "_posts");
 const errors = [];
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(full);
-    else if (entry.name.endsWith('.md')) validate(full);
+    else if (entry.name.endsWith(".md")) validate(full);
   }
 }
 
 function validate(file) {
-  const { data } = matter(fs.readFileSync(file, 'utf8'));
+  const { data } = matter(fs.readFileSync(file, "utf8"));
   const relative = path.relative(root, file);
-  for (const key of ['title', 'date', 'description', 'tags', 'categories']) {
-    if (data[key] === undefined || data[key] === '') errors.push(`${relative}: missing ${key}`);
+  for (const key of ["title", "date", "description", "tags", "categories"]) {
+    if (data[key] === undefined || data[key] === "")
+      errors.push(`${relative}: missing ${key}`);
   }
-  if (!Array.isArray(data.tags)) errors.push(`${relative}: tags must be a YAML list`);
-  if (!Array.isArray(data.categories)) errors.push(`${relative}: categories must be a YAML list`);
+  if (!Array.isArray(data.tags))
+    errors.push(`${relative}: tags must be a YAML list`);
+  if (!Array.isArray(data.categories))
+    errors.push(`${relative}: categories must be a YAML list`);
   for (const tag of Array.isArray(data.tags) ? data.tags : []) {
-    if (/[,，]/.test(String(tag))) errors.push(`${relative}: combined tag "${tag}"`);
+    if (/[,，]/.test(String(tag)))
+      errors.push(`${relative}: combined tag "${tag}"`);
   }
   const date = new Date(data.date);
-  if (!Number.isNaN(date.valueOf()) && date > new Date()) errors.push(`${relative}: future date ${data.date}`);
+  if (!Number.isNaN(date.valueOf()) && date > new Date())
+    errors.push(`${relative}: future date ${data.date}`);
 }
 
 walk(root);
 if (errors.length) {
-  errors.forEach(error => console.error(`FRONTMATTER: ${error}`));
+  errors.forEach((error) => console.error(`FRONTMATTER: ${error}`));
   process.exit(1);
 }
-console.log('FRONTMATTER: all posts passed');
+console.log("FRONTMATTER: all posts passed");
 ```
 
 - [x] **Step 3: Register it**
@@ -429,10 +443,12 @@ git commit -m "chore: validate and normalize post metadata"
 ### Task 6: Make the homepage useful for scanning
 
 **Files:**
+
 - Modify: `_config.yml:73-76`
 - Modify: `source/_posts/**/*.md` around `<!-- more -->`.
 
 **Interfaces:**
+
 - Consumes: explicit descriptions and curated pre-`<!-- more -->` introductions.
 - Produces: six to eight compact, informative article cards per homepage page.
 
@@ -446,7 +462,7 @@ Change `_config.yml`:
 
 ```yaml
 index_generator:
-  path: ''
+  path: ""
   per_page: 8
   order_by: -date
 ```
@@ -473,11 +489,13 @@ git commit -m "content: add useful homepage excerpts"
 ### Task 7: Make update and publication policy explicit
 
 **Files:**
+
 - Modify: `_config.yml:63,101`
 - Modify: `scaffolds/post.md`
 - Modify: affected `source/_posts/**/*.md`.
 
 **Interfaces:**
+
 - Consumes: explicit `date` and `updated` frontmatter.
 - Produces: deterministic dates across machines and no accidental future publication.
 
@@ -512,10 +530,12 @@ git commit -m "fix: make post dates deterministic"
 ### Task 8: Make CI deterministic and enforce verification
 
 **Files:**
+
 - Modify: `.github/workflows/deploy.yml:27-48`
 - Modify: `package.json` and `package-lock.json` only if dependency ownership changes.
 
 **Interfaces:**
+
 - Consumes: committed lockfile and `npm run check`.
 - Produces: Pages artifact only after all validation passes.
 
@@ -560,10 +580,12 @@ git commit -m "ci: make Hexo deployment reproducible"
 ### Task 9: Resolve misleading traffic counters
 
 **Files:**
+
 - Modify: `_config.next.yml:225-230`
 - Optionally modify: `README.md` if the counter is intentionally disabled.
 
 **Interfaces:**
+
 - Consumes: observed production counter values on `https://entropyxi.github.io`.
 - Produces: credible statistics or no statistics.
 
@@ -599,12 +621,14 @@ git commit -m "fix: show only credible traffic statistics"
 ### Task 10: Remove unused theme copies safely
 
 **Files:**
+
 - Delete after explicit review: tracked `themes/anzhiyu/`
 - Delete or ignore after explicit review: untracked `themes/themes/`, `themes/landscape/`
 - Modify: `.gitignore`
 - Modify: `README.md`
 
 **Interfaces:**
+
 - Consumes: confirmed active theme `next` from npm.
 - Produces: a repository with no misleading inactive theme source.
 
@@ -661,9 +685,11 @@ git commit -m "chore: remove inactive theme copies"
 ### Task 11: Final end-to-end acceptance
 
 **Files:**
+
 - Modify only files needed to correct failures found here.
 
 **Interfaces:**
+
 - Consumes: all prior tasks.
 - Produces: release-ready source branch without deploying it.
 
@@ -695,7 +721,7 @@ For homepage and two representative posts, inspect `title`, `meta description`, 
 
 Update `README.md` with:
 
-```markdown
+````markdown
 ## Local validation
 
 ```bash
@@ -703,16 +729,18 @@ npm ci
 npm run check
 npm run server
 ```
+````
 
 `npm run check` validates frontmatter, generates the site, and inspects generated HTML for known regressions.
-```
+
+````
 
 - [x] **Step 6: Commit**
 
 ```bash
 git add README.md
 git commit -m "docs: document blog validation workflow"
-```
+````
 
 ## Release Gate
 

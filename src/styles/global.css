@@ -32,14 +32,8 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    'PingFang SC',
-    'Microsoft YaHei',
-    'Helvetica Neue',
-    Helvetica,
-    Arial,
-    sans-serif;
+    -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.7;
   overflow-wrap: break-word;
 }

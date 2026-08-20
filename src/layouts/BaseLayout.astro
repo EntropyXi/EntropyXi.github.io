@@ -1,7 +1,7 @@
 ---
-import '@/styles/global.css';
-import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '@/data/site';
-import { buildPageTitle } from '@/lib/seo/page-title';
+import "@/styles/global.css";
+import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from "@/data/site";
+import { buildPageTitle } from "@/lib/seo/page-title";
 
 interface Props {
   title: string;
@@ -10,7 +10,8 @@ interface Props {
 
 const { title, description } = Astro.props;
 const pageTitle = buildPageTitle(title);
-const pageDescription = description.trim() === '' ? SITE_DESCRIPTION : description.trim();
+const pageDescription =
+  description.trim() === "" ? SITE_DESCRIPTION : description.trim();
 ---
 
 <!doctype html>
@@ -35,7 +36,9 @@ const pageDescription = description.trim() === '' ? SITE_DESCRIPTION : descripti
       <slot />
     </main>
     <footer class="site-footer">
-      <p>© 2026 EntropyXi · <a href="https://github.com/EntropyXi">GitHub</a></p>
+      <p>
+        © 2026 EntropyXi · <a href="https://github.com/EntropyXi">GitHub</a>
+      </p>
     </footer>
   </body>
 </html>

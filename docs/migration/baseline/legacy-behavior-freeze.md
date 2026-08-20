@@ -10,19 +10,19 @@
 - 渲染条件：仅 `page.comments !== false` 的文章页输出评论容器。
 - 脚本：`https://giscus.app/client.js`，带 `data-pjax`、`crossorigin="anonymous"`、`async`。
 
-| 参数 | 值 |
-| --- | --- |
-| `data-repo` | `EntropyXi/EntropyXi.github.io` |
-| `data-repo-id` | `R_kgDORLLL8g` |
-| `data-category` | `General` |
-| `data-category-id` | `DIC_kwDORLLL8s4C9O73` |
-| `data-mapping` | `pathname` |
-| `data-strict` | `0` |
-| `data-reactions-enabled` | `1` |
-| `data-emit-metadata` | `0` |
-| `data-input-position` | `top` |
-| `data-theme` | `preferred_color_scheme` |
-| `data-lang` | `zh-CN` |
+| 参数                     | 值                              |
+| ------------------------ | ------------------------------- |
+| `data-repo`              | `EntropyXi/EntropyXi.github.io` |
+| `data-repo-id`           | `R_kgDORLLL8g`                  |
+| `data-category`          | `General`                       |
+| `data-category-id`       | `DIC_kwDORLLL8s4C9O73`          |
+| `data-mapping`           | `pathname`                      |
+| `data-strict`            | `0`                             |
+| `data-reactions-enabled` | `1`                             |
+| `data-emit-metadata`     | `0`                             |
+| `data-input-position`    | `top`                           |
+| `data-theme`             | `preferred_color_scheme`        |
+| `data-lang`              | `zh-CN`                         |
 
 ## 搜索
 

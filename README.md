@@ -6,15 +6,15 @@
 
 ## 技术栈
 
-| 组件 | 说明 |
-|------|------|
-| 静态生成 | Hexo 8 + Pandoc 渲染 Markdown |
-| 主题 | NexT 8 Pisces（双栏布局） |
-| 公式渲染 | MathJax 3 客户端 |
-| 评论 | Giscus（GitHub Discussions） |
-| 搜索 | hexo-generator-searchdb 本地搜索 |
+| 组件     | 说明                                 |
+| -------- | ------------------------------------ |
+| 静态生成 | Hexo 8 + Pandoc 渲染 Markdown        |
+| 主题     | NexT 8 Pisces（双栏布局）            |
+| 公式渲染 | MathJax 3 客户端                     |
+| 评论     | Giscus（GitHub Discussions）         |
+| 搜索     | hexo-generator-searchdb 本地搜索     |
 | 访问统计 | 暂停展示（生产统计数据核实后再启用） |
-| CI/CD | GitHub Actions → GitHub Pages |
+| CI/CD    | GitHub Actions → GitHub Pages        |
 
 ## 写一篇新笔记
 
@@ -52,6 +52,7 @@ categories:
 ```
 
 **格式规范**：
+
 - 行内公式用 `$...$`，块级公式用 `$$...$$`
 - `$$` 块前后各空一行
 - 别用 Unicode `·`（中间点），用 `\cdot`

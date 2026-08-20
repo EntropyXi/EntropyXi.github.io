@@ -40,14 +40,14 @@ git diff --exit-code tests/fixtures/legacy-baseline.json
 
 顶层字段：
 
-| 字段 | 说明 |
-| --- | --- |
-| `schemaVersion` | 基线结构版本，当前为 `1` |
-| `generatedFromCommit` | 生成时 `git rev-parse HEAD` 的结果；不是 Git 仓库时返回 `null` |
-| `html` | `public/` 下所有 HTML 的元数据数组，按 `relativeFile` 排序 |
-| `assets` | `public/` 下非 HTML 文件清单（含 URL、相对路径、字节大小与 SHA-256），按 `relativeFile` 排序 |
-| `posts` | `source/_posts/` 下所有 Markdown 文章的清单，按 `sourceRelative` 排序 |
-| `summary` | 数量与分类汇总 |
+| 字段                  | 说明                                                                                         |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| `schemaVersion`       | 基线结构版本，当前为 `1`                                                                     |
+| `generatedFromCommit` | 生成时 `git rev-parse HEAD` 的结果；不是 Git 仓库时返回 `null`                               |
+| `html`                | `public/` 下所有 HTML 的元数据数组，按 `relativeFile` 排序                                   |
+| `assets`              | `public/` 下非 HTML 文件清单（含 URL、相对路径、字节大小与 SHA-256），按 `relativeFile` 排序 |
+| `posts`               | `source/_posts/` 下所有 Markdown 文章的清单，按 `sourceRelative` 排序                        |
+| `summary`             | 数量与分类汇总                                                                               |
 
 ### HTML 记录字段
 

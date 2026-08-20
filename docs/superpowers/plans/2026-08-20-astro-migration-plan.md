@@ -6,7 +6,7 @@
 项目根目录：`D:\Blog_file`  
 当前生产地址：`https://entropyxi.github.io`  
 目标渲染模式：Astro 静态站点生成（SSG）  
-目标托管平台：GitHub Pages  
+目标托管平台：GitHub Pages
 
 ## 1. 决策摘要
 
@@ -939,21 +939,21 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 
 ## 15. 风险登记表
 
-| 风险 | 概率 | 影响 | 缓解措施 | 阻塞上线 |
-|---|---:|---:|---|---|
-| 中文多层旧 URL 改变 | 中 | 极高 | permalink 冻结、manifest 全量比较、E2E 直访 | 是 |
-| 旧分页/聚合 URL 被 catch-all 遗漏 | 中 | 高 | 线上 manifest、显式分页路由、输出与生产全量检查 | 是 |
-| MathJax 高级公式不兼容 | 高 | 极高 | 公式夹具、30 篇扫描、5 篇视觉基线、保留客户端 MathJax 备选 | 是 |
-| Giscus 因 pathname 变化产生新线程 | 中 | 高 | 路径先验收，保持 trailing slash 和 mapping | 是 |
-| Obsidian 图片缺失 | 已发生 | 中 | 资源审计阻塞、逐项补齐或明确处理 | 是 |
-| Astro/Markdown processor 改变原始 HTML | 中 | 高 | 内容哈希、代表文章 DOM 对比、禁止未审计 raw HTML | 是 |
-| Hexo `public/` 覆盖 Astro 静态源 | 高 | 高 | Astro `publicDir: 'astro-public'`，共存期目录隔离 | 是 |
-| 动画导致低端设备卡顿 | 中 | 中 | CSS/SVG 优先、减少持续动画、性能预算、reduced motion | 否，但阻塞视觉阶段 |
-| ClientRouter 导致脚本重复初始化 | 中 | 高 | 默认使用原生导航，启用前做生命周期专项测试 | 是 |
-| Pagefind 中文结果质量不足 | 中 | 中 | extended build、中文 E2E、保留标签/分类导航 | 否 |
-| GitHub Pages base/canonical 配错 | 低 | 高 | `site` 固定、无 base、部署 smoke test | 是 |
-| 一次性大改难以回滚 | 中 | 高 | 阶段提交、Hexo 基线标签、迁移与视觉分离 | 是 |
-| 第三方依赖升级破坏构建 | 中 | 中 | lockfile、Dependabot/手动单独升级、CI 全量验证 | 否 |
+| 风险                                   |   概率 | 影响 | 缓解措施                                                   | 阻塞上线           |
+| -------------------------------------- | -----: | ---: | ---------------------------------------------------------- | ------------------ |
+| 中文多层旧 URL 改变                    |     中 | 极高 | permalink 冻结、manifest 全量比较、E2E 直访                | 是                 |
+| 旧分页/聚合 URL 被 catch-all 遗漏      |     中 |   高 | 线上 manifest、显式分页路由、输出与生产全量检查            | 是                 |
+| MathJax 高级公式不兼容                 |     高 | 极高 | 公式夹具、30 篇扫描、5 篇视觉基线、保留客户端 MathJax 备选 | 是                 |
+| Giscus 因 pathname 变化产生新线程      |     中 |   高 | 路径先验收，保持 trailing slash 和 mapping                 | 是                 |
+| Obsidian 图片缺失                      | 已发生 |   中 | 资源审计阻塞、逐项补齐或明确处理                           | 是                 |
+| Astro/Markdown processor 改变原始 HTML |     中 |   高 | 内容哈希、代表文章 DOM 对比、禁止未审计 raw HTML           | 是                 |
+| Hexo `public/` 覆盖 Astro 静态源       |     高 |   高 | Astro `publicDir: 'astro-public'`，共存期目录隔离          | 是                 |
+| 动画导致低端设备卡顿                   |     中 |   中 | CSS/SVG 优先、减少持续动画、性能预算、reduced motion       | 否，但阻塞视觉阶段 |
+| ClientRouter 导致脚本重复初始化        |     中 |   高 | 默认使用原生导航，启用前做生命周期专项测试                 | 是                 |
+| Pagefind 中文结果质量不足              |     中 |   中 | extended build、中文 E2E、保留标签/分类导航                | 否                 |
+| GitHub Pages base/canonical 配错       |     低 |   高 | `site` 固定、无 base、部署 smoke test                      | 是                 |
+| 一次性大改难以回滚                     |     中 |   高 | 阶段提交、Hexo 基线标签、迁移与视觉分离                    | 是                 |
+| 第三方依赖升级破坏构建                 |     中 |   中 | lockfile、Dependabot/手动单独升级、CI 全量验证             | 否                 |
 
 ## 16. 回滚策略
 

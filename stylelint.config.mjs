@@ -1,11 +1,11 @@
 // @ts-check
 /** @type {import('stylelint').Config} */
 export default {
-  extends: ['stylelint-config-standard'],
+  extends: ["stylelint-config-standard"],
   overrides: [
     {
-      files: ['**/*.astro'],
-      customSyntax: 'postcss-html',
+      files: ["**/*.astro"],
+      customSyntax: "postcss-html",
     },
   ],
 };
