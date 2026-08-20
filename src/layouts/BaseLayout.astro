@@ -1,0 +1,41 @@
+---
+import '@/styles/global.css';
+import { SITE_DESCRIPTION, SITE_LANG, SITE_TITLE } from '@/data/site';
+import { buildPageTitle } from '@/lib/seo/page-title';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = buildPageTitle(title);
+const pageDescription = description.trim() === '' ? SITE_DESCRIPTION : description.trim();
+---
+
+<!doctype html>
+<html lang={SITE_LANG}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <p class="site-header__title"><a href="/">{SITE_TITLE}</a></p>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="/">首页</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>© 2026 EntropyXi · <a href="https://github.com/EntropyXi">GitHub</a></p>
+    </footer>
+  </body>
+</html>
