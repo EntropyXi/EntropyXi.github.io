@@ -21,7 +21,8 @@
 - [x] 扫描全部数学分隔符和环境。（此前已完成，结果固化在 legacy baseline 的 `summary.math`）
 - [x] 保存首页、归档、分类、标签、关于和 5 篇复杂公式文章基准截图。（此前已完成：
   `docs/migration/baseline/hexo-next/`）
-- [ ] 记录当前 Giscus 配置、搜索、RSS、Sitemap 与部署行为。
+- [x] 记录当前 Giscus 配置、搜索、RSS、Sitemap 与部署行为。
+  （本轮完成：`docs/migration/baseline/legacy-behavior-freeze.md`）
 - [ ] 标记 Hexo 可回滚点 `pre-astro-migration`。
 - [x] 本阶段不得改变生产部署。（未修改 `.github/workflows/deploy.yml` 与 `source` 分支）
 
