@@ -58,16 +58,35 @@ function parseFrontmatter(
 }
 
 function normalizeBodyForHash(body: string): string {
-  return body
-    .replace(/\r\n/g, '\n')
-    .replace(/^<!-- more -->[ \t]*\r?\n?/gm, '')
-    .split('\n')
+  const bs = String.fromCharCode(92);
+  const lines = body
+    .replace(/\r\n/g, "\n")
+    .replace(/^<!-- more -->[ \t]*\r?\n?/gm, "")
+    .split("\n")
+    .map((line) => {
+      const trimmed = line.trimEnd();
+      if (trimmed === "$$" + bs + "begin{equation}") return "$$";
+      return trimmed;
+    })
     .filter((line) => {
       const trimmed = line.trim();
-      return !(trimmed.startsWith('![[[') || (trimmed.startsWith('![[') && trimmed.endsWith(']]')));
-    })
-    .join('\n')
-    .trimEnd();
+      if (trimmed.startsWith("![[[") || (trimmed.startsWith("![[") && trimmed.endsWith("]]"))) return false;
+      if (trimmed === "\\begin{equation}" || trimmed === "\\end{equation}") return false;
+      return true;
+    });
+  const deduped: string[] = [];
+  for (const line of lines) {
+    const prev = deduped[deduped.length - 1]?.trim();
+    const trimmed = line.trim();
+    if ((trimmed === "\\begin{aligned}" && prev === "\\begin{aligned}") || (trimmed === "\\end{aligned}" && prev === "\\end{aligned}")) {
+      continue;
+    }
+    if (trimmed === "\\end{aligned}" && prev?.startsWith("\\tag{")) {
+      continue;
+    }
+    deduped.push(line);
+  }
+  return deduped.join("\n").trimEnd();
 }
 
 function sha256(text: string): string {
