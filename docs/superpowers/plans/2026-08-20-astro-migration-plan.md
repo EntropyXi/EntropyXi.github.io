@@ -832,18 +832,18 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 
 任务：
 
-- [ ] 首页文章列表与静态分页，pathname 与 manifest 逐字节一致。
-- [ ] 归档页及 manifest 中存在的年月/分页路由。
-- [ ] 分类索引、分类详情、层级展示和旧分页路由。
-- [ ] 标签索引、标签详情和旧分页路由。
-- [ ] 关于页迁移。
-- [ ] Pagefind 构建和中文搜索 UI。
-- [ ] 保留 manifest 中的旧 `search.xml` 兼容 URL，但新搜索不依赖该 XML。
-- [ ] Atom/RSS feed。
-- [ ] Sitemap、robots 和 canonical。
-- [ ] 结构化数据与社交分享 metadata。
-- [ ] 完整 404 页面。
-- [ ] 用新实现替代旧 verify-build 的全部能力。
+- [x] 首页文章列表与静态分页，pathname 与 manifest 逐字节一致。
+- [x] 归档页及 manifest 中存在的年月/分页路由。
+- [x] 分类索引、分类详情、层级展示和旧分页路由。
+- [x] 标签索引、标签详情和旧分页路由。
+- [x] 关于页迁移。
+- [x] Pagefind 构建和中文搜索 UI。
+- [x] 保留 manifest 中的旧 `search.xml` 兼容 URL，但新搜索不依赖该 XML。
+- [x] Atom/RSS feed。
+- [x] Sitemap、robots 和 canonical。
+- [x] 结构化数据与社交分享 metadata。
+- [x] 完整 404 页面。
+- [x] 用新实现替代旧 verify-build 的全部能力。
 
 退出条件：站点功能矩阵完成，搜索、RSS、Sitemap 和聚合页通过自动化测试。
 
