@@ -7,7 +7,7 @@
     "preview": "astro preview",
     "build": "npm run build:site",
     "build:site": "npm run copy:vendor && astro build",
-    "check": "npm run format:check && npm run lint && npm run check:types && npm run test:unit -- --run && npm run test:e2e",
+    "check": "npm run format:check && npm run lint && npm run check:types && npm run audit:content && npm run test:unit -- --run && npm run test:e2e",
     "check:types": "astro check",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
@@ -21,7 +21,9 @@
     "legacy:deploy": "hexo deploy",
     "verify": "node scripts/verify-build.js",
     "audit:frontmatter": "node scripts/audit-frontmatter.js",
-    "copy:vendor": "tsx scripts/copy-vendor-assets.ts"
+    "copy:vendor": "tsx scripts/copy-vendor-assets.ts",
+    "migrate:content": "tsx scripts/migrate-content.ts",
+    "audit:content": "tsx scripts/audit-content.ts"
   },
   "hexo": {
     "version": "8.1.1"
@@ -50,6 +52,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@playwright/test": "^1.62.1",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^26.2.0",
     "eslint": "^10.8.1",
     "eslint-plugin-astro": "^1.7.0",
