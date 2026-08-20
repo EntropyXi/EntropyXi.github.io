@@ -8,14 +8,20 @@ export default tseslint.config(
       "dist/",
       "node_modules/",
       ".astro/",
+      ".deploy_git/",
       "public/",
       "astro-public/",
       "playwright-report/",
       "test-results/",
-      // Legacy Hexo CommonJS scripts; TypeScript scripts live in scripts/**/*.ts
-      "scripts/*.js",
+      // Legacy Hexo CommonJS code and generated baselines.
+      "scripts/**/*.js",
+      "tests/fixtures/",
+      "tests/legacy-baseline/",
+      "update_categories.js",
     ],
   },
-  ...eslintPluginAstro.configs["flat/recommended"],
+  // Order matters: tseslint's unscoped parser config must come first so that
+  // eslint-plugin-astro can override the parser for .astro files.
   ...tseslint.configs.recommended,
+  ...eslintPluginAstro.configs["flat/recommended"],
 );
