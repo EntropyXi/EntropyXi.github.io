@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatPostDate } from "@/lib/date/format-date";
+import { buildPostPath } from "@/lib/routing/post-path";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => (
+      <li class="post-card">
+        <h2 class="post-card-title">
+          <a href={buildPostPath(post.data.permalink)}>{post.data.title}</a>
+        </h2>
+        <p class="post-card-description">{post.data.description}</p>
+        <div class="post-card-meta">
+          <time datetime={post.data.date}>
+            {formatPostDate(post.data.date)}
+          </time>
+          <span>{post.data.categories.join(" / ")}</span>
+        </div>
+      </li>
+    ))
+  }
+</ul>

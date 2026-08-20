@@ -6,8 +6,9 @@ test("home page renders the site title and welcome heading", async ({
   await page.goto("/");
   await expect(page).toHaveTitle(/EntropyXi/);
   await expect(
-    page.getByRole("heading", { name: "欢迎来到 EntropyXi 的博客" }),
+    page.getByRole("heading", { name: "EntropyXi 的技术笔记" }),
   ).toBeVisible();
+  await expect(page.locator(".post-card").first()).toBeVisible();
 });
 
 test("404 page renders without redirecting to a broken layout", async ({

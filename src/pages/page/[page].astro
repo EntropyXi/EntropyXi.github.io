@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import PostList from "@/components/content/PostList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { pagePath, paginate, totalPages } from "@/lib/routing/pagination";
+import "@/styles/home.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => data.draft !== true);
+  const sorted = posts.sort((a, b) => {
+    const dateA = new Date(a.data.date).getTime();
+    const dateB = new Date(b.data.date).getTime();
+    if (dateB !== dateA) return dateB - dateA;
+    return b.data.permalink.localeCompare(a.data.permalink);
+  });
+  const pages = totalPages(sorted.length);
+  return Array.from({ length: pages - 1 }, (_, index) => index + 2).map(
+    (page) => ({
+      params: { page: String(page) },
+      props: { sorted, page },
+    }),
+  );
+}
+
+const { sorted, page } = Astro.props;
+const pages = totalPages(sorted.length);
+const pagePosts = paginate(sorted, page);
+---
+
+<BaseLayout
+  title={`第 ${page} 页`}
+  description="深度学习、扩散模型、流匹配与数值分析的技术笔记"
+>
+  <h1 class="page-title">EntropyXi 的技术笔记</h1>
+  <p class="page-intro">第 {page} 页</p>
+  <PostList posts={pagePosts} />
+  <nav class="post-pagination" aria-label="首页分页">
+    <ul class="pagination-list">
+      {
+        Array.from({ length: pages }, (_, index) => index + 1).map(
+          (pageNumber) => (
+            <li>
+              <a
+                class="pagination-link"
+                aria-current={pageNumber === page ? "page" : undefined}
+                href={pagePath(pageNumber)}
+              >
+                {pageNumber}
+              </a>
+            </li>
+          ),
+        )
+      }
+    </ul>
+  </nav>
+</BaseLayout>
