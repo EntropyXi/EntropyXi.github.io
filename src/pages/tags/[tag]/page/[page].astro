@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import PaginationNav from "@/components/content/PaginationNav.astro";
+import PostList from "@/components/content/PostList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  buildTagPath,
+  postsWithTag,
+  sortPostsByDateDesc,
+} from "@/lib/content/aggregate";
+import { paginate, totalPages } from "@/lib/routing/pagination";
+import "@/styles/home.css";
+
+export async function getStaticPaths() {
+  const allPosts = sortPostsByDateDesc(
+    await getCollection("blog", ({ data }) => data.draft !== true),
+  );
+  const routes = [];
+  for (const tag of new Set(allPosts.flatMap((post) => post.data.tags))) {
+    const posts = sortPostsByDateDesc(postsWithTag(allPosts, tag));
+    const pages = totalPages(posts.length);
+    for (let page = 2; page <= pages; page += 1) {
+      routes.push({
+        params: { tag, page: String(page) },
+        props: { allPosts, tag, page },
+      });
+    }
+  }
+  return routes;
+}
+
+const { allPosts, tag, page } = Astro.props;
+const posts = sortPostsByDateDesc(postsWithTag(allPosts, tag));
+const pages = totalPages(posts.length);
+const pagePosts = paginate(posts, page);
+const basePath = buildTagPath(tag);
+const href = (pageNumber: number) =>
+  pageNumber === 1 ? basePath : `${basePath}page/${pageNumber}/`;
+---
+
+<BaseLayout title={`标签：${tag} 第 ${page} 页`} description={`标签：${tag}`}>
+  <h1 class="page-title">标签：{tag}</h1>
+  <PostList posts={pagePosts} />
+  <PaginationNav currentPage={page} pages={pages} href={href} />
+</BaseLayout>

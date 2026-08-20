@@ -1,0 +1,20 @@
+node_modules
+dist
+.astro
+public
+astro-public
+package-lock.json
+playwright-report
+test-results
+
+# Published legacy Hexo content and generated baselines must not be reformatted.
+source
+scaffolds
+scripts
+tests/fixtures
+tests/legacy-baseline
+docs/content
+docs/migration/baseline/hexo-next
+docs/migration/baseline/*.json
+audit-screenshots
+src/content/blog

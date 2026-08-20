@@ -4,12 +4,12 @@
 
 # Site
 title: EntropyXi的个人博客
-subtitle: '深度学习与数值分析笔记'
-description: '深度学习、扩散模型、流匹配与数值分析的技术笔记'
+subtitle: "深度学习与数值分析笔记"
+description: "深度学习、扩散模型、流匹配与数值分析的技术笔记"
 keywords:
 author: EntropyXi
 language: zh-CN
-timezone: ''
+timezone: ""
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -55,7 +55,7 @@ titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
-  exclude: ''
+  exclude: ""
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -65,20 +65,20 @@ syntax_highlighter: highlight.js
 highlight:
   line_number: true
   auto_detect: false
-  tab_replace: ''
+  tab_replace: ""
   wrap: true
   hljs: false
 prismjs:
   preprocess: true
   line_number: true
-  tab_replace: ''
+  tab_replace: ""
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: ""
   per_page: 8
   order_by: -date
 
@@ -143,19 +143,19 @@ deploy:
   repository: https://github.com/EntropyXi/EntropyXi.github.io.git
   branch: main
 # math:
-  # engine: 'mathjax'
-  # mathjax:
-    # src: custom_mathjax_source  <-- 建议注释掉，除非你有特定的CDN地址，否则插件会自动使用默认的稳定源
-    # config:
-      # tex:
-        # 配置行内公式识别符，让单美元符号 $...$ 生效
-        # inlineMath: [['$', '$'], ['\\(', '\\)']]
-        # 配置块级公式识别符
-        # displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        # 禁用自动编号（可选，根据喜好开启或关闭）
-        # tags: 'none'
-      # options:
-        # 告诉 MathJax 不要渲染这些标签里的内容
-        # skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        # 忽略 hexo 代码块中的类
-        # ignoreHtmlClass: 'tex2jax_ignore'
+# engine: 'mathjax'
+# mathjax:
+# src: custom_mathjax_source  <-- 建议注释掉，除非你有特定的CDN地址，否则插件会自动使用默认的稳定源
+# config:
+# tex:
+# 配置行内公式识别符，让单美元符号 $...$ 生效
+# inlineMath: [['$', '$'], ['\\(', '\\)']]
+# 配置块级公式识别符
+# displayMath: [['$$', '$$'], ['\\[', '\\]']]
+# 禁用自动编号（可选，根据喜好开启或关闭）
+# tags: 'none'
+# options:
+# 告诉 MathJax 不要渲染这些标签里的内容
+# skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+# 忽略 hexo 代码块中的类
+# ignoreHtmlClass: 'tex2jax_ignore'
