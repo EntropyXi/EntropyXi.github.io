@@ -16,6 +16,25 @@
 | 访问统计 | 暂停展示（生产统计数据核实后再启用） |
 | CI/CD    | GitHub Actions → GitHub Pages        |
 
+## Astro 迁移共存期命令
+
+当前 `codex/astro-migration` 分支同时保留 Hexo 旧站与 Astro 新站。
+
+| 命令                                   | 含义                                                          |
+| -------------------------------------- | ------------------------------------------------------------- |
+| `npm run check`                        | Astro 质量门禁：格式、Lint、类型、单测、E2E（E2E 内部先构建） |
+| `npm run build` / `npm run build:site` | Astro 构建到 `dist/`（先复制自托管 vendor 资源）              |
+| `npm run dev` / `npm run preview`      | Astro 开发服务器 / 构建产物预览                               |
+| `npm run legacy:check`                 | 旧 Hexo 门禁：frontmatter 审计 + clean + generate + verify    |
+| `npm run legacy:build`                 | 旧 Hexo 构建到 `public/`                                      |
+| `npm run legacy:server`                | 旧 Hexo 本地预览                                              |
+
+共存期目录边界：
+
+- Astro 静态源目录是 `astro-public/`，构建输出是 `dist/`。
+- Hexo 继续独占 `public/`；`npm run build` 不再指 Hexo。
+- 生产部署 workflow 在阶段 6 切换前固定使用 `legacy:check`。
+
 ## 写一篇新笔记
 
 ```bash
