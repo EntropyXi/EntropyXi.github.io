@@ -7,6 +7,6 @@ export function GET(): Response {
 `;
 
   return new Response(body, {
-    headers: { 'Content-Type': 'application/xml; charset=utf-8' },
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }

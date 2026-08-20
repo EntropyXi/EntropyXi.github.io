@@ -54,8 +54,7 @@ canvas {
 mjx-container[display="true"] {
   display: block;
   max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
 }
 
 mjx-container:not([display="true"]) {

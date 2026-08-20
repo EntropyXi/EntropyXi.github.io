@@ -1,4 +1,4 @@
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '@/data/site';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/data/site";
 
 export function GET(): Response {
   const body = `<?xml version="1.0" encoding="UTF-8"?>
@@ -12,6 +12,6 @@ export function GET(): Response {
 `;
 
   return new Response(body, {
-    headers: { 'Content-Type': 'application/atom+xml; charset=utf-8' },
+    headers: { "Content-Type": "application/atom+xml; charset=utf-8" },
   });
 }

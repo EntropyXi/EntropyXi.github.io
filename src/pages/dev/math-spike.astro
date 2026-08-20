@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import MathJax from '@/components/content/MathJax.astro';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import MathJax from "@/components/content/MathJax.astro";
 
 const spikeHtml = `
 <p>行内公式：已知 $x^2 + y^2 = z^2$ 与 $\\mathbb{E}[\\boldsymbol{X}]$。</p>
@@ -22,9 +22,12 @@ const spikeHtml = `
 `;
 ---
 
-<BaseLayout title="数学渲染验证" description="MathJax 渲染能力验证页，仅用于迁移验收。">
+<BaseLayout
+  title="数学渲染验证"
+  description="MathJax 渲染能力验证页，仅用于迁移验收。"
+>
   <h1 class="page-title">数学渲染验证</h1>
   <p>本页仅用于 Astro 迁移阶段的 MathJax 兼容性验证，不进入正式导航。</p>
-  <div class="spike-body" set:html={spikeHtml}></div>
+  <div class="spike-body" set:html={spikeHtml} />
   <MathJax />
 </BaseLayout>
