@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import "@/styles/prose.css";
+import { formatPostDate } from "@/lib/date/format-date";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  headings: MarkdownHeading[];
+}
+
+const { post, headings } = Astro.props;
+const { data } = post;
+const toc = headings.filter(
+  (heading) => heading.depth === 2 || heading.depth === 3,
+);
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{data.title}</h1>
+      <div class="post-meta">
+        <time datetime={data.date}>{formatPostDate(data.date)}</time>
+        <span>分类：{data.categories.join(" / ")}</span>
+      </div>
+      <div class="post-tags" aria-label="文章标签">
+        {data.tags.map((tag) => <span class="post-tag">{tag}</span>)}
+      </div>
+    </header>
+    {
+      toc.length > 0 && (
+        <nav class="post-toc" aria-label="文章目录">
+          <p class="post-toc-title">目录</p>
+          <ul>
+            {toc.map((heading) => (
+              <li class={`toc-depth-${heading.depth}`}>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    <div class="prose" data-pagefind-body>
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
