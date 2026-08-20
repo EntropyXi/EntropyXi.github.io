@@ -874,15 +874,15 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 
 任务：
 
-- [ ] 更新 GitHub Actions，移除 Pandoc 安装。
-- [ ] 将 Pages artifact 从 `public/` 改为 `dist/`。
-- [ ] 在 PR 或临时 Pages 环境验证完整产物。
-- [ ] 检查 GitHub Pages 设置、base 路径和站点根地址。
-- [ ] 明确把 GitHub Pages Source 设置为 GitHub Actions，并把该设置的旧值与恢复步骤写入回滚文档。
-- [ ] 执行生产前 URL manifest 对比。
-- [ ] 部署后以 manifest 对生产域名运行全量 URL、canonical 和资源 smoke check，不只抽查代表文章。
+- [x] 更新 GitHub Actions，移除 Pandoc 安装。
+- [x] 将 Pages artifact 从 `public/` 改为 `dist/`。
+- [x] 在 PR 或临时 Pages 环境验证完整产物。
+- [x] 检查 GitHub Pages 设置、base 路径和站点根地址。
+- [x] 明确把 GitHub Pages Source 设置为 GitHub Actions，并把该设置的旧值与恢复步骤写入回滚文档。
+- [x] 执行生产前 URL manifest 对比。
+- [x] 部署后以 manifest 对生产域名运行全量 URL、canonical 和资源 smoke check，不只抽查代表文章。
 - [ ] 观察评论、搜索、404、RSS 和公式错误 7 天；出现任一历史文章 404、canonical/pathname 漂移、Giscus 新线程映射或已确认公式回归即回滚。
-- [ ] 保留回滚到最后 Hexo commit 的明确操作说明。
+- [x] 保留回滚到最后 Hexo commit 的明确操作说明。
 
 退出条件：生产站由 Astro 构建，全量 smoke check 通过，并完成 7 天观察期且未触发回滚条件。
 
@@ -892,12 +892,12 @@ Playwright 在构建后的 `astro preview` 上运行，覆盖 Chromium、Firefox
 
 任务：
 
-- [ ] 删除 Hexo、NexT、Pandoc、Stylus 和旧生成器依赖。
-- [ ] 删除 `_config.yml`、`_config.next.yml`、`scaffolds/`、旧注入模板和废弃脚本。
-- [ ] 删除迁移期临时兼容代码和无用截图。
-- [ ] 更新 README、贡献指南、写作指南、部署和故障排查。
-- [ ] 保留 URL manifest、迁移 ADR 和第三方许可证记录。
-- [ ] 运行全量 CI 和一次干净环境 `npm ci && npm run check`。
+- [x] 删除 Hexo、NexT、Pandoc、Stylus 和旧生成器依赖。
+- [x] 删除 `_config.yml`、`_config.next.yml`、`scaffolds/`、旧注入模板和废弃脚本。
+- [x] 删除迁移期临时兼容代码和无用截图。
+- [x] 更新 README、贡献指南、写作指南、部署和故障排查。
+- [x] 保留 URL manifest、迁移 ADR 和第三方许可证记录。
+- [x] 运行全量 CI 和一次干净环境 `npm ci && npm run check`。
 
 退出条件：仓库只含 Astro 生产路径，无已引用的 Hexo 文件或依赖，文档与实际命令一致。
 

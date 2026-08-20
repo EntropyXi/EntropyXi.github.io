@@ -1,156 +1,95 @@
 # EntropyXi 的个人博客
 
-基于 Hexo + NexT 主题的深度学习与数值分析技术笔记。
+基于 Astro 7 的静态技术博客，部署在 GitHub Pages。
 
 **线上地址**：https://entropyxi.github.io
 
 ## 技术栈
 
-| 组件     | 说明                                 |
-| -------- | ------------------------------------ |
-| 静态生成 | Hexo 8 + Pandoc 渲染 Markdown        |
-| 主题     | NexT 8 Pisces（双栏布局）            |
-| 公式渲染 | MathJax 3 客户端                     |
-| 评论     | Giscus（GitHub Discussions）         |
-| 搜索     | hexo-generator-searchdb 本地搜索     |
-| 访问统计 | 暂停展示（生产统计数据核实后再启用） |
-| CI/CD    | GitHub Actions → GitHub Pages        |
+| 组件     | 说明                                           |
+| -------- | ---------------------------------------------- |
+| 静态生成 | Astro 7 SSG                                    |
+| 内容     | Astro Content Collections                      |
+| 数学     | 构建期 MathJax（remark-math + rehype-mathjax） |
+| 搜索     | Pagefind 中文静态搜索                          |
+| 评论     | 暂不加载第三方评论脚本                         |
+| CI/CD    | GitHub Actions → GitHub Pages                  |
 
-## Astro 迁移共存期命令
+## 本地开发
 
-当前 `codex/astro-migration` 分支同时保留 Hexo 旧站与 Astro 新站。
+```bash
+npm ci
+npm run dev
+```
 
-| 命令                                   | 含义                                                          |
-| -------------------------------------- | ------------------------------------------------------------- |
-| `npm run check`                        | Astro 质量门禁：格式、Lint、类型、单测、E2E（E2E 内部先构建） |
-| `npm run build` / `npm run build:site` | Astro 构建到 `dist/`（先复制自托管 vendor 资源）              |
-| `npm run dev` / `npm run preview`      | Astro 开发服务器 / 构建产物预览                               |
-| `npm run legacy:check`                 | 旧 Hexo 门禁：frontmatter 审计 + clean + generate + verify    |
-| `npm run legacy:build`                 | 旧 Hexo 构建到 `public/`                                      |
-| `npm run legacy:server`                | 旧 Hexo 本地预览                                              |
+打开 `http://localhost:4321`。
 
-共存期目录边界：
+## 质量门禁
 
-- Astro 静态源目录是 `astro-public/`，构建输出是 `dist/`。
-- Hexo 继续独占 `public/`；`npm run build` 不再指 Hexo。
-- 生产部署 workflow 在阶段 6 切换前固定使用 `legacy:check`。
+```bash
+npm run check
+```
+
+`npm run check` 依次执行：格式检查、Lint、类型检查、内容审计、单元测试、
+E2E（内部会先完整构建并生成 Pagefind 索引）、输出审计。
+
+## 构建与预览
+
+```bash
+npm run build
+npm run preview
+```
+
+- 构建输出：`dist/`
+- Astro 静态源目录：`astro-public/`（旧站兼容图片等静态资源）
 
 ## 写一篇新笔记
 
-```bash
-# 在对应分类目录下创建 .md 文件
-vim source/_posts/深度学习/流匹配与扩散模型/新文章.md
-```
-
-**Frontmatter 模板**：
+在 `src/content/blog/` 对应分类目录下创建 `.md` 文件，frontmatter 使用：
 
 ```yaml
 ---
 title: 文章标题
-date: 2026-05-17 00:00:00
+description: 摘要
+date: 2026-08-20T10:00:00+08:00
+updated: 2026-08-20T10:00:00+08:00
 tags:
   - 深度学习
-  - 流匹配与扩散模型
-mathjax: true
 categories:
   - 深度学习
-  - 流匹配与扩散模型
+permalink: 2026/08/20/深度学习/文章标题
+math: true
+draft: false
 ---
-<style>
-.mjx-container, .MathJax_Display, .MathJax {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
-}
-</style>
-<!-- more -->
-
-### 第一节
-内容...
 ```
 
-**格式规范**：
-
-- 行内公式用 `$...$`，块级公式用 `$$...$$`
-- `$$` 块前后各空一行
-- 别用 Unicode `·`（中间点），用 `\cdot`
-- 文章第一个段落前加 `<!-- more -->` 控制首页摘要
-
-**Note 提示框**：
-
-```markdown
-{% note info %}
-**定理**：这里写定理内容。
-{% endnote %}
-
-{% note warning %}
-**注意**：这里写注意事项。
-{% endnote %}
-```
-
-## 本地预览
-
-```bash
-npx hexo server
-# 打开 http://localhost:4000
-```
+规则：`permalink` 发布后冻结；行内公式 `$...$`，块级公式 `$$...$$`；
+`math: true` 的文章由构建期 MathJax 渲染。
 
 ## 部署
 
-```bash
-git add source/_posts/...
-git commit -m "new post: xxx"
-git push origin source
-```
+推送 `source` 分支会触发 `.github/workflows/deploy.yml` 构建并部署 `dist/`。
 
-推送 `source` 分支后，GitHub Actions 自动构建并部署到 GitHub Pages。
+## 目录结构
 
-## 本地验证
-
-```bash
-npm ci
-npm run check
-npm run server
-```
-
-`npm run check` 验证 frontmatter、生成站点并检查生成的 HTML 是否存在已知回归问题。
-
-## 项目结构
-
-```
+```text
 Blog_file/
-├── source/
-│   ├── _posts/              # 笔记源文件 (.md)
-│   │   ├── 深度学习/        # 分类：深度学习
-│   │   │   ├── 流匹配与扩散模型/  # 子分类
-│   │   │   │   ├── 体系/    # 理论体系笔记
-│   │   │   │   └── 超分辨率/ # 超分辨率论文笔记
-│   │   │   └── 线性回归/
-│   │   └── 数值分析/
-│   ├── _data/               # 自定义样式与脚本
-│   │   ├── styles.styl      # 全局 CSS
-│   │   └── post-body-end.njk # Giscus 评论注入
-│   └── about/               # 关于页面
-├── _config.yml              # Hexo 主配置
-├── _config.next.yml         # NexT 主题配置
-├── .github/workflows/       # GitHub Actions 部署
-└── themes/                  # 通过 npm 管理的主题（NexT）
+├── astro-public/        # 静态资源，构建时原样复制到 dist/
+├── scripts/             # 内容审计、输出审计、vendor 复制脚本
+├── src/
+│   ├── components/      # 组件
+│   ├── content/blog/    # 文章（Content Collections）
+│   ├── data/            # 站点配置
+│   ├── layouts/         # BaseLayout、PostLayout
+│   ├── lib/             # 无 UI 领域逻辑
+│   ├── pages/           # 路由页面与 XML endpoint
+│   └── styles/          # 全局与排版样式
+├── tests/               # E2E 与单元测试
+└── astro.config.ts
 ```
 
-NexT 主题通过 npm 安装，仅通过 `_config.next.yml` 和 `source/_data/` 进行自定义。
+## 迁移记录
 
-## 优化清单
-
-- [x] NexT Pisces 双栏 + 暗色模式
-- [x] MathJax 公式渲染（暗色模式适配）
-- [x] Giscus GitHub 评论
-- [x] 本地搜索
-- [x] Note 提示框（定理/注意/引理）
-- [x] 不蒜子页面访问统计
-- [x] RSS 订阅 `/atom.xml`
-- [x] Sitemap `/sitemap.xml`
-- [x] FancyBox 图片灯箱
-- [x] 阅读进度条 + 回顶滚动百分比
-- [x] 手机公式缩小适配
-- [x] 系统 CJK 字体栈（免 Google Fonts）
+- 计划：`docs/superpowers/plans/2026-08-20-astro-migration-plan.md`
+- ADR：`docs/architecture/adr/`
+- 回滚：`docs/migration/rollback.md`（回滚 tag `pre-astro-migration`）
