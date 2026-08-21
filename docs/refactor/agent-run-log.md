@@ -48,3 +48,13 @@
 - 初审发现 360/390 视口横向溢出、移动导航缺失和废弃断词属性，Antigravity 完成移动 `<details>` 导航、44px 触控目标、背景裁切和断词修正；
 - 主 Agent使用 Chrome 固定采集 8 组暗/亮、桌面/移动、菜单展开、键盘焦点和 reduced-motion 证据，`audit-screenshots/phase-1/index.json` 全部通过；
 - HTML、CSS、格式、令牌引用与整库 `npm run check` 均通过，阶段 1 写租约已释放。
+
+## 阶段 2 放行记录
+
+- 主 Agent实现 `src/lib/client/` 生命周期、主题、移动抽屉、阅读进度、回顶、代码复制、Pagefind 搜索与运动环境模块，只在主要可视组件保留薄初始化桥接；首屏主题脚本在存储拒绝时与系统主题保持一致；
+- DeepSeek（DeepSeek‑V4‑Flash / Max）仅编写简单纯函数单测；主 Agent复核后把两个弱大小写断言改为会真正区分无效存储值与系统回退的用例；
+- Antigravity（Gemini 3.7 Flash / High）编写搜索无 JS 提示与对比度相关可视修正；主 Agent先后拒绝 `outline: none`、`transition: all`、不足 44px 目标以及对冻结阶段 1 原型的越界修改，并纠正其“全站无 `transition: all`”的不实总结；
+- 新增 desktop Chromium、390×844 touch、360px overflow、reduced-motion、JavaScript disabled 与 200% zoom 六种自动化环境，以及 axe、重复初始化、cleanup、主题存储异常、系统主题变化、抽屉焦点、真实搜索、剪贴板成功/失败和无 JS 用例；
+- 主 Agent发现 Astro 在 AI 终端会把 `preview` 自动转为后台守护进程，导致 Playwright 干净启动误判服务提前退出；新增跨平台前台预览包装并以 `CI=1` 从无服务状态验证构建、启动、测试和回收闭环；
+- 完整 `npm run check` 通过：4 个单测文件 21 项、Playwright 29 项、4 个关键页面 axe serious/critical 为 0、首方脚本 5,140/24,576 B gzip、30 篇内容、81 个兼容页面与 1,289/1,289 条可访问公式全部通过；
+- 未新增动画依赖，无需新增 ADR。阶段 2 写租约已释放；按用户要求暂停，不启动或派发阶段 3。

@@ -60,17 +60,22 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all var(--transition-normal);
+    transition:
+      background-color var(--transition-normal),
+      color var(--transition-normal),
+      border-color var(--transition-normal),
+      transform var(--transition-normal);
   }
 
   .error-btn-primary {
     background: var(--color-accent);
-    color: #000;
+    color: var(--color-accent-contrast);
     box-shadow: 0 0 20px var(--color-accent-glow);
   }
 
   .error-btn-primary:hover {
     background: var(--color-accent-hover);
+    color: var(--color-accent-contrast);
     transform: translateY(-2px);
   }
 

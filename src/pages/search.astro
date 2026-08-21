@@ -10,6 +10,24 @@ import "@/styles/home.css";
       <p class="page-intro">输入中文或英文关键词，实时索引 30 篇技术文章</p>
     </div>
 
+    <noscript>
+      <div
+        class="search-noscript-notice"
+        role="region"
+        aria-label="无 JavaScript 提示"
+      >
+        <p class="search-noscript-text">
+          当前浏览器未启用
+          JavaScript，实时站内搜索功能不可用。您可以通过以下索引页面浏览全部内容：
+        </p>
+        <div class="search-noscript-links">
+          <a href="/archives/" class="search-noscript-link">全站归档</a>
+          <a href="/categories/" class="search-noscript-link">文章分类</a>
+          <a href="/tags/" class="search-noscript-link">标签列表</a>
+        </div>
+      </div>
+    </noscript>
+
     <form class="search-form" role="search" onsubmit="return false">
       <label for="search-input" class="visually-hidden">搜索文章</label>
       <div class="search-input-wrapper">
@@ -32,7 +50,6 @@ import "@/styles/home.css";
           type="search"
           autocomplete="off"
           placeholder="搜索扩散模型、流匹配、SDE、数值分析等..."
-          autofocus
         />
         <kbd class="search-kbd-hint">/</kbd>
       </div>
@@ -62,92 +79,56 @@ import "@/styles/home.css";
     margin-bottom: 1.5rem;
     min-height: 1.5rem;
   }
+
+  .search-noscript-notice {
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .search-noscript-text {
+    margin: 0 0 1rem;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .search-noscript-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .search-noscript-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .search-noscript-link:hover,
+  .search-noscript-link:focus-visible {
+    border-color: var(--color-accent);
+    background: var(--color-accent-subtle);
+  }
 </style>
 
 <script>
-  function initSearch(): void {
-    const input = document.getElementById("search-input") as HTMLInputElement;
-    const results = document.getElementById(
-      "search-results",
-    ) as HTMLUListElement;
-    const status = document.getElementById("search-status") as HTMLDivElement;
+  import { registerClientFeature } from "@/lib/client/lifecycle";
+  import { initializeSearch } from "@/lib/client/search";
 
-    if (!input || !results || input.dataset.bound === "true") return;
-    input.dataset.bound = "true";
-
-    let debounceTimer = 0;
-
-    // Press '/' to focus search input anywhere
-    window.addEventListener("keydown", (e) => {
-      if (
-        e.key === "/" &&
-        document.activeElement !== input &&
-        document.activeElement?.tagName !== "INPUT" &&
-        document.activeElement?.tagName !== "TEXTAREA"
-      ) {
-        e.preventDefault();
-        input.focus();
-      }
-    });
-
-    async function executeSearch(query: string): Promise<void> {
-      results.replaceChildren();
-      const trimmed = query.trim();
-      if (!trimmed) {
-        if (status) status.textContent = "";
-        return;
-      }
-
-      if (status) status.textContent = "正在搜索...";
-
-      try {
-        const pagefindUrl = "/pagefind/pagefind.js";
-        const pagefind = await import(/* -ignore */ pagefindUrl);
-        const search = await pagefind.search(trimmed);
-
-        if (search.results.length === 0) {
-          if (status) status.textContent = `未找到与 "${trimmed}" 相关的文章。`;
-          return;
-        }
-
-        if (status)
-          status.textContent = `找到 ${search.results.length} 篇相关文章：`;
-
-        for (const result of search.results) {
-          const data = await result.data();
-          const card = document.createElement("li");
-          card.className = "search-result-card";
-
-          const title = document.createElement("h2");
-          title.className = "search-result-title";
-
-          const link = document.createElement("a");
-          link.href = data.url;
-          link.textContent = data.meta?.title ?? data.url;
-          title.appendChild(link);
-
-          const excerpt = document.createElement("div");
-          excerpt.className = "search-result-excerpt";
-          excerpt.innerHTML = data.excerpt ?? "";
-
-          card.appendChild(title);
-          card.appendChild(excerpt);
-          results.appendChild(card);
-        }
-      } catch {
-        if (status) status.textContent = "搜索索引加载失败，请刷新页面重试。";
-      }
-    }
-
-    input.addEventListener("input", () => {
-      window.clearTimeout(debounceTimer);
-      debounceTimer = window.setTimeout(
-        () => void executeSearch(input.value),
-        250,
-      );
-    });
-  }
-
-  initSearch();
-  document.addEventListener("astro:page-load", initSearch);
+  registerClientFeature("search", initializeSearch);
 </script>

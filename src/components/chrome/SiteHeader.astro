@@ -374,41 +374,8 @@ function isActive(href: string): boolean {
 </style>
 
 <script>
-  function initMobileDrawer(): void {
-    const btn = document.getElementById("mobile-menu-btn");
-    const drawer = document.getElementById("mobile-drawer");
-    const backdrop = document.getElementById("mobile-drawer-backdrop");
-    const closeBtn = document.getElementById("mobile-drawer-close");
+  import { registerClientFeature } from "@/lib/client/lifecycle";
+  import { initializeMobileDrawer } from "@/lib/client/mobile-drawer";
 
-    if (!btn || !drawer || !backdrop || !closeBtn) return;
-    if (btn.dataset.bound === "true") return;
-    btn.dataset.bound = "true";
-
-    function openDrawer(): void {
-      drawer?.classList.add("open");
-      drawer?.setAttribute("aria-hidden", "false");
-      btn?.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeDrawer(): void {
-      drawer?.classList.remove("open");
-      drawer?.setAttribute("aria-hidden", "true");
-      btn?.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    }
-
-    btn.addEventListener("click", openDrawer);
-    backdrop.addEventListener("click", closeDrawer);
-    closeBtn.addEventListener("click", closeDrawer);
-
-    window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && drawer?.classList.contains("open")) {
-        closeDrawer();
-      }
-    });
-  }
-
-  initMobileDrawer();
-  document.addEventListener("astro:page-load", initMobileDrawer);
+  registerClientFeature("mobile-drawer", initializeMobileDrawer);
 </script>

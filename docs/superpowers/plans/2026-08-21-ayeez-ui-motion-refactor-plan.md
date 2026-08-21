@@ -1,6 +1,6 @@
 # EntropyXi Blog：AyeezBlog 风格界面与动效二次重构计划
 
-> 状态：阶段 0、0.5 与 1 已通过主 Agent 验收；`agy` 运行正常，现进入阶段 2 架构地基与自动门禁
+> 状态：阶段 0、0.5、1 与 2 已通过主 Agent 验收；按用户要求暂停在阶段 3 之前
 > 计划日期：2026-08-21  
 > 计划范围：以展示层、交互层、动效层为主；允许对 permalink、分页、聚合路由、Astro SSG、数学、搜索和部署链路做有证据、可兼容、可回滚的优化或替换  
 > 明确前置：上一轮 Hexo → Astro 底层框架重构已经完成，本计划不重复迁移工作  
@@ -643,19 +643,21 @@ component styles    # 组件内部样式
 
 任务：
 
-- [ ] 主 Agent盘点现有 `.astro` 内联客户端脚本；把会与 Antigravity 主要可视文件发生写租约冲突的主题、菜单、阅读进度、TOC、复制、回顶等核心行为拆入 `src/lib/` 对应 TypeScript 模块，只在组件保留最薄初始化桥接。纯首屏主题防闪脚本可按 §7.3 例外保留。
-- [ ] 在拆脚本前先补当前行为基线测试，再建立拆分后的等价回归：DOM 契约、无 JS、重复初始化、导航/主题/文章交互均不得变化；该批次必须在任何主要视觉写入前由主 Agent独立完成并放行。
-- [ ] 主 Agent只定义 motion token 的语义名称、类型/取值边界、`data-motion` 契约、生命周期和安全降级默认值；阶段 1 冻结并经批准的时长、距离、easing、辉光等视觉数值由 Antigravity 落值。若视觉规格与生命周期/性能契约冲突，不自动以任一方为准：暂停派工，由 Antigravity 提交视觉替代、主 Agent评估技术边界并作最终裁决，更新 `design-specs.md` 后继续。
-- [ ] 主 Agent实现 `motion-preferences`、页面可见性、幂等初始化和 cleanup。
-- [ ] DeepSeek 可协助编写简单纯函数、媒体查询 mock、单测和 bundle audit 脚本。
-- [ ] 新增 reduced-motion、无 JS、键盘、重复初始化和监听器清理测试。
-- [ ] 在 `playwright.config.ts` 或等价配置中建立明确项目：desktop Chromium、390×844 touch、360px overflow、reduced-motion、JavaScript disabled、200% zoom；固定主题、动画终态、字体和时间。iOS Safari 以 WebKit/真实设备/远程设备抽查，记录负责人、频率和最小页面集。
-- [ ] 把视觉阈值、Lighthouse 配置、bundle 预算和产物审计阈值固化到版本控制配置或 `docs/refactor/quality-gates.md`；CI 全矩阵目标总时长和分片策略在阶段 2 实测后冻结。
-- [ ] 建立资源与 bundle 预算报告。
-- [ ] 记录是否需要新增 ADR；默认不引入动画依赖。
-- [ ] 明确终态优先契约：仅当初始化成功后设置 `html[data-motion="ready"]`，任何异常都保持内容可见；无 JS E2E 必须断言 Hero、卡片和正文均未被隐藏。
+- [x] 主 Agent盘点现有 `.astro` 内联客户端脚本；把会与 Antigravity 主要可视文件发生写租约冲突的主题、菜单、阅读进度、TOC、复制、回顶等核心行为拆入 `src/lib/` 对应 TypeScript 模块，只在组件保留最薄初始化桥接。纯首屏主题防闪脚本可按 §7.3 例外保留。
+- [x] 在拆脚本前先补当前行为基线测试，再建立拆分后的等价回归：DOM 契约、无 JS、重复初始化、导航/主题/文章交互均不得变化；该批次必须在任何主要视觉写入前由主 Agent独立完成并放行。
+- [x] 主 Agent只定义 motion token 的语义名称、类型/取值边界、`data-motion` 契约、生命周期和安全降级默认值；阶段 1 冻结并经批准的时长、距离、easing、辉光等视觉数值由 Antigravity 落值。若视觉规格与生命周期/性能契约冲突，不自动以任一方为准：暂停派工，由 Antigravity 提交视觉替代、主 Agent评估技术边界并作最终裁决，更新 `design-specs.md` 后继续。
+- [x] 主 Agent实现 `motion-preferences`、页面可见性、幂等初始化和 cleanup。
+- [x] DeepSeek 可协助编写简单纯函数、媒体查询 mock、单测和 bundle audit 脚本。
+- [x] 新增 reduced-motion、无 JS、键盘、重复初始化和监听器清理测试。
+- [x] 在 `playwright.config.ts` 或等价配置中建立明确项目：desktop Chromium、390×844 touch、360px overflow、reduced-motion、JavaScript disabled、200% zoom；固定主题、动画终态、字体和时间。iOS Safari 以 WebKit/真实设备/远程设备抽查，记录负责人、频率和最小页面集。
+- [x] 把视觉阈值、Lighthouse 配置、bundle 预算和产物审计阈值固化到版本控制配置或 `docs/refactor/quality-gates.md`；CI 全矩阵目标总时长和分片策略在阶段 2 实测后冻结。
+- [x] 建立资源与 bundle 预算报告。
+- [x] 记录是否需要新增 ADR；默认不引入动画依赖。
+- [x] 明确终态优先契约：仅当初始化成功后设置 `html[data-motion="ready"]`，任何异常都保持内容可见；无 JS E2E 必须断言 Hero、卡片和正文均未被隐藏。
 
 退出条件：客户端核心行为已从主要可视租约中解耦且行为等价；新基础设施本身不改变现有视觉；单测通过；重复初始化无副作用；无 JS 内容可见；预算报告可在 CI 运行。
+
+执行结果（2026-08-22）：主 Agent完成生命周期、主题、移动抽屉、阅读进度、回顶、复制、搜索和运动环境模块拆分，并补齐存储不可用、系统主题变化、重复初始化、cleanup、键盘、真实 Pagefind、剪贴板成功/失败及无 JS 回归。DeepSeek（DeepSeek‑V4‑Flash / Max）仅协助简单纯函数单测，主 Agent复核并收紧大小写无效值断言；Antigravity（Gemini 3.7 Flash / High）仅负责无 JS 搜索提示和对比度可视修正，主 Agent拒绝其越界修改冻结原型并纠正不实的全站样式结论。完整门禁通过：21 项单测、29 项 E2E、4 个关键页 axe serious/critical 为 0、6 种浏览器环境、5,140/24,576 B gzip 客户端预算及 1,289/1,289 条可访问公式。未引入动画依赖，无需新增 ADR；按用户要求暂停在阶段 3 之前。
 
 ### 阶段 3：全局外壳（Antigravity 强制主责）
 

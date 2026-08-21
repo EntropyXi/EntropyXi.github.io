@@ -201,38 +201,8 @@ const jsonLd = JSON.stringify({
 </BaseLayout>
 
 <script>
-  function initCodeCopyButtons(): void {
-    document.querySelectorAll("pre.astro-code").forEach((pre) => {
-      if (pre.querySelector(".code-copy-button")) return;
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "code-copy-button";
-      button.textContent = "复制";
-      button.setAttribute("aria-label", "复制代码");
+  import { initializeCodeCopyButtons } from "@/lib/client/code-copy";
+  import { registerClientFeature } from "@/lib/client/lifecycle";
 
-      button.addEventListener("click", () => {
-        const code = pre.querySelector("code")?.textContent ?? "";
-        void navigator.clipboard.writeText(code).then(() => {
-          button.textContent = "已复制";
-          button.classList.add("copied");
-          window.setTimeout(() => {
-            button.textContent = "复制";
-            button.classList.remove("copied");
-          }, 2000);
-        });
-      });
-
-      const language = (pre as HTMLElement).dataset.language ?? "";
-      if (language) {
-        const label = document.createElement("span");
-        label.className = "code-language-label";
-        label.textContent = language;
-        pre.appendChild(label);
-      }
-      pre.appendChild(button);
-    });
-  }
-
-  initCodeCopyButtons();
-  document.addEventListener("astro:page-load", initCodeCopyButtons);
+  registerClientFeature("code-copy", initializeCodeCopyButtons);
 </script>

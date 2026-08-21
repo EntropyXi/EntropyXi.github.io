@@ -84,28 +84,8 @@
 </style>
 
 <script>
-  function initBackToTop(): void {
-    const btn = document.getElementById("back-to-top");
-    if (!btn || btn.dataset.bound === "true") return;
-    btn.dataset.bound = "true";
+  import { initializeBackToTop } from "@/lib/client/back-to-top";
+  import { registerClientFeature } from "@/lib/client/lifecycle";
 
-    function onScroll(): void {
-      if (window.scrollY > 300) {
-        btn?.classList.add("visible");
-      } else {
-        btn?.classList.remove("visible");
-      }
-    }
-
-    btn.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-  }
-
-  initBackToTop();
-  document.addEventListener("astro:page-load", initBackToTop);
+  registerClientFeature("back-to-top", initializeBackToTop);
 </script>

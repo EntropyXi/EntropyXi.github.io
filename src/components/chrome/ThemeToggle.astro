@@ -4,8 +4,8 @@
 
 <button
   type="button"
-  id="theme-toggle"
   class="theme-toggle-btn"
+  data-theme-toggle
   aria-label="切换明暗主题"
   title="切换明暗主题"
 >
@@ -93,23 +93,8 @@
 </style>
 
 <script>
-  function initThemeToggle(): void {
-    const button = document.getElementById("theme-toggle");
-    if (!button || button.dataset.bound === "true") return;
-    button.dataset.bound = "true";
+  import { registerClientFeature } from "@/lib/client/lifecycle";
+  import { initializeThemeControls } from "@/lib/client/theme";
 
-    button.addEventListener("click", () => {
-      const currentTheme = document.documentElement.dataset.theme;
-      const nextTheme = currentTheme === "light" ? "dark" : "light";
-      document.documentElement.dataset.theme = nextTheme;
-      try {
-        localStorage.setItem("entropyxi-theme", nextTheme);
-      } catch {
-        // Ignore localStorage restrictions
-      }
-    });
-  }
-
-  initThemeToggle();
-  document.addEventListener("astro:page-load", initThemeToggle);
+  registerClientFeature("theme-controls", initializeThemeControls);
 </script>

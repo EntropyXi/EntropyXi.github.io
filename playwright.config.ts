@@ -13,12 +13,53 @@ export default defineConfig({
   },
   projects: [
     {
-      name: "chromium",
+      name: "desktop-chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "mobile-390",
+      testMatch: /client-matrix\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 390, height: 844 },
+        hasTouch: true,
+        isMobile: true,
+      },
+    },
+    {
+      name: "mobile-360",
+      testMatch: /client-matrix\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 360, height: 800 },
+        hasTouch: true,
+        isMobile: true,
+      },
+    },
+    {
+      name: "reduced-motion",
+      testMatch: /client-matrix\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        reducedMotion: "reduce",
+      },
+    },
+    {
+      name: "javascript-disabled",
+      testMatch: /client-matrix\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        javaScriptEnabled: false,
+      },
+    },
+    {
+      name: "zoom-200",
+      testMatch: /client-matrix\.spec\.ts/,
       use: { ...devices["Desktop Chrome"] },
     },
   ],
   webServer: {
-    command: "npm run build && npm run preview -- --host 127.0.0.1 --port 4321",
+    command: "npm run build && npm run preview:test",
     url: "http://127.0.0.1:4321",
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

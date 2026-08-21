@@ -36,15 +36,16 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
     <!-- Theme initialization script to prevent FOUC -->
     <script is:inline>
       (function () {
+        const systemTheme = window.matchMedia?.("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
         try {
           const stored = localStorage.getItem("entropyxi-theme");
-          if (stored === "light" || stored === "dark") {
-            document.documentElement.dataset.theme = stored;
-          } else {
-            document.documentElement.dataset.theme = "dark";
-          }
+          document.documentElement.dataset.theme =
+            stored === "light" || stored === "dark" ? stored : systemTheme;
         } catch {
-          document.documentElement.dataset.theme = "dark";
+          document.documentElement.dataset.theme = systemTheme;
         }
       })();
     </script>
@@ -57,5 +58,11 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       <slot />
     </main>
     <SiteFooter />
+    <script>
+      import { registerClientFeature } from "@/lib/client/lifecycle";
+      import { initializeMotionEnvironment } from "@/lib/client/motion-environment";
+
+      registerClientFeature("motion-environment", initializeMotionEnvironment);
+    </script>
   </body>
 </html>
