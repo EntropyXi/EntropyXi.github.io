@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" data-design-spec-version="1.0.0">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EntropyXi 的技术笔记 - 视觉原型</title>
+    <meta
+      name="description"
+      content="聚焦深度学习、扩散模型、流匹配与数值分析的严谨数学推导与工程实践"
+    >
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <!-- Skip Link for Keyboard Accessibility -->
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+
+    <!-- Layer 1: Ambient Background (Strictly isolated overflow) -->
+    <div class="ambient-background" aria-hidden="true">
+      <div class="cyber-grid-layer"></div>
+      <div class="ambient-glow-orb glow-orb-primary"></div>
+      <div class="ambient-glow-orb glow-orb-cyan"></div>
+    </div>
+
+    <!-- Layer 2: Semantic Site Header -->
+    <header class="site-header">
+      <div class="site-header-inner">
+        <div class="site-brand">
+          <a href="#" class="site-logo-link" aria-label="EntropyXi 首页">
+            <span class="site-logo-symbol">Ξ</span>
+            <span class="site-logo-text">EntropyXi</span>
+          </a>
+        </div>
+
+        <!-- Desktop Navigation (Hidden on <= 768px) -->
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="#" class="nav-link active" aria-current="page">首页</a>
+          <a href="#" class="nav-link">归档</a>
+          <a href="#" class="nav-link">分类</a>
+          <a href="#" class="nav-link">标签</a>
+          <a href="#" class="nav-link">关于</a>
+          <a href="#" class="nav-link">搜索</a>
+          <div class="theme-indicator-icon" title="主题指示" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </div>
+        </nav>
+
+        <!-- Mobile Zero-JS Accessible Navigation (Visible on <= 768px) -->
+        <details class="mobile-nav-details">
+          <summary class="mobile-nav-trigger" aria-label="打开导航菜单">
+            <span class="mobile-nav-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            </span>
+            <span class="mobile-nav-label">菜单</span>
+          </summary>
+          <nav class="mobile-nav-drawer" aria-label="移动端主导航">
+            <a href="#" class="mobile-nav-link active" aria-current="page">首页</a>
+            <a href="#" class="mobile-nav-link">归档</a>
+            <a href="#" class="mobile-nav-link">分类</a>
+            <a href="#" class="mobile-nav-link">标签</a>
+            <a href="#" class="mobile-nav-link">关于</a>
+            <a href="#" class="mobile-nav-link">搜索</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <!-- Layer 3: Main Page Content -->
+    <main id="main-content">
+      <!-- Hero Narrative Section -->
+      <section class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <span class="hero-badge-dot" aria-hidden="true"></span>
+            <span>Generative AI &amp; Mathematics Research</span>
+          </div>
+
+          <h1 id="hero-title" class="hero-title">EntropyXi 的技术笔记</h1>
+
+          <p class="hero-description">
+            聚焦<strong>深度学习</strong>、<strong>扩散模型</strong>、<strong
+              >流匹配 (Flow Matching)</strong
+            >与<strong>数值分析</strong>的严谨数学推导与工程实践。
+          </p>
+
+          <nav class="hero-chips" aria-label="研究主题分类">
+            <a href="#" class="hero-chip"># 扩散模型</a>
+            <a href="#" class="hero-chip"># 流匹配与 CNF</a>
+            <a href="#" class="hero-chip"># SDE / ODE</a>
+            <a href="#" class="hero-chip"># 图像超分辨率</a>
+            <a href="#" class="hero-chip"># 数值计算</a>
+          </nav>
+
+          <div class="hero-actions">
+            <a href="#latest-posts" class="hero-btn hero-btn-primary">
+              <span>探索文章</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a href="#" class="hero-btn hero-btn-secondary">
+              <span>归档体系</span>
+            </a>
+            <a href="#" class="hero-btn hero-btn-secondary">
+              <span>关于作者</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Right: Original SDE Flowfield Vector Graphic -->
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-flowfield-container">
+            <svg
+              viewBox="0 0 480 420"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="hero-flowfield-svg"
+              role="presentation"
+            >
+              <!-- 1. Coordinate Grid & Manifold Orbits -->
+              <ellipse
+                cx="240"
+                cy="210"
+                rx="180"
+                ry="130"
+                stroke="var(--color-border-default)"
+                stroke-width="1"
+                stroke-dasharray="3 6"
+              ></ellipse>
+              <ellipse
+                cx="240"
+                cy="210"
+                rx="120"
+                ry="80"
+                stroke="var(--color-border-subtle)"
+                stroke-width="1"
+              ></ellipse>
+              <ellipse
+                cx="240"
+                cy="210"
+                rx="60"
+                ry="35"
+                stroke="var(--color-accent-cyan)"
+                stroke-width="1"
+                opacity="0.4"
+              ></ellipse>
+
+              <!-- 2. Vector Streamlines (Flow Matching Velocity Fields) -->
+              <g class="flow-streamlines" opacity="0.45">
+                <path
+                  d="M40 80 C 120 100, 180 180, 240 210"
+                  stroke="var(--color-accent-cyan)"
+                  stroke-width="1.5"
+                  stroke-dasharray="5 5"
+                ></path>
+                <path
+                  d="M80 340 C 140 280, 180 230, 240 210"
+                  stroke="var(--color-accent-cyan)"
+                  stroke-width="1.5"
+                  stroke-dasharray="5 5"
+                ></path>
+                <path
+                  d="M440 100 C 360 130, 300 180, 240 210"
+                  stroke="var(--color-accent-primary)"
+                  stroke-width="1.5"
+                  stroke-dasharray="4 4"
+                ></path>
+                <path
+                  d="M420 330 C 350 300, 290 240, 240 210"
+                  stroke="var(--color-accent-primary)"
+                  stroke-width="1.5"
+                  stroke-dasharray="4 4"
+                ></path>
+                <path
+                  d="M240 30 C 240 90, 240 150, 240 210"
+                  stroke="var(--color-text-dim)"
+                  stroke-width="1"
+                ></path>
+                <path
+                  d="M240 390 C 240 330, 240 270, 240 210"
+                  stroke="var(--color-text-dim)"
+                  stroke-width="1"
+                ></path>
+              </g>
+
+              <!-- 3. Primary Stochastic SDE Trajectory -->
+              <path
+                class="sde-main-trajectory"
+                d="M 60 70 Q 140 120, 160 190 T 240 210 T 320 230 T 420 350"
+                stroke="var(--color-accent-primary)"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+
+              <!-- 4. Euler-Maruyama Step Nodes -->
+              <circle
+                cx="60"
+                cy="70"
+                r="4"
+                fill="var(--color-accent-cyan)"
+              ></circle>
+              <circle
+                cx="160"
+                cy="190"
+                r="3.5"
+                fill="var(--color-accent-primary)"
+              ></circle>
+              <circle
+                cx="240"
+                cy="210"
+                r="6"
+                fill="var(--color-accent-primary)"
+              ></circle>
+              <circle
+                cx="320"
+                cy="230"
+                r="3.5"
+                fill="var(--color-accent-primary)"
+              ></circle>
+              <circle
+                cx="420"
+                cy="350"
+                r="5"
+                fill="var(--color-accent-cyan)"
+              ></circle>
+
+              <!-- Central Math Symbol Indicator -->
+              <text
+                x="240"
+                y="205"
+                text-anchor="middle"
+                font-family="monospace"
+                font-size="11"
+                fill="var(--color-text-primary)"
+                font-weight="bold"
+              >
+                x₀
+              </text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Latest Posts Stream Section -->
+      <section
+        id="latest-posts"
+        class="posts-section"
+        aria-labelledby="latest-posts-title"
+      >
+        <div class="section-header">
+          <h2 id="latest-posts-title" class="section-title">
+            <span class="section-title-symbol">#</span>
+            <span>最新文章</span>
+          </h2>
+          <span class="section-count">共 30 篇笔记</span>
+        </div>
+
+        <!-- 3 Standard Post Cards -->
+        <ul class="post-list">
+          <!-- Card 1 -->
+          <li>
+            <article class="post-card">
+              <a href="#" class="post-card-category" title="分类：深度学习">
+                <span>深度学习 / 流匹配与扩散模型</span>
+              </a>
+              <h3 class="post-card-title">
+                <a href="#">DDPM：去噪扩散概率模型的严谨数学推导</a>
+              </h3>
+              <p class="post-card-description">
+                深入解析 DDPM 的前向加噪过程与反向去噪过程，从变分下界 (ELBO)
+                推导出高斯分布重参数化技巧与简化目标函数。
+              </p>
+              <footer class="post-card-meta">
+                <div class="post-card-date">
+                  <time datetime="2026-03-15">2026-03-15</time>
+                </div>
+                <div class="post-card-tags">
+                  <span class="post-card-tag">#扩散模型</span>
+                  <span class="post-card-tag">#数学推导</span>
+                </div>
+              </footer>
+            </article>
+          </li>
+
+          <!-- Card 2 -->
+          <li>
+            <article class="post-card">
+              <a href="#" class="post-card-category" title="分类：深度学习">
+                <span>深度学习 / 体系</span>
+              </a>
+              <h3 class="post-card-title">
+                <a href="#">从 SDE 开始：随机微分方程与概率流 ODE 统一视角</a>
+              </h3>
+              <p class="post-card-description">
+                从连续时间 Ito SDE 出发，解析 Score Matching、Fokker-Planck
+                方程与对应的确定性概率流常微分方程 (Probability Flow ODE)。
+              </p>
+              <footer class="post-card-meta">
+                <div class="post-card-date">
+                  <time datetime="2026-05-17">2026-05-17</time>
+                </div>
+                <div class="post-card-tags">
+                  <span class="post-card-tag">#SDE</span>
+                  <span class="post-card-tag">#流匹配</span>
+                </div>
+              </footer>
+            </article>
+          </li>
+
+          <!-- Card 3 -->
+          <li>
+            <article class="post-card">
+              <a href="#" class="post-card-category" title="分类：数值分析">
+                <span>数值分析</span>
+              </a>
+              <h3 class="post-card-title">
+                <a href="#">共轭梯度法中参数 alpha 和 beta 的几何与代数推导</a>
+              </h3>
+              <p class="post-card-description">
+                探讨 Krylov 子空间投影、A-正交方向的构造逻辑，详细证明步长参数
+                &alpha;<sub>k</sub> 与共轭更新系数 &beta;<sub>k</sub> 的最优化解。
+              </p>
+              <footer class="post-card-meta">
+                <div class="post-card-date">
+                  <time datetime="2026-01-20">2026-01-20</time>
+                </div>
+                <div class="post-card-tags">
+                  <span class="post-card-tag">#数值分析</span>
+                  <span class="post-card-tag">#矩阵计算</span>
+                </div>
+              </footer>
+            </article>
+          </li>
+        </ul>
+
+        <!-- Pagination Navigation -->
+        <nav class="pagination-nav" aria-label="分页导航">
+          <ul class="pagination-list">
+            <li>
+              <a href="#" class="pagination-link" aria-current="page">1</a>
+            </li>
+            <li><a href="#" class="pagination-link">2</a></li>
+            <li><a href="#" class="pagination-link">3</a></li>
+            <li><a href="#" class="pagination-link" aria-label="下一页">→</a></li>
+          </ul>
+        </nav>
+      </section>
+    </main>
+
+    <!-- Layer 4: Semantic Site Footer -->
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="site-footer-status">
+          <span class="status-pulse" aria-hidden="true"></span>
+          <span>System Status: <strong>SSG Prototype Active</strong></span>
+        </div>
+        <div class="site-footer-copy">
+          <p>
+            © 2026 EntropyXi · Designed with Ayeez-Style Cyber-Math Design Specs
+            (v1.0.0)
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

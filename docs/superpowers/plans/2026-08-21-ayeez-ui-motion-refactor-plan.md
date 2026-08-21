@@ -1,6 +1,6 @@
 # EntropyXi Blog：AyeezBlog 风格界面与动效二次重构计划
 
-> 状态：`agy` 运行环境已验证；Antigravity 前置审查与两轮 DeepSeek‑V4‑Flash / Max 独立高精度审查均已完成并由主 Agent 裁决，允许从阶段 0 启动  
+> 状态：阶段 0、0.5 与 1 已通过主 Agent 验收；`agy` 运行正常，现进入阶段 2 架构地基与自动门禁
 > 计划日期：2026-08-21  
 > 计划范围：以展示层、交互层、动效层为主；允许对 permalink、分页、聚合路由、Astro SSG、数学、搜索和部署链路做有证据、可兼容、可回滚的优化或替换  
 > 明确前置：上一轮 Hexo → Astro 底层框架重构已经完成，本计划不重复迁移工作  
@@ -620,20 +620,22 @@ component styles    # 组件内部样式
 
 任务：
 
-- [ ] Antigravity 产出首页桌面/移动视觉方案，明确与 AyeezBlog 的借鉴点和原创差异。
-- [ ] 定义暗/亮主题色板、字体、网格、间距、圆角、边框、阴影、辉光、z-index 和 motion tokens。
-- [ ] 明确首访主题策略：选择“暗色为品牌默认”或“首次跟随系统、用户选择覆盖”；不得继续保留含糊的“若支持”。若选择系统跟随，阶段 2 必须覆盖媒体查询变化、持久化优先级、FOUC 和 cleanup。
-- [ ] 记录展示字体的名称、来源、许可证、子集策略、回退字体、度量数据来源、`font-display` 和 CLS 验证方法。
-- [ ] 定义原创 Hero 右侧视觉：优先数学符号/流场/扩散轨迹 SVG，不使用参考站人物素材。
-- [ ] 定义 Header、Hero、PostCard、SectionHeader、Pagination、Footer、TOC、SearchResult 的状态规格。
-- [ ] 为每个交互组件列出 default、hover、focus-visible、active、disabled、loading、error（适用时）。
-- [ ] 定义断点矩阵和各断点信息保留/折叠规则。
-- [ ] 定义 reduced-motion 静态终态。
-- [ ] 交付 `docs/refactor/design-specs.md`，至少包含：语义色/token 表、WCAG 2.2 AA 对比度表、字体加载与回退方案、断点矩阵、原创 SVG 规格、组件全状态、运动分级、移动端性能降级规则和资产许可证台账。
-- [ ] 在 `audit-screenshots/phase-1/` 交付 1440×900 暗/亮、390×844 暗/亮以及 reduced-motion 静态终态样板；所有样板标注所用 commit 与设计规格版本。
-- [ ] 主 Agent检查语义、可达性、复杂度、资产许可证和 Astro 可实现性。
+- [x] Antigravity 产出首页桌面/移动视觉方案，明确与 AyeezBlog 的借鉴点和原创差异。
+- [x] 定义暗/亮主题色板、字体、网格、间距、圆角、边框、阴影、辉光、z-index 和 motion tokens。
+- [x] 明确首访主题策略：选择“暗色为品牌默认”或“首次跟随系统、用户选择覆盖”；不得继续保留含糊的“若支持”。若选择系统跟随，阶段 2 必须覆盖媒体查询变化、持久化优先级、FOUC 和 cleanup。
+- [x] 记录展示字体的名称、来源、许可证、子集策略、回退字体、度量数据来源、`font-display` 和 CLS 验证方法。
+- [x] 定义原创 Hero 右侧视觉：优先数学符号/流场/扩散轨迹 SVG，不使用参考站人物素材。
+- [x] 定义 Header、Hero、PostCard、SectionHeader、Pagination、Footer、TOC、SearchResult 的状态规格。
+- [x] 为每个交互组件列出 default、hover、focus-visible、active、disabled、loading、error（适用时）。
+- [x] 定义断点矩阵和各断点信息保留/折叠规则。
+- [x] 定义 reduced-motion 静态终态。
+- [x] 交付 `docs/refactor/design-specs.md`，至少包含：语义色/token 表、WCAG 2.2 AA 对比度表、字体加载与回退方案、断点矩阵、原创 SVG 规格、组件全状态、运动分级、移动端性能降级规则和资产许可证台账。
+- [x] 在 `audit-screenshots/phase-1/` 交付 1440×900 暗/亮、390×844 暗/亮以及 reduced-motion 静态终态样板；所有样板标注所用 commit 与设计规格版本。
+- [x] 主 Agent检查语义、可达性、复杂度、资产许可证和 Astro 可实现性。
 
 退出条件：`docs/refactor/design-specs.md`、固定截图矩阵、设计令牌表、组件状态表、响应式规格、动效分级和原创资产方向全部通过主 Agent review；尚不修改全站页面。
+
+执行结果（2026-08-22）：Antigravity（Gemini 3.7 Flash / High）完成视觉规格和零依赖静态原型；主 Agent要求并验收 360/390 移动端菜单及溢出修正、键盘焦点、亮暗主题、reduced-motion、原创资产和许可台账。8 组固定浏览器证据全部通过，整库 `npm run check` 全绿，阶段 1 放行。
 
 ### 阶段 2：架构地基与自动门禁（主 Agent主责，DeepSeek 协助）
 

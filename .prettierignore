@@ -18,3 +18,7 @@ docs/migration/baseline/hexo-next
 docs/migration/baseline/*.json
 audit-screenshots
 src/content/blog
+
+# This validator fixture intentionally keeps the canonical HTML5 doctype and
+# void-element syntax, which Prettier normalizes to a different house style.
+docs/refactor/prototype/index.html

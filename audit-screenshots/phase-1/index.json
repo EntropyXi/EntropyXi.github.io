@@ -1,0 +1,187 @@
+{
+  "generatedAt": "2026-08-21T16:00:29.587Z",
+  "source": "docs/refactor/prototype",
+  "designSpecVersion": "1.0.0",
+  "allCasesPass": true,
+  "cases": [
+    {
+      "name": "prototype-dark-desktop-1440",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "file": "prototype-dark-desktop-1440.png",
+      "viewportWidth": 1440,
+      "viewportHeight": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 1348,
+      "activeElement": {
+        "tag": "BODY",
+        "label": null,
+        "text": "跳到主内容\n\n    \n    \n      \n      \n      \n  "
+      },
+      "reducedAnimationName": "badge-pulse",
+      "desktopNavDisplay": "flex",
+      "mobileNavDisplay": "none",
+      "mobileMenuOpen": false,
+      "mobileTriggerHeight": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "prototype-light-desktop-1440",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "file": "prototype-light-desktop-1440.png",
+      "viewportWidth": 1440,
+      "viewportHeight": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 1348,
+      "activeElement": {
+        "tag": "BODY",
+        "label": null,
+        "text": "跳到主内容\n\n    \n    \n      \n      \n      \n  "
+      },
+      "reducedAnimationName": "badge-pulse",
+      "desktopNavDisplay": "flex",
+      "mobileNavDisplay": "none",
+      "mobileMenuOpen": false,
+      "mobileTriggerHeight": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "prototype-dark-mobile-390",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "file": "prototype-dark-mobile-390.png",
+      "viewportWidth": 390,
+      "viewportHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 1912,
+      "activeElement": {
+        "tag": "BODY",
+        "label": null,
+        "text": "跳到主内容\n\n    \n    \n      \n      \n      \n  "
+      },
+      "reducedAnimationName": "badge-pulse",
+      "desktopNavDisplay": "none",
+      "mobileNavDisplay": "block",
+      "mobileMenuOpen": false,
+      "mobileTriggerHeight": 44,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "prototype-dark-mobile-390-menu-open",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "menuOpen": true,
+      "file": "prototype-dark-mobile-390-menu-open.png",
+      "viewportWidth": 390,
+      "viewportHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 1912,
+      "activeElement": {
+        "tag": "SUMMARY",
+        "label": "打开导航菜单",
+        "text": "菜单"
+      },
+      "reducedAnimationName": "badge-pulse",
+      "desktopNavDisplay": "none",
+      "mobileNavDisplay": "block",
+      "mobileMenuOpen": true,
+      "mobileTriggerHeight": 44,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "prototype-light-mobile-390",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "file": "prototype-light-mobile-390.png",
+      "viewportWidth": 390,
+      "viewportHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 1912,
+      "activeElement": {
+        "tag": "BODY",
+        "label": null,
+        "text": "跳到主内容\n\n    \n    \n      \n      \n      \n  "
+      },
+      "reducedAnimationName": "badge-pulse",
+      "desktopNavDisplay": "none",
+      "mobileNavDisplay": "block",
+      "mobileMenuOpen": false,
+      "mobileTriggerHeight": 44,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "prototype-dark-mobile-360",
+      "width": 360,
+      "height": 800,
+      "theme": "dark",
+      "file": "prototype-dark-mobile-360.png",
+      "viewportWidth": 360,
+      "viewportHeight": 800,
+      "scrollWidth": 360,
+      "scrollHeight": 1953,
+      "activeElement": {
+        "tag": "BODY",
+        "label": null,
+        "text": "跳到主内容\n\n    \n    \n      \n      \n      \n  "
+      },
+      "reducedAnimationName": "badge-pulse",
+      "desktopNavDisplay": "none",
+      "mobileNavDisplay": "block",
+      "mobileMenuOpen": false,
+      "mobileTriggerHeight": 44,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "prototype-dark-reduced-motion",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reduced": true,
+      "file": "prototype-dark-reduced-motion.png",
+      "viewportWidth": 1440,
+      "viewportHeight": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 1348,
+      "activeElement": {
+        "tag": "BODY",
+        "label": null,
+        "text": "跳到主内容\n\n    \n    \n      \n      \n      \n  "
+      },
+      "reducedAnimationName": "none",
+      "desktopNavDisplay": "flex",
+      "mobileNavDisplay": "none",
+      "mobileMenuOpen": false,
+      "mobileTriggerHeight": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "prototype-dark-keyboard-focus",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "focus": true,
+      "file": "prototype-dark-keyboard-focus.png",
+      "viewportWidth": 1440,
+      "viewportHeight": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 1348,
+      "activeElement": {
+        "tag": "A",
+        "label": "EntropyXi 首页",
+        "text": "Ξ\n            EntropyXi"
+      },
+      "reducedAnimationName": "badge-pulse",
+      "desktopNavDisplay": "flex",
+      "mobileNavDisplay": "none",
+      "mobileMenuOpen": false,
+      "mobileTriggerHeight": 0,
+      "horizontalOverflow": false
+    }
+  ]
+}
