@@ -1,0 +1,330 @@
+{
+  "browser": "Chromium 151.0.7922.34",
+  "commit": "1462a23f6f49091d477b2ee56d50a64a184f7566",
+  "generatedAt": "2026-08-21T15:28:40.433Z",
+  "baseUrl": "http://127.0.0.1:4321",
+  "command": "npm run capture:ui-baseline",
+  "motionPreference": "no-preference",
+  "files": [
+    {
+      "file": "home-1440x900-dark.png",
+      "pathname": "/",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "article-ddim-1440x900-dark.png",
+      "pathname": "/2026/05/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDIM/",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "archives-1440x900-dark.png",
+      "pathname": "/archives/",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "categories-1440x900-dark.png",
+      "pathname": "/categories/",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "tags-1440x900-dark.png",
+      "pathname": "/tags/",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "search-1440x900-dark.png",
+      "pathname": "/search/",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "about-1440x900-dark.png",
+      "pathname": "/about/",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "404-1440x900-dark.png",
+      "pathname": "/404.html",
+      "theme": "dark",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "home-1440x900-light.png",
+      "pathname": "/",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "article-ddim-1440x900-light.png",
+      "pathname": "/2026/05/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDIM/",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "archives-1440x900-light.png",
+      "pathname": "/archives/",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "categories-1440x900-light.png",
+      "pathname": "/categories/",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "tags-1440x900-light.png",
+      "pathname": "/tags/",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "search-1440x900-light.png",
+      "pathname": "/search/",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "about-1440x900-light.png",
+      "pathname": "/about/",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "404-1440x900-light.png",
+      "pathname": "/404.html",
+      "theme": "light",
+      "viewport": {
+        "id": "1440x900",
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "home-390x844-dark.png",
+      "pathname": "/",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "article-ddim-390x844-dark.png",
+      "pathname": "/2026/05/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDIM/",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "archives-390x844-dark.png",
+      "pathname": "/archives/",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "categories-390x844-dark.png",
+      "pathname": "/categories/",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "tags-390x844-dark.png",
+      "pathname": "/tags/",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "search-390x844-dark.png",
+      "pathname": "/search/",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "about-390x844-dark.png",
+      "pathname": "/about/",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "404-390x844-dark.png",
+      "pathname": "/404.html",
+      "theme": "dark",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "home-390x844-light.png",
+      "pathname": "/",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "article-ddim-390x844-light.png",
+      "pathname": "/2026/05/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B5%81%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B/DDIM/",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "archives-390x844-light.png",
+      "pathname": "/archives/",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "categories-390x844-light.png",
+      "pathname": "/categories/",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "tags-390x844-light.png",
+      "pathname": "/tags/",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "search-390x844-light.png",
+      "pathname": "/search/",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "about-390x844-light.png",
+      "pathname": "/about/",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "404-390x844-light.png",
+      "pathname": "/404.html",
+      "theme": "light",
+      "viewport": {
+        "id": "390x844",
+        "width": 390,
+        "height": 844
+      }
+    }
+  ]
+}

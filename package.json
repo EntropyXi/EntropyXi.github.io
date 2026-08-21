@@ -11,6 +11,7 @@
     "copy:vendor": "tsx scripts/copy-vendor-assets.ts",
     "check": "npm run format:check && npm run lint && npm run check:types && npm run audit:content && npm run test:unit -- --run && npm run test:e2e && npm run audit:output",
     "check:types": "astro check",
+    "capture:ui-baseline": "tsx scripts/capture-ui-baseline.ts",
     "audit:content": "tsx scripts/audit-content.ts",
     "audit:output": "tsx scripts/audit-output.ts",
     "test:unit": "vitest",

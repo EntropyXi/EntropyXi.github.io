@@ -16,7 +16,11 @@ _multiconfig.yml
 .obsidian/
 .vscode/
 .claude/
-audit-screenshots/
+audit-screenshots/**/*.png
+audit-screenshots/**/*.webp
+!audit-screenshots/
+!audit-screenshots/**/
+!audit-screenshots/**/index.json
 update_categories.js
 *.swp
 themes/*
