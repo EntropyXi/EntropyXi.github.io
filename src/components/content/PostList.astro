@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { formatPostDate } from "@/lib/date/format-date";
-import { buildPostPath } from "@/lib/routing/post-path";
+import PostCard from "./PostCard.astro";
 
 interface Props {
   posts: CollectionEntry<"blog">[];
@@ -10,21 +9,28 @@ interface Props {
 const { posts } = Astro.props;
 ---
 
-<ul class="post-list">
-  {
-    posts.map((post) => (
-      <li class="post-card">
-        <h2 class="post-card-title">
-          <a href={buildPostPath(post.data.permalink)}>{post.data.title}</a>
-        </h2>
-        <p class="post-card-description">{post.data.description}</p>
-        <div class="post-card-meta">
-          <time datetime={post.data.date}>
-            {formatPostDate(post.data.date)}
-          </time>
-          <span>{post.data.categories.join(" / ")}</span>
-        </div>
-      </li>
-    ))
+<div class="post-list-wrapper">
+  <ul class="post-list">
+    {
+      posts.map((post) => (
+        <li class="post-list-item">
+          <PostCard post={post} />
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .post-list-wrapper {
+    width: 100%;
   }
-</ul>
+
+  .post-list-item {
+    display: flex;
+  }
+
+  .post-list-item :global(.post-card) {
+    width: 100%;
+  }
+</style>

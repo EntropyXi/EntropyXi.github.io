@@ -1,0 +1,115 @@
+---
+// ThemeToggle.astro: Cyber-styled Light/Dark Mode Switcher
+---
+
+<button
+  type="button"
+  id="theme-toggle"
+  class="theme-toggle-btn"
+  aria-label="切换明暗主题"
+  title="切换明暗主题"
+>
+  <svg
+    class="sun-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="m4.93 4.93 1.41 1.41"></path>
+    <path d="m17.66 17.66 1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="m6.34 17.66-1.41 1.41"></path>
+    <path d="m19.07 4.93-1.41 1.41"></path>
+  </svg>
+  <svg
+    class="moon-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+  </svg>
+</button>
+
+<style>
+  .theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text-dim);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .theme-toggle-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent-glow);
+  }
+
+  .theme-toggle-btn svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    transition: transform var(--transition-normal);
+  }
+
+  /* Default (Dark): show sun to switch to light */
+  .sun-icon {
+    display: block;
+  }
+
+  .moon-icon {
+    display: none;
+  }
+
+  /* Light mode: show moon to switch to dark */
+  :global(html[data-theme="light"]) .sun-icon {
+    display: none;
+  }
+
+  :global(html[data-theme="light"]) .moon-icon {
+    display: block;
+  }
+</style>
+
+<script>
+  function initThemeToggle(): void {
+    const button = document.getElementById("theme-toggle");
+    if (!button || button.dataset.bound === "true") return;
+    button.dataset.bound = "true";
+
+    button.addEventListener("click", () => {
+      const currentTheme = document.documentElement.dataset.theme;
+      const nextTheme = currentTheme === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = nextTheme;
+      try {
+        localStorage.setItem("entropyxi-theme", nextTheme);
+      } catch {
+        // Ignore localStorage restrictions
+      }
+    });
+  }
+
+  initThemeToggle();
+  document.addEventListener("astro:page-load", initThemeToggle);
+</script>

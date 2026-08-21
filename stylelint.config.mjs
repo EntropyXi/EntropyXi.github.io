@@ -6,6 +6,14 @@ export default {
     {
       files: ["**/*.astro"],
       customSyntax: "postcss-html",
+      rules: {
+        "selector-pseudo-class-no-unknown": [
+          true,
+          {
+            ignorePseudoClasses: ["global"],
+          },
+        ],
+      },
     },
   ],
 };

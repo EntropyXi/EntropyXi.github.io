@@ -1,21 +1,38 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { buildTagPath } from "@/lib/content/aggregate";
+import { buildTagPath, postsWithTag } from "@/lib/content/aggregate";
+import "@/styles/home.css";
 
 const posts = await getCollection("blog", ({ data }) => data.draft !== true);
-const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+
+const tagsWithCount = allTags.map((tag) => ({
+  name: tag,
+  count: postsWithTag(posts, tag).length,
+}));
 ---
 
-<BaseLayout title="标签" description="文章标签">
-  <h1 class="page-title">标签</h1>
-  <ul class="post-list">
+<BaseLayout title="标签" description="全站文章标签索引">
+  <div class="tags-index-header">
+    <h1 class="page-title">文章标签</h1>
+    <p class="page-intro">共 {allTags.length} 个技术标签</p>
+  </div>
+
+  <div class="badge-grid">
     {
-      tags.map((tag) => (
-        <li class="post-card">
-          <a href={buildTagPath(tag)}>{tag}</a>
-        </li>
+      tagsWithCount.map((tag) => (
+        <a href={buildTagPath(tag.name)} class="tag-badge">
+          <span>#{tag.name}</span>
+          <span class="tag-count">({tag.count})</span>
+        </a>
       ))
     }
-  </ul>
+  </div>
 </BaseLayout>
+
+<style>
+  .tags-index-header {
+    margin-bottom: 2rem;
+  }
+</style>

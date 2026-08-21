@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { buildCategoryPath } from "@/lib/content/aggregate";
+import { buildCategoryPath, postsInCategory } from "@/lib/content/aggregate";
+import "@/styles/home.css";
 
 const posts = await getCollection("blog", ({ data }) => data.draft !== true);
 const categoryPaths = [
@@ -13,17 +14,43 @@ const categoryPaths = [
     ),
   ),
 ].sort();
+
+const categoriesWithCount = categoryPaths.map((catPath) => {
+  const segments = catPath.split("/");
+  const count = postsInCategory(posts, segments).length;
+  return {
+    path: catPath,
+    segments,
+    name: segments[segments.length - 1],
+    count,
+  };
+});
 ---
 
-<BaseLayout title="分类" description="文章分类">
-  <h1 class="page-title">分类</h1>
-  <ul class="post-list">
+<BaseLayout title="分类" description="全站文章分类导览">
+  <div class="category-index-header">
+    <h1 class="page-title">文章分类</h1>
+    <p class="page-intro">共 {categoryPaths.length} 个分类维度</p>
+  </div>
+
+  <div class="badge-grid">
     {
-      categoryPaths.map((path) => (
-        <li class="post-card">
-          <a href={buildCategoryPath(path.split("/"))}>{path}</a>
-        </li>
+      categoriesWithCount.map((cat) => (
+        <a href={buildCategoryPath(cat.segments)} class="category-card">
+          <span class="category-card-name">{cat.path}</span>
+          <span class="tag-count">{cat.count} 篇</span>
+        </a>
       ))
     }
-  </ul>
+  </div>
 </BaseLayout>
+
+<style>
+  .category-index-header {
+    margin-bottom: 2rem;
+  }
+
+  .category-card-name {
+    font-weight: 500;
+  }
+</style>

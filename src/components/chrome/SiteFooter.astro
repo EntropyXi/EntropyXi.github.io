@@ -1,0 +1,94 @@
+---
+// SiteFooter.astro: Clean Cyberpunk Footer
+---
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-status">
+      <span class="status-pulse" aria-hidden="true"></span>
+      <span>System Status: <strong>SSG Online</strong></span>
+    </div>
+    <div class="site-footer-copy">
+      <p>
+        © 2026 EntropyXi · Built with <a
+          href="https://astro.build"
+          target="_blank"
+          rel="noopener noreferrer">Astro 7</a
+        > & <a
+          href="https://github.com/EntropyXi"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-muted);
+    padding: 2rem 1.25rem;
+    font-size: 0.88rem;
+    transition: background var(--transition-normal);
+  }
+
+  .site-footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: var(--max-width-wide);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .site-footer-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-text-dim);
+  }
+
+  .status-pulse {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent-glow);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .site-footer-copy p {
+    margin: 0;
+  }
+
+  .site-footer a {
+    color: var(--color-text-dim);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .site-footer a:hover {
+    color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,188 @@
+---
+// Hero.astro: Cyberpunk Home Banner
+---
+
+<section class="hero-section" aria-label="欢迎首屏">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span>Generative AI & Mathematics Research</span>
+    </div>
+
+    <h1 class="hero-title">EntropyXi 的技术笔记</h1>
+
+    <p class="hero-description">
+      聚焦<strong>深度学习</strong>、<strong>扩散模型</strong>、<strong
+        >流匹配 (Flow Matching)</strong
+      >与<strong>数值分析</strong>的严谨数学推导与工程实践。
+    </p>
+
+    <div class="hero-chips">
+      <span class="hero-chip"># 扩散模型</span>
+      <span class="hero-chip"># 流匹配与 CNF</span>
+      <span class="hero-chip"># SDE / ODE</span>
+      <span class="hero-chip"># 图像超分辨率</span>
+      <span class="hero-chip"># 数值计算</span>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#latest-posts" class="hero-btn hero-btn-primary">
+        <span>探索文章</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14"></path>
+          <path d="m19 12-7 7-7-7"></path>
+        </svg>
+      </a>
+      <a href="/archives/" class="hero-btn hero-btn-secondary">
+        <span>归档体系</span>
+      </a>
+      <a href="/about/" class="hero-btn hero-btn-secondary">
+        <span>关于作者</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    padding: 3.5rem 0 3rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    max-width: 48rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    box-shadow: 0 0 15px var(--color-accent-subtle);
+  }
+
+  .hero-badge-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent-glow);
+  }
+
+  .hero-title {
+    margin: 0;
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  .hero-description {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+
+  .hero-description strong {
+    color: var(--color-text);
+  }
+
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .hero-chip {
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-muted-soft);
+    color: var(--color-text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .hero-btn-primary {
+    background: var(--color-accent);
+    color: #000;
+    box-shadow: 0 0 20px var(--color-accent-glow);
+  }
+
+  .hero-btn-primary:hover {
+    background: var(--color-accent-hover);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px var(--color-accent-glow);
+  }
+
+  .hero-btn-secondary {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .hero-btn-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  @media (width <= 48rem) {
+    .hero-section {
+      padding: 2rem 0;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+  }
+</style>

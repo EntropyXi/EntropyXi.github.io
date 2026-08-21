@@ -10,7 +10,7 @@ const { currentPage, pages, href } = Astro.props;
 
 {
   pages > 1 && (
-    <nav class="post-pagination" aria-label="分页">
+    <nav class="post-pagination-nav post-pagination" aria-label="分页">
       <ul class="pagination-list">
         {Array.from({ length: pages }, (_, index) => index + 1).map((page) => (
           <li>

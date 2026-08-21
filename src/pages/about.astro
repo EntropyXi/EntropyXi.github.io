@@ -4,13 +4,112 @@ import "@/styles/prose.css";
 ---
 
 <BaseLayout title="关于本人" description="关于 EntropyXi">
-  <article class="prose">
-    <h1 class="page-title">关于本人</h1>
-    <h2>Entropy_Xi</h2>
-    <h3>是一名软件工程专业的学生</h3>
-    <h3>目前正在学习 C/C++, Python, Ai4sci，扩散模型与超分辨率</h3>
-    <h3>EMAIL: zengzhaoxi.g@gmail.com</h3>
-    <h3>欢迎交流学习</h3>
-    <h3>Student at SCAU, interested in computer science, rl, diffusion, llm</h3>
-  </article>
+  <div class="about-container">
+    <header class="about-header">
+      <div class="about-avatar-wrapper">
+        <span class="about-avatar-symbol">Ξ</span>
+      </div>
+      <div>
+        <h1 class="page-title">关于本人</h1>
+        <p class="about-role">Entropy_Xi · Software Engineering Student</p>
+      </div>
+    </header>
+
+    <article class="prose about-card">
+      <h2>个人简介</h2>
+      <p>
+        是一名软件工程专业的学生（Student at
+        SCAU），专注于计算机科学基础与前沿生成式 AI 算法。
+      </p>
+
+      <h2>研究与技术兴趣</h2>
+      <ul>
+        <li>
+          <strong>生成建模</strong>：扩散模型 (Diffusion Models)、流匹配 (Flow
+          Matching)、连续正则化流 (CNF)
+        </li>
+        <li>
+          <strong>底层与优化</strong>：数值分析、随机微分方程 (SDE / ODE)、C/C++
+          与高性能计算
+        </li>
+        <li>
+          <strong>前沿探索</strong>：图像超分辨率
+          (Super-Resolution)、AI4Science、强化学习 (RL) 与 LLM
+        </li>
+      </ul>
+
+      <h2>联系方式</h2>
+      <p>
+        欢迎交流探讨学术与工程问题：<br />
+        <strong>EMAIL</strong>：<a href="mailto:zengzhaoxi.g@gmail.com"
+          >zengzhaoxi.g@gmail.com</a
+        ><br />
+        <strong>GitHub</strong>：<a
+          href="https://github.com/EntropyXi"
+          target="_blank"
+          rel="noopener noreferrer">github.com/EntropyXi</a
+        >
+      </p>
+    </article>
+  </div>
 </BaseLayout>
+
+<style>
+  .about-container {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .about-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-avatar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 0 20px var(--color-accent-glow);
+  }
+
+  .about-avatar-symbol {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .about-header .page-title {
+    margin: 0 0 0.25rem;
+  }
+
+  .about-role {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--color-muted);
+  }
+
+  .about-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (width <= 40rem) {
+    .about-card {
+      padding: 1.25rem;
+    }
+  }
+</style>

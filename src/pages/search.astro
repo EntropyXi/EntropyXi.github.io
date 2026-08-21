@@ -3,56 +3,151 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import "@/styles/home.css";
 ---
 
-<BaseLayout title="搜索" description="搜索文章">
-  <h1 class="page-title">搜索</h1>
-  <form class="search-form" role="search" onsubmit="return false">
-    <label for="search-input">搜索文章</label>
-    <input
-      id="search-input"
-      type="search"
-      autocomplete="off"
-      placeholder="输入中文或英文关键词"
-    />
-  </form>
-  <ul class="search-results post-list" aria-live="polite"></ul>
+<BaseLayout title="搜索" description="全站文章搜索">
+  <div class="search-container">
+    <div class="search-header">
+      <h1 class="page-title">全站搜索</h1>
+      <p class="page-intro">输入中文或英文关键词，实时索引 30 篇技术文章</p>
+    </div>
+
+    <form class="search-form" role="search" onsubmit="return false">
+      <label for="search-input" class="visually-hidden">搜索文章</label>
+      <div class="search-input-wrapper">
+        <svg
+          class="search-input-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+        </svg>
+        <input
+          id="search-input"
+          type="search"
+          autocomplete="off"
+          placeholder="搜索扩散模型、流匹配、SDE、数值分析等..."
+          autofocus
+        />
+        <kbd class="search-kbd-hint">/</kbd>
+      </div>
+    </form>
+
+    <div id="search-status" class="search-status" aria-live="polite"></div>
+    <ul class="search-results" id="search-results" aria-live="polite"></ul>
+  </div>
 </BaseLayout>
 
-<script>
-  const input = document.getElementById("search-input") as HTMLInputElement;
-  const results = document.querySelector(".search-results") as HTMLUListElement;
-  let debounce = 0;
-
-  async function runSearch(query: string): Promise<void> {
-    results.replaceChildren();
-    if (query.trim() === "") return;
-    const pagefindUrl = "/pagefind/pagefind.js";
-    const pagefind = await import(/* -ignore */ pagefindUrl);
-    const search = await pagefind.search(query.trim());
-    if (search.results.length === 0) {
-      const item = document.createElement("li");
-      item.className = "post-card";
-      item.textContent = "没有找到相关文章。";
-      results.appendChild(item);
-      return;
-    }
-    for (const result of search.results) {
-      const data = await result.data();
-      const item = document.createElement("li");
-      item.className = "post-card";
-      const link = document.createElement("a");
-      link.href = data.url;
-      link.textContent = data.meta?.title ?? data.url;
-      const excerpt = document.createElement("p");
-      excerpt.className = "post-card-description";
-      excerpt.innerHTML = data.excerpt ?? "";
-      item.appendChild(link);
-      item.appendChild(excerpt);
-      results.appendChild(item);
-    }
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
   }
 
-  input.addEventListener("input", () => {
-    window.clearTimeout(debounce);
-    debounce = window.setTimeout(() => void runSearch(input.value), 250);
-  });
+  .search-status {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    min-height: 1.5rem;
+  }
+</style>
+
+<script>
+  function initSearch(): void {
+    const input = document.getElementById("search-input") as HTMLInputElement;
+    const results = document.getElementById(
+      "search-results",
+    ) as HTMLUListElement;
+    const status = document.getElementById("search-status") as HTMLDivElement;
+
+    if (!input || !results || input.dataset.bound === "true") return;
+    input.dataset.bound = "true";
+
+    let debounceTimer = 0;
+
+    // Press '/' to focus search input anywhere
+    window.addEventListener("keydown", (e) => {
+      if (
+        e.key === "/" &&
+        document.activeElement !== input &&
+        document.activeElement?.tagName !== "INPUT" &&
+        document.activeElement?.tagName !== "TEXTAREA"
+      ) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+
+    async function executeSearch(query: string): Promise<void> {
+      results.replaceChildren();
+      const trimmed = query.trim();
+      if (!trimmed) {
+        if (status) status.textContent = "";
+        return;
+      }
+
+      if (status) status.textContent = "正在搜索...";
+
+      try {
+        const pagefindUrl = "/pagefind/pagefind.js";
+        const pagefind = await import(/* -ignore */ pagefindUrl);
+        const search = await pagefind.search(trimmed);
+
+        if (search.results.length === 0) {
+          if (status) status.textContent = `未找到与 "${trimmed}" 相关的文章。`;
+          return;
+        }
+
+        if (status)
+          status.textContent = `找到 ${search.results.length} 篇相关文章：`;
+
+        for (const result of search.results) {
+          const data = await result.data();
+          const card = document.createElement("li");
+          card.className = "search-result-card";
+
+          const title = document.createElement("h2");
+          title.className = "search-result-title";
+
+          const link = document.createElement("a");
+          link.href = data.url;
+          link.textContent = data.meta?.title ?? data.url;
+          title.appendChild(link);
+
+          const excerpt = document.createElement("div");
+          excerpt.className = "search-result-excerpt";
+          excerpt.innerHTML = data.excerpt ?? "";
+
+          card.appendChild(title);
+          card.appendChild(excerpt);
+          results.appendChild(card);
+        }
+      } catch {
+        if (status) status.textContent = "搜索索引加载失败，请刷新页面重试。";
+      }
+    }
+
+    input.addEventListener("input", () => {
+      window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(
+        () => void executeSearch(input.value),
+        250,
+      );
+    });
+  }
+
+  initSearch();
+  document.addEventListener("astro:page-load", initSearch);
 </script>
