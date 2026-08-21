@@ -18,6 +18,11 @@ for (const path of complexMathPosts) {
       await page.goto(path);
       await expect(page.locator("mjx-container").first()).toBeVisible();
 
+      const formulaCount = await page.locator("mjx-container").count();
+      await expect(
+        page.locator('mjx-container svg[role="img"][aria-label^="数学公式："]'),
+      ).toHaveCount(formulaCount);
+
       const layout = await page.evaluate(() => ({
         viewportWidth: window.innerWidth,
         documentWidth: document.documentElement.scrollWidth,

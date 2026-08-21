@@ -7,6 +7,12 @@ test("article page renders content and MathJax formulas", async ({ page }) => {
   ).toBeVisible();
   await expect(page.locator("mjx-container").first()).toBeVisible();
 
+  const formulaCount = await page.locator("mjx-container").count();
+  const accessibleFormulaCount = await page
+    .locator('mjx-container svg[role="img"][aria-label^="数学公式："]')
+    .count();
+  expect(accessibleFormulaCount).toBe(formulaCount);
+
   const mathText = await page.locator(".prose").innerText();
   expect(mathText).not.toContain("$$");
   expect(mathText).not.toContain("\\begin");

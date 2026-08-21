@@ -26,6 +26,8 @@ function main(): void {
   const baseline = JSON.parse(readFileSync(baselineFile, "utf8")) as LegacyBaseline;
   const articleCount = baseline.html.filter((record) => record.kind === "article").length;
   let articleHtmlCount = 0;
+  let mathContainerCount = 0;
+  let accessibleMathSvgCount = 0;
 
   for (const record of baseline.html) {
     const decodedPathname = decodeURIComponent(record.pathname);
@@ -38,8 +40,24 @@ function main(): void {
     if (record.kind === "article") {
       articleHtmlCount += 1;
       const html = readFileSync(file, "utf8");
-      if (html.includes("$$")) errors.push(`${record.pathname}: raw $$ delimiter leaked`);
-      if (html.includes("\\begin{")) errors.push(`${record.pathname}: raw \\begin leaked`);
+      const htmlWithoutMathLabels = html.replace(/aria-label="数学公式：[^"]*"/gu, "");
+      if (htmlWithoutMathLabels.includes("$$")) {
+        errors.push(`${record.pathname}: raw $$ delimiter leaked outside an accessible name`);
+      }
+      if (htmlWithoutMathLabels.includes("\\begin{")) {
+        errors.push(`${record.pathname}: raw \\begin leaked outside an accessible name`);
+      }
+      if (html.includes("mathjax-error")) errors.push(`${record.pathname}: MathJax error marker found`);
+
+      const articleMathContainers = html.match(/<mjx-container\b/gu)?.length ?? 0;
+      const articleAccessibleSvg = html.match(/aria-label="数学公式：/gu)?.length ?? 0;
+      mathContainerCount += articleMathContainers;
+      accessibleMathSvgCount += articleAccessibleSvg;
+      if (articleAccessibleSvg !== articleMathContainers) {
+        errors.push(
+          `${record.pathname}: ${articleAccessibleSvg}/${articleMathContainers} MathJax SVGs have accessible names`,
+        );
+      }
     }
   }
 
@@ -61,12 +79,20 @@ function main(): void {
     }
   }
 
+  for (const removedProductionArtifact of ["dev/math-spike/index.html", "vendor/mathjax"]) {
+    if (existsSync(path.join(distRoot, removedProductionArtifact))) {
+      errors.push(`development-only artifact leaked into production: ${removedProductionArtifact}`);
+    }
+  }
+
   if (errors.length > 0) {
     for (const error of errors) console.error(`OUTPUT: ${error}`);
     process.exit(1);
   }
 
-  console.log(`OUTPUT: ${baseline.html.length} legacy pages and ${articleCount} articles passed`);
+  console.log(
+    `OUTPUT: ${baseline.html.length} legacy pages, ${articleCount} articles, and ${accessibleMathSvgCount}/${mathContainerCount} accessible formulas passed`,
+  );
 }
 
 main();

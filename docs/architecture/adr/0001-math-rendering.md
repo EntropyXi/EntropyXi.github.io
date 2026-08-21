@@ -2,7 +2,7 @@
 
 - 状态：已接受
 - 日期：2026-08-20
-- 修订：2026-08-20 阶段 3 实证后由“按页客户端”改为“构建期”。
+- 修订：2026-08-20 阶段 3 实证后由“按页客户端”改为“构建期”；2026-08-21 移除迁移期客户端参考页并补齐 SVG 可访问名称。
 - 关联计划：`docs/superpowers/plans/2026-08-20-astro-migration-plan.md` §9
 
 ## 背景
@@ -26,8 +26,10 @@
 2. 分隔符保留旧站事实：`$...$` 与 `$$...$$`；不引入 `\(...\)`、
    `\[...\]`，不把现有正文归一化为其他分隔符。
 3. 非数学页不加载任何 MathJax 脚本。
-4. 客户端 MathJax 仅保留在 `src/pages/dev/math-spike.astro` 作为参考实现，
-   对应 `src/components/content/MathJax.astro` 与自托管 vendor 资源。
+4. 每个构建期 MathJax SVG 使用同序原始 TeX 生成以“数学公式：”开头的
+   `aria-label`；捕获数量与渲染数量不一致时构建失败。
+5. 删除迁移期 `/dev/math-spike/`、客户端 MathJax 组件、自托管 vendor 复制
+   脚本与直接 `mathjax` 依赖，避免开发资产进入生产产物。
 
 ## 修订原因
 
@@ -46,18 +48,20 @@ Astro 7 默认 Sätteri Markdown 处理器会把 LaTeX 中的 `_` 当作 Markdow
 
 ## 验证
 
-- `src/pages/dev/math-spike.astro` 覆盖行内/显示公式、`equation`、
-  `aligned`、`align`、`cases`、`bmatrix`、`pmatrix`、`\tag`、
+- 5 篇真实复杂公式文章覆盖行内/显示公式、AMS 环境、矩阵、`\tag`、
   `\mathbb`、`\boldsymbol`、`\underbrace`、中文 `\text` 与长公式。
-- `tests/e2e/math-spike.spec.ts` 验证客户端参考实现。
-- `tests/e2e/article.spec.ts` 验证真实文章页存在 `mjx-container`，
-  正文无 `$$`/`\begin` 泄漏，页面无横向溢出。
+- `tests/unit/math-accessibility.test.ts` 验证源顺序、空白归一化、SVG 标注
+  与数量不一致的失败路径。
+- `tests/e2e/article.spec.ts` 与 `article-layout.spec.ts` 验证真实文章页存在
+  `mjx-container`，每个公式 SVG 都有可访问名称，正文无原始 TeX 泄漏，
+  桌面与移动页面无横向溢出。
 
 ## 后果
 
 - 文章迁移脚本不得改写 TeX 分隔符；内容哈希差异报告不得把数学正文
   变化归为可接受差异。
 - 输出审计按构建期方案执行：静态扫描构建 HTML 断言无 TeX 分隔符泄漏、
-  无 MathJax 错误标记，并统计 `mjx-container` 数量。
-- `astro-public/vendor/mathjax` 仅用于 dev spike，由 copy 脚本生成并保持
-  git 忽略；阶段 7 可评估是否移除客户端 vendor。
+  无 MathJax 错误标记，并要求全部 `mjx-container` 的 SVG 具有可访问名称。
+- 生产产物审计禁止 `/dev/math-spike/` 和 `vendor/mathjax` 再次进入 `dist/`。
+- 可访问名称保留原 TeX 而不是生成自然语言朗读；这是无需引入客户端运行时
+  的确定性基线。若未来引入专业数学语音规则，必须另开 ADR 并比较产物体积。

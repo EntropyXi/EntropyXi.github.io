@@ -3,6 +3,11 @@ import { defineConfig } from "astro/config";
 import rehypeMathjax from "rehype-mathjax";
 import remarkMath from "remark-math";
 
+import {
+  captureMathAccessibilitySources,
+  labelMathJaxSvg,
+} from "./src/lib/markdown/math-accessibility";
+
 export default defineConfig({
   site: "https://entropyxi.github.io",
   trailingSlash: "always",
@@ -12,7 +17,11 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeMathjax],
+      rehypePlugins: [
+        captureMathAccessibilitySources,
+        rehypeMathjax,
+        labelMathJaxSvg,
+      ],
     }),
   },
 });

@@ -32,3 +32,11 @@
 - 阶段 2：主 Agent先完成脚本解耦、测试与动效契约；
 - 阶段 3 起：按阶段把明确的 Astro/CSS/SVG 可视文件串行租给 Antigravity；
 - 任何 Agent 完成后必须停止写入，主 Agent审查通过才释放到下一阶段。
+
+## 阶段 0.5 放行记录
+
+- 数学可访问性插件、构建配置、ADR、单测、E2E 与产物审计均由主 Agent实现；
+- Antigravity 未写入阶段 0.5 文件；
+- 全量门禁、1289/1289 公式产物审计、Chrome DOM 抽查与 Lighthouse 数学 SVG
+  审计通过后，数学专项允许进入独立 commit；
+- permalink、分页、聚合路由、Astro SSG、Pagefind 与 GitHub Pages 链路保持现状。

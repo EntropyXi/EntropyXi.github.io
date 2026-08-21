@@ -612,6 +612,8 @@ component styles    # 组件内部样式
 
 获批专项的实现门：由主 Agent 单独派工、单独 ADR/变更单元、单独文件租约、独立回滚点，并完整遵守 §8.2 DoD。UI 阶段进行中不得并发写入该阶段租约文件；若专项改变 UI 依赖契约，必须先暂停后续 UI 阶段、完成专项回归并重新批准 design specs。
 
+执行结果（2026-08-21）：permalink、分页、聚合路由、Astro SSG、Pagefind 与 GitHub Pages 保持现状；数学可访问性与迁移期客户端 vendor 移除作为唯一专项完成独立实施。30/30 文章、1289/1289 个公式、5 篇复杂公式双视口、Chrome DOM 与 Lighthouse `svg-img-alt` 均通过，证据与回滚见 `docs/refactor/foundation-math-implementation.md`。
+
 ### 阶段 1：视觉方向与组件规格（Antigravity 主责，主 Agent审批）
 
 目标：先形成可审查的设计系统和低成本样板，不直接全站铺开。
