@@ -299,9 +299,9 @@ test.describe("motion feature flags fallback contract", () => {
     await page.goto("/");
     const root = page.locator("html");
     await expect(root).toHaveAttribute("data-feature-magnetic", "false");
-    const cta = page.locator(".hero-btn-primary[data-magnetic]");
-    await cta.hover();
-    await expect(cta).not.toHaveAttribute("data-magnetic-state", "active");
+    const target = page.locator(".site-logo-link[data-magnetic]");
+    await target.hover();
+    await expect(target).not.toHaveAttribute("data-magnetic-state", "active");
   });
 
   test("all feature flags disabled maintains clean stable layout", async ({

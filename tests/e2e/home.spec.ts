@@ -10,7 +10,7 @@ test("home page renders the site title and welcome heading", async ({
   ).toBeVisible();
 
   // On full-screen hero landing page, scroll down to reveal latest posts section
-  await page.getByRole("link", { name: "探索文章" }).click();
+  await page.getByRole("link", { name: "向下滚动至最新文章" }).click();
   await expect(page.locator(".post-card").first()).toBeVisible();
 });
 

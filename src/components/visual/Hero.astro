@@ -1,35 +1,10 @@
 ---
-// Hero.astro: Fullscreen Immersive Sunset Landing Hero Component
-// Adheres to docs/superpowers/plans/2026-08-22-suisen-sunset-hero-redesign-plan.md
-import { buildTagPath } from "@/lib/content/aggregate";
-
-interface ResearchTopic {
-  label: string;
-  tag: string;
-}
-
-const researchTopics: ResearchTopic[] = [
-  { label: "流匹配与扩散模型", tag: "流匹配与扩散模型" },
-  { label: "深度学习理论", tag: "深度学习" },
-  { label: "数值分析与优化", tag: "数值分析" },
-  { label: "概率论与随机过程", tag: "概率论" },
-  { label: "生成式超分辨率", tag: "超分辨率" },
-  { label: "信号与系统", tag: "信号与系统" },
-];
+// Hero.astro: Streamlined Immersive Welcome Hero (Upper-Left Layout & Condensed Typography)
 ---
 
 <section class="hero-fullscreen" aria-label="欢迎首屏" data-theme-scope="dark">
-  <!-- Central Content Card sitting on persistent fixed ambient wallpaper -->
   <div class="hero-content-container">
-    <!-- Status & Announcement Badge -->
-    <div class="hero-status-badge">
-      <span class="hero-status-pulse" aria-hidden="true"></span>
-      <span class="hero-status-title">专题前沿</span>
-      <span class="hero-status-divider" aria-hidden="true">/</span>
-      <span class="hero-status-desc">SDE 扩散模型与流匹配理论推导</span>
-    </div>
-
-    <!-- Massive Stylized Brand Title (Image 2 style) -->
+    <!-- Massive Stylized Condensed Brand Title (Image 2 style) -->
     <div class="hero-brand-block">
       <h1 class="hero-welcome-title">
         <span class="welcome-line-1">WELCOME TO</span>
@@ -37,8 +12,8 @@ const researchTopics: ResearchTopic[] = [
       </h1>
     </div>
 
-    <!-- Welcoming Narrative Card -->
-    <div class="hero-narrative-card">
+    <!-- Welcoming Narrative (Clean text, no black box background) -->
+    <div class="hero-narrative-block">
       <p class="narrative-line">
         这里是 <strong class="brand-text">EntropyXi</strong> 的技术笔记。
       </p>
@@ -47,101 +22,45 @@ const researchTopics: ResearchTopic[] = [
         聚焦<strong>深度学习</strong>、<strong
           >扩散模型 (Diffusion Models)</strong
         >、<strong>流匹配 (Flow Matching)</strong>与<strong>数值分析</strong
-        >的严谨数学推导、收敛性证明与高性能工程落地。
+        >的严谨数学推导与高性能工程落地。
       </p>
-    </div>
-
-    <!-- Preserved 6 Verified Research Topic Chips -->
-    <div class="hero-topics-wrapper" aria-label="核心研究主题">
-      <span class="hero-topics-label">研究主题</span>
-      <div class="hero-topics-list">
-        {
-          researchTopics.map((topic) => (
-            <a href={buildTagPath(topic.tag)} class="hero-topic-chip">
-              <span class="hero-topic-hash" aria-hidden="true">
-                #
-              </span>
-              <span>{topic.label}</span>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-
-    <!-- Preserved 4 CTA Navigation Actions -->
-    <div class="hero-actions">
-      <a href="#latest-posts" class="hero-btn hero-btn-primary" data-magnetic>
-        <span>探索文章</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <polyline points="19 12 12 19 5 12"></polyline>
-        </svg>
-      </a>
-      <a href="/categories/" class="hero-btn hero-btn-secondary">
-        <span>分类图谱</span>
-      </a>
-      <a href="/archives/" class="hero-btn hero-btn-secondary">
-        <span>全站归档</span>
-      </a>
-      <a href="/about/" class="hero-btn hero-btn-secondary">
-        <span>关于博主</span>
-      </a>
     </div>
   </div>
 
-  <!-- Layer 4: 44px Touch Target Scroll Down Indicator -->
+  <!-- Minimalist Vertical Bar + Chevron Scroll Down Indicator -->
   <div class="hero-scroll-wrapper">
     <a
       href="#latest-posts"
-      class="hero-scroll-btn"
-      id="hero-scroll-indicator"
+      class="hero-scroll-indicator"
       aria-label="向下滚动至最新文章"
     >
-      <span class="scroll-label">SCROLL DOWN</span>
-      <span class="scroll-arrow-icon" aria-hidden="true">
-        <svg
-          viewBox="0 0 24 24"
-          width="20"
-          height="20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M7 10l5 5 5-5"></path>
-        </svg>
-      </span>
+      <div class="scroll-bar-pill" aria-hidden="true"></div>
+      <svg
+        class="scroll-chevron-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M6 9l6 6 6-6"></path>
+      </svg>
     </a>
   </div>
 </section>
 
 <style>
-  /* Enforce isolated high-contrast dark color-scheme in Hero scope */
   .hero-fullscreen {
     color-scheme: dark;
 
     --color-text-primary: #f8fafc;
     --color-text-secondary: #cbd5e1;
     --color-text-muted: #94a3b8;
-    --color-surface-base: #13172b;
-    --color-surface-raised: #1b213d;
-    --color-surface-glass: rgb(19 23 43 / 78%);
-    --color-border-default: #252d4c;
     --color-accent-primary: #f59e0b;
     --color-accent-primary-hover: #fbbf24;
-    --color-accent-primary-glow: rgb(245 158 11 / 32%);
 
     position: relative;
     width: 100%;
@@ -149,131 +68,105 @@ const researchTopics: ResearchTopic[] = [
     min-height: 100svh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     overflow: hidden;
     background: transparent;
-    padding: calc(var(--header-height) + 1.5rem) 1.5rem 3rem;
+    padding: calc(var(--header-height) + 3.5rem) 1.5rem 3rem;
   }
 
-  /* Layer 3: Central Content Card */
   .hero-content-container {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     width: 100%;
-    max-width: var(--max-width-wide);
+    max-width: min(44rem, 55vw);
+    margin-left: clamp(1.5rem, 5.5vw, 5.5rem);
+    margin-top: clamp(1rem, 3.5vh, 3.5rem);
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
-    margin: auto 0;
+    gap: 1.25rem;
   }
 
-  /* Status Badge */
-  .hero-status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.35rem 0.95rem;
-    border-radius: var(--radius-full);
-    background: rgb(19 23 43 / 85%);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgb(245 158 11 / 35%);
-    font-family: var(--font-mono);
-    font-size: 0.84rem;
-    box-shadow: 0 0 16px rgb(245 158 11 / 18%);
-  }
-
-  .hero-status-pulse {
-    width: 0.55rem;
-    height: 0.55rem;
-    border-radius: var(--radius-full);
-    background: #f59e0b;
-    box-shadow: 0 0 10px rgb(245 158 11 / 70%);
-    animation: pulse-dot var(--motion-duration-pulse) var(--motion-ease-pulse)
-      infinite;
-  }
-
-  .hero-status-title {
-    color: #fbbf24;
-    font-weight: 700;
-  }
-
-  .hero-status-divider {
-    color: #4b5563;
-  }
-
-  .hero-status-desc {
-    color: #e2e8f0;
-  }
-
-  /* Stylized Massive Title (Image 2 style) */
-  .hero-brand-block {
-    margin: 0.25rem 0;
-  }
-
+  /* Massive Condensed Brand Title */
   .hero-welcome-title {
-    margin: 0;
+    font-family:
+      Impact,
+      "Arial Narrow",
+      Haettenschweiler,
+      "DIN Alternate",
+      "Roboto Condensed",
+      "Franklin Gothic Bold",
+      -apple-system,
+      sans-serif;
+    font-size: clamp(2.6rem, 4.2vw, 4.6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     display: flex;
     flex-direction: column;
-    font-family: var(--font-display);
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
+    margin: 0;
+  }
+
+  .welcome-line-1,
+  .welcome-line-2 {
+    display: block;
+    white-space: nowrap;
   }
 
   .welcome-line-1 {
-    font-size: clamp(2.2rem, 5vw, 4rem);
     color: #fff;
-    text-shadow: 0 2px 10px rgb(0 0 0 / 70%);
+    text-shadow:
+      0 2px 14px rgb(0 0 0 / 90%),
+      0 4px 28px rgb(0 0 0 / 80%),
+      0 0 20px rgb(255 255 255 / 25%);
   }
 
   .welcome-line-2 {
-    font-size: clamp(2.6rem, 6.2vw, 5rem);
-    background: linear-gradient(
-      135deg,
-      #fffbeb 0%,
-      #fde047 30%,
-      #f59e0b 70%,
-      #ff6b4a 100%
-    );
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
-    filter: drop-shadow(0 0 25px rgb(245 158 11 / 45%));
+    filter: drop-shadow(0 2px 12px rgb(0 0 0 / 95%))
+      drop-shadow(0 0 16px rgb(245 158 11 / 40%));
   }
 
-  /* Narrative Card */
-  .hero-narrative-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    max-width: 48rem;
-    padding: 1.1rem 1.35rem;
-    border-radius: var(--radius-lg);
-    background: rgb(15 18 33 / 78%);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgb(255 255 255 / 12%);
-    box-shadow: 0 8px 32px rgb(0 0 0 / 45%);
+  /* Welcoming Narrative Block without black background */
+  .hero-narrative-block {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 0.5rem;
+    max-width: 38rem;
   }
 
   .narrative-line {
-    margin: 0;
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: #f1f5f9;
+    color: #f8fafc;
+    font-size: clamp(1.1rem, 1.35vw, 1.3rem);
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0 0 0.4rem;
+    text-shadow:
+      0 2px 12px rgb(0 0 0 / 95%),
+      0 4px 24px rgb(0 0 0 / 85%);
   }
 
-  .brand-text {
-    color: #fbbf24;
+  .narrative-line strong.brand-text {
+    color: #f59e0b;
     font-weight: 700;
+    text-shadow: 0 0 12px rgb(245 158 11 / 50%);
   }
 
   .narrative-lead {
-    margin: 0.25rem 0 0;
-    font-size: 0.96rem;
-    line-height: 1.6;
-    color: #cbd5e1;
+    color: #e2e8f0;
+    font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+    line-height: 1.7;
+    margin: 0.5rem 0 0;
+    text-shadow:
+      0 2px 10px rgb(0 0 0 / 95%),
+      0 4px 20px rgb(0 0 0 / 85%);
   }
 
   .narrative-lead strong {
@@ -281,283 +174,120 @@ const researchTopics: ResearchTopic[] = [
     font-weight: 600;
   }
 
-  /* Topic Rails */
-  .hero-topics-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    width: 100%;
-    margin-top: 0.25rem;
-  }
-
-  .hero-topics-label {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #94a3b8;
-  }
-
-  .hero-topics-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .hero-topic-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.35rem 0.8rem;
-    border-radius: var(--radius-sm);
-    background: rgb(19 23 43 / 80%);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgb(245 158 11 / 28%);
-    color: #cbd5e1;
-    font-family: var(--font-mono);
-    font-size: 0.84rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition:
-      border-color var(--motion-duration-fast) var(--motion-ease-standard),
-      color var(--motion-duration-fast) var(--motion-ease-standard),
-      background-color var(--motion-duration-fast) var(--motion-ease-standard),
-      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
-      transform var(--motion-duration-fast) var(--motion-ease-standard);
-  }
-
-  .hero-topic-chip:hover,
-  .hero-topic-chip:focus-visible {
-    border-color: #f59e0b;
-    color: #fbbf24;
-    background: rgb(245 158 11 / 20%);
-    box-shadow: 0 0 12px rgb(245 158 11 / 35%);
-    outline: 2px solid #f59e0b;
-    outline-offset: 2px;
-  }
-
-  .hero-topic-hash {
-    color: #f59e0b;
-    font-weight: 700;
-  }
-
-  /* CTA Buttons */
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.85rem;
-    margin-top: 0.5rem;
-  }
-
-  .hero-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    min-height: 44px;
-    padding: 0.65rem 1.4rem;
-    border-radius: var(--radius-md);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition:
-      background-color var(--motion-duration-fast) var(--motion-ease-standard),
-      color var(--motion-duration-fast) var(--motion-ease-standard),
-      border-color var(--motion-duration-fast) var(--motion-ease-standard),
-      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
-      transform var(--motion-duration-fast) var(--motion-ease-standard);
-  }
-
-  .hero-btn-primary {
-    background: #f59e0b;
-    color: #000;
-    border: 1px solid #f59e0b;
-    box-shadow: 0 0 20px rgb(245 158 11 / 35%);
-    font-weight: 700;
-  }
-
-  .hero-btn-primary:hover,
-  .hero-btn-primary:focus-visible {
-    background: #fbbf24;
-    color: #000;
-    transform: translateY(-2px);
-    box-shadow: 0 0 28px rgb(245 158 11 / 50%);
-    outline: 2px solid #fbbf24;
-    outline-offset: 3px;
-  }
-
-  .hero-btn-secondary {
-    background: rgb(19 23 43 / 85%);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgb(255 255 255 / 18%);
-    color: #f8fafc;
-  }
-
-  .hero-btn-secondary:hover,
-  .hero-btn-secondary:focus-visible {
-    border-color: #f59e0b;
-    color: #fbbf24;
-    background: rgb(245 158 11 / 18%);
-    transform: translateY(-2px);
-    box-shadow: 0 0 16px rgb(245 158 11 / 30%);
-    outline: 2px solid #f59e0b;
-    outline-offset: 3px;
-  }
-
-  /* Layer 4: Bottom Scroll Indicator */
+  /* Scroll Indicator */
   .hero-scroll-wrapper {
     position: absolute;
-    bottom: 1.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 4;
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
   }
 
-  .hero-scroll-btn {
-    display: inline-flex;
+  .hero-scroll-indicator {
+    pointer-events: auto;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem;
+    gap: 0.4rem;
     min-width: 44px;
     min-height: 44px;
-    padding: 0.35rem 0.75rem;
-    border-radius: var(--radius-full);
-    background: rgb(15 18 33 / 75%);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgb(245 158 11 / 30%);
-    color: #cbd5e1;
+    padding: 0.5rem;
+    color: #f59e0b;
     text-decoration: none;
-    transition:
-      border-color var(--motion-duration-fast) var(--motion-ease-standard),
-      color var(--motion-duration-fast) var(--motion-ease-standard),
-      transform var(--motion-duration-fast) var(--motion-ease-standard);
-    animation: scroll-bounce 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    border-radius: var(--radius-full);
+    outline: none;
+    transition: color var(--transition-fast);
   }
 
-  .hero-scroll-btn:hover,
-  .hero-scroll-btn:focus-visible {
-    border-color: #f59e0b;
-    color: #fbbf24;
-    outline: 2px solid #f59e0b;
-    outline-offset: 3px;
+  .hero-scroll-indicator:focus-visible {
+    box-shadow: 0 0 0 3px #f59e0b;
   }
 
-  .scroll-label {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+  .scroll-bar-pill,
+  .scroll-chevron-icon {
+    animation: hero-scroll-breathe 2.4s ease-in-out infinite;
   }
 
-  .scroll-arrow-icon {
-    display: inline-flex;
+  .scroll-bar-pill {
+    width: 3px;
+    height: 28px;
+    border-radius: 9999px;
+    background: linear-gradient(180deg, rgb(245 158 11 / 20%) 0%, #f59e0b 100%);
+    box-shadow: 0 0 10px rgb(245 158 11 / 60%);
   }
 
-  @keyframes scroll-bounce {
+  .scroll-chevron-icon {
+    width: 18px;
+    height: 18px;
+    filter: drop-shadow(0 0 6px rgb(245 158 11 / 60%));
+  }
+
+  @keyframes hero-scroll-breathe {
     0%,
     100% {
       transform: translateY(0);
+      opacity: 0.85;
     }
 
     50% {
       transform: translateY(6px);
+      opacity: 1;
     }
   }
 
-  /* Responsive Breakpoint Matrix */
+  /* Responsive Breakpoints */
   @media (width <= 48rem) {
     .hero-fullscreen {
-      padding: calc(var(--header-height) + 1rem) 1rem 3.5rem;
+      padding: calc(var(--header-height) + 1.5rem) 1.25rem 3rem;
     }
 
-    .hero-narrative-card {
-      padding: 0.85rem 1rem;
-    }
-
-    .narrative-line {
-      font-size: 0.98rem;
-    }
-
-    .narrative-lead {
-      font-size: 0.9rem;
-    }
-
-    .hero-actions {
-      width: 100%;
-    }
-
-    .hero-btn {
-      flex: 1 1 calc(50% - 0.5rem);
-      min-width: 8rem;
-    }
-  }
-
-  @media (width <= 25rem) {
-    .welcome-line-1 {
-      font-size: 1.8rem;
-    }
-
-    .welcome-line-2 {
-      font-size: 2.1rem;
-    }
-
-    .hero-btn {
-      flex: 1 1 100%;
-    }
-  }
-
-  /* Short viewport compression */
-  @media (height <= 44rem) {
-    .hero-fullscreen {
-      padding-top: calc(var(--header-height) + 0.5rem);
-      padding-bottom: 2.5rem;
-      justify-content: flex-start;
+    .hero-content-container {
+      max-width: 100%;
+      margin-left: 0;
+      margin-top: 0.5rem;
     }
 
     .hero-welcome-title {
-      gap: 0;
-    }
-
-    .welcome-line-1 {
-      font-size: 1.8rem;
-    }
-
-    .welcome-line-2 {
-      font-size: 2.2rem;
-    }
-
-    .hero-narrative-card {
-      padding: 0.6rem 0.85rem;
-    }
-
-    .narrative-lead {
-      display: none;
+      font-size: clamp(1.65rem, 6.4vw, 2.2rem);
     }
   }
 
-  /* Reduced Motion Accessibility */
+  @media (height <= 44rem) {
+    .hero-fullscreen {
+      padding-top: calc(var(--header-height) + 1rem);
+      padding-bottom: 1.5rem;
+    }
+
+    .hero-content-container {
+      gap: 0.75rem;
+      margin-top: 0;
+    }
+
+    .hero-scroll-wrapper {
+      bottom: 0.75rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .hero-status-pulse,
-    .hero-scroll-btn {
-      animation: none !important;
-    }
-
-    .hero-btn-primary:hover,
-    .hero-btn-secondary:hover,
-    .hero-topic-chip:hover {
-      transform: none !important;
+    .scroll-bar-pill,
+    .scroll-chevron-icon {
+      animation: none;
     }
   }
 
-  /* High Contrast Forced Colors */
   @media (forced-colors: active) {
     .welcome-line-2 {
       -webkit-text-fill-color: CanvasText;
-      background: none;
+      color: CanvasText;
+      filter: none;
+    }
+
+    .scroll-bar-pill {
+      background: CanvasText;
     }
   }
 </style>
