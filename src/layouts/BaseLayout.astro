@@ -125,7 +125,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
   <body>
     <a href="#main-content" class="skip-link">跳至主要内容</a>
     <div id="top"></div>
-    <AmbientBackground />
+    <AmbientBackground isHome={isHome} />
     <SiteHeader isHome={isHome} />
     <slot name="hero" />
     <main id="main-content" tabindex="-1">

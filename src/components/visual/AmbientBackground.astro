@@ -1,14 +1,53 @@
 ---
-// AmbientBackground.astro: Original 4-layer cyber ambient background
-// Layer 1: Cyber Grid (Linear-gradient + Radial Mask)
+// AmbientBackground.astro: Original ambient background with persistent fixed wallpaper on homepage
+// Layer 1: Cyber Grid (Disabled per user request)
 // Layer 2: Scanline (Subtle neon sweep)
 // Layer 3: Local Glow (Primary + Cyan Neon Orbs)
 // Layer 4: Mathematical Streamline Flow (Low-density SDE vector paths)
 // Strictly pointer-events: none, aria-hidden="true", independent layer toggleable
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
 ---
 
 <div class="ambient-background" aria-hidden="true">
-  <!-- Layer 1: Cyber Grid -->
+  {
+    isHome && (
+      <div class="ambient-wallpaper-container">
+        <picture class="ambient-wallpaper-picture">
+          <source
+            media="(max-width: 48rem)"
+            type="image/webp"
+            srcset="/images/hero/suisen-hero-750w.webp"
+          />
+          <source
+            media="(max-width: 90rem)"
+            type="image/webp"
+            srcset="/images/hero/suisen-hero-1440w.webp"
+          />
+          <source
+            type="image/webp"
+            srcset="/images/hero/suisen-hero-3840w.webp"
+          />
+          <img
+            src="/images/hero/suisen-hero-1440w.webp"
+            alt=""
+            class="ambient-wallpaper-img"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            width="1920"
+            height="1080"
+          />
+        </picture>
+        <div class="ambient-wallpaper-scrim" />
+      </div>
+    )
+  }
+
+  <!-- Layer 1: Cyber Grid (Disabled per user request) -->
   <div class="ambient-layer ambient-grid-layer" data-layer="grid"></div>
 
   <!-- Layer 2: Ambient Scanline -->
@@ -67,6 +106,44 @@
     background-color: var(--color-bg-canvas);
   }
 
+  /* Persistent fixed wallpaper across entire page */
+  .ambient-wallpaper-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .ambient-wallpaper-picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ambient-wallpaper-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+  }
+
+  .ambient-wallpaper-scrim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgb(10 12 22 / 45%) 0%,
+      rgb(10 12 22 / 58%) 45%,
+      rgb(15 18 33 / 78%) 100%
+    );
+  }
+
   .ambient-layer {
     position: absolute;
     inset: 0;
@@ -75,18 +152,9 @@
     pointer-events: none;
   }
 
-  /* Layer 1: Cyber Grid */
+  /* Layer 1: Cyber Grid (Disabled per user request) */
   .ambient-grid-layer {
-    background-image:
-      linear-gradient(to right, var(--color-ambient-grid) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--color-ambient-grid) 1px, transparent 1px);
-    background-size: 3.5rem 3.5rem;
-    opacity: 0.45;
-    mask-image: radial-gradient(
-      ellipse 80% 60% at 50% 15%,
-      #000 50%,
-      transparent 100%
-    );
+    display: none;
   }
 
   /* Layer 2: Ambient Scanline */
@@ -186,10 +254,6 @@
     width: 100%;
     height: 100%;
     display: block;
-  }
-
-  :global(html[data-theme="light"]) .ambient-grid-layer {
-    opacity: 0.25;
   }
 
   :global(html[data-theme="light"]) .ambient-glow-orb {
