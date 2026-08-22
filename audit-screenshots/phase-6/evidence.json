@@ -1,0 +1,153 @@
+{
+  "phase": 6,
+  "name": "Phase 6 Visual Evidence - Article & Prose Cyber Design System",
+  "browser": "Chromium 151.0.7922.34",
+  "commit": "cffff5c4fb4693e546053bf78bbf2c61f99c3d7e",
+  "generatedAt": "2026-08-22T07:20:42.867Z",
+  "baseUrl": "http://127.0.0.1:4321",
+  "evidence": [
+    {
+      "file": "article-ddim-1440x900-dark.png",
+      "id": "article-ddim-1440x900-dark",
+      "pathname": "/2026/05/10/深度学习/流匹配与扩散模型/DDIM/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 172,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-ddim-1440x900-light.png",
+      "id": "article-ddim-1440x900-light",
+      "pathname": "/2026/05/10/深度学习/流匹配与扩散模型/DDIM/",
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 172,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-ddim-390x844-dark.png",
+      "id": "article-ddim-390x844-dark",
+      "pathname": "/2026/05/10/深度学习/流匹配与扩散模型/DDIM/",
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "mathContainersCount": 172,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-ddim-390x844-light.png",
+      "id": "article-ddim-390x844-light",
+      "pathname": "/2026/05/10/深度学习/流匹配与扩散模型/DDIM/",
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "mathContainersCount": 172,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-ddim-360x640-dark-math-check.png",
+      "id": "article-ddim-360x640-dark-math-check",
+      "pathname": "/2026/05/10/深度学习/流匹配与扩散模型/DDIM/",
+      "theme": "dark",
+      "width": 360,
+      "height": 640,
+      "mathContainersCount": 172,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-ddim-1440x900-dark-reduced-motion.png",
+      "id": "article-ddim-1440x900-dark-reduced-motion",
+      "pathname": "/2026/05/10/深度学习/流匹配与扩散模型/DDIM/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 172,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-wsl2-code-tables-1440x900-dark.png",
+      "id": "article-wsl2-code-tables-1440x900-dark",
+      "pathname": "/2026/08/05/技术随笔/WSL2安装失败排查：从DISM_COM损坏到NetCfg残留/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 0,
+      "codeBlocksCount": 76,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-wsl2-code-tables-1440x900-light.png",
+      "id": "article-wsl2-code-tables-1440x900-light",
+      "pathname": "/2026/08/05/技术随笔/WSL2安装失败排查：从DISM_COM损坏到NetCfg残留/",
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 0,
+      "codeBlocksCount": 76,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-softmax-code-1440x900-dark.png",
+      "id": "article-softmax-code-1440x900-dark",
+      "pathname": "/2026/02/08/深度学习/线性回归/整理一下softmax回归实现中训练部分代码的思路/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 0,
+      "codeBlocksCount": 5,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-ddpm-1440x900-dark.png",
+      "id": "article-ddpm-1440x900-dark",
+      "pathname": "/2026/03/15/深度学习/流匹配与扩散模型/DDPM/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 53,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-sde-1440x900-dark.png",
+      "id": "article-sde-1440x900-dark",
+      "pathname": "/2026/05/17/深度学习/流匹配与扩散模型/体系/1. 从SDE开始/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 44,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-sr3-1440x900-dark.png",
+      "id": "article-sr3-1440x900-dark",
+      "pathname": "/2026/05/17/深度学习/流匹配与扩散模型/超分辨率/SR3/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 49,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "file": "article-resshift-1440x900-dark.png",
+      "id": "article-resshift-1440x900-dark",
+      "pathname": "/2026/05/17/深度学习/流匹配与扩散模型/超分辨率/ResShift/",
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "mathContainersCount": 158,
+      "codeBlocksCount": 0,
+      "horizontalOverflow": false
+    }
+  ]
+}

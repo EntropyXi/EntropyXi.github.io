@@ -17,7 +17,7 @@
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
+      stroke-width="2.5"
       stroke-linecap="round"
       stroke-linejoin="round"
       aria-hidden="true"
@@ -30,7 +30,7 @@
 <style>
   .floating-controls {
     position: fixed;
-    right: 1.5rem;
+    right: 1.75rem;
     bottom: 2rem;
     z-index: var(--z-floating);
     display: flex;
@@ -44,17 +44,24 @@
     justify-content: center;
     width: 2.75rem;
     height: 2.75rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-default);
     border-radius: var(--radius-full);
-    background: var(--color-surface);
-    color: var(--color-text-dim);
+    background: var(--color-surface-base);
+    color: var(--color-text-muted);
     box-shadow: var(--shadow-card);
     text-decoration: none;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: all var(--transition-normal);
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+      opacity var(--motion-duration-normal) var(--motion-ease-standard),
+      visibility var(--motion-duration-normal) var(--motion-ease-standard),
+      transform var(--motion-duration-normal) var(--motion-ease-standard);
   }
 
   .floating-btn.visible {
@@ -63,11 +70,28 @@
     transform: translateY(0);
   }
 
-  .floating-btn:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
+  .floating-btn:hover,
+  .floating-btn:focus-visible {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: var(--color-surface-raised);
+    box-shadow:
+      var(--shadow-card-hover),
+      0 0 16px var(--color-accent-primary-glow);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .floating-btn:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .floating-btn:hover {
+      transform: none !important;
+    }
   }
 
   @media (width <= 40rem) {

@@ -12,7 +12,7 @@ export function initializeBackToTop(): () => void {
   };
 
   const schedule = (): void => {
-    if (animationFrame !== 0) return;
+    if (animationFrame !== 0 || document.hidden) return;
     animationFrame = window.requestAnimationFrame(render);
   };
 
@@ -31,6 +31,13 @@ export function initializeBackToTop(): () => void {
     passive: true,
     signal: events.signal,
   });
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (!document.hidden) schedule();
+    },
+    { signal: events.signal },
+  );
   render();
 
   return () => {

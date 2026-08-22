@@ -7,7 +7,7 @@ import FloatingControls from "@/components/content/FloatingControls.astro";
 import { SITE_URL } from "@/data/site";
 import { formatPostDate } from "@/lib/date/format-date";
 import { buildPostPath } from "@/lib/routing/post-path";
-import { buildTagPath } from "@/lib/content/aggregate";
+import { buildCategoryPath, buildTagPath } from "@/lib/content/aggregate";
 import "@/styles/prose.css";
 
 interface PostLink {
@@ -89,7 +89,13 @@ const jsonLd = JSON.stringify({
                 >
                   <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
                 </svg>
-                <span>{data.categories.join(" / ")}</span>
+                <a
+                  href={buildCategoryPath(data.categories)}
+                  class="post-meta-category"
+                  title={`分类：${data.categories.join(" / ")}`}
+                >
+                  {data.categories.join(" / ")}
+                </a>
               </span>
             )
           }
@@ -100,7 +106,8 @@ const jsonLd = JSON.stringify({
             <div class="post-tags" aria-label="文章标签">
               {data.tags.map((tag) => (
                 <a href={buildTagPath(tag)} class="post-tag-badge">
-                  #{tag}
+                  <span class="post-tag-hash">#</span>
+                  <span>{tag}</span>
                 </a>
               ))}
             </div>
@@ -112,14 +119,30 @@ const jsonLd = JSON.stringify({
       {
         toc.length > 0 && (
           <details class="post-toc-mobile">
-            <summary>
+            <summary class="post-toc-mobile-summary">
               <span>文章目录 ({toc.length})</span>
-              <span>▼</span>
+              <svg
+                class="toc-chevron"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
             </summary>
-            <ul>
+            <ul class="post-toc-mobile-list">
               {toc.map((heading) => (
-                <li class={`toc-depth-${heading.depth}`}>
-                  <a href={`#${heading.slug}`}>{heading.text}</a>
+                <li class={`post-toc-mobile-item depth-${heading.depth}`}>
+                  <a href={`#${heading.slug}`} class="post-toc-mobile-link">
+                    {heading.text}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -165,6 +188,8 @@ const jsonLd = JSON.stringify({
           <div class="post-sidebar-title">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -202,7 +227,9 @@ const jsonLd = JSON.stringify({
 
 <script>
   import { initializeCodeCopyButtons } from "@/lib/client/code-copy";
+  import { initializeTocHighlight } from "@/lib/client/post-toc";
   import { registerClientFeature } from "@/lib/client/lifecycle";
 
   registerClientFeature("code-copy", initializeCodeCopyButtons);
+  registerClientFeature("post-toc", initializeTocHighlight);
 </script>

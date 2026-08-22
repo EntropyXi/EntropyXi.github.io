@@ -23,12 +23,18 @@
     height: 3px;
     background: linear-gradient(
       90deg,
-      var(--color-accent),
+      var(--color-accent-primary),
       var(--color-accent-cyan)
     );
-    box-shadow: 0 0 10px var(--color-accent-glow);
+    box-shadow: 0 0 10px var(--color-accent-primary-glow);
     transition: width 50ms linear;
     pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reading-progress-bar {
+      transition: none !important;
+    }
   }
 </style>
 
