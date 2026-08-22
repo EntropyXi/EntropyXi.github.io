@@ -12,6 +12,7 @@
     "check": "npm run format:check && npm run lint && npm run check:types && npm run audit:content && npm run test:unit -- --run && npm run test:e2e && npm run audit:bundle && npm run audit:output",
     "check:types": "astro check",
     "capture:ui-baseline": "tsx scripts/capture-ui-baseline.ts",
+    "capture:phase-3": "tsx scripts/capture-phase-3.ts",
     "audit:content": "tsx scripts/audit-content.ts",
     "audit:bundle": "tsx scripts/audit-bundle.ts",
     "audit:output": "tsx scripts/audit-output.ts",

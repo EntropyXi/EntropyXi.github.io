@@ -1,0 +1,212 @@
+{
+  "allCasesPass": true,
+  "baseUrl": "http://127.0.0.1:4321",
+  "browser": "Chromium 151.0.7922.34",
+  "command": "npm run capture:phase-3",
+  "commit": "82615037a52cf809b13a73f835db523c5b857fc3",
+  "generatedAt": "2026-08-22T02:53:26.773Z",
+  "note": "Captured from the reviewed Stage 3 worktree before its independent commit.",
+  "cases": [
+    {
+      "id": "home-dark-desktop-1440",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "file": "home-dark-desktop-1440.png",
+      "ambientZIndex": "-1",
+      "bodyBackground": "rgba(0, 0, 0, 0)",
+      "clientWidth": 1440,
+      "headerState": "expanded",
+      "horizontalOverflow": false,
+      "layerState": [
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "grid",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "scanline-sweep",
+          "display": "block",
+          "layer": "scanline",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "glow",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "flow",
+          "pointerEvents": "none"
+        }
+      ],
+      "motionPreference": "full",
+      "scrollWidth": 1440
+    },
+    {
+      "id": "home-light-desktop-1440",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "file": "home-light-desktop-1440.png",
+      "ambientZIndex": "-1",
+      "bodyBackground": "rgba(0, 0, 0, 0)",
+      "clientWidth": 1440,
+      "headerState": "expanded",
+      "horizontalOverflow": false,
+      "layerState": [
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "grid",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "scanline-sweep",
+          "display": "block",
+          "layer": "scanline",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "glow",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "flow",
+          "pointerEvents": "none"
+        }
+      ],
+      "motionPreference": "full",
+      "scrollWidth": 1440
+    },
+    {
+      "id": "home-dark-mobile-390",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "file": "home-dark-mobile-390.png",
+      "ambientZIndex": "-1",
+      "bodyBackground": "rgba(0, 0, 0, 0)",
+      "clientWidth": 390,
+      "headerState": "expanded",
+      "horizontalOverflow": false,
+      "layerState": [
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "grid",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "scanline-sweep",
+          "display": "none",
+          "layer": "scanline",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "glow",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "none",
+          "layer": "flow",
+          "pointerEvents": "none"
+        }
+      ],
+      "motionPreference": "full",
+      "scrollWidth": 390
+    },
+    {
+      "id": "home-light-mobile-390",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "file": "home-light-mobile-390.png",
+      "ambientZIndex": "-1",
+      "bodyBackground": "rgba(0, 0, 0, 0)",
+      "clientWidth": 390,
+      "headerState": "expanded",
+      "horizontalOverflow": false,
+      "layerState": [
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "grid",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "scanline-sweep",
+          "display": "none",
+          "layer": "scanline",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "glow",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "none",
+          "layer": "flow",
+          "pointerEvents": "none"
+        }
+      ],
+      "motionPreference": "full",
+      "scrollWidth": 390
+    },
+    {
+      "id": "home-dark-reduced-motion",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": true,
+      "file": "home-dark-reduced-motion.png",
+      "ambientZIndex": "-1",
+      "bodyBackground": "rgba(0, 0, 0, 0)",
+      "clientWidth": 1440,
+      "headerState": "expanded",
+      "horizontalOverflow": false,
+      "layerState": [
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "grid",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "scanline",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "glow",
+          "pointerEvents": "none"
+        },
+        {
+          "animationName": "none",
+          "display": "block",
+          "layer": "flow",
+          "pointerEvents": "none"
+        }
+      ],
+      "motionPreference": "reduced",
+      "scrollWidth": 1440
+    }
+  ]
+}

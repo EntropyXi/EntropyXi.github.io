@@ -40,6 +40,14 @@ test("client foundation matches its configured environment", async ({
 
   if (testInfo.project.name === "reduced-motion") {
     await expect(root).toHaveAttribute("data-motion-preference", "reduced");
+    await expect(page.locator(".ambient-scanline-layer")).toHaveCSS(
+      "animation-name",
+      "none",
+    );
+    await expect(page.locator(".status-pulse")).toHaveCSS(
+      "animation-name",
+      "none",
+    );
     return;
   }
 
@@ -56,6 +64,14 @@ test("client foundation matches its configured environment", async ({
         ),
       )
       .toBe(true);
+    await expect(page.locator(".ambient-scanline-layer")).toHaveCSS(
+      "display",
+      "none",
+    );
+    await expect(page.locator(".ambient-flow-layer")).toHaveCSS(
+      "display",
+      "none",
+    );
     await page.getByRole("button", { name: "打开导航菜单" }).click();
     await expect(page.getByRole("button", { name: "关闭菜单" })).toBeFocused();
     return;

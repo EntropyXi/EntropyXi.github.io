@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { resolveTheme } from "@/lib/client/theme";
 import { calculateReadingProgress } from "@/lib/client/reading-progress";
+import { resolveSiteHeaderState } from "@/lib/client/site-header";
 
 describe("resolveTheme", () => {
   it("prefers a stored dark theme over a light system preference", () => {
@@ -62,5 +63,21 @@ describe("calculateReadingProgress", () => {
 
   it("clamps scroll positions past the end to 100", () => {
     expect(calculateReadingProgress(800, 1200, 800)).toBe(100);
+  });
+});
+
+describe("resolveSiteHeaderState", () => {
+  it("keeps the header expanded at and above the document origin", () => {
+    expect(resolveSiteHeaderState(-10)).toBe("expanded");
+    expect(resolveSiteHeaderState(0)).toBe("expanded");
+  });
+
+  it("keeps the header expanded through the scroll threshold", () => {
+    expect(resolveSiteHeaderState(24)).toBe("expanded");
+  });
+
+  it("compacts the header after the scroll threshold", () => {
+    expect(resolveSiteHeaderState(25)).toBe("compact");
+    expect(resolveSiteHeaderState(400)).toBe("compact");
   });
 });

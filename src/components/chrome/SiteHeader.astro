@@ -19,7 +19,7 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header data-header-state="expanded">
   <div class="site-header-inner">
     <div class="site-brand">
       <a href="/" class="site-logo-link">
@@ -69,7 +69,7 @@ function isActive(href: string): boolean {
       <ThemeToggle />
     </nav>
 
-    <!-- Mobile Menu Button & Theme Toggle -->
+    <!-- Mobile Actions (Theme toggle + Menu button) -->
     <div class="mobile-actions">
       <ThemeToggle />
       <button
@@ -99,12 +99,43 @@ function isActive(href: string): boolean {
     </div>
   </div>
 
-  <!-- Mobile Drawer -->
-  <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+  <!-- No-JS Mobile Navigation Fallback -->
+  <noscript>
+    <div class="mobile-noscript-nav-container">
+      <nav class="mobile-noscript-nav" aria-label="无脚本主导航">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                "mobile-noscript-nav-link",
+                { active: isActive(item.href) },
+              ]}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </noscript>
+
+  <!-- Mobile Drawer (JS Enhanced) -->
+  <div
+    id="mobile-drawer"
+    class="mobile-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mobile-drawer-title"
+    aria-hidden="true"
+  >
     <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
-    <div class="mobile-drawer-content">
+    <div class="mobile-drawer-content" id="mobile-drawer-content">
       <div class="mobile-drawer-header">
-        <span class="mobile-drawer-title">导航目录</span>
+        <span id="mobile-drawer-title" class="mobile-drawer-title">
+          导航目录
+        </span>
         <button
           type="button"
           id="mobile-drawer-close"
@@ -146,15 +177,22 @@ function isActive(href: string): boolean {
     z-index: var(--z-header);
     width: 100%;
     height: var(--header-height);
-    background: rgb(9 13 22 / 80%);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-glass);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--color-border-default);
     box-shadow: var(--shadow-header);
-    transition: background var(--transition-normal);
+    transition:
+      background-color var(--motion-duration-normal) var(--motion-ease-standard),
+      border-color var(--motion-duration-normal) var(--motion-ease-standard);
   }
 
-  :global(html[data-theme="light"]) .site-header {
-    background: rgb(248 250 252 / 85%);
+  /* Reserved CSS Contract for Main Agent's Header State */
+  .site-header[data-header-state="expanded"] {
+    height: var(--header-height);
+  }
+
+  .site-header[data-header-state="compact"] {
+    height: var(--header-height-scrolled);
   }
 
   .site-header-inner {
@@ -165,7 +203,7 @@ function isActive(href: string): boolean {
     max-width: var(--max-width-wide);
     height: 100%;
     margin: 0 auto;
-    padding: 0 1.25rem;
+    padding: 0 1.5rem;
   }
 
   .site-brand {
@@ -176,32 +214,33 @@ function isActive(href: string): boolean {
   .site-logo-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    color: var(--color-text);
+    gap: 0.65rem;
+    color: var(--color-text-primary);
     font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: color var(--motion-duration-fast) var(--motion-ease-standard);
   }
 
   .site-logo-symbol {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.85rem;
-    height: 1.85rem;
+    width: 1.9rem;
+    height: 1.9rem;
     border-radius: var(--radius-sm);
-    background: var(--color-accent-subtle);
-    border: 1px solid var(--color-accent);
-    color: var(--color-accent);
+    background: var(--color-accent-primary-subtle);
+    border: 1px solid var(--color-accent-primary);
+    color: var(--color-accent-primary);
     font-family: var(--font-mono);
     font-size: 1rem;
-    box-shadow: 0 0 10px var(--color-accent-glow);
+    font-weight: 700;
+    box-shadow: 0 0 10px var(--color-accent-primary-glow);
   }
 
   .site-logo-link:hover .site-logo-text {
-    color: var(--color-accent);
+    color: var(--color-accent-primary);
   }
 
   .desktop-nav {
@@ -214,22 +253,35 @@ function isActive(href: string): boolean {
     position: relative;
     padding: 0.4rem 0.75rem;
     border-radius: var(--radius-sm);
-    color: var(--color-muted);
+    color: var(--color-text-muted);
     font-size: 0.92rem;
     font-weight: 500;
     text-decoration: none;
-    transition: all var(--transition-fast);
+    transition:
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard);
   }
 
   .nav-link:hover {
-    color: var(--color-text);
-    background: var(--color-muted-soft);
+    color: var(--color-text-primary);
+    background: var(--color-bg-subtle);
   }
 
   .nav-link.active {
-    color: var(--color-accent);
-    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
     font-weight: 600;
+  }
+
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: -0.85rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    height: 2px;
+    background: var(--color-accent-primary);
+    box-shadow: 0 0 8px var(--color-accent-primary-glow);
   }
 
   .nav-link-external {
@@ -251,12 +303,22 @@ function isActive(href: string): boolean {
     justify-content: center;
     width: 2.25rem;
     height: 2.25rem;
+    min-width: 44px;
+    min-height: 44px;
     padding: 0;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-default);
     border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-text);
+    background: var(--color-surface-base);
+    color: var(--color-text-primary);
     cursor: pointer;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .mobile-menu-btn:hover {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
   }
 
   .mobile-menu-btn svg {
@@ -264,7 +326,43 @@ function isActive(href: string): boolean {
     height: 1.25rem;
   }
 
-  /* Mobile Drawer */
+  :global(.no-js) .mobile-menu-btn {
+    display: none;
+  }
+
+  /* No-JS Mobile Navigation */
+  .mobile-noscript-nav-container {
+    display: none;
+    padding: 0.5rem 1rem;
+    background: var(--color-surface-raised);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .mobile-noscript-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .mobile-noscript-nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+  }
+
+  .mobile-noscript-nav-link:hover,
+  .mobile-noscript-nav-link.active {
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
+  }
+
+  /* Mobile Drawer (JS Enhanced) */
   .mobile-drawer {
     position: fixed;
     inset: 0;
@@ -279,10 +377,11 @@ function isActive(href: string): boolean {
   .mobile-drawer-backdrop {
     position: absolute;
     inset: 0;
-    background: rgb(0 0 0 / 60%);
+    background: var(--color-drawer-backdrop);
     backdrop-filter: blur(4px);
     opacity: 0;
-    transition: opacity var(--transition-normal);
+    transition: opacity var(--motion-duration-normal)
+      var(--motion-ease-standard);
   }
 
   .mobile-drawer.open .mobile-drawer-backdrop {
@@ -296,14 +395,16 @@ function isActive(href: string): boolean {
     bottom: 0;
     width: 18rem;
     max-width: 85vw;
-    background: var(--color-surface);
-    border-left: 1px solid var(--color-border);
+    background: var(--color-surface-raised);
+    border-left: 1px solid var(--color-border-default);
     box-shadow: -4px 0 25px rgb(0 0 0 / 50%);
     transform: translateX(100%);
-    transition: transform var(--transition-normal);
+    transition: transform var(--motion-duration-normal)
+      var(--motion-ease-standard);
     display: flex;
     flex-direction: column;
     padding: 1.5rem 1.25rem;
+    backdrop-filter: var(--glass-blur);
   }
 
   .mobile-drawer.open .mobile-drawer-content {
@@ -315,54 +416,77 @@ function isActive(href: string): boolean {
     align-items: center;
     justify-content: space-between;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border-default);
     margin-bottom: 1.25rem;
   }
 
   .mobile-drawer-title {
     font-size: 1.05rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: var(--color-text-primary);
   }
 
   .mobile-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
     padding: 0.25rem 0.5rem;
-    background: none;
-    border: 1px solid var(--color-border);
+    background: var(--color-surface-base);
+    border: 1px solid var(--color-border-default);
     border-radius: var(--radius-sm);
-    color: var(--color-muted);
+    color: var(--color-text-muted);
     font-size: 1rem;
     cursor: pointer;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .mobile-drawer-close:hover {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
   }
 
   .mobile-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.35rem;
   }
 
   .mobile-nav-link {
-    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
     border-radius: var(--radius-md);
-    color: var(--color-text);
-    font-size: 1rem;
+    color: var(--color-text-primary);
+    font-size: 0.98rem;
     font-weight: 500;
     text-decoration: none;
-    transition: all var(--transition-fast);
+    transition:
+      background-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard);
   }
 
   .mobile-nav-link:hover {
-    background: var(--color-surface-hover);
-    color: var(--color-accent);
+    background: var(--color-accent-primary-subtle);
+    color: var(--color-accent-primary);
   }
 
   .mobile-nav-link.active {
-    background: var(--color-accent-subtle);
-    color: var(--color-accent);
+    background: var(--color-accent-primary-subtle);
+    color: var(--color-accent-primary);
     font-weight: 600;
+    border-left: 3px solid var(--color-accent-primary);
   }
 
   @media (width <= 48rem) {
+    .site-header-inner {
+      padding: 0 1rem;
+    }
+
     .desktop-nav {
       display: none;
     }
@@ -370,12 +494,18 @@ function isActive(href: string): boolean {
     .mobile-actions {
       display: flex;
     }
+
+    .mobile-noscript-nav-container {
+      display: block;
+    }
   }
 </style>
 
 <script>
   import { registerClientFeature } from "@/lib/client/lifecycle";
   import { initializeMobileDrawer } from "@/lib/client/mobile-drawer";
+  import { initializeSiteHeaderState } from "@/lib/client/site-header";
 
   registerClientFeature("mobile-drawer", initializeMobileDrawer);
+  registerClientFeature("site-header-state", initializeSiteHeaderState);
 </script>

@@ -58,3 +58,17 @@
 - 主 Agent发现 Astro 在 AI 终端会把 `preview` 自动转为后台守护进程，导致 Playwright 干净启动误判服务提前退出；新增跨平台前台预览包装并以 `CI=1` 从无服务状态验证构建、启动、测试和回收闭环；
 - 完整 `npm run check` 通过：4 个单测文件 21 项、Playwright 29 项、4 个关键页面 axe serious/critical 为 0、首方脚本 5,140/24,576 B gzip、30 篇内容、81 个兼容页面与 1,289/1,289 条可访问公式全部通过；
 - 未新增动画依赖，无需新增 ADR。阶段 2 写租约已释放；按用户要求暂停，不启动或派发阶段 3。
+
+## 阶段 3 提交前记录
+
+- Antigravity（Gemini 3.7 Flash / High）获得且仅获得全局外壳可视租约，实现设计令牌、全局样式、四层原创环境背景、页头、页脚、主题按钮和基础动效；`CyberGrid.astro` 保留为兼容代理，没有删除旧引用路径；
+- 主 Agent实现 `src/lib/client/site-header.ts` 的纯状态解析、单帧滚动/尺寸调度与可清理初始化桥接，并新增 SkipLink、页头状态、四层背景、移动降级、低动态和无 JS 证据；
+- Chrome 实机初审发现环境背景因负层级与不透明 `html/body` 画布组合而不可见；该缺陷退回 Antigravity 自主返修，主 Agent不再指定具体前端实现；
+- 修正堆叠后，axe 精确发现浅色 `#64748b` 次要文字在 `#f1f5f9` 画布上仅 4.34:1。Antigravity 在授权范围内单行改为 `#475569`，实测 6.93:1，4 个关键页面 serious/critical 再次归零；
+- 用户纠正前端治理边界后，凡此前受到主 Agent具体样式、选择器或动画结构指示影响的阶段 3 可视实现全部退回 Antigravity“返厂重修”。Antigravity 重新独立确定渐进增强标记、控件显隐、动效令牌、可访问语义和低动态单一规则来源；主 Agent只提交可复现缺陷与验收边界，并逐项批准或驳回候选差异；
+- DeepSeek 第一轮有效审查为独立 Read Only、DeepSeek‑V4‑Flash / Max；此前一次调用了非 Git Bash Shell 的尝试已排除，不计入双审。第一轮提出的 SVG `stroke` 变量问题经 Chrome 151 计算样式和截图证伪，其余有效问题（布局属性过渡、死 CSS、无 JS 菜单、对比度说明、焦点陷阱测试）均已关闭；
+- DeepSeek 第二轮同样为全新独立 Read Only、DeepSeek‑V4‑Flash / Max，会话仅使用 Read/Glob/Grep。结论无 P0/P1、条件通过；指出的无 JS 主题死按钮、层级规格偏差、低动态重复规则、裸动效参数和无 JS 当前页语义均由 Antigravity 自主返修，移动抽屉模态名称由主 Agent验收补充；
+- 主 Agent新增回归用例后，在生产构建稳定复现 Astro Scoped CSS 级联导致无 JS 移动菜单仍可见；该事实再次退回 Antigravity，其在组件视觉租约内独立修复菜单与主题控件的最终级联，并保持有 JS 移动交互和无 JS 桌面导航；
+- `audit-screenshots/phase-3/index.json` 记录 1440×900 暗/亮、390×844 暗/亮和 reduced-motion 共 5 组证据；桌面四层显示、移动端停用扫描线/流线、低动态停止循环、全部无横向溢出且 `pointer-events: none`；
+- Chrome 实机复核同时确认暗/亮桌面与移动端均无横向溢出；复杂公式文章存在 20 个 `mjx-container`，显示公式为块级、可见且不溢出页面；构建产物审计保持 1,289/1,289 条公式具备可访问文本。
+- 双独立高精度审查已经完成且所有有效项关闭。最终 `npm run check` 全绿：格式、ESLint、Stylelint、Astro Check 均无问题，30 篇内容通过，24 项单测与 33 项 Playwright E2E 通过，客户端 gzip 5,326/24,576 B，81 个兼容页面、30 篇文章与 1,289/1,289 条可访问公式通过；阶段 3 由主 Agent放行并进入独立提交。

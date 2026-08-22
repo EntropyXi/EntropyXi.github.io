@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Motion System & Keyframe Contracts
+   Strictly adheres to docs/refactor/design-specs.md §7
+   ========================================================================== */
+
+/* Keyframe Animations (Strictly transform and opacity only) */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes scanline-sweep {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Reduced Motion: Instant duration & pause decorative loops without breaking layout transforms */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .status-pulse,
+  .ambient-layer,
+  .ambient-glow-orb {
+    animation: none !important;
+  }
+}
+
+/* Page Visibility: Pause background ambient animations when document is hidden (0% CPU) */
+html[data-page-visibility="hidden"] .site-footer .status-pulse,
+html[data-page-visibility="hidden"] .ambient-background .ambient-layer,
+html[data-page-visibility="hidden"] .ambient-background .ambient-glow-orb,
+html[data-page-visibility="hidden"] .ambient-background .ambient-scanline-layer,
+html[data-page-visibility="hidden"] .ambient-background .ambient-flow-layer {
+  animation-play-state: paused;
+}

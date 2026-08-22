@@ -1,0 +1,188 @@
+---
+// AmbientBackground.astro: Original 4-layer cyber ambient background
+// Layer 1: Cyber Grid (Linear-gradient + Radial Mask)
+// Layer 2: Scanline (Subtle neon sweep)
+// Layer 3: Local Glow (Primary + Cyan Neon Orbs)
+// Layer 4: Mathematical Streamline Flow (Low-density SDE vector paths)
+// Strictly pointer-events: none, aria-hidden="true", independent layer toggleable
+---
+
+<div class="ambient-background" aria-hidden="true">
+  <!-- Layer 1: Cyber Grid -->
+  <div class="ambient-layer ambient-grid-layer" data-layer="grid"></div>
+
+  <!-- Layer 2: Ambient Scanline -->
+  <div class="ambient-layer ambient-scanline-layer" data-layer="scanline"></div>
+
+  <!-- Layer 3: Local Glow Orbs -->
+  <div class="ambient-layer ambient-glow-layer" data-layer="glow">
+    <div class="ambient-glow-orb glow-orb-primary"></div>
+    <div class="ambient-glow-orb glow-orb-cyan"></div>
+  </div>
+
+  <!-- Layer 4: Low-density SVG Mathematical Streamline Flow -->
+  <div class="ambient-layer ambient-flow-layer" data-layer="flow">
+    <svg
+      class="ambient-flow-svg"
+      viewBox="0 0 1440 900"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <path
+        d="M-100 250 C 300 150, 700 450, 1100 300 C 1300 220, 1500 280, 1600 320"
+        stroke="var(--color-ambient-streamline)"
+        stroke-width="1.5"
+        stroke-dasharray="8 12"
+        opacity="0.6"></path>
+      <path
+        d="M-50 480 C 350 380, 650 680, 1050 520 C 1250 440, 1450 500, 1550 540"
+        stroke="var(--color-accent-primary-subtle)"
+        stroke-width="1.2"
+        stroke-dasharray="6 10"
+        opacity="0.5"></path>
+      <path
+        d="M100 700 C 500 600, 800 850, 1200 720 C 1350 670, 1500 710, 1600 730"
+        stroke="var(--color-ambient-streamline)"
+        stroke-width="1"
+        stroke-dasharray="4 8"
+        opacity="0.4"></path>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .ambient-background {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    z-index: var(--z-bg);
+    pointer-events: none;
+    overflow: hidden;
+    contain: strict;
+    clip-path: inset(0);
+    background-color: var(--color-bg-canvas);
+  }
+
+  .ambient-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  /* Layer 1: Cyber Grid */
+  .ambient-grid-layer {
+    background-image:
+      linear-gradient(to right, var(--color-ambient-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-ambient-grid) 1px, transparent 1px);
+    background-size: 3.5rem 3.5rem;
+    opacity: 0.45;
+    mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 15%,
+      #000 50%,
+      transparent 100%
+    );
+  }
+
+  /* Layer 2: Ambient Scanline */
+  .ambient-scanline-layer {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--color-ambient-scanline) 50%,
+      transparent 100%
+    );
+    height: 12rem;
+    opacity: 0.8;
+    animation: scanline-sweep var(--motion-duration-ambient) linear infinite;
+  }
+
+  /* Layer 3: Glow Orbs */
+  .ambient-glow-layer {
+    overflow: hidden;
+  }
+
+  .ambient-glow-orb {
+    position: absolute;
+    border-radius: var(--radius-full);
+    filter: blur(80px);
+    opacity: 0.16;
+    pointer-events: none;
+  }
+
+  .glow-orb-primary {
+    top: -8rem;
+    left: 15%;
+    width: 32rem;
+    height: 32rem;
+    max-width: 80vw;
+    background: radial-gradient(
+      circle,
+      var(--color-accent-primary) 0%,
+      transparent 70%
+    );
+  }
+
+  .glow-orb-cyan {
+    top: 14rem;
+    right: 8%;
+    width: 28rem;
+    height: 28rem;
+    max-width: 70vw;
+    background: radial-gradient(
+      circle,
+      var(--color-accent-cyan) 0%,
+      transparent 70%
+    );
+    opacity: 0.12;
+  }
+
+  /* Layer 4: Mathematical Streamline Flow */
+  .ambient-flow-layer {
+    overflow: hidden;
+  }
+
+  .ambient-flow-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  :global(html[data-theme="light"]) .ambient-grid-layer {
+    opacity: 0.25;
+  }
+
+  :global(html[data-theme="light"]) .ambient-glow-orb {
+    opacity: 0.08;
+  }
+
+  /* Mobile & Touch Responsive Degradation */
+  @media (width <= 48rem), (hover: none) {
+    .ambient-scanline-layer {
+      display: none;
+    }
+
+    .ambient-flow-layer {
+      display: none;
+    }
+
+    .ambient-glow-orb {
+      filter: blur(40px);
+    }
+
+    .glow-orb-primary {
+      top: -4rem;
+      left: 0;
+      width: 16rem;
+      height: 16rem;
+    }
+
+    .glow-orb-cyan {
+      display: none;
+    }
+  }
+</style>

@@ -208,8 +208,8 @@ html[data-theme="light"] {
   /* 排版文本分层 */
   --color-text-primary: #0f172a; /* Slate-900 */
   --color-text-secondary: #334155; /* Slate-700 */
-  --color-text-muted: #64748b; /* Slate-500 */
-  --color-text-dim: #94a3b8;
+  --color-text-muted: #475569; /* Slate-600 */
+  --color-text-dim: #334155; /* Slate-700 */
 
   /* 代码与公式 */
   --color-code-bg: #0f172a;
@@ -230,14 +230,14 @@ html[data-theme="light"] {
 
 依据 W3C 相对亮度公式 $L = 0.2126 R + 0.7152 G + 0.0722 B$ 与对比度公式 $(L_1 + 0.05) / (L_2 + 0.05)$ 实测：
 
-| 元素分类         | 前景色 Token (Hex)                               | 背景色 Token (Hex)                             | Dark 对比度实测 | Light 对比度实测 | WCAG 2.2 AA 标准 |   达标判定   |
-| :--------------- | :----------------------------------------------- | :--------------------------------------------- | :-------------: | :--------------: | :--------------: | :----------: |
-| **页面主标题**   | `--color-text-primary` (`#f8fafc` / `#0f172a`)   | `--color-bg-base` (`#090d16` / `#f8fafc`)      |  **18.92 : 1**  |  **15.78 : 1**   |     ≥ 4.5:1      | 符合标准要求 |
-| **正文段落**     | `--color-text-secondary` (`#cbd5e1` / `#334155`) | `--color-surface-base` (`#111827` / `#ffffff`) |  **11.53 : 1**  |  **10.30 : 1**   |     ≥ 4.5:1      | 符合标准要求 |
-| **元数据与日期** | `--color-text-muted` (`#94a3b8` / `#64748b`)     | `--color-surface-base` (`#111827` / `#ffffff`) |  **6.94 : 1**   |   **4.81 : 1**   |     ≥ 4.5:1      | 符合标准要求 |
-| **主要强调文本** | `--color-accent-primary` (`#00f59b` / `#047857`) | `--color-bg-base` (`#090d16` / `#f8fafc`)      |  **12.47 : 1**  |   **5.27 : 1**   |     ≥ 4.5:1      | 符合标准要求 |
-| **次要青色文本** | `--color-accent-cyan` (`#00e5ff` / `#0369a1`)    | `--color-bg-base` (`#090d16` / `#f8fafc`)      |  **12.63 : 1**  |   **5.67 : 1**   |     ≥ 4.5:1      | 符合标准要求 |
-| **交互焦点环**   | `--color-focus` (`#00f59b` / `#047857`)          | `--color-surface-base` (`#111827` / `#ffffff`) |  **12.47 : 1**  |   **5.27 : 1**   |     ≥ 3.0:1      | 符合标准要求 |
+| 元素分类         | 前景色 Token (Hex)                               | 背景色 Token (Hex)                             | Dark 对比度实测 |             Light 对比度实测              | WCAG 2.2 AA 标准 |   达标判定   |
+| :--------------- | :----------------------------------------------- | :--------------------------------------------- | :-------------: | :---------------------------------------: | :--------------: | :----------: |
+| **页面主标题**   | `--color-text-primary` (`#f8fafc` / `#0f172a`)   | `--color-bg-base` (`#090d16` / `#f8fafc`)      |  **18.92 : 1**  |               **15.78 : 1**               |     ≥ 4.5:1      | 符合标准要求 |
+| **正文段落**     | `--color-text-secondary` (`#cbd5e1` / `#334155`) | `--color-surface-base` (`#111827` / `#ffffff`) |  **11.53 : 1**  |               **10.30 : 1**               |     ≥ 4.5:1      | 符合标准要求 |
+| **元数据与日期** | `--color-text-muted` (`#94a3b8` / `#475569`)     | `--color-surface-base` (`#111827` / `#ffffff`) |  **6.94 : 1**   | **7.57 : 1** (对画布 `#f1f5f9` 达 6.93:1) |     ≥ 4.5:1      | 符合标准要求 |
+| **主要强调文本** | `--color-accent-primary` (`#00f59b` / `#047857`) | `--color-bg-base` (`#090d16` / `#f8fafc`)      |  **12.47 : 1**  |               **5.27 : 1**                |     ≥ 4.5:1      | 符合标准要求 |
+| **次要青色文本** | `--color-accent-cyan` (`#00e5ff` / `#0369a1`)    | `--color-bg-base` (`#090d16` / `#f8fafc`)      |  **12.63 : 1**  |               **5.67 : 1**                |     ≥ 4.5:1      | 符合标准要求 |
+| **交互焦点环**   | `--color-focus` (`#00f59b` / `#047857`)          | `--color-surface-base` (`#111827` / `#ffffff`) |  **12.47 : 1**  |               **5.27 : 1**                |     ≥ 3.0:1      | 符合标准要求 |
 
 ---
 
@@ -292,12 +292,14 @@ html[data-theme="light"] {
   --motion-duration-fast: 150ms;
   --motion-duration-normal: 260ms;
   --motion-duration-slow: 450ms;
-  --motion-duration-ambient: 4000ms;
+  --motion-duration-pulse: 2400ms;
+  --motion-duration-ambient: 12000ms;
   --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --motion-ease-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --motion-ease-pulse: cubic-bezier(0.4, 0, 0.6, 1);
 
   /* 层级令牌 (z-index) */
-  --z-bg: -10;
+  --z-bg: -1;
   --z-base: 1;
   --z-sticky: 40;
   --z-header: 50;
@@ -379,9 +381,9 @@ html[data-theme="light"] {
    - 参数：持续 `260ms`，缓动 `cubic-bezier(0.05, 0.7, 0.1, 1)`，位移 `translateY(14px)`；
    - 机制：IntersectionObserver 触发后立即 `unobserve`，一次性执行。
 2. **Ambient 环境循环动效**：
-   - 范围：网格微弱流动、光晕轻微漂移、状态点呼吸；
-   - 参数：持续 `4000ms`，缓动 `linear` / `ease-in-out`；
-   - 降级：移动端（`width <= 768px`）或低电量模式下**完全停止**，锁定静态。
+   - 范围：网格微弱流动、扫描线扫掠（`12000ms` `linear`）、状态点呼吸脉冲（`2400ms` `cubic-bezier(0.4, 0, 0.6, 1)`）；
+   - 参数：统一使用 `--motion-duration-ambient` (12000ms) 与 `--motion-duration-pulse` (2400ms)；
+   - 降级：移动端（`width <= 48rem`）或低动态模式下**完全停止**，锁定静态。
 3. **Pointer 光标增强动效**：
    - 范围：磁吸光晕跟随；
    - 严格限定：仅在 `(hover: hover) and (pointer: fine)` 下启用，严格在 `requestAnimationFrame` 中更新，**不隐藏系统原生光标**。
