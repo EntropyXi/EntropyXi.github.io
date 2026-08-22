@@ -389,6 +389,12 @@
   min-width: 0;
   width: 100%;
   max-width: 52rem;
+  background: rgb(10 12 22 / 78%);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-2xl);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  box-shadow: var(--shadow-card);
 }
 
 .post-header {
@@ -489,7 +495,8 @@
   padding: 1.25rem;
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-xl);
-  background: var(--color-surface-base);
+  background: rgb(10 12 22 / 78%);
+  backdrop-filter: blur(16px);
   box-shadow: var(--shadow-card);
 }
 

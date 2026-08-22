@@ -77,9 +77,9 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: min(44rem, 55vw);
+    max-width: min(52rem, 60vw);
     margin-left: clamp(1.5rem, 5.5vw, 5.5rem);
-    margin-top: clamp(1rem, 3.5vh, 3.5rem);
+    margin-top: clamp(1.5rem, 4vh, 4rem);
     margin-right: auto;
     display: flex;
     flex-direction: column;
@@ -98,9 +98,9 @@
       "Franklin Gothic Bold",
       -apple-system,
       sans-serif;
-    font-size: clamp(2.6rem, 4.2vw, 4.6rem);
+    font-size: clamp(3.5rem, 6.2vw, 6.5rem);
     font-weight: 900;
-    line-height: 1;
+    line-height: 0.95;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     display: flex;
@@ -136,7 +136,7 @@
     background: none;
     border: none;
     padding: 0;
-    margin-top: clamp(2.4rem, 5vh, 4rem);
+    margin-top: clamp(5rem, 12vh, 9.5rem);
     max-width: 36rem;
     display: flex;
     flex-direction: column;
@@ -173,11 +173,12 @@
   }
 
   .narrative-tech-bracket {
-    width: 8rem;
-    height: 2px;
-    background: linear-gradient(90deg, #f59e0b 0%, rgb(245 158 11 / 0%) 100%);
-    margin-top: 0.75rem;
-    box-shadow: 0 0 8px rgb(245 158 11 / 50%);
+    width: 10rem;
+    height: 8px;
+    border-left: 3px solid #f59e0b;
+    border-bottom: 3px solid #f59e0b;
+    margin-top: 1rem;
+    box-shadow: 0 0 10px rgb(245 158 11 / 60%);
   }
 
   /* Scroll Indicator */
@@ -258,19 +259,31 @@
     }
 
     .hero-welcome-title {
-      font-size: clamp(1.65rem, 6.4vw, 2.2rem);
+      font-size: clamp(2.2rem, 9vw, 3.2rem);
+    }
+
+    .hero-narrative-block {
+      margin-top: clamp(2rem, 5vh, 3.5rem);
     }
   }
 
   @media (height <= 44rem) {
     .hero-fullscreen {
-      padding-top: calc(var(--header-height) + 1rem);
+      padding-top: calc(var(--header-height) + 0.5rem);
       padding-bottom: 1.5rem;
     }
 
     .hero-content-container {
       gap: 0.75rem;
       margin-top: 0;
+    }
+
+    .hero-welcome-title {
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+    }
+
+    .hero-narrative-block {
+      margin-top: 1.5rem;
     }
 
     .hero-scroll-wrapper {

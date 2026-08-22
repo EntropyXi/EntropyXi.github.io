@@ -4,37 +4,11 @@ import { calculateReadingProgress } from "@/lib/client/reading-progress";
 import { resolveSiteHeaderState } from "@/lib/client/site-header";
 
 describe("resolveTheme", () => {
-  it("prefers a stored dark theme over a light system preference", () => {
+  it("always returns dark theme as the fixed mode", () => {
     expect(resolveTheme("dark", false)).toBe("dark");
-  });
-
-  it("prefers a stored light theme over a dark system preference", () => {
-    expect(resolveTheme("light", true)).toBe("light");
-  });
-
-  it("falls back to the dark system preference when nothing is stored", () => {
-    expect(resolveTheme(null, true)).toBe("dark");
+    expect(resolveTheme("light", true)).toBe("dark");
+    expect(resolveTheme(null, false)).toBe("dark");
     expect(resolveTheme(undefined, true)).toBe("dark");
-  });
-
-  it("falls back to the light system preference when nothing is stored", () => {
-    expect(resolveTheme(null, false)).toBe("light");
-    expect(resolveTheme(undefined, false)).toBe("light");
-  });
-
-  it("treats unknown stored values as invalid and falls back to the system", () => {
-    expect(resolveTheme("system", true)).toBe("dark");
-    expect(resolveTheme("system", false)).toBe("light");
-  });
-
-  it("treats empty strings and non-string values as invalid", () => {
-    expect(resolveTheme("", true)).toBe("dark");
-    expect(resolveTheme(42, false)).toBe("light");
-  });
-
-  it("is case-sensitive when matching stored themes", () => {
-    expect(resolveTheme("DARK", false)).toBe("light");
-    expect(resolveTheme("Light", true)).toBe("dark");
   });
 });
 

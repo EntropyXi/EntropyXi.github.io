@@ -1,5 +1,4 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro";
 import { SITE_TITLE } from "@/data/site";
 
 interface Props {
@@ -86,12 +85,10 @@ function isActive(href: string): boolean {
           <path d="M9 18c-4.51 2-5-2-7-2"></path>
         </svg>
       </a>
-      <ThemeToggle />
     </nav>
 
-    <!-- Mobile Actions (Theme toggle + Menu button) -->
+    <!-- Mobile Actions (Menu button) -->
     <div class="mobile-actions">
-      <ThemeToggle />
       <button
         type="button"
         id="mobile-menu-btn"

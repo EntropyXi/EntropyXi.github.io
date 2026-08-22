@@ -1,92 +1,21 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("theme behavior contract", () => {
-  test.beforeEach(async ({ page }) => {
+  test("site is permanently locked to dark mode", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    await expect(page.locator(".theme-toggle-btn")).toHaveCount(0);
+  });
+
+  test("dark theme persists regardless of system color scheme preference", async ({
+    page,
+  }) => {
     await page.emulateMedia({ colorScheme: "light" });
-  });
-
-  test("first visit follows the system theme without duplicate ids", async ({
-    page,
-  }) => {
     await page.goto("/");
-
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-    await expect(page.locator("[id]")).toHaveCount(
-      await page.locator("[id]").evaluateAll((elements) => {
-        return new Set(elements.map((element) => element.id)).size;
-      }),
-    );
-  });
-
-  test("the visible theme control toggles and persists the explicit choice", async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/");
-
-    const toggle = page.locator(".theme-toggle-btn:visible");
-    await expect(toggle).toHaveCount(1);
-    await toggle.click();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 
+    await page.emulateMedia({ colorScheme: "dark" });
     await page.reload();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  });
-
-  test("storage failure falls back to the system theme", async ({ page }) => {
-    await page.addInitScript(() => {
-      Storage.prototype.getItem = () => {
-        throw new DOMException("Storage access denied", "SecurityError");
-      };
-    });
-    await page.goto("/");
-
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  });
-
-  test("repeated lifecycle events never duplicate the theme listener", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    await page.evaluate(() => {
-      document.dispatchEvent(new Event("astro:page-load"));
-      document.dispatchEvent(new Event("astro:page-load"));
-    });
-
-    await page.locator(".theme-toggle-btn:visible").click();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  });
-
-  test("system changes apply only until the visitor makes a choice", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    await page.emulateMedia({ colorScheme: "dark" });
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-
-    await page.locator(".theme-toggle-btn:visible").click();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-    await page.emulateMedia({ colorScheme: "light" });
-    await page.emulateMedia({ colorScheme: "dark" });
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  });
-
-  test("before-swap removes listeners and page-load restores them", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    const toggle = page.locator(".theme-toggle-btn:visible");
-
-    await page.evaluate(() => {
-      document.dispatchEvent(new Event("astro:before-swap"));
-    });
-    await toggle.click();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-
-    await page.evaluate(() => {
-      document.dispatchEvent(new Event("astro:page-load"));
-    });
-    await toggle.click();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   });
 });
@@ -251,9 +180,7 @@ test.describe("progressive enhancement contract", () => {
     await expect(
       page.getByRole("button", { name: "打开导航菜单" }),
     ).toBeHidden();
-    await expect(page.locator(".theme-toggle-btn")).toHaveCount(2);
-    await expect(page.locator(".theme-toggle-btn").first()).toBeHidden();
-    await expect(page.locator(".theme-toggle-btn").last()).toBeHidden();
+    await expect(page.locator(".theme-toggle-btn")).toHaveCount(0);
 
     await page.goto(
       "/2026/05/17/深度学习/流匹配与扩散模型/体系/1.%20从SDE开始/",

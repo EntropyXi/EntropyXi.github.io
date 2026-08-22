@@ -9,43 +9,37 @@ interface Props {
   isHome?: boolean;
 }
 
-const { isHome = false } = Astro.props;
+const { isHome: _isHome } = Astro.props;
+void _isHome;
 ---
 
 <div class="ambient-background" aria-hidden="true">
-  {
-    isHome && (
-      <div class="ambient-wallpaper-container">
-        <picture class="ambient-wallpaper-picture">
-          <source
-            media="(max-width: 48rem)"
-            type="image/webp"
-            srcset="/images/hero/suisen-hero-750w.webp"
-          />
-          <source
-            media="(max-width: 90rem)"
-            type="image/webp"
-            srcset="/images/hero/suisen-hero-1440w.webp"
-          />
-          <source
-            type="image/webp"
-            srcset="/images/hero/suisen-hero-3840w.webp"
-          />
-          <img
-            src="/images/hero/suisen-hero-1440w.webp"
-            alt=""
-            class="ambient-wallpaper-img"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            width="1920"
-            height="1080"
-          />
-        </picture>
-        <div class="ambient-wallpaper-scrim" />
-      </div>
-    )
-  }
+  <div class="ambient-wallpaper-container">
+    <picture class="ambient-wallpaper-picture">
+      <source
+        media="(max-width: 48rem)"
+        type="image/webp"
+        srcset="/images/hero/suisen-hero-750w.webp"
+      />
+      <source
+        media="(max-width: 90rem)"
+        type="image/webp"
+        srcset="/images/hero/suisen-hero-1440w.webp"
+      />
+      <source type="image/webp" srcset="/images/hero/suisen-hero-3840w.webp" />
+      <img
+        src="/images/hero/suisen-hero-1440w.webp"
+        alt=""
+        class="ambient-wallpaper-img"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        width="1920"
+        height="1080"
+      />
+    </picture>
+    <div class="ambient-wallpaper-scrim"></div>
+  </div>
 
   <!-- Layer 1: Cyber Grid (Disabled per user request) -->
   <div class="ambient-layer ambient-grid-layer" data-layer="grid"></div>

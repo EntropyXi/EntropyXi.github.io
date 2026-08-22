@@ -79,15 +79,10 @@ test.describe("Hero Component Accessibility, Typography and Contrast Verificatio
     }
   });
 
-  test("hero maintains dark-theme scope styling regardless of page theme", async ({
+  test("hero maintains dark-theme scope styling and high contrast white title", async ({
     page,
   }) => {
     await page.goto("/");
-    // Switch to light theme
-    await page.evaluate(() => {
-      document.documentElement.dataset.theme = "light";
-    });
-
     const hero = page.locator(".hero-fullscreen");
     await expect(hero).toHaveAttribute("data-theme-scope", "dark");
 
