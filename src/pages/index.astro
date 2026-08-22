@@ -2,8 +2,9 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@/components/visual/Hero.astro";
-import PostList from "@/components/content/PostList.astro";
-import PaginationNav from "@/components/content/PaginationNav.astro";
+import SectionHeader from "@/components/visual/SectionHeader.astro";
+import PostList from "@/components/visual/PostList.astro";
+import Pagination from "@/components/visual/Pagination.astro";
 import { pagePath, paginate, totalPages } from "@/lib/routing/pagination";
 import "@/styles/home.css";
 
@@ -25,52 +26,17 @@ const pagePosts = paginate(sorted, 1);
   <Hero />
 
   <section id="latest-posts" class="home-posts-section" aria-label="最新文章">
-    <div class="section-header">
-      <h2 class="section-title">
-        <span class="section-title-symbol">#</span>
-        <span>最新文章</span>
-      </h2>
-      <span class="section-count">共 {sorted.length} 篇笔记</span>
-    </div>
+    <SectionHeader title="最新文章" countText={`共 ${sorted.length} 篇笔记`} />
 
     <PostList posts={pagePosts} />
 
-    <PaginationNav currentPage={1} pages={pages} href={pagePath} />
+    <Pagination currentPage={1} pages={pages} href={pagePath} />
   </section>
 </BaseLayout>
 
 <style>
   .home-posts-section {
     margin-top: 1rem;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .section-title {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin: 0;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .section-title-symbol {
-    color: var(--color-accent);
-    font-family: var(--font-mono);
-  }
-
-  .section-count {
-    color: var(--color-muted);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+    width: 100%;
   }
 </style>

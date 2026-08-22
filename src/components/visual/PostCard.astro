@@ -1,0 +1,340 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatPostDate } from "@/lib/date/format-date";
+import { buildPostPath } from "@/lib/routing/post-path";
+import { buildCategoryPath, buildTagPath } from "@/lib/content/aggregate";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { data } = post;
+const postUrl = buildPostPath(data.permalink);
+const primaryCategory = data.categories[data.categories.length - 1];
+---
+
+<article class="post-card">
+  <div class="post-card-header">
+    {
+      primaryCategory && (
+        <a
+          href={buildCategoryPath(data.categories)}
+          class="post-card-category"
+          title={`分类：${data.categories.join(" / ")}`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+          </svg>
+          <span>{primaryCategory}</span>
+        </a>
+      )
+    }
+    <div class="post-card-date">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" x2="21" y1="10" y2="10"></line>
+      </svg>
+      <time datetime={data.date}>{formatPostDate(data.date)}</time>
+    </div>
+  </div>
+
+  <h3 class="post-card-title">
+    <a href={postUrl} class="post-card-title-link">{data.title}</a>
+  </h3>
+
+  <p class="post-card-description">{data.description}</p>
+
+  <footer class="post-card-meta">
+    {
+      data.tags.length > 0 && (
+        <div class="post-card-tags" aria-label="标签">
+          {data.tags.slice(0, 2).map((tag) => (
+            <a href={buildTagPath(tag)} class="post-card-tag">
+              <span class="post-card-tag-hash">#</span>
+              <span>{tag}</span>
+            </a>
+          ))}
+          {data.tags.length > 2 && (
+            <span
+              class="post-card-tag-more"
+              title={`还有 ${data.tags.length - 2} 个标签`}
+            >
+              +{data.tags.length - 2}
+            </span>
+          )}
+        </div>
+      )
+    }
+    <a
+      href={postUrl}
+      class="post-card-readmore"
+      aria-label={`阅读全文：${data.title}`}
+    >
+      <span>阅读</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </footer>
+</article>
+
+<style>
+  .post-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    background: var(--color-surface-base);
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color var(--motion-duration-normal) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-normal) var(--motion-ease-standard),
+      transform var(--motion-duration-normal) var(--motion-ease-standard);
+    overflow: hidden;
+  }
+
+  .post-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-accent-primary),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity var(--motion-duration-normal)
+      var(--motion-ease-standard);
+  }
+
+  .post-card:hover,
+  .post-card:focus-within {
+    border-color: var(--color-accent-primary);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .post-card:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  .post-card:hover::before,
+  .post-card:focus-within::before {
+    opacity: 1;
+  }
+
+  .post-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.18rem 0.6rem;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-primary-subtle);
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .post-card-category:hover,
+  .post-card-category:focus-visible {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .post-card-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  .post-card-title {
+    margin: 0 0 0.6rem;
+    font-size: 1.18rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .post-card-title-link {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: color var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .post-card-title-link:hover,
+  .post-card-title-link:focus-visible {
+    color: var(--color-accent-primary);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .post-card-description {
+    margin: 0 0 1rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    flex: 1 0 auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .post-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .post-card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-subtle);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    text-decoration: none;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .post-card-tag:hover,
+  .post-card-tag:focus-visible {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 1px;
+  }
+
+  .post-card-tag-hash {
+    color: var(--color-accent-primary);
+    font-weight: 700;
+  }
+
+  .post-card-tag-more {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-raised);
+    color: var(--color-text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .post-card-readmore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--radius-sm);
+    transition:
+      transform var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .post-card-readmore:hover,
+  .post-card-readmore:focus-visible {
+    color: var(--color-accent-primary-hover);
+    transform: translateX(2px);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .post-card:hover,
+    .post-card-readmore:hover,
+    .post-card-readmore:focus-visible {
+      transform: none !important;
+    }
+  }
+</style>

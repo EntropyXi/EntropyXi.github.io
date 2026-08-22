@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import PostList from "@/components/content/PostList.astro";
-import PaginationNav from "@/components/content/PaginationNav.astro";
+import PostList from "@/components/visual/PostList.astro";
+import Pagination from "@/components/visual/Pagination.astro";
+import SectionHeader from "@/components/visual/SectionHeader.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { pagePath, paginate, totalPages } from "@/lib/routing/pagination";
 import "@/styles/home.css";
@@ -32,10 +33,19 @@ const pagePosts = paginate(sorted, page);
   title={`第 ${page} 页`}
   description="深度学习、扩散模型、流匹配与数值分析的技术笔记"
 >
-  <div class="page-header-container">
-    <h1 class="page-title">全部文章</h1>
-    <p class="page-intro">第 {page} 页 / 共 {pages} 页</p>
+  <div class="pagination-page-container">
+    <SectionHeader
+      title="全部文章"
+      countText={`第 ${page} 页 / 共 ${pages} 页`}
+    />
+    <PostList posts={pagePosts} />
+    <Pagination currentPage={page} pages={pages} href={pagePath} />
   </div>
-  <PostList posts={pagePosts} />
-  <PaginationNav currentPage={page} pages={pages} href={pagePath} />
 </BaseLayout>
+
+<style>
+  .pagination-page-container {
+    padding: 1.5rem 0;
+    width: 100%;
+  }
+</style>

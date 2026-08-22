@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  countText?: string;
+  symbol?: string;
+}
+
+const { title, countText, symbol = "#" } = Astro.props;
+---
+
+<div class="section-header">
+  <h2 class="section-title">
+    <span class="section-title-symbol" aria-hidden="true">{symbol}</span>
+    <span>{title}</span>
+  </h2>
+  {countText && <span class="section-count">{countText}</span>}
+</div>
+
+<style>
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .section-title-symbol {
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
+  .section-count {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-base);
+    border: 1px solid var(--color-border-default);
+  }
+</style>

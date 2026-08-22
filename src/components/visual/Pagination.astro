@@ -1,0 +1,151 @@
+---
+interface Props {
+  currentPage: number;
+  pages: number;
+  href: (page: number) => string;
+}
+
+const { currentPage, pages, href } = Astro.props;
+---
+
+{
+  pages > 1 && (
+    <nav class="post-pagination-nav post-pagination" aria-label="分页导航">
+      <ul class="pagination-list">
+        {currentPage > 1 && (
+          <li>
+            <a
+              class="pagination-link pagination-prev"
+              href={href(currentPage - 1)}
+              aria-label="上一页"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+              <span>上一页</span>
+            </a>
+          </li>
+        )}
+
+        {Array.from({ length: pages }, (_, index) => index + 1).map((page) => (
+          <li>
+            <a
+              class="pagination-link"
+              aria-current={page === currentPage ? "page" : undefined}
+              href={href(page)}
+              aria-label={`第 ${page} 页`}
+            >
+              {page}
+            </a>
+          </li>
+        ))}
+
+        {currentPage < pages && (
+          <li>
+            <a
+              class="pagination-link pagination-next"
+              href={href(currentPage + 1)}
+              aria-label="下一页"
+            >
+              <span>下一页</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </a>
+          </li>
+        )}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .post-pagination-nav {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .pagination-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 0.85rem;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-base);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+      transform var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .pagination-link:hover,
+  .pagination-link:focus-visible {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
+    box-shadow: 0 0 12px var(--color-accent-primary-glow);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .pagination-link[aria-current="page"] {
+    border-color: var(--color-accent-primary);
+    background: var(--color-accent-primary);
+    color: var(--color-accent-contrast);
+    font-weight: 700;
+    box-shadow: 0 0 18px var(--color-accent-primary-glow);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pagination-link:hover,
+    .pagination-link:focus-visible {
+      transform: none !important;
+    }
+  }
+</style>
