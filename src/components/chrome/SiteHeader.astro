@@ -22,7 +22,7 @@ function isActive(href: string): boolean {
 <header class="site-header" data-site-header data-header-state="expanded">
   <div class="site-header-inner">
     <div class="site-brand">
-      <a href="/" class="site-logo-link">
+      <a href="/" class="site-logo-link" data-magnetic>
         <span class="site-logo-symbol">Ξ</span>
         <span class="site-logo-text">{SITE_TITLE}</span>
       </a>
@@ -36,6 +36,7 @@ function isActive(href: string): boolean {
             href={item.href}
             class:list={["nav-link", { active: isActive(item.href) }]}
             aria-current={isActive(item.href) ? "page" : undefined}
+            data-magnetic
           >
             {item.label}
           </a>
@@ -47,6 +48,7 @@ function isActive(href: string): boolean {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub 个人主页"
+        data-magnetic
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

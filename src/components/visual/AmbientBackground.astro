@@ -18,6 +18,7 @@
   <div class="ambient-layer ambient-glow-layer" data-layer="glow">
     <div class="ambient-glow-orb glow-orb-primary"></div>
     <div class="ambient-glow-orb glow-orb-cyan"></div>
+    <div class="ambient-glow-orb glow-orb-pointer"></div>
   </div>
 
   <!-- Layer 4: Low-density SVG Mathematical Streamline Flow -->
@@ -141,6 +142,41 @@
     opacity: 0.12;
   }
 
+  .glow-orb-pointer {
+    top: 0;
+    left: 0;
+    width: 22rem;
+    height: 22rem;
+    margin-top: -11rem;
+    margin-left: -11rem;
+    transform: translate3d(
+      var(--pointer-x, -999px),
+      var(--pointer-y, -999px),
+      0
+    );
+    background: radial-gradient(
+      circle,
+      var(--color-accent-primary-subtle) 0%,
+      transparent 70%
+    );
+    opacity: 0.45;
+    pointer-events: none;
+    filter: blur(50px);
+    transition: opacity var(--motion-duration-normal)
+      var(--motion-ease-standard);
+    will-change: transform;
+  }
+
+  :global(html[data-theme="light"]) .glow-orb-pointer {
+    opacity: 0.22;
+  }
+
+  :global(html:not([data-motion="ready"])) .glow-orb-pointer,
+  :global(html[data-motion-preference="reduced"]) .glow-orb-pointer,
+  :global(html[data-feature-magnetic="false"]) .glow-orb-pointer {
+    display: none !important;
+  }
+
   /* Layer 4: Mathematical Streamline Flow */
   .ambient-flow-layer {
     overflow: hidden;
@@ -182,6 +218,10 @@
     }
 
     .glow-orb-cyan {
+      display: none;
+    }
+
+    .glow-orb-pointer {
       display: none;
     }
   }

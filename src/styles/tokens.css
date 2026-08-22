@@ -254,14 +254,22 @@ html[data-theme="light"] {
   --glass-blur: blur(12px);
 
   /* Motion Tokens */
+  --motion-duration-instant: 50ms;
   --motion-duration-fast: 150ms;
   --motion-duration-normal: 260ms;
   --motion-duration-slow: 450ms;
+  --motion-duration-hero: 800ms;
   --motion-duration-pulse: 2400ms;
   --motion-duration-ambient: 12000ms;
   --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --motion-ease-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
   --motion-ease-pulse: cubic-bezier(0.4, 0, 0.6, 1);
+  --motion-distance-xs: 4px;
+  --motion-distance-sm: 8px;
+  --motion-distance-md: 16px;
+  --motion-distance-lg: 24px;
+  --motion-stagger-xs: 40ms;
+  --motion-stagger-sm: 60ms;
 
   /* Compatibility Motion Aliases */
   --transition-fast: var(--motion-duration-fast) var(--motion-ease-standard);

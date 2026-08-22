@@ -1,0 +1,307 @@
+{
+  "phase": 7,
+  "name": "Phase 7 Visual Evidence - Advanced Motion, Reveal and Magnetic Dynamics",
+  "browser": "Chromium 151.0.7922.34",
+  "commit": "f913660599e07ceaf62e538d40e4b593a02c1843",
+  "generatedAt": "2026-08-22T08:07:40.572Z",
+  "baseUrl": "http://127.0.0.1:4321",
+  "evidence": [
+    {
+      "file": "01-fine-pointer-desktop-dark.png",
+      "id": "01-fine-pointer-desktop-dark",
+      "description": "Fine pointer enabled desktop default dark theme",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "02-fine-pointer-desktop-light.png",
+      "id": "02-fine-pointer-desktop-light",
+      "description": "Fine pointer enabled desktop light high-contrast theme",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "light",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "03-fine-pointer-magnetic-hover-cta.png",
+      "id": "03-fine-pointer-magnetic-hover-cta",
+      "description": "Fine pointer magnetic hover state on primary hero CTA",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "04-fine-pointer-magnetic-hover-card.png",
+      "id": "04-fine-pointer-magnetic-hover-card",
+      "description": "Fine pointer magnetic hover state on post card",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "05-touch-disabled-mobile-390-dark.png",
+      "id": "05-touch-disabled-mobile-390-dark",
+      "description": "Touch device mobile 390px (magnetic disabled, scanline/flow disabled)",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": true,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "06-touch-disabled-mobile-390-light.png",
+      "id": "06-touch-disabled-mobile-390-light",
+      "description": "Touch device mobile 390px light theme (magnetic disabled)",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "reducedMotion": false,
+      "hasTouch": true,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "light",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "07-reduced-motion-desktop-dark.png",
+      "id": "07-reduced-motion-desktop-dark",
+      "description": "Reduced motion preference enabled (zero unnecessary motion, instant reveal)",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": true,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "reduced",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "08-fallback-reveal-disabled.png",
+      "id": "08-fallback-reveal-disabled",
+      "description": "Independent feature-flag fallback: data-feature-reveal=false",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": false,
+        "ambient": true,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "09-fallback-ambient-disabled.png",
+      "id": "09-fallback-ambient-disabled",
+      "description": "Independent feature-flag fallback: data-feature-ambient=false",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": false,
+        "magnetic": true
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "10-fallback-magnetic-disabled.png",
+      "id": "10-fallback-magnetic-disabled",
+      "description": "Independent feature-flag fallback: data-feature-magnetic=false",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": true,
+        "ambient": true,
+        "magnetic": false
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    },
+    {
+      "file": "11-fallback-all-flags-disabled.png",
+      "id": "11-fallback-all-flags-disabled",
+      "description": "All motion feature flags disabled simultaneously (safe clean baseline)",
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "reducedMotion": false,
+      "hasTouch": false,
+      "featureFlags": {
+        "reveal": false,
+        "ambient": false,
+        "magnetic": false
+      },
+      "state": {
+        "theme": "dark",
+        "motionPreference": "full",
+        "motionReady": true,
+        "featureReveal": "true",
+        "featureAmbient": "true",
+        "featureMagnetic": "true",
+        "magneticElementsCount": 17,
+        "revealElementsCount": 8,
+        "ambientLayersCount": 4,
+        "horizontalOverflow": false
+      }
+    }
+  ]
+}

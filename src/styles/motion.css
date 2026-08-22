@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Motion System & Keyframe Contracts
-   Strictly adheres to docs/refactor/design-specs.md §7
+   Motion System & Keyframe Contracts (Phase 7 Refactor)
+   Strictly adheres to docs/refactor/design-specs.md §7 & Phase 7 Plan
    ========================================================================== */
 
 /* Keyframe Animations (Strictly transform and opacity only) */
@@ -27,7 +27,205 @@
   }
 }
 
-/* Reduced Motion: Instant duration & pause decorative loops without breaking layout transforms */
+/* ==========================================================================
+   1. Scroll Reveal Presentation Contracts (reveal-controller integration)
+   ========================================================================== */
+
+/* Safe No-JS & Default Fallback: visible by default */
+[data-reveal] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* Feature flag fallback: instantly visible with zero delay */
+html[data-feature-reveal="false"] [data-reveal] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Reduced-motion data attribute override */
+html[data-motion-preference="reduced"] [data-reveal] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Post list item reveal stagger */
+.post-list-item:nth-child(1) .post-card[data-reveal] {
+  transition-delay: 0ms;
+}
+
+.post-list-item:nth-child(2) .post-card[data-reveal] {
+  transition-delay: var(--motion-stagger-sm);
+}
+
+.post-list-item:nth-child(3) .post-card[data-reveal] {
+  transition-delay: calc(2 * var(--motion-stagger-sm));
+}
+
+.post-list-item:nth-child(4) .post-card[data-reveal] {
+  transition-delay: calc(3 * var(--motion-stagger-sm));
+}
+
+.post-list-item:nth-child(5) .post-card[data-reveal] {
+  transition-delay: calc(4 * var(--motion-stagger-sm));
+}
+
+.post-list-item:nth-child(6) .post-card[data-reveal] {
+  transition-delay: calc(5 * var(--motion-stagger-sm));
+}
+
+/* Revealed State: Smooth transition to full visibility and natural position */
+html[data-motion="ready"]:not([data-feature-reveal="false"])
+  [data-reveal][data-reveal-state="visible"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity var(--motion-duration-slow) var(--motion-ease-emphasized),
+    transform var(--motion-duration-slow) var(--motion-ease-emphasized);
+}
+
+/* Progressive Enhancement: Initial hidden state ONLY when JS is initialized and motion enabled */
+html[data-motion="ready"]:not([data-feature-reveal="false"])
+  [data-reveal]:not([data-reveal-state="visible"]) {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--motion-distance-md));
+}
+
+/* ==========================================================================
+   2. Magnetic Dynamic Visuals (pointer-controller integration)
+   Strictly applies to whitelisted elements: Logo, Main Nav, Hero CTA, Post Cards
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  [data-magnetic] {
+    will-change: transform;
+  }
+
+  /* Inactive reset transition */
+  [data-magnetic]:not([data-magnetic-state="active"]) {
+    transition:
+      transform var(--motion-duration-normal) var(--motion-ease-emphasized),
+      box-shadow var(--motion-duration-normal) var(--motion-ease-standard),
+      border-color var(--motion-duration-normal) var(--motion-ease-standard);
+  }
+
+  /* Active tracking transition */
+  [data-magnetic][data-magnetic-state="active"] {
+    transition:
+      transform 100ms cubic-bezier(0.2, 0, 0, 1),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  /* Whitelist 1: Brand Logo */
+  .site-logo-link[data-magnetic][data-magnetic-state="active"] {
+    --magnetic-factor: 0.22;
+
+    transform: translate(
+      calc(var(--magnetic-x, 0px) * var(--magnetic-factor)),
+      calc(var(--magnetic-y, 0px) * var(--magnetic-factor))
+    );
+  }
+
+  /* Whitelist 2: Desktop Nav Links */
+  .nav-link[data-magnetic][data-magnetic-state="active"] {
+    --magnetic-factor: 0.2;
+
+    transform: translate(
+      calc(var(--magnetic-x, 0px) * var(--magnetic-factor)),
+      calc(var(--magnetic-y, 0px) * var(--magnetic-factor))
+    );
+  }
+
+  /* Whitelist 3: Hero Primary CTA */
+  .hero-btn-primary[data-magnetic][data-magnetic-state="active"] {
+    --magnetic-factor: 0.28;
+
+    transform: translate(
+        calc(var(--magnetic-x, 0px) * var(--magnetic-factor)),
+        calc(var(--magnetic-y, 0px) * var(--magnetic-factor))
+      )
+      scale(1.02);
+    box-shadow:
+      0 0 32px var(--color-accent-primary-glow),
+      0 0 12px var(--color-accent-primary);
+  }
+
+  /* Whitelist 4: Post Cards */
+  .post-card[data-magnetic][data-magnetic-state="active"] {
+    --magnetic-factor: 0.05;
+
+    transform: translateY(-4px)
+      translate(
+        calc(var(--magnetic-x, 0px) * var(--magnetic-factor)),
+        calc(var(--magnetic-y, 0px) * var(--magnetic-factor))
+      );
+    border-color: var(--color-accent-primary);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+/* Touch & Coarse Pointer Fallback */
+@media (hover: none), (pointer: coarse) {
+  [data-magnetic] {
+    transform: none !important;
+  }
+}
+
+/* Feature flag fallback for magnetic behavior */
+html[data-feature-magnetic="false"] [data-magnetic] {
+  transform: none !important;
+}
+
+html[data-motion-preference="reduced"] [data-magnetic] {
+  transform: none !important;
+}
+
+/* ==========================================================================
+   3. Ambient & Page Visibility Pause Contracts (ambient-controller integration)
+   ========================================================================== */
+
+/* Ambient Feature Flag Disabled Fallback */
+html[data-feature-ambient="false"] .ambient-scanline-layer,
+html[data-feature-ambient="false"] .ambient-flow-layer {
+  display: none !important;
+}
+
+html[data-feature-ambient="false"] .ambient-glow-orb {
+  opacity: 0.05 !important;
+  animation: none !important;
+}
+
+/* Out-of-view pause */
+[data-ambient][data-ambient-visible="false"] * {
+  animation-play-state: paused !important;
+}
+
+.ambient-background[data-ambient-visible="false"] .ambient-layer,
+.ambient-background[data-ambient-visible="false"] .ambient-glow-orb,
+.ambient-background[data-ambient-visible="false"] .ambient-scanline-layer,
+.ambient-background[data-ambient-visible="false"] .ambient-flow-layer {
+  animation-play-state: paused !important;
+}
+
+/* Page Visibility Pause (0% CPU) */
+html[data-page-visibility="hidden"] .site-footer .status-pulse,
+html[data-page-visibility="hidden"] .ambient-background .ambient-layer,
+html[data-page-visibility="hidden"] .ambient-background .ambient-glow-orb,
+html[data-page-visibility="hidden"] .ambient-background .ambient-scanline-layer,
+html[data-page-visibility="hidden"] .ambient-background .ambient-flow-layer {
+  animation-play-state: paused !important;
+}
+
+/* ==========================================================================
+   4. Reduced Motion: Instant duration & zero unnecessary motion
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
@@ -44,16 +242,21 @@
 
   .status-pulse,
   .ambient-layer,
-  .ambient-glow-orb {
+  .ambient-glow-orb,
+  .hero-title-segment,
+  .segment-brand,
+  .hero-scroll-chevron {
     animation: none !important;
   }
-}
 
-/* Page Visibility: Pause background ambient animations when document is hidden (0% CPU) */
-html[data-page-visibility="hidden"] .site-footer .status-pulse,
-html[data-page-visibility="hidden"] .ambient-background .ambient-layer,
-html[data-page-visibility="hidden"] .ambient-background .ambient-glow-orb,
-html[data-page-visibility="hidden"] .ambient-background .ambient-scanline-layer,
-html[data-page-visibility="hidden"] .ambient-background .ambient-flow-layer {
-  animation-play-state: paused;
+  [data-reveal] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-magnetic] {
+    transform: none !important;
+  }
 }

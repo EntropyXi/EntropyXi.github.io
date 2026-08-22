@@ -19,7 +19,14 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
 ---
 
 <!doctype html>
-<html lang={SITE_LANG} class="no-js" data-theme="dark">
+<html
+  lang={SITE_LANG}
+  class="no-js"
+  data-theme="dark"
+  data-feature-reveal="true"
+  data-feature-ambient="true"
+  data-feature-magnetic="true"
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,8 +70,14 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
     <script>
       import { registerClientFeature } from "@/lib/client/lifecycle";
       import { initializeMotionEnvironment } from "@/lib/client/motion-environment";
+      import { initializeRevealController } from "@/lib/client/reveal-controller";
+      import { initializeAmbientController } from "@/lib/client/ambient-controller";
+      import { initializePointerController } from "@/lib/client/pointer-controller";
 
       registerClientFeature("motion-environment", initializeMotionEnvironment);
+      registerClientFeature("reveal-controller", initializeRevealController);
+      registerClientFeature("ambient-controller", initializeAmbientController);
+      registerClientFeature("pointer-controller", initializePointerController);
     </script>
   </body>
 </html>
