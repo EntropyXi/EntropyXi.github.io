@@ -4,15 +4,56 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
 <BaseLayout title="页面未找到" description="404 - 页面未找到">
   <div class="error-page-container">
-    <div class="error-badge">SYSTEM ERROR // 404</div>
-    <p class="error-page-status">404</p>
+    <div class="error-badge">
+      <span class="error-badge-pulse"></span>
+      <span>SYSTEM ERROR // 404_NOT_FOUND</span>
+    </div>
+    <div class="error-singularity-code" aria-hidden="true">
+      <span>4</span>
+      <span class="glitch-zero">0</span>
+      <span>4</span>
+    </div>
     <h1 class="page-title">页面未找到</h1>
     <p class="error-desc">
       抱歉，您访问的路径不存在或已被迁移。请检查 URL 拼写或通过搜索定位文章。
     </p>
     <div class="error-actions">
-      <a href="/" class="error-btn error-btn-primary">返回首页</a>
-      <a href="/search/" class="error-btn error-btn-secondary">全站搜索</a>
+      <a href="/" class="error-btn error-btn-primary">
+        <span>返回首页</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </a>
+      <a href="/search/" class="error-btn error-btn-secondary">
+        <span>全站搜索</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
     </div>
   </div>
 </BaseLayout>
@@ -27,23 +68,62 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     padding: 4rem 1rem;
     max-width: 36rem;
     margin: 0 auto;
+    width: 100%;
   }
 
   .error-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-accent);
-    letter-spacing: 0.1em;
-    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-accent-red);
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.85rem;
     border-radius: var(--radius-full);
-    border: 1px solid var(--color-accent);
-    background: var(--color-accent-subtle);
-    margin-bottom: 0.5rem;
+    border: 1px solid var(--color-accent-red);
+    background: rgb(239 68 68 / 8%);
+    margin-bottom: 1.5rem;
+  }
+
+  .error-badge-pulse {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: var(--radius-full);
+    background: var(--color-accent-red);
+    box-shadow: 0 0 8px var(--color-accent-red);
+  }
+
+  .error-singularity-code {
+    font-family: var(--font-mono);
+    font-size: 5.5rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .glitch-zero {
+    color: var(--color-accent-primary);
+    text-shadow: 0 0 25px var(--color-accent-primary-glow);
+  }
+
+  .page-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
   }
 
   .error-desc {
-    color: var(--color-muted);
-    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.65;
     margin-bottom: 2rem;
   }
 
@@ -55,39 +135,69 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   }
 
   .error-btn {
-    padding: 0.65rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.65rem 1.4rem;
     border-radius: var(--radius-md);
     font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
     transition:
-      background-color var(--transition-normal),
-      color var(--transition-normal),
-      border-color var(--transition-normal),
-      transform var(--transition-normal);
+      background-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+      transform var(--motion-duration-fast) var(--motion-ease-standard);
   }
 
   .error-btn-primary {
-    background: var(--color-accent);
+    background: var(--color-accent-primary);
     color: var(--color-accent-contrast);
-    box-shadow: 0 0 20px var(--color-accent-glow);
+    border: 1px solid var(--color-accent-primary);
+    box-shadow: 0 0 20px var(--color-accent-primary-glow);
   }
 
-  .error-btn-primary:hover {
-    background: var(--color-accent-hover);
+  .error-btn-primary:hover,
+  .error-btn-primary:focus-visible {
+    background: var(--color-accent-primary-hover);
     color: var(--color-accent-contrast);
-    transform: translateY(-2px);
+    box-shadow: 0 0 28px var(--color-accent-primary-glow);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
   }
 
   .error-btn-secondary {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
+    background: var(--color-surface-base);
+    border: 1px solid var(--color-border-default);
+    color: var(--color-text-primary);
   }
 
-  .error-btn-secondary:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-    transform: translateY(-2px);
+  .error-btn-secondary:hover,
+  .error-btn-secondary:focus-visible {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
+    box-shadow: 0 0 16px var(--color-accent-primary-glow);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .error-btn-primary:hover,
+    .error-btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .error-btn-primary:hover,
+    .error-btn-primary:focus-visible,
+    .error-btn-secondary:hover,
+    .error-btn-secondary:focus-visible {
+      transform: none !important;
+    }
   }
 </style>

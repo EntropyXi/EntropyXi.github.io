@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import PaginationNav from "@/components/content/PaginationNav.astro";
-import PostList from "@/components/content/PostList.astro";
+import Pagination from "@/components/visual/Pagination.astro";
+import PostList from "@/components/visual/PostList.astro";
+import SectionHeader from "@/components/visual/SectionHeader.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { postsInYearMonth, sortPostsByDateDesc } from "@/lib/content/aggregate";
 import { paginate, totalPages } from "@/lib/routing/pagination";
@@ -36,7 +37,19 @@ const href = (page: number) =>
   title={`归档 ${year}-${month}`}
   description={`${year} 年 ${month} 月文章归档`}
 >
-  <h1 class="page-title">{year}-{month} 归档</h1>
-  <PostList posts={pagePosts} />
-  <PaginationNav currentPage={1} pages={pages} href={href} />
+  <div class="archive-container">
+    <SectionHeader
+      title={`${year} 年 ${month} 月归档`}
+      countText={`共 ${posts.length} 篇技术笔记`}
+    />
+    <PostList posts={pagePosts} />
+    <Pagination currentPage={1} pages={pages} href={href} />
+  </div>
 </BaseLayout>
+
+<style>
+  .archive-container {
+    padding: 1.5rem 0;
+    width: 100%;
+  }
+</style>

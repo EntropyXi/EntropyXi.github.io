@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import PaginationNav from "@/components/content/PaginationNav.astro";
-import PostList from "@/components/content/PostList.astro";
+import Pagination from "@/components/visual/Pagination.astro";
+import PostList from "@/components/visual/PostList.astro";
+import SectionHeader from "@/components/visual/SectionHeader.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { sortPostsByDateDesc } from "@/lib/content/aggregate";
 import { paginate, totalPages } from "@/lib/routing/pagination";
@@ -27,8 +28,20 @@ const href = (pageNumber: number) =>
   pageNumber === 1 ? "/archives/" : `/archives/page/${pageNumber}/`;
 ---
 
-<BaseLayout title={`归档 第 ${page} 页`} description="全部文章归档">
-  <h1 class="page-title">归档</h1>
-  <PostList posts={pagePosts} />
-  <PaginationNav currentPage={page} pages={pages} href={href} />
+<BaseLayout title={`全站归档 第 ${page} 页`} description="全部文章归档">
+  <div class="archive-container">
+    <SectionHeader
+      title="全站归档"
+      countText={`第 ${page} 页 / 共 ${pages} 页 · 共 ${posts.length} 篇`}
+    />
+    <PostList posts={pagePosts} />
+    <Pagination currentPage={page} pages={pages} href={href} />
+  </div>
 </BaseLayout>
+
+<style>
+  .archive-container {
+    padding: 1.5rem 0;
+    width: 100%;
+  }
+</style>

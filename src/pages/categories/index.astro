@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionHeader from "@/components/visual/SectionHeader.astro";
 import { buildCategoryPath, postsInCategory } from "@/lib/content/aggregate";
 import "@/styles/home.css";
 
@@ -27,30 +28,125 @@ const categoriesWithCount = categoryPaths.map((catPath) => {
 });
 ---
 
-<BaseLayout title="分类" description="全站文章分类导览">
-  <div class="category-index-header">
-    <h1 class="page-title">文章分类</h1>
-    <p class="page-intro">共 {categoryPaths.length} 个分类维度</p>
-  </div>
+<BaseLayout title="全站分类" description="全站文章分类图谱与层级索引">
+  <div class="category-page-container">
+    <SectionHeader
+      title="全站分类"
+      countText={`共 ${categoryPaths.length} 个分类维度`}
+    />
 
-  <div class="badge-grid">
-    {
-      categoriesWithCount.map((cat) => (
-        <a href={buildCategoryPath(cat.segments)} class="category-card">
-          <span class="category-card-name">{cat.path}</span>
-          <span class="tag-count">{cat.count} 篇</span>
-        </a>
-      ))
-    }
+    <div class="category-grid">
+      {
+        categoriesWithCount.map((cat) => (
+          <a href={buildCategoryPath(cat.segments)} class="category-atlas-card">
+            <div class="category-atlas-left">
+              <svg
+                class="category-atlas-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+              </svg>
+              <span class="category-atlas-name">{cat.path}</span>
+            </div>
+            <span class="category-atlas-count">{cat.count} 篇</span>
+          </a>
+        ))
+      }
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  .category-index-header {
-    margin-bottom: 2rem;
+  .category-page-container {
+    padding: 1.5rem 0;
+    width: 100%;
   }
 
-  .category-card-name {
-    font-weight: 500;
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .category-atlas-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-base);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+      transform var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .category-atlas-card:hover,
+  .category-atlas-card:focus-visible {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
+    box-shadow: var(--shadow-card-hover);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .category-atlas-card:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .category-atlas-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    overflow: hidden;
+  }
+
+  .category-atlas-icon {
+    color: var(--color-accent-primary);
+    flex-shrink: 0;
+  }
+
+  .category-atlas-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .category-atlas-count {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-subtle);
+    flex-shrink: 0;
+  }
+
+  @media (width <= 40rem) {
+    .category-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

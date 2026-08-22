@@ -1,14 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionHeader from "@/components/visual/SectionHeader.astro";
 import "@/styles/home.css";
 ---
 
-<BaseLayout title="搜索" description="全站文章搜索">
-  <div class="search-container">
-    <div class="search-header">
-      <h1 class="page-title">全站搜索</h1>
-      <p class="page-intro">输入中文或英文关键词，实时索引 30 篇技术文章</p>
-    </div>
+<BaseLayout title="全站搜索" description="全站文章搜索">
+  <div class="search-page-container">
+    <SectionHeader title="全站搜索" countText="实时索引 30 篇技术文章" />
 
     <noscript>
       <div
@@ -56,11 +54,18 @@ import "@/styles/home.css";
     </form>
 
     <div id="search-status" class="search-status" aria-live="polite"></div>
-    <ul class="search-results" id="search-results" aria-live="polite"></ul>
+    <ul class="search-results" id="search-results"></ul>
   </div>
 </BaseLayout>
 
 <style>
+  .search-page-container {
+    padding: 1.5rem 0;
+    max-width: 48rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+
   .visually-hidden {
     position: absolute;
     width: 1px;
@@ -73,8 +78,68 @@ import "@/styles/home.css";
     border-width: 0;
   }
 
+  .search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .search-input-icon {
+    position: absolute;
+    left: 1.15rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-text-muted);
+    pointer-events: none;
+  }
+
+  .search-form input {
+    width: 100%;
+    padding: 0.9rem 3.2rem 0.9rem 3rem;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-base);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .search-form input:focus {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 20px var(--color-accent-primary-glow);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .search-kbd-hint {
+    position: absolute;
+    right: 1.15rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
   .search-status {
-    color: var(--color-muted);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     min-height: 1.5rem;
@@ -83,14 +148,14 @@ import "@/styles/home.css";
   .search-noscript-notice {
     padding: 1.25rem;
     margin-bottom: 2rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-default);
     border-radius: var(--radius-lg);
-    background: var(--color-surface);
+    background: var(--color-surface-base);
   }
 
   .search-noscript-text {
     margin: 0 0 1rem;
-    color: var(--color-text);
+    color: var(--color-text-primary);
     font-size: 0.95rem;
     line-height: 1.6;
   }
@@ -106,23 +171,80 @@ import "@/styles/home.css";
     align-items: center;
     min-height: 2.75rem;
     padding: 0.5rem 1rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-default);
     border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-accent);
-    font-size: 0.9rem;
-    font-weight: 500;
+    background: var(--color-surface-raised);
+    color: var(--color-accent-primary);
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 600;
     text-decoration: none;
     transition:
-      color var(--transition-fast),
-      border-color var(--transition-fast),
-      background-color var(--transition-fast);
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
   }
 
   .search-noscript-link:hover,
   .search-noscript-link:focus-visible {
-    border-color: var(--color-accent);
-    background: var(--color-accent-subtle);
+    border-color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
+    box-shadow: 0 0 12px var(--color-accent-primary-glow);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* Dynamic Search Results Styling */
+  .search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  :global(.search-result-card) {
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    background: var(--color-surface-base);
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  :global(.search-result-card:hover) {
+    border-color: var(--color-accent-primary);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  :global(.search-result-title) {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  :global(.search-result-title a) {
+    color: var(--color-accent-primary);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  :global(.search-result-title a:hover),
+  :global(.search-result-title a:focus-visible) {
+    color: var(--color-accent-primary-hover);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  :global(.search-result-excerpt mark) {
+    background: var(--color-accent-primary-subtle);
+    color: var(--color-accent-primary);
+    padding: 0.1em 0.35em;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
   }
 </style>
 

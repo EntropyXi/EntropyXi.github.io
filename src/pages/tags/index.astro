@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionHeader from "@/components/visual/SectionHeader.astro";
 import { buildTagPath, postsWithTag } from "@/lib/content/aggregate";
 import "@/styles/home.css";
 
@@ -13,26 +14,88 @@ const tagsWithCount = allTags.map((tag) => ({
 }));
 ---
 
-<BaseLayout title="标签" description="全站文章标签索引">
-  <div class="tags-index-header">
-    <h1 class="page-title">文章标签</h1>
-    <p class="page-intro">共 {allTags.length} 个技术标签</p>
-  </div>
+<BaseLayout title="全站标签" description="全站文章技术标签与索引">
+  <div class="tags-page-container">
+    <SectionHeader
+      title="全站标签"
+      countText={`共 ${allTags.length} 个技术标签`}
+    />
 
-  <div class="badge-grid">
-    {
-      tagsWithCount.map((tag) => (
-        <a href={buildTagPath(tag.name)} class="tag-badge">
-          <span>#{tag.name}</span>
-          <span class="tag-count">({tag.count})</span>
-        </a>
-      ))
-    }
+    <div class="tag-cloud-grid">
+      {
+        tagsWithCount.map((tag) => (
+          <a href={buildTagPath(tag.name)} class="tag-cloud-chip">
+            <span class="tag-cloud-hash">#</span>
+            <span class="tag-cloud-name">{tag.name}</span>
+            <span class="tag-cloud-count">{tag.count}</span>
+          </a>
+        ))
+      }
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  .tags-index-header {
-    margin-bottom: 2rem;
+  .tags-page-container {
+    padding: 1.5rem 0;
+    width: 100%;
+  }
+
+  .tag-cloud-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .tag-cloud-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border-default);
+    background: var(--color-surface-base);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      background-color var(--motion-duration-fast) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+      transform var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .tag-cloud-chip:hover,
+  .tag-cloud-chip:focus-visible {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-primary-subtle);
+    box-shadow: 0 0 12px var(--color-accent-primary-glow);
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tag-cloud-chip:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .tag-cloud-hash {
+    color: var(--color-accent-primary);
+    font-weight: 700;
+  }
+
+  .tag-cloud-count {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    padding: 0.1rem 0.4rem;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-subtle);
   }
 </style>
