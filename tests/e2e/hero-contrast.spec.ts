@@ -50,13 +50,16 @@ test.describe("Hero Component Accessibility, Typography and Contrast Verificatio
 
     // Verify text content: contains core domains and excludes "收敛性证明"
     const text = await narrativeBlock.innerText();
-    expect(text).toContain("这里是 EntropyXi 的技术笔记");
+    expect(text).toContain("这里是 EntropyXi 的个人博客");
     expect(text).toContain("很高兴与你相遇！");
     expect(text).toContain("深度学习");
-    expect(text).toContain("扩散模型 (Diffusion Models)");
-    expect(text).toContain("流匹配 (Flow Matching)");
+    expect(text).toContain("扩散模型");
+    expect(text).toContain("流匹配");
     expect(text).toContain("数值分析");
     expect(text).not.toContain("收敛性证明");
+
+    // Verify navbar brand avatar logo
+    await expect(page.locator(".site-logo-avatar")).toBeVisible();
   });
 
   test("vertical bar scroll indicator has accessible label and 44px min touch target", async ({

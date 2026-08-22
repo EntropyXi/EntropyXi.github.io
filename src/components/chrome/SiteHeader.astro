@@ -33,7 +33,15 @@ function isActive(href: string): boolean {
   <div class="site-header-inner">
     <div class="site-brand">
       <a href="/" class="site-logo-link" data-magnetic>
-        <span class="site-logo-symbol">Ξ</span>
+        <img
+          src="/images/avatar-suisen.webp"
+          alt="EntropyXi"
+          class="site-logo-avatar"
+          width="32"
+          height="32"
+          loading="eager"
+          decoding="async"
+        />
         <span class="site-logo-text">{SITE_TITLE}</span>
       </a>
     </div>
@@ -244,7 +252,7 @@ function isActive(href: string): boolean {
     max-width: var(--max-width-wide);
     height: 100%;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 clamp(1.5rem, 5.5vw, 5.5rem);
   }
 
   .site-brand {
@@ -264,20 +272,20 @@ function isActive(href: string): boolean {
     transition: color var(--motion-duration-fast) var(--motion-ease-standard);
   }
 
-  .site-logo-symbol {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.9rem;
-    height: 1.9rem;
-    border-radius: var(--radius-sm);
-    background: var(--color-accent-primary-subtle);
-    border: 1px solid var(--color-accent-primary);
-    color: var(--color-accent-primary);
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    font-weight: 700;
+  .site-logo-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--color-accent-primary);
     box-shadow: 0 0 10px var(--color-accent-primary-glow);
+    object-fit: cover;
+    display: block;
+    transition: transform var(--motion-duration-fast)
+      var(--motion-ease-standard);
+  }
+
+  .site-logo-link:hover .site-logo-avatar {
+    transform: rotate(8deg) scale(1.08);
   }
 
   .site-logo-link:hover .site-logo-text {

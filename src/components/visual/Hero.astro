@@ -15,15 +15,13 @@
     <!-- Welcoming Narrative (Clean text, no black box background) -->
     <div class="hero-narrative-block">
       <p class="narrative-line">
-        这里是 <strong class="brand-text">EntropyXi</strong> 的技术笔记。
+        这里是 <strong class="brand-text">EntropyXi</strong> 的个人博客。
       </p>
       <p class="narrative-line">很高兴与你相遇！</p>
       <p class="narrative-lead">
-        聚焦<strong>深度学习</strong>、<strong
-          >扩散模型 (Diffusion Models)</strong
-        >、<strong>流匹配 (Flow Matching)</strong>与<strong>数值分析</strong
-        >的严谨数学推导与高性能工程落地。
+        聚焦深度学习、扩散模型、流匹配与数值分析的高性能工程落地。
       </p>
+      <div class="narrative-tech-bracket" aria-hidden="true"></div>
     </div>
   </div>
 
@@ -138,16 +136,20 @@
     background: none;
     border: none;
     padding: 0;
-    margin-top: 0.5rem;
-    max-width: 38rem;
+    margin-top: clamp(2.4rem, 5vh, 4rem);
+    max-width: 36rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
   }
 
   .narrative-line {
     color: #f8fafc;
-    font-size: clamp(1.1rem, 1.35vw, 1.3rem);
-    font-weight: 600;
-    line-height: 1.6;
-    margin: 0 0 0.4rem;
+    font-size: clamp(0.92rem, 1.12vw, 1.04rem);
+    font-weight: 500;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    margin: 0;
     text-shadow:
       0 2px 12px rgb(0 0 0 / 95%),
       0 4px 24px rgb(0 0 0 / 85%);
@@ -160,18 +162,22 @@
   }
 
   .narrative-lead {
-    color: #e2e8f0;
-    font-size: clamp(0.92rem, 1.05vw, 1.02rem);
-    line-height: 1.7;
-    margin: 0.5rem 0 0;
+    color: #cbd5e1;
+    font-size: clamp(0.88rem, 1.05vw, 0.98rem);
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+    margin: 0.25rem 0 0;
     text-shadow:
       0 2px 10px rgb(0 0 0 / 95%),
       0 4px 20px rgb(0 0 0 / 85%);
   }
 
-  .narrative-lead strong {
-    color: #fff;
-    font-weight: 600;
+  .narrative-tech-bracket {
+    width: 8rem;
+    height: 2px;
+    background: linear-gradient(90deg, #f59e0b 0%, rgb(245 158 11 / 0%) 100%);
+    margin-top: 0.75rem;
+    box-shadow: 0 0 8px rgb(245 158 11 / 50%);
   }
 
   /* Scroll Indicator */
