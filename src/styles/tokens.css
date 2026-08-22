@@ -1,66 +1,72 @@
 /* ==========================================================================
-   Design Tokens - Dark Cyber (Default Theme) & Light Cyber (High Contrast)
-   Design Target: WCAG 2.2 AA (AA Target)
-   Adheres to docs/refactor/design-specs.md v1.0.0
+   Design Tokens - Sunset Suisen (Dark & Light Theme)
+   Design Target: WCAG 2.2 AA (All Text >= 4.5:1, Headings/UI >= 3:1)
+   Adheres to docs/superpowers/plans/2026-08-22-suisen-sunset-hero-redesign-plan.md
    ========================================================================== */
 
 :root,
 html[data-theme="dark"] {
-  /* Canvas & Surface System */
-  --color-bg-canvas: #060911;
-  --color-bg-base: #090d16;
-  --color-bg-subtle: #0f172a;
-  --color-surface-base: #111827;
-  --color-surface-raised: #162032;
-  --color-surface-overlay: #1a2234;
-  --color-surface-glass: rgb(17 24 39 / 75%);
-  --color-drawer-backdrop: rgb(0 0 0 / 65%);
+  color-scheme: dark;
+
+  /* Canvas & Surface System (Twilight Indigo Obsidian) */
+  --color-bg-canvas: #0a0c16;
+  --color-bg-base: #0f1221;
+  --color-bg-subtle: #161a30;
+  --color-surface-base: #13172b;
+  --color-surface-raised: #1b213d;
+  --color-surface-overlay: #232a4e;
+  --color-surface-glass: rgb(19 23 43 / 78%);
+  --color-drawer-backdrop: rgb(10 12 22 / 75%);
 
   /* Border System */
-  --color-border-subtle: #162032;
-  --color-border-default: #1e293b;
-  --color-border-hover: #334155;
-  --color-border-accent: #00f59b;
-  --color-border-glow: rgb(0 245 155 / 35%);
+  --color-border-subtle: #1c223a;
+  --color-border-default: #252d4c;
+  --color-border-hover: #3d4976;
+  --color-border-accent: #f59e0b;
+  --color-border-glow: rgb(245 158 11 / 35%);
 
-  /* Brand & Cyber Accents */
-  --color-accent-primary: #00f59b;
-  --color-accent-primary-hover: #10b981;
-  --color-accent-primary-glow: rgb(0 245 155 / 28%);
-  --color-accent-primary-subtle: rgb(0 245 155 / 10%);
-  --color-accent-cyan: #00e5ff;
-  --color-accent-cyan-hover: #38bdf8;
-  --color-accent-cyan-glow: rgb(0 229 255 / 25%);
-  --color-accent-cyan-subtle: rgb(0 229 255 / 10%);
-  --color-accent-purple: #a855f7;
+  /* Brand & Sunset Accents */
+  --color-accent-primary: #f59e0b;
+  --color-accent-primary-hover: #fbbf24;
+  --color-accent-primary-glow: rgb(245 158 11 / 32%);
+  --color-accent-primary-subtle: rgb(245 158 11 / 12%);
+  --color-accent-secondary: #818cf8;
+  --color-accent-secondary-hover: #a78bfa;
+  --color-accent-secondary-glow: rgb(129 140 248 / 25%);
+  --color-accent-secondary-subtle: rgb(129 140 248 / 12%);
+  --color-accent-cyan: var(--color-accent-secondary);
+  --color-accent-cyan-hover: var(--color-accent-secondary-hover);
+  --color-accent-cyan-glow: var(--color-accent-secondary-glow);
+  --color-accent-cyan-subtle: var(--color-accent-secondary-subtle);
+  --color-accent-coral: #ff6b4a;
   --color-accent-amber: #f59e0b;
   --color-accent-red: #ef4444;
 
-  /* Typography Colors */
+  /* Typography Colors (Verified Contrast) */
   --color-text-primary: #f8fafc;
   --color-text-secondary: #cbd5e1;
   --color-text-muted: #94a3b8;
-  --color-text-dim: #64748b;
+  --color-text-dim: #7d8cb0; /* R2: Adjusted from #64748b to guarantee 5.5:1 on #0f1221 */
 
   /* Ambient Layers */
-  --color-ambient-grid: #162032;
-  --color-ambient-scanline: rgb(0 245 155 / 3%);
-  --color-ambient-streamline: rgb(0 229 255 / 20%);
+  --color-ambient-grid: #1c223a;
+  --color-ambient-scanline: rgb(245 158 11 / 3%);
+  --color-ambient-streamline: rgb(129 140 248 / 22%);
 
   /* Code & Formulas */
-  --color-code-bg: #0b0f19;
+  --color-code-bg: #0b0e1a;
   --color-code-text: #e2e8f0;
-  --color-code-inline-bg: rgb(0 245 155 / 12%);
-  --color-code-inline-text: #00f59b;
-  --color-code-border: #1e293b;
+  --color-code-inline-bg: rgb(245 158 11 / 12%);
+  --color-code-inline-text: #fbbf24;
+  --color-code-border: #252d4c;
 
-  /* Focus & Selection */
-  --color-focus: #00f59b;
-  --color-focus-ring: rgb(0 245 155 / 45%);
-  --color-selection-bg: rgb(0 245 155 / 30%);
+  /* Focus & Selection (WCAG 2.4.13 Compliant Solid Focus) */
+  --color-focus: #f59e0b;
+  --color-focus-ring: #f59e0b;
+  --color-selection-bg: rgb(245 158 11 / 30%);
   --color-selection-text: #fff;
 
-  /* Shadows & Neon Glows */
+  /* Shadows & Sunset Neon Glows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 40%);
   --shadow-card:
     0 4px 20px -2px rgb(0 0 0 / 50%), 0 0 0 1px var(--color-border-default);
@@ -69,7 +75,8 @@ html[data-theme="dark"] {
     0 0 20px 0 var(--color-accent-primary-glow),
     0 0 0 1px var(--color-accent-primary);
   --shadow-glow-accent: 0 0 25px var(--color-accent-primary-glow);
-  --shadow-glow-cyan: 0 0 25px var(--color-accent-cyan-glow);
+  --shadow-glow-secondary: 0 0 25px var(--color-accent-secondary-glow);
+  --shadow-glow-cyan: var(--shadow-glow-secondary);
   --shadow-header:
     0 4px 20px rgb(0 0 0 / 40%), 0 1px 0 var(--color-border-default);
 
@@ -91,63 +98,69 @@ html[data-theme="dark"] {
 }
 
 /* ==========================================================================
-   Design Tokens - Light Cyber (High Contrast Theme)
-   Design Target: WCAG 2.2 AA (AA Target)
+   Design Tokens - Light Cyber (Warm Sunset Alabaster Theme)
+   Design Target: WCAG 2.2 AA (AA Target >= 4.5:1)
    ========================================================================== */
 html[data-theme="light"] {
+  color-scheme: light;
+
   /* Canvas & Surface System */
-  --color-bg-canvas: #f1f5f9;
-  --color-bg-base: #f8fafc;
-  --color-bg-subtle: #edf2f7;
+  --color-bg-canvas: #f8f5f0;
+  --color-bg-base: #fdfbf7;
+  --color-bg-subtle: #f2ece1;
   --color-surface-base: #fff;
-  --color-surface-raised: #f8fafc;
-  --color-surface-overlay: #fff;
-  --color-surface-glass: rgb(255 255 255 / 85%);
-  --color-drawer-backdrop: rgb(15 23 42 / 45%);
+  --color-surface-raised: #faf6ef;
+  --color-surface-overlay: #f4eee3;
+  --color-surface-glass: rgb(255 255 255 / 88%);
+  --color-drawer-backdrop: rgb(28 25 23 / 45%);
 
   /* Border System */
-  --color-border-subtle: #f1f5f9;
-  --color-border-default: #e2e8f0;
-  --color-border-hover: #cbd5e1;
-  --color-border-accent: #047857;
-  --color-border-glow: rgb(4 120 87 / 20%);
+  --color-border-subtle: #f0e7da;
+  --color-border-default: #e4d7c5;
+  --color-border-hover: #cfbea8;
+  --color-border-accent: #c2410c;
+  --color-border-glow: rgb(194 65 12 / 20%);
 
-  /* Brand & Cyber Accents (AA Target >= 4.5:1) */
-  --color-accent-primary: #047857;
-  --color-accent-primary-hover: #065f46;
-  --color-accent-primary-glow: rgb(4 120 87 / 18%);
-  --color-accent-primary-subtle: rgb(4 120 87 / 8%);
-  --color-accent-cyan: #0369a1;
-  --color-accent-cyan-hover: #075985;
-  --color-accent-cyan-glow: rgb(3 105 161 / 18%);
-  --color-accent-cyan-subtle: rgb(3 105 161 / 8%);
-  --color-accent-purple: #7c3aed;
-  --color-accent-amber: #d97706;
+  /* Brand & Sunset Accents (AA Target >= 4.5:1) */
+  --color-accent-primary: #c2410c; /* Exact 5.01:1 on #fdfbf7 */
+  --color-accent-primary-hover: #9a3412;
+  --color-accent-primary-glow: rgb(194 65 12 / 18%);
+  --color-accent-primary-subtle: rgb(194 65 12 / 8%);
+  --color-accent-secondary: #4338ca; /* Exact 7.65:1 on #fdfbf7 */
+  --color-accent-secondary-hover: #3730a3;
+  --color-accent-secondary-glow: rgb(67 56 202 / 18%);
+  --color-accent-secondary-subtle: rgb(67 56 202 / 8%);
+  --color-accent-cyan: var(--color-accent-secondary);
+  --color-accent-cyan-hover: var(--color-accent-secondary-hover);
+  --color-accent-cyan-glow: var(--color-accent-secondary-glow);
+  --color-accent-cyan-subtle: var(--color-accent-secondary-subtle);
+  --color-accent-coral: #ea580c;
+  --color-accent-amber: #b45309;
   --color-accent-red: #dc2626;
 
   /* Typography Colors */
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #334155;
-  --color-text-muted: #475569;
-  --color-text-dim: #334155; /* Maintained at #334155 per contract */
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #44403c;
+  --color-text-muted: #57534e;
+  --color-text-dim: #44403c;
 
   /* Ambient Layers */
-  --color-ambient-grid: #e2e8f0;
-  --color-ambient-scanline: rgb(4 120 87 / 2%);
-  --color-ambient-streamline: rgb(3 105 161 / 15%);
+  --color-ambient-grid: #e8ded1;
+  --color-ambient-scanline: rgb(194 65 12 / 2%);
+  --color-ambient-streamline: rgb(67 56 202 / 15%);
 
   /* Code & Formulas */
-  --color-code-bg: #0f172a;
-  --color-code-text: #e2e8f0;
-  --color-code-inline-bg: rgb(4 120 87 / 8%);
-  --color-code-inline-text: #065f46;
-  --color-code-border: #e2e8f0;
+  --color-code-bg: #1c1917;
+  --color-code-text: #f5f5f4;
+  --color-code-inline-bg: rgb(194 65 12 / 8%);
+  --color-code-inline-text: #fdba74; /* R2: High contrast 8.54:1 on #1c1917 */
+  --color-code-border: #e4d7c5;
 
   /* Focus & Selection */
-  --color-focus: #047857;
-  --color-focus-ring: rgb(4 120 87 / 35%);
-  --color-selection-bg: rgb(4 120 87 / 20%);
-  --color-selection-text: #0f172a;
+  --color-focus: #c2410c;
+  --color-focus-ring: #c2410c;
+  --color-selection-bg: rgb(194 65 12 / 20%);
+  --color-selection-text: #1c1917;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 5%);
@@ -158,7 +171,8 @@ html[data-theme="light"] {
     0 0 16px 0 var(--color-accent-primary-glow),
     0 0 0 1px var(--color-accent-primary);
   --shadow-glow-accent: 0 0 20px var(--color-accent-primary-glow);
-  --shadow-glow-cyan: 0 0 20px var(--color-accent-cyan-glow);
+  --shadow-glow-secondary: 0 0 20px var(--color-accent-secondary-glow);
+  --shadow-glow-cyan: var(--shadow-glow-secondary);
   --shadow-header:
     0 2px 10px rgb(0 0 0 / 5%), 0 1px 0 var(--color-border-default);
 
