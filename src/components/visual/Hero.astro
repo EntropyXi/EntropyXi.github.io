@@ -1,6 +1,6 @@
 ---
-// Hero.astro: Grand Narrative Hero Component with Demand-Loaded Original SDE Graphic
-// Strictly adheres to docs/refactor/design-specs.md §6.2 and §8
+// Hero.astro: Fullscreen Immersive Sunset Landing Hero Component
+// Adheres to docs/superpowers/plans/2026-08-22-suisen-sunset-hero-redesign-plan.md
 import { buildTagPath } from "@/lib/content/aggregate";
 
 interface ResearchTopic {
@@ -8,7 +8,6 @@ interface ResearchTopic {
   tag: string;
 }
 
-// Strictly maps to verified existing tags generated in static build
 const researchTopics: ResearchTopic[] = [
   { label: "流匹配与扩散模型", tag: "流匹配与扩散模型" },
   { label: "深度学习理论", tag: "深度学习" },
@@ -19,160 +18,233 @@ const researchTopics: ResearchTopic[] = [
 ];
 ---
 
-<section class="hero-section" aria-label="欢迎首屏">
-  <div class="hero-container">
-    <!-- Left Narrative Column (55% on Desktop) -->
-    <div class="hero-narrative">
-      <!-- Announcement & Research Status Badge -->
-      <div class="hero-status-badge">
-        <span class="hero-status-pulse" aria-hidden="true"></span>
-        <span class="hero-status-title">专题前沿</span>
-        <span class="hero-status-divider" aria-hidden="true">/</span>
-        <span class="hero-status-desc">SDE 扩散模型与流匹配理论推导</span>
-      </div>
+<section class="hero-fullscreen" aria-label="欢迎首屏" data-theme-scope="dark">
+  <!-- Layer 1: Responsive Picture Background -->
+  <picture class="hero-picture-layer" aria-hidden="true">
+    <source
+      media="(max-width: 48rem)"
+      type="image/webp"
+      srcset="/images/hero/suisen-hero-750w.webp"
+    />
+    <source
+      media="(max-width: 90rem)"
+      type="image/webp"
+      srcset="/images/hero/suisen-hero-1440w.webp"
+    />
+    <source type="image/webp" srcset="/images/hero/suisen-hero-3840w.webp" />
+    <img
+      src="/images/hero/suisen-hero-1440w.webp"
+      alt=""
+      class="hero-bg-img"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="1920"
+      height="1080"
+    />
+  </picture>
 
-      <!-- Main Headline with Segmented Structure & Shimmer -->
-      <div class="hero-title-group">
-        <h1 class="hero-title">
-          <span class="hero-title-segment segment-brand">EntropyXi</span>
-          <span class="hero-title-segment segment-sub">的技术笔记</span>
-        </h1>
-        <p class="hero-subtitle">
-          <span class="hero-subtitle-symbol" aria-hidden="true">&gt;</span>
-          <span>探索生成式 AI、随机微分方程与连续流的数学交汇点</span>
-        </p>
-      </div>
+  <!-- Layer 2: Scrim & Gradient Overlay -->
+  <div class="hero-scrim-layer" aria-hidden="true"></div>
+  <div class="hero-grid-layer" aria-hidden="true"></div>
 
-      <!-- Narrative Lead Paragraph -->
-      <p class="hero-lead">
+  <!-- Layer 3: Central Content Card -->
+  <div class="hero-content-container">
+    <!-- Status & Announcement Badge -->
+    <div class="hero-status-badge">
+      <span class="hero-status-pulse" aria-hidden="true"></span>
+      <span class="hero-status-title">专题前沿</span>
+      <span class="hero-status-divider" aria-hidden="true">/</span>
+      <span class="hero-status-desc">SDE 扩散模型与流匹配理论推导</span>
+    </div>
+
+    <!-- Massive Stylized Brand Title (Image 2 style) -->
+    <div class="hero-brand-block">
+      <h1 class="hero-welcome-title">
+        <span class="welcome-line-1">WELCOME TO</span>
+        <span class="welcome-line-2">ENTROPYXI BLOG !</span>
+      </h1>
+    </div>
+
+    <!-- Welcoming Narrative Card -->
+    <div class="hero-narrative-card">
+      <p class="narrative-line">
+        这里是 <strong class="brand-text">EntropyXi</strong> 的技术笔记。
+      </p>
+      <p class="narrative-line">很高兴与你相遇！</p>
+      <p class="narrative-lead">
         聚焦<strong>深度学习</strong>、<strong
           >扩散模型 (Diffusion Models)</strong
         >、<strong>流匹配 (Flow Matching)</strong>与<strong>数值分析</strong
         >的严谨数学推导、收敛性证明与高性能工程落地。
       </p>
+    </div>
 
-      <!-- Research Topic Rails -->
-      <div class="hero-topics-wrapper" aria-label="核心研究主题">
-        <span class="hero-topics-label">研究主题</span>
-        <div class="hero-topics-list">
-          {
-            researchTopics.map((topic) => (
-              <a href={buildTagPath(topic.tag)} class="hero-topic-chip">
-                <span class="hero-topic-hash" aria-hidden="true">
-                  #
-                </span>
-                <span>{topic.label}</span>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-
-      <!-- Call To Action Actions -->
-      <div class="hero-actions">
-        <a href="#latest-posts" class="hero-btn hero-btn-primary" data-magnetic>
-          <span>探索文章</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <polyline points="19 12 12 19 5 12"></polyline>
-          </svg>
-        </a>
-        <a href="/categories/" class="hero-btn hero-btn-secondary">
-          <span>分类图谱</span>
-        </a>
-        <a href="/archives/" class="hero-btn hero-btn-secondary">
-          <span>全站归档</span>
-        </a>
-        <a href="/about/" class="hero-btn hero-btn-secondary">
-          <span>关于博主</span>
-        </a>
+    <!-- Preserved 6 Verified Research Topic Chips -->
+    <div class="hero-topics-wrapper" aria-label="核心研究主题">
+      <span class="hero-topics-label">研究主题</span>
+      <div class="hero-topics-list">
+        {
+          researchTopics.map((topic) => (
+            <a href={buildTagPath(topic.tag)} class="hero-topic-chip">
+              <span class="hero-topic-hash" aria-hidden="true">
+                #
+              </span>
+              <span>{topic.label}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
 
-    <!-- Right Demand-Loaded SDE Flowfield Graphic Column (Desktop Only Asset) -->
-    <div class="hero-graphic" aria-hidden="true">
-      <div class="hero-graphic-card">
-        <div class="hero-graphic-header">
-          <div class="hero-graphic-dots">
-            <span class="graphic-dot dot-red"></span>
-            <span class="graphic-dot dot-amber"></span>
-            <span class="graphic-dot dot-green"></span>
-          </div>
-          <span class="hero-graphic-label">Reverse-Time SDE Flowfield</span>
-        </div>
-
-        <div class="hero-svg-container">
-          <picture>
-            <source
-              media="(max-width: 48rem)"
-              srcset="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-            />
-            <source
-              media="(min-width: 48.01rem)"
-              srcset="/images/hero-sde-flowfield.svg"
-              type="image/svg+xml"
-            />
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-              alt=""
-              class="hero-sde-svg"
-              loading="lazy"
-              decoding="async"
-              width="520"
-              height="400"
-            />
-          </picture>
-        </div>
-
-        <!-- Formula Caption Footer -->
-        <div class="hero-graphic-footer">
-          <span class="graphic-formula-symbol">SDE:</span>
-          <code class="graphic-formula-code"
-            >dx = [f(x,t) - g(t)²∇log p_t(x)]dt + g(t)dw̄</code
-          >
-        </div>
-      </div>
+    <!-- Preserved 4 CTA Navigation Actions -->
+    <div class="hero-actions">
+      <a href="#latest-posts" class="hero-btn hero-btn-primary" data-magnetic>
+        <span>探索文章</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </a>
+      <a href="/categories/" class="hero-btn hero-btn-secondary">
+        <span>分类图谱</span>
+      </a>
+      <a href="/archives/" class="hero-btn hero-btn-secondary">
+        <span>全站归档</span>
+      </a>
+      <a href="/about/" class="hero-btn hero-btn-secondary">
+        <span>关于博主</span>
+      </a>
     </div>
+  </div>
+
+  <!-- Layer 4: 44px Touch Target Scroll Down Indicator -->
+  <div class="hero-scroll-wrapper">
+    <a
+      href="#latest-posts"
+      class="hero-scroll-btn"
+      id="hero-scroll-indicator"
+      aria-label="向下滚动至最新文章"
+    >
+      <span class="scroll-label">SCROLL DOWN</span>
+      <span class="scroll-arrow-icon" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M7 10l5 5 5-5"></path>
+        </svg>
+      </span>
+    </a>
   </div>
 </section>
 
 <style>
-  .hero-section {
+  /* Enforce isolated high-contrast dark color-scheme in Hero scope */
+  .hero-fullscreen {
+    color-scheme: dark;
+
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #cbd5e1;
+    --color-text-muted: #94a3b8;
+    --color-surface-base: #13172b;
+    --color-surface-raised: #1b213d;
+    --color-surface-glass: rgb(19 23 43 / 78%);
+    --color-border-default: #252d4c;
+    --color-accent-primary: #f59e0b;
+    --color-accent-primary-hover: #fbbf24;
+    --color-accent-primary-glow: rgb(245 158 11 / 32%);
+
     position: relative;
-    padding: 0.75rem 0 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border-default);
     width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #0a0c16;
+    padding: calc(var(--header-height) + 1.5rem) 1.5rem 3rem;
   }
 
-  .hero-container {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 2rem;
-    align-items: center;
+  /* Layer 1: Responsive Picture Background */
+  .hero-picture-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+  }
+
+  /* Layer 2: Scrim & Gradient Overlay */
+  .hero-scrim-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgb(10 12 22 / 55%) 0%,
+      rgb(10 12 22 / 65%) 45%,
+      rgb(15 18 33 / 92%) 85%,
+      #0f1221 100%
+    );
+  }
+
+  .hero-grid-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgb(28 34 58 / 35%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(28 34 58 / 35%) 1px, transparent 1px);
+    background-size: 3.5rem 3.5rem;
+    opacity: 0.5;
+  }
+
+  /* Layer 3: Central Content Card */
+  .hero-content-container {
+    position: relative;
+    z-index: 3;
     width: 100%;
     max-width: var(--max-width-wide);
-    margin: 0 auto;
-  }
-
-  /* Left Narrative Column */
-  .hero-narrative {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.65rem;
-    width: 100%;
+    gap: 1rem;
+    margin: auto 0;
   }
 
   /* Status Badge */
@@ -180,118 +252,110 @@ const researchTopics: ResearchTopic[] = [
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.3rem 0.85rem;
+    padding: 0.35rem 0.95rem;
     border-radius: var(--radius-full);
-    background: var(--color-surface-base);
-    border: 1px solid var(--color-border-default);
+    background: rgb(19 23 43 / 85%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(245 158 11 / 35%);
     font-family: var(--font-mono);
-    font-size: 0.82rem;
-    box-shadow: 0 0 15px var(--color-accent-primary-subtle);
+    font-size: 0.84rem;
+    box-shadow: 0 0 16px rgb(245 158 11 / 18%);
   }
 
   .hero-status-pulse {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.55rem;
+    height: 0.55rem;
     border-radius: var(--radius-full);
-    background: var(--color-accent-primary);
-    box-shadow: 0 0 8px var(--color-accent-primary-glow);
+    background: #f59e0b;
+    box-shadow: 0 0 10px rgb(245 158 11 / 70%);
     animation: pulse-dot var(--motion-duration-pulse) var(--motion-ease-pulse)
       infinite;
   }
 
   .hero-status-title {
-    color: var(--color-accent-primary);
+    color: #fbbf24;
     font-weight: 700;
   }
 
   .hero-status-divider {
-    color: var(--color-border-default);
+    color: #4b5563;
   }
 
   .hero-status-desc {
-    color: var(--color-text-secondary);
+    color: #e2e8f0;
   }
 
-  /* Title Group */
-  .hero-title-group {
+  /* Stylized Massive Title (Image 2 style) */
+  .hero-brand-block {
+    margin: 0.25rem 0;
+  }
+
+  .hero-welcome-title {
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
   }
 
-  .hero-title {
-    margin: 0;
-    font-size: 2.35rem;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.03em;
-    color: var(--color-text-primary);
+  .welcome-line-1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    color: #fff;
+    text-shadow: 0 2px 10px rgb(0 0 0 / 70%);
   }
 
-  .hero-title-segment {
-    display: inline-block;
-    opacity: 1;
-    transform: none;
-    animation: hero-title-reveal var(--motion-duration-slow)
-      var(--motion-ease-standard) both;
-  }
-
-  .segment-sub {
-    animation-delay: var(--motion-stagger-sm);
-  }
-
-  .segment-brand {
+  .welcome-line-2 {
+    font-size: clamp(2.6rem, 6.2vw, 5rem);
     background: linear-gradient(
       135deg,
-      var(--color-text-primary) 0%,
-      var(--color-accent-primary) 50%,
-      var(--color-accent-cyan) 100%
+      #fffbeb 0%,
+      #fde047 30%,
+      #f59e0b 70%,
+      #ff6b4a 100%
     );
     background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: hero-title-reveal var(--motion-duration-slow)
-      var(--motion-ease-standard) both;
+    color: transparent;
+    filter: drop-shadow(0 0 25px rgb(245 158 11 / 45%));
   }
 
-  @keyframes hero-title-reveal {
-    from {
-      opacity: 0.3;
-      transform: translateY(var(--motion-distance-xs));
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero-subtitle {
+  /* Narrative Card */
+  .hero-narrative-card {
     display: flex;
-    align-items: baseline;
+    flex-direction: column;
     gap: 0.45rem;
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 1.05rem;
-    color: var(--color-accent-cyan);
-    font-weight: 600;
+    max-width: 48rem;
+    padding: 1.1rem 1.35rem;
+    border-radius: var(--radius-lg);
+    background: rgb(15 18 33 / 78%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 12%);
+    box-shadow: 0 8px 32px rgb(0 0 0 / 45%);
   }
 
-  .hero-subtitle-symbol {
-    color: var(--color-accent-primary);
+  .narrative-line {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #f1f5f9;
+  }
+
+  .brand-text {
+    color: #fbbf24;
     font-weight: 700;
   }
 
-  /* Lead Description */
-  .hero-lead {
-    margin: 0;
-    font-size: 1.05rem;
+  .narrative-lead {
+    margin: 0.25rem 0 0;
+    font-size: 0.96rem;
     line-height: 1.6;
-    color: var(--color-text-secondary);
-    max-width: 44rem;
+    color: #cbd5e1;
   }
 
-  .hero-lead strong {
-    color: var(--color-text-primary);
+  .narrative-lead strong {
+    color: #fff;
     font-weight: 600;
   }
 
@@ -299,17 +363,18 @@ const researchTopics: ResearchTopic[] = [
   .hero-topics-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.45rem;
     width: 100%;
+    margin-top: 0.25rem;
   }
 
   .hero-topics-label {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+    color: #94a3b8;
   }
 
   .hero-topics-list {
@@ -321,14 +386,15 @@ const researchTopics: ResearchTopic[] = [
   .hero-topic-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    padding: 0.3rem 0.75rem;
+    gap: 0.35rem;
+    padding: 0.35rem 0.8rem;
     border-radius: var(--radius-sm);
-    background: var(--color-surface-base);
-    border: 1px solid var(--color-border-default);
-    color: var(--color-text-secondary);
+    background: rgb(19 23 43 / 80%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(245 158 11 / 28%);
+    color: #cbd5e1;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 500;
     text-decoration: none;
     transition:
@@ -341,16 +407,16 @@ const researchTopics: ResearchTopic[] = [
 
   .hero-topic-chip:hover,
   .hero-topic-chip:focus-visible {
-    border-color: var(--color-accent-primary);
-    color: var(--color-accent-primary);
-    background: var(--color-accent-primary-subtle);
-    box-shadow: 0 0 10px var(--color-accent-primary-glow);
-    outline: 2px solid var(--color-focus);
+    border-color: #f59e0b;
+    color: #fbbf24;
+    background: rgb(245 158 11 / 20%);
+    box-shadow: 0 0 12px rgb(245 158 11 / 35%);
+    outline: 2px solid #f59e0b;
     outline-offset: 2px;
   }
 
   .hero-topic-hash {
-    color: var(--color-accent-primary);
+    color: #f59e0b;
     font-weight: 700;
   }
 
@@ -369,7 +435,7 @@ const researchTopics: ResearchTopic[] = [
     justify-content: center;
     gap: 0.45rem;
     min-height: 44px;
-    padding: 0.65rem 1.35rem;
+    padding: 0.65rem 1.4rem;
     border-radius: var(--radius-md);
     font-size: 0.95rem;
     font-weight: 600;
@@ -384,177 +450,118 @@ const researchTopics: ResearchTopic[] = [
   }
 
   .hero-btn-primary {
-    background: var(--color-accent-primary);
-    color: var(--color-accent-contrast);
-    border: 1px solid var(--color-accent-primary);
-    box-shadow: 0 0 20px var(--color-accent-primary-glow);
+    background: #f59e0b;
+    color: #000;
+    border: 1px solid #f59e0b;
+    box-shadow: 0 0 20px rgb(245 158 11 / 35%);
+    font-weight: 700;
   }
 
   .hero-btn-primary:hover,
   .hero-btn-primary:focus-visible {
-    background: var(--color-accent-primary);
-    color: var(--color-accent-contrast);
+    background: #fbbf24;
+    color: #000;
     transform: translateY(-2px);
-    box-shadow: 0 0 28px var(--color-accent-primary-glow);
-    outline: 2px solid var(--color-focus);
+    box-shadow: 0 0 28px rgb(245 158 11 / 50%);
+    outline: 2px solid #fbbf24;
     outline-offset: 3px;
   }
 
-  .hero-btn-primary:active {
-    transform: translateY(0) scale(0.98);
-  }
-
   .hero-btn-secondary {
-    background: var(--color-surface-base);
-    border: 1px solid var(--color-border-default);
-    color: var(--color-text-primary);
+    background: rgb(19 23 43 / 85%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(255 255 255 / 18%);
+    color: #f8fafc;
   }
 
   .hero-btn-secondary:hover,
   .hero-btn-secondary:focus-visible {
-    border-color: var(--color-accent-primary);
-    color: var(--color-accent-primary);
-    background: var(--color-accent-primary-subtle);
+    border-color: #f59e0b;
+    color: #fbbf24;
+    background: rgb(245 158 11 / 18%);
     transform: translateY(-2px);
-    box-shadow: 0 0 16px var(--color-accent-primary-glow);
-    outline: 2px solid var(--color-focus);
+    box-shadow: 0 0 16px rgb(245 158 11 / 30%);
+    outline: 2px solid #f59e0b;
     outline-offset: 3px;
   }
 
-  .hero-btn-secondary:active {
-    transform: translateY(0) scale(0.98);
+  /* Layer 4: Bottom Scroll Indicator */
+  .hero-scroll-wrapper {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
   }
 
-  /* Right Graphic Panel */
-  .hero-graphic {
-    display: flex;
+  .hero-scroll-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-  .hero-graphic-card {
-    position: relative;
-    width: 100%;
-    max-width: 30rem;
-    border-radius: var(--radius-xl);
-    background: var(--color-surface-glass);
-    backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--color-border-default);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-  }
-
-  .hero-graphic-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.65rem 1rem;
-    border-bottom: 1px solid var(--color-border-default);
-    background: var(--color-surface-base);
-  }
-
-  .hero-graphic-dots {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .graphic-dot {
-    width: 0.6rem;
-    height: 0.6rem;
+    gap: 0.25rem;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.35rem 0.75rem;
     border-radius: var(--radius-full);
+    background: rgb(15 18 33 / 75%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(245 158 11 / 30%);
+    color: #cbd5e1;
+    text-decoration: none;
+    transition:
+      border-color var(--motion-duration-fast) var(--motion-ease-standard),
+      color var(--motion-duration-fast) var(--motion-ease-standard),
+      transform var(--motion-duration-fast) var(--motion-ease-standard);
+    animation: scroll-bounce 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  .dot-red {
-    background: #ef4444;
+  .hero-scroll-btn:hover,
+  .hero-scroll-btn:focus-visible {
+    border-color: #f59e0b;
+    color: #fbbf24;
+    outline: 2px solid #f59e0b;
+    outline-offset: 3px;
   }
 
-  .dot-amber {
-    background: #f59e0b;
-  }
-
-  .dot-green {
-    background: #10b981;
-  }
-
-  .hero-graphic-label {
+  .scroll-label {
     font-family: var(--font-mono);
-    font-size: 0.76rem;
-    color: var(--color-text-muted);
-    font-weight: 500;
-  }
-
-  .hero-svg-container {
-    padding: 0.75rem 0.5rem 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-sde-svg {
-    width: 100%;
-    height: auto;
-    max-height: 12rem;
-    display: block;
-  }
-
-  .hero-graphic-footer {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1rem;
-    border-top: 1px solid var(--color-border-default);
-    background: var(--color-surface-base);
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-  }
-
-  .graphic-formula-symbol {
-    color: var(--color-accent-primary);
+    font-size: 0.68rem;
     font-weight: 700;
+    letter-spacing: 0.1em;
   }
 
-  .graphic-formula-code {
-    color: var(--color-text-secondary);
-    font-size: 0.74rem;
-    overflow-x: auto;
-    white-space: nowrap;
+  .scroll-arrow-icon {
+    display: inline-flex;
   }
 
-  /* Responsive Matrix */
-  @media (width <= 64rem) {
-    .hero-container {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+  @keyframes scroll-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
     }
 
-    .hero-graphic {
-      max-width: 28rem;
-      margin: 0 auto;
+    50% {
+      transform: translateY(6px);
     }
   }
 
+  /* Responsive Breakpoint Matrix */
   @media (width <= 48rem) {
-    .hero-section {
-      padding: 2rem 0 1.75rem;
-      margin-bottom: 1.75rem;
+    .hero-fullscreen {
+      padding: calc(var(--header-height) + 1rem) 1rem 3.5rem;
     }
 
-    .hero-title {
-      font-size: 2.15rem;
+    .hero-narrative-card {
+      padding: 0.85rem 1rem;
     }
 
-    .hero-subtitle {
-      font-size: 0.95rem;
+    .narrative-line {
+      font-size: 0.98rem;
     }
 
-    .hero-lead {
-      font-size: 1rem;
-    }
-
-    .hero-graphic {
-      display: none;
+    .narrative-lead {
+      font-size: 0.9rem;
     }
 
     .hero-actions {
@@ -563,13 +570,17 @@ const researchTopics: ResearchTopic[] = [
 
     .hero-btn {
       flex: 1 1 calc(50% - 0.5rem);
-      min-width: 8.5rem;
+      min-width: 8rem;
     }
   }
 
   @media (width <= 25rem) {
-    .hero-title {
-      font-size: 1.85rem;
+    .welcome-line-1 {
+      font-size: 1.8rem;
+    }
+
+    .welcome-line-2 {
+      font-size: 2.1rem;
     }
 
     .hero-btn {
@@ -577,21 +588,54 @@ const researchTopics: ResearchTopic[] = [
     }
   }
 
+  /* Short viewport compression */
+  @media (height <= 44rem) {
+    .hero-fullscreen {
+      padding-top: calc(var(--header-height) + 0.5rem);
+      padding-bottom: 2.5rem;
+      justify-content: flex-start;
+    }
+
+    .hero-welcome-title {
+      gap: 0;
+    }
+
+    .welcome-line-1 {
+      font-size: 1.8rem;
+    }
+
+    .welcome-line-2 {
+      font-size: 2.2rem;
+    }
+
+    .hero-narrative-card {
+      padding: 0.6rem 0.85rem;
+    }
+
+    .narrative-lead {
+      display: none;
+    }
+  }
+
   /* Reduced Motion Accessibility */
   @media (prefers-reduced-motion: reduce) {
-    .hero-title-segment,
-    .segment-brand,
-    .hero-status-pulse {
-      animation: none !important; /* A11y reduced-motion override */
+    .hero-status-pulse,
+    .hero-scroll-btn {
+      animation: none !important;
     }
 
     .hero-btn-primary:hover,
-    .hero-btn-primary:focus-visible,
     .hero-btn-secondary:hover,
-    .hero-btn-secondary:focus-visible,
-    .hero-topic-chip:hover,
-    .hero-topic-chip:focus-visible {
-      transform: none !important; /* A11y reduced-motion override */
+    .hero-topic-chip:hover {
+      transform: none !important;
+    }
+  }
+
+  /* High Contrast Forced Colors */
+  @media (forced-colors: active) {
+    .welcome-line-2 {
+      -webkit-text-fill-color: CanvasText;
+      background: none;
     }
   }
 </style>

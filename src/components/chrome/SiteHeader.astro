@@ -2,6 +2,11 @@
 import ThemeToggle from "./ThemeToggle.astro";
 import { SITE_TITLE } from "@/data/site";
 
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 const navItems = [
@@ -19,7 +24,12 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="site-header" data-site-header data-header-state="expanded">
+<header
+  class:list={["site-header", { "site-header-home": isHome }]}
+  data-site-header
+  data-header-state="expanded"
+  data-is-home={isHome ? "true" : "false"}
+>
   <div class="site-header-inner">
     <div class="site-brand">
       <a href="/" class="site-logo-link" data-magnetic>
@@ -184,8 +194,37 @@ function isActive(href: string): boolean {
     border-bottom: 1px solid var(--color-border-default);
     box-shadow: var(--shadow-header);
     transition:
+      background var(--motion-duration-normal) var(--motion-ease-standard),
       background-color var(--motion-duration-normal) var(--motion-ease-standard),
-      border-color var(--motion-duration-normal) var(--motion-ease-standard);
+      border-color var(--motion-duration-normal) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-normal) var(--motion-ease-standard);
+  }
+
+  /* Homepage Floating Header over Hero (0-CLS height stability) */
+  .site-header.site-header-home {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .site-header.site-header-home[data-header-state="expanded"] {
+    background: linear-gradient(
+      180deg,
+      rgb(10 12 22 / 88%) 0%,
+      rgb(10 12 22 / 50%) 60%,
+      transparent 100%
+    );
+    backdrop-filter: blur(8px);
+    border-bottom-color: rgb(245 158 11 / 15%);
+    box-shadow: none;
+  }
+
+  .site-header.site-header-home[data-header-state="compact"] {
+    background: var(--color-surface-glass);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--color-border-default);
+    box-shadow: var(--shadow-header);
   }
 
   /* Reserved CSS Contract for Main Agent's Header State */
@@ -245,6 +284,10 @@ function isActive(href: string): boolean {
     color: var(--color-accent-primary);
   }
 
+  .site-header.site-header-home[data-header-state="expanded"] .site-logo-link {
+    color: #fff;
+  }
+
   .desktop-nav {
     display: flex;
     align-items: center;
@@ -284,6 +327,15 @@ function isActive(href: string): boolean {
     height: 2px;
     background: var(--color-accent-primary);
     box-shadow: 0 0 8px var(--color-accent-primary-glow);
+  }
+
+  .site-header.site-header-home[data-header-state="expanded"] .nav-link {
+    color: var(--color-text-secondary);
+  }
+
+  .site-header.site-header-home[data-header-state="expanded"] .nav-link:hover {
+    color: #fff;
+    background: rgb(245 158 11 / 18%);
   }
 
   .nav-link-external {

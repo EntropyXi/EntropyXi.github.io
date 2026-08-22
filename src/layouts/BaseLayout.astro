@@ -9,9 +9,10 @@ import SiteFooter from "@/components/chrome/SiteFooter.astro";
 interface Props {
   title: string;
   description: string;
+  isHome?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, isHome = false } = Astro.props;
 const pageTitle = buildPageTitle(title);
 const pageDescription =
   description.trim() === "" ? SITE_DESCRIPTION : description.trim();
@@ -58,6 +59,19 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       href="/images/apple-touch-icon-next.png"
     />
     <link rel="shortcut icon" href="/favicon.ico" />
+
+    {
+      isHome && (
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero/suisen-hero-1440w.webp"
+          imagesrcset="/images/hero/suisen-hero-750w.webp 750w, /images/hero/suisen-hero-1440w.webp 1440w, /images/hero/suisen-hero-3840w.webp 3840w"
+          imagesizes="100vw"
+          fetchpriority="high"
+        />
+      )
+    }
 
     <!-- Theme & Client initialization script to prevent FOUC -->
     <script is:inline>
@@ -112,7 +126,8 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
     <a href="#main-content" class="skip-link">跳至主要内容</a>
     <div id="top"></div>
     <AmbientBackground />
-    <SiteHeader />
+    <SiteHeader isHome={isHome} />
+    <slot name="hero" />
     <main id="main-content" tabindex="-1">
       <slot />
     </main>

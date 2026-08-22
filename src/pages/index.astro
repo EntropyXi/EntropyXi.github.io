@@ -20,12 +20,18 @@ const pagePosts = paginate(sorted, 1);
 ---
 
 <BaseLayout
+  isHome={true}
   title=""
   description="聚焦深度学习、扩散模型、流匹配与数值分析的技术笔记"
 >
-  <Hero />
+  <Hero slot="hero" />
 
-  <section id="latest-posts" class="home-posts-section" aria-label="最新文章">
+  <section
+    id="latest-posts"
+    class="home-posts-section"
+    aria-label="最新文章"
+    tabindex="-1"
+  >
     <SectionHeader title="最新文章" countText={`共 ${sorted.length} 篇笔记`} />
 
     <PostList posts={pagePosts} />
@@ -38,5 +44,9 @@ const pagePosts = paginate(sorted, 1);
   .home-posts-section {
     margin-top: 1rem;
     width: 100%;
+  }
+
+  .home-posts-section:focus:not(:focus-visible) {
+    outline: none;
   }
 </style>
