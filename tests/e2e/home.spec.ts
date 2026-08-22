@@ -6,8 +6,11 @@ test("home page renders the site title and welcome heading", async ({
   await page.goto("/");
   await expect(page).toHaveTitle(/EntropyXi/);
   await expect(
-    page.getByRole("heading", { name: "EntropyXi 的技术笔记" }),
+    page.getByRole("heading", { name: /WELCOME TO.*ENTROPYXI BLOG/i }),
   ).toBeVisible();
+
+  // On full-screen hero landing page, scroll down to reveal latest posts section
+  await page.getByRole("link", { name: "探索文章" }).click();
   await expect(page.locator(".post-card").first()).toBeVisible();
 });
 

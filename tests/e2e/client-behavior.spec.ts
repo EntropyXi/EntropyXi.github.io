@@ -239,7 +239,7 @@ test.describe("progressive enhancement contract", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
     await expect(
-      page.getByRole("heading", { name: "EntropyXi 的技术笔记" }),
+      page.getByRole("heading", { name: /WELCOME TO.*ENTROPYXI BLOG/i }),
     ).toBeVisible();
     await expect(page.locator(".post-card").first()).toBeVisible();
     await expect(
@@ -318,7 +318,7 @@ test.describe("motion feature flags fallback contract", () => {
     await expect(root).toHaveAttribute("data-feature-ambient", "false");
     await expect(root).toHaveAttribute("data-feature-magnetic", "false");
     await expect(
-      page.getByRole("heading", { name: "EntropyXi 的技术笔记" }),
+      page.getByRole("heading", { name: /WELCOME TO.*ENTROPYXI BLOG/i }),
     ).toBeVisible();
     await expect(page.locator(".post-card").first()).toBeVisible();
     const hasOverflow = await page.evaluate(

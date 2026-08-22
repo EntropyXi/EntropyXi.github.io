@@ -10,7 +10,7 @@ test("client foundation matches its configured environment", async ({
 
   const root = page.locator("html");
   const heading = page.getByRole("heading", {
-    name: "EntropyXi 的技术笔记",
+    name: /WELCOME TO.*ENTROPYXI BLOG/i,
   });
   await expect(heading).toBeVisible();
 
