@@ -180,6 +180,36 @@ html[data-theme="light"] {
 }
 
 /* ==========================================================================
+   Typography & Font-Display Contracts (Phase 4A: 0-CLS, font-display: swap)
+   ========================================================================== */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src:
+    local("JetBrains Mono"), local("JetBrainsMono-Regular"),
+    local("JetBrainsMono-Bold"), local("JetBrainsMonoNL-Regular");
+}
+
+@font-face {
+  font-family: "Fira Code";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: local("Fira Code"), local("FiraCode-Regular"), local("FiraCode-Bold");
+}
+
+@font-face {
+  font-family: "Cascadia Code";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src:
+    local("Cascadia Code"), local("CascadiaCode-Regular"), local("CascadiaCode");
+}
+
+/* ==========================================================================
    Common Typography, Layout, Radii & Motion Tokens
    ========================================================================== */
 :root {
@@ -191,7 +221,7 @@ html[data-theme="light"] {
   --font-mono:
     "JetBrains Mono", "Fira Code", "Cascadia Code", "Source Code Pro", consolas,
     monaco, monospace;
-  --font-display: var(--font-mono);
+  --font-display: "JetBrains Mono", "Fira Code", var(--font-mono);
 
   /* Space Step Tokens */
   --space-1: 0.25rem;
