@@ -15,8 +15,6 @@ math: false
 draft: false
 ---
 
-# WSL2 安装失败排查：从 DISM COM 损坏到 NetCfg 残留
-
 这次遇到的问题是，BIOS 里已经开了虚拟化，但是执行
 
 ```powershell
@@ -50,7 +48,7 @@ HvHost: RUNNING
 
 ---
 
-### 1. 一开始的问题
+## 1. 一开始的问题
 
 最初的现象是：
 
@@ -89,7 +87,7 @@ WSLService
 
 ---
 
-### 2. 先检查 WSL 到底装到了什么程度
+## 2. 先检查 WSL 到底装到了什么程度
 
 检查以后发现，Store 版 WSL 运行时已经存在：
 
@@ -148,7 +146,7 @@ MuMu 的 VirtualBox 驱动可能冲突
 
 ---
 
-### 3. 第一个真正的问题：DISM 自己坏了
+## 3. 第一个真正的问题：DISM 自己坏了
 
 执行：
 
@@ -194,7 +192,7 @@ HKLM\SOFTWARE\Classes\CLSID\
 
 ---
 
-### 4. 修复 DISM COM 注册
+## 4. 修复 DISM COM 注册
 
 修复时先重新注册 DISM 的核心 DLL 和 Provider，包括：
 
@@ -261,7 +259,7 @@ dism /online /enable-feature `
 
 ---
 
-### 5. 卸载 MuMu 以后还要检查驱动
+## 5. 卸载 MuMu 以后还要检查驱动
 
 MuMu 当时使用的 VirtualBox 内核驱动仍然在运行：
 
@@ -305,7 +303,7 @@ C:\Program Files\MuMuVMMVbox
 
 ---
 
-### 6. 第一次重启以后，vmcompute 还是没有出现
+## 6. 第一次重启以后，vmcompute 还是没有出现
 
 DISM 修复了，MuMu 也卸载了，而且事件日志显示 Hypervisor 已经正常启动。
 
@@ -358,7 +356,7 @@ Enabled
 
 ---
 
-### 7. 中间尝试过手动部署，但是这条路不对
+## 7. 中间尝试过手动部署，但是这条路不对
 
 因为 `vmcompute` 一直没有部署出来，中间尝试过从 WinSxS 手动复制 HCS 相关文件，并注册：
 
@@ -403,7 +401,7 @@ enable /all
 
 ---
 
-### 8. 从 CBS 日志继续往下查
+## 8. 从 CBS 日志继续往下查
 
 第一次回滚时，CBS 日志只看到：
 
@@ -460,7 +458,7 @@ NetCfg 安装网络组件时，会枚举系统中已经注册的网络通知对�
 
 ---
 
-### 9. 中间还误判过一次 WFP 文件缺失
+## 9. 中间还误判过一次 WFP 文件缺失
 
 当时发现下面这些文件在 System32 和 WinSxS 中都不存在：
 
@@ -491,7 +489,7 @@ wfplwfs.sys              → 有正常 Windows 版本记录
 
 ---
 
-### 10. 扫描 NetCfg 通知对象以后找到真正原因
+## 10. 扫描 NetCfg 通知对象以后找到真正原因
 
 接下来扫描：
 
@@ -506,7 +504,7 @@ HKLM\SOFTWARE\Classes\CLSID
 
 最后找到了两个主要问题。
 
-#### 10.1 VMware Bridge notifier 路径已经过期
+### 10.1 VMware Bridge notifier 路径已经过期
 
 注册表中存在：
 
@@ -551,7 +549,7 @@ ERROR_MOD_NOT_FOUND
 CBS 回滚
 ```
 
-#### 10.2 LDPlayer 卸载后还留下了 VirtualBox CLSID
+### 10.2 LDPlayer 卸载后还留下了 VirtualBox CLSID
 
 系统中还存在几个 LDPlayer / VirtualBox 相关 CLSID，指向：
 
@@ -567,7 +565,7 @@ C:\Program Files\ldplayer9box\Ld9BoxSVC.exe
 
 ---
 
-### 11. 修复 VMware 路径，删除 LDPlayer 残留
+## 11. 修复 VMware 路径，删除 LDPlayer 残留
 
 VMware 的情况是 DLL 仍然存在，只是路径错了。
 
@@ -603,7 +601,7 @@ D:\VMware\elevated.dll
 
 ---
 
-### 12. 再次部署 VirtualMachinePlatform
+## 12. 再次部署 VirtualMachinePlatform
 
 清理完成以后，重新执行：
 
@@ -670,7 +668,7 @@ wsl --status 正常
 
 ---
 
-### 13. 把 Ubuntu 安装到 D 盘
+## 13. 把 Ubuntu 安装到 D 盘
 
 底层问题解决以后，先更新 WSL：
 
@@ -717,7 +715,7 @@ D:\WSL\Ubuntu\ext4.vhdx
 
 ---
 
-### 14. 最终验证
+## 14. 最终验证
 
 执行：
 
@@ -765,7 +763,7 @@ BIOS 没有改动
 
 ---
 
-### 15. 总结
+## 15. 总结
 
 这次问题一开始只是：
 

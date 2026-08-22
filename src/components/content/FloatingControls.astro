@@ -53,7 +53,7 @@
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
+    transform: translateY(var(--motion-distance-sm));
     transition:
       border-color var(--motion-duration-fast) var(--motion-ease-standard),
       color var(--motion-duration-fast) var(--motion-ease-standard),
@@ -90,7 +90,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .floating-btn:hover {
-      transform: none !important;
+      transform: none !important; /* A11y reduced-motion override */
     }
   }
 

@@ -24,8 +24,30 @@ const errors: string[] = [];
 let htmlChecked = 0;
 let assetsChecked = 0;
 
+async function fetchWithRetry(url: string, retries = 3): Promise<Response> {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 5000);
+      const res = await fetch(url, { redirect: "follow", signal: controller.signal });
+      clearTimeout(id);
+      return res;
+    } catch (e) {
+      if (i === retries - 1) throw e;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+  }
+  throw new Error("Unreachable");
+}
+
 async function checkHtml(record: BaselineHtmlRecord): Promise<void> {
-  const response = await fetch(`${baseUrl}${record.pathname}`, { redirect: "follow" });
+  let response: Response;
+  try {
+    response = await fetchWithRetry(`${baseUrl}${record.pathname}`);
+  } catch (e) {
+    errors.push(`${record.pathname}: fetch failed (${e})`);
+    return;
+  }
   htmlChecked += 1;
   if (response.status !== 200) {
     errors.push(`${record.pathname}: HTTP ${response.status}`);
@@ -47,7 +69,13 @@ async function checkHtml(record: BaselineHtmlRecord): Promise<void> {
 }
 
 async function checkAsset(record: BaselineAssetRecord): Promise<void> {
-  const response = await fetch(`${baseUrl}${record.pathname}`, { redirect: "follow" });
+  let response: Response;
+  try {
+    response = await fetchWithRetry(`${baseUrl}${record.pathname}`);
+  } catch (e) {
+    errors.push(`${record.pathname}: fetch failed (${e})`);
+    return;
+  }
   assetsChecked += 1;
   if (response.status !== 200) {
     errors.push(`${record.pathname}: HTTP ${response.status}`);

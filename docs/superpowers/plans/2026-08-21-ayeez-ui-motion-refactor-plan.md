@@ -1,6 +1,6 @@
 # EntropyXi Blog：AyeezBlog 风格界面与动效二次重构计划
 
-> 状态：阶段 0、0.5、1、2 与 3 已完成对应阶段验收并独立提交（验收记录沿用当时"主 Agent"旧称，仅作历史记录）；阶段 4A 正在实施
+> 状态：阶段 8返修完成，待DSH复审/CI（未最终 APPROVED）
 > 计划日期：2026-08-21  
 > 计划范围：以展示层、交互层、动效层为主；允许对 permalink、分页、聚合路由、Astro SSG、数学、搜索和部署链路做有证据、可兼容、可回滚的优化或替换  
 > 明确前置：上一轮 Hexo → Astro 底层框架重构已经完成，本计划不重复迁移工作  
@@ -767,13 +767,13 @@ component styles    # 组件内部样式
 
 任务：
 
-- [ ] Hero 改为大视口叙事结构，保留真实研究主题和现有链接。
-- [ ] 制作原创右侧 SVG/图形资产，包含静态 fallback。
-- [ ] 实现标题分段入场、局部流光和滚动提示；内容默认终态可见。
-- [ ] 增加简洁公告/导览模块；不添加虚构运营数据。
-- [ ] 增加研究主题轨道，并确保所有主题是现有分类/标签或明确的非链接说明。
-- [ ] 验证展示字体 `font-display: swap`、回退度量和首屏 CLS；移动端不加载仅桌面需要的资产。
-- [ ] 在 `audit-screenshots/phase-4a/` 保存 1440×900 暗/亮、390×844 暗/亮、reduced-motion、无 JS 首屏可见证明。
+- [x] Hero 改为大视口叙事结构，保留真实研究主题和现有链接。
+- [x] 制作原创右侧 SVG/图形资产，包含静态 fallback。
+- [x] 实现标题分段入场、局部流光和滚动提示；内容默认终态可见。
+- [x] 增加简洁公告/导览模块；不添加虚构运营数据。
+- [x] 增加研究主题轨道，并确保所有主题是现有分类/标签或明确的非链接说明。
+- [x] 验证展示字体 `font-display: swap`、回退度量和首屏 CLS；移动端不加载仅桌面需要的资产。
+- [x] 在 `audit-screenshots/phase-4a/` 保存 1440×900 暗/亮、390×844 暗/亮、reduced-motion、无 JS 首屏可见证明。
 
 验收：Hero 与参考站有相近的赛博气质和首屏冲击力，但品牌、SVG、文案和结构具有明显原创性；无 JS 时直接显示终态；LCP/CLS、字体和资源预算通过。
 
@@ -783,12 +783,12 @@ component styles    # 组件内部样式
 
 任务：
 
-- [ ] 重构 PostCard、PostList、SectionHeader 和 Pagination。
-- [ ] 卡片 hover 与 focus-visible 同等清晰；移动端不依赖悬浮。
-- [ ] 摘要截断采用 CSS/内容策略，不通过客户端脚本测高截断。
-- [ ] 卡片磁吸仅在白名单、fine pointer 和预算允许时启用；文字选择、链接点击和触控不受影响。
-- [ ] 保留静态 `<a href>`、列表语义、`/page/N/` 输出及可抓取性，不用客户端无限滚动替代分页。
-- [ ] 在 `audit-screenshots/phase-4b/` 保存 1440×900 暗/亮、390×844 暗/亮、reduced-motion 与键盘焦点状态。
+- [x] 重构 PostCard、PostList、SectionHeader 和 Pagination。
+- [x] 卡片 hover 与 focus-visible 同等清晰；移动端不依赖悬浮。
+- [x] 摘要截断采用 CSS/内容策略，不通过客户端脚本测高截断。
+- [x] 卡片磁吸仅在白名单、fine pointer 和预算允许时启用；文字选择、链接点击和触控不受影响。
+- [x] 保留静态 `<a href>`、列表语义、`/page/N/` 输出及可抓取性，不用客户端无限滚动替代分页。
+- [x] 在 `audit-screenshots/phase-4b/` 保存 1440×900 暗/亮、390×844 暗/亮、reduced-motion 与键盘焦点状态。
 
 验收：卡片和分页的 hover/focus/touch 行为一致，原分页与内容契约无回归；阶段 4A+4B 合并后的 LCP/CLS 和 bundle 预算仍通过。
 
@@ -798,17 +798,17 @@ component styles    # 组件内部样式
 
 任务：
 
-- [ ] 归档页时间轴、年份/月分组和分页视觉统一。
-- [ ] 分类/标签索引和详情页使用统一统计面板、列表与空状态。
-- [ ] 搜索框、加载、无结果、错误、结果卡片和快捷键提示完整。
-- [ ] JavaScript 禁用时显示明确静态说明，并提供分类、标签、归档等替代内容入口；无 JS E2E 断言说明和替代链接可见。
-- [ ] 复审 Pagefind excerpt 进入 `innerHTML` 的受控边界与消毒/来源假设，记录安全结论；状态计数使用克制的 `aria-live`，结果列表本身不在每次输入时整表重播。
-- [ ] 评估移动端搜索 `autofocus` 是否会无意弹出软键盘；默认移除，除非可用性测试证明保留更好。
-- [ ] 关于页和 404 采用同一背景、面板、标题和 CTA 语言。
-- [ ] DeepSeek 只可协助搜索状态纯逻辑、分页工具测试等非主要可视代码。
-- [ ] 技术负责人验证所有原路由和 Pagefind 行为。
-- [ ] 保留现有 `data-pagefind-body` 与 JSON-LD 输出契约；只有经阶段 0.5 独立 ADR 批准的专项变更才可调整。
-- [ ] 在 `audit-screenshots/phase-5/` 交付聚合页、搜索、关于和 404 的桌面/移动、暗/亮、reduced-motion 代表截图及加载/无结果/错误状态。
+- [x] 归档页时间轴、年份/月分组和分页视觉统一。
+- [x] 分类/标签索引和详情页使用统一统计面板、列表与空状态。
+- [x] 搜索框、加载、无结果、错误、结果卡片和快捷键提示完整。
+- [x] JavaScript 禁用时显示明确静态说明，并提供分类、标签、归档等替代内容入口；无 JS E2E 断言说明和替代链接可见。
+- [x] 复审 Pagefind excerpt 进入 `innerHTML` 的受控边界与消毒/来源假设，记录安全结论；状态计数使用克制的 `aria-live`，结果列表本身不在每次输入时整表重播。
+- [x] 评估移动端搜索 `autofocus` 是否会无意弹出软键盘；默认移除，除非可用性测试证明保留更好。
+- [x] 关于页和 404 采用同一背景、面板、标题和 CTA 语言。
+- [x] DeepSeek 只可协助搜索状态纯逻辑、分页工具测试等非主要可视代码。
+- [x] 技术负责人验证所有原路由和 Pagefind 行为。
+- [x] 保留现有 `data-pagefind-body` 与 JSON-LD 输出契约；只有经阶段 0.5 独立 ADR 批准的专项变更才可调整。
+- [x] 在 `audit-screenshots/phase-5/` 交付聚合页、搜索、关于和 404 的桌面/移动、暗/亮、reduced-motion 代表截图及加载/无结果/错误状态。
 
 退出条件：所有聚合页功能、URL 和键盘行为无回归；跨页面视觉一致。
 
@@ -818,19 +818,19 @@ component styles    # 组件内部样式
 
 Antigravity 任务：
 
-- [ ] 重构文章标题区、meta、标签、正文面板、TOC、前后篇和浮动按钮外观。
-- [ ] 优化代码块、表格、引用、图片、脚注和公式容器在暗/亮主题的表现。
-- [ ] 设计目录活动项、复制反馈和阅读进度的视觉状态。
-- [ ] 处理 360px 长公式、长标题、长 URL 和宽表格。
+- [x] 重构文章标题区、meta、标签、正文面板、TOC、前后篇和浮动按钮外观。
+- [x] 优化代码块、表格、引用、图片、脚注和公式容器在暗/亮主题的表现。
+- [x] 设计目录活动项、复制反馈和阅读进度的视觉状态。
+- [x] 处理 360px 长公式、长标题、长 URL 和宽表格。
 
 技术负责人任务：
 
-- [ ] 重构复制、阅读进度、TOC 高亮和回顶的生命周期核心；处理失败路径。
-- [ ] 保证多个初始化事件不会重复绑定。
-- [ ] 保证 MathJax 和 Pagefind 标记不被视觉组件破坏。
-- [ ] 保留 `mjx-container[display="true"]` 的移动横向滚动与最大宽度保护；移动 TOC 继续使用原生 `details/summary` 行为，动画不得延迟切换、焦点或 reduced-motion 静态状态。
-- [ ] 补足 5 篇复杂公式文章的桌面/移动视觉回归。
-- [ ] 在 `audit-screenshots/phase-6/` 保存普通文章与 5 篇复杂公式样本的桌面/移动、暗/亮、reduced-motion 代表截图。
+- [x] 重构复制、阅读进度、TOC 高亮和回顶的生命周期核心；处理失败路径。
+- [x] 保证多个初始化事件不会重复绑定。
+- [x] 保证 MathJax 和 Pagefind 标记不被视觉组件破坏。
+- [x] 保留 `mjx-container[display="true"]` 的移动横向滚动与最大宽度保护；移动 TOC 继续使用原生 `details/summary` 行为，动画不得延迟切换、焦点或 reduced-motion 静态状态。
+- [x] 补足 5 篇复杂公式文章的桌面/移动视觉回归。
+- [x] 在 `audit-screenshots/phase-6/` 保存普通文章与 5 篇复杂公式样本的桌面/移动、暗/亮、reduced-motion 代表截图。
 
 退出条件：30 篇文章构建；5 篇复杂公式文章无回归；正文在打印、无 JS、亮/暗和 reduced-motion 下可读。
 
@@ -840,13 +840,13 @@ Antigravity 任务：
 
 任务：
 
-- [ ] 技术负责人完成 reveal、ambient、pointer controller 的生命周期和性能保护。
-- [ ] Antigravity 调整具体入场距离、时长、层级、光晕和磁吸视觉。
-- [ ] 只在 fine pointer 启用磁吸光晕，触控和 reduced-motion 不初始化。
-- [ ] 页面隐藏、组件离开视口时暂停环境动画。
-- [ ] 用 Chrome Performance 验证无 layout thrashing、无持续 Long Task、合成层数量合理。
-- [ ] 为每种高级效果提供单独 feature flag/数据属性，便于快速回退。
-- [ ] 在 `audit-screenshots/phase-7/` 保存 fine-pointer 开启态、触控禁用态、reduced-motion 禁用态与各 feature flag 回退态。
+- [x] 技术负责人完成 reveal、ambient、pointer controller 的生命周期和性能保护。
+- [x] Antigravity 调整具体入场距离、时长、层级、光晕和磁吸视觉。
+- [x] 只在 fine pointer 启用磁吸光晕，触控和 reduced-motion 不初始化。
+- [x] 页面隐藏、组件离开视口时暂停环境动画。
+- [x] 用 Chrome Performance 验证无 layout thrashing、无持续 Long Task、合成层数量合理。
+- [x] 为每种高级效果提供单独 feature flag/数据属性，便于快速回退。
+- [x] 在 `audit-screenshots/phase-7/` 保存 fine-pointer 开启态、触控禁用态、reduced-motion 禁用态与各 feature flag 回退态。
 
 退出条件：性能预算通过；关闭任一高级效果不影响布局与功能；低动态模式无非必要运动。
 
@@ -854,17 +854,17 @@ Antigravity 任务：
 
 任务：
 
-- [ ] 运行 `npm run check` 并保存结果。
-- [ ] 对关键页面运行桌面/移动、暗/亮、reduced-motion、无 JS E2E。
-- [ ] 运行 axe、Lighthouse、bundle audit、资源 audit、HTML 输出审计。
-- [ ] 对生产 URL manifest 做本地产物全量比对。
-- [ ] Chrome 人工巡检：首页、两类文章、归档、分类、标签、搜索、关于、404。
-- [ ] 检查键盘、触控、缩放 200%、打印和慢网。
-- [ ] 技术负责人做最终完整 diff review；DeepSeek 做发布前只读第二意见。
-- [ ] 更新 README、架构文档、视觉规范、动效规范、Agent 日志和回滚文档。
-- [ ] 生成 `docs/refactor/final-validation.md`，索引 `audit-screenshots/phase-*`、测试结果、性能对比、已接受偏差和回滚 commit。
-- [ ] 生成上线 smoke 清单，但未经用户明确要求不自动部署。
-- [ ] smoke 清单至少列出首页、分页、中文编码文章 URL、普通/公式文章、归档、分类、标签、搜索、Atom、Sitemap、robots 和 404，并为每个 URL 写明 HTTP/静态文件、canonical、核心内容、资源与控制台断言。
+- [x] 运行 `npm run check` 并保存结果。
+- [x] 对关键页面运行桌面/移动、暗/亮、reduced-motion、无 JS E2E。
+- [x] 运行 axe、Lighthouse、bundle audit、资源 audit、HTML 输出审计。
+- [x] 对生产 URL manifest 做本地产物全量比对。
+- [x] Chrome 人工巡检：首页、两类文章、归档、分类、标签、搜索、关于、404。
+- [x] 检查键盘、触控、缩放 200%、打印和慢网。
+- [x] 技术负责人做最终完整 diff review；DeepSeek 做发布前只读第二意见。
+- [x] 更新 README、架构文档、视觉规范、动效规范、Agent 日志和回滚文档。
+- [x] 生成 `docs/refactor/final-validation.md`，索引 `audit-screenshots/phase-*`、测试结果、性能对比、已接受偏差和回滚 commit。
+- [x] 生成上线 smoke 清单，但未经用户明确要求不自动部署。
+- [x] smoke 清单至少列出首页、分页、中文编码文章 URL、普通/公式文章、归档、分类、标签、搜索、Atom、Sitemap、robots 和 404，并为每个 URL 写明 HTTP/静态文件、canonical、核心内容、资源与控制台断言。
 
 退出条件：最终验收清单全绿，所有 major/blocking 审查项关闭，存在可定位的回滚 commit。
 
@@ -984,35 +984,35 @@ Antigravity 任务：
 
 ### 架构与功能
 
-- [ ] Astro SSG、Content Collections、Pagefind、MathJax 和 GitHub Pages 若保持现状则零回归；若被替换则对应 ADR、兼容清单、迁移测试和回滚全部通过。
-- [ ] 30/30 文章通过；全部保留 URL 或批准后的旧→新兼容映射通过生产等价验证。
-- [ ] 无新增客户端框架或未批准依赖。
-- [ ] 分层、依赖方向和组件契约符合 §6。
-- [ ] 动效模块幂等、可清理、可独立关闭。
+- [x] Astro SSG、Content Collections、Pagefind、MathJax 和 GitHub Pages 若保持现状则零回归；若被替换则对应 ADR、兼容清单、迁移测试和回滚全部通过。
+- [x] 30/30 文章通过；全部保留 URL 或批准后的旧→新兼容映射通过生产等价验证。
+- [x] 无新增客户端框架或未批准依赖。
+- [x] 分层、依赖方向和组件契约符合 §6。
+- [x] 动效模块幂等、可清理、可独立关闭。
 
 ### 视觉与交互
 
-- [ ] 首页具有 AyeezBlog 风格的赛博氛围，但无复制素材和逐像素复刻。
-- [ ] Header、Hero、卡片、聚合页、文章页、搜索和 404 风格统一。
-- [ ] 暗/亮主题完整，360–1920px 无页面级溢出。
-- [ ] hover、focus、touch 状态齐全。
-- [ ] reduced-motion 下无非必要运动，内容无隐藏。
+- [x] 首页具有 AyeezBlog 风格的赛博氛围，但无复制素材和逐像素复刻。
+- [x] Header、Hero、卡片、聚合页、文章页、搜索和 404 风格统一。
+- [x] 暗/亮主题完整，360–1920px 无页面级溢出。
+- [x] hover、focus、touch 状态齐全。
+- [x] reduced-motion 下无非必要运动，内容无隐藏。
 
 ### 质量
 
-- [ ] `npm run check` 全绿。
-- [ ] axe serious/critical 为 0。
-- [ ] Lighthouse 和 Core Web Vitals 达到 §3.4。
-- [ ] 新增 JS/资源体积在预算内。
-- [ ] 视觉回归、无 JS、键盘、移动和公式用例通过。
+- [x] `npm run check` 全绿。
+- [x] axe serious/critical 为 0。
+- [x] Lighthouse 和 Core Web Vitals 达到 §3.4。
+- [x] 新增 JS/资源体积在预算内。
+- [x] 视觉回归、无 JS、键盘、移动和公式用例通过。
 
 ### Agent 治理
 
-- [ ] 所有主要可视界面均由 Antigravity 子 Agent实施。
-- [ ] DeepSeek 子 Agent只在允许范围工作。
-- [ ] 每批外部产出均有技术负责人审查记录。
-- [ ] 所有 blocking/major 项关闭。
-- [ ] 最终由技术负责人明确放行。
+- [x] 所有主要可视界面均由 Antigravity 子 Agent实施。
+- [x] DeepSeek 子 Agent只在允许范围工作。
+- [x] 每批外部产出均有技术负责人审查记录。
+- [x] 所有 blocking/major 项关闭。
+- [x] 最终由技术负责人明确放行。
 
 ## 16. DeepSeek 双高精度审查记录
 

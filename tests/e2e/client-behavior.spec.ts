@@ -262,3 +262,70 @@ test.describe("progressive enhancement contract", () => {
     await expect(page.locator("mjx-container").first()).toBeVisible();
   });
 });
+
+test.describe("motion feature flags fallback contract", () => {
+  test("feature-reveal=false ensures immediate visibility without observation delay", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem("entropyxi-feature-reveal", "false");
+    });
+    await page.goto("/");
+    const root = page.locator("html");
+    await expect(root).toHaveAttribute("data-feature-reveal", "false");
+    const cards = page.locator(".post-card[data-reveal]");
+    await expect(cards.first()).toBeVisible();
+  });
+
+  test("feature-ambient=false hides scanlines and streamlines", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem("entropyxi-feature-ambient", "false");
+    });
+    await page.goto("/");
+    const root = page.locator("html");
+    await expect(root).toHaveAttribute("data-feature-ambient", "false");
+    await expect(page.locator(".ambient-scanline-layer")).toBeHidden();
+    await expect(page.locator(".ambient-flow-layer")).toBeHidden();
+  });
+
+  test("feature-magnetic=false disables magnetic dynamic transforms", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem("entropyxi-feature-magnetic", "false");
+    });
+    await page.goto("/");
+    const root = page.locator("html");
+    await expect(root).toHaveAttribute("data-feature-magnetic", "false");
+    const cta = page.locator(".hero-btn-primary[data-magnetic]");
+    await cta.hover();
+    await expect(cta).not.toHaveAttribute("data-magnetic-state", "active");
+  });
+
+  test("all feature flags disabled maintains clean stable layout", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem("entropyxi-feature-reveal", "false");
+      localStorage.setItem("entropyxi-feature-ambient", "false");
+      localStorage.setItem("entropyxi-feature-magnetic", "false");
+    });
+    await page.goto("/");
+    const root = page.locator("html");
+    await expect(root).toHaveAttribute("data-feature-reveal", "false");
+    await expect(root).toHaveAttribute("data-feature-ambient", "false");
+    await expect(root).toHaveAttribute("data-feature-magnetic", "false");
+    await expect(
+      page.getByRole("heading", { name: "EntropyXi 的技术笔记" }),
+    ).toBeVisible();
+    await expect(page.locator(".post-card").first()).toBeVisible();
+    const hasOverflow = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth >
+        document.documentElement.clientWidth,
+    );
+    expect(hasOverflow).toBe(false);
+  });
+});

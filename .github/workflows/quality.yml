@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - codex/astro-migration
+      - codex/ayeez-ui-motion-refactor
+      - codex/phase-8-validation
   workflow_dispatch:
 
 permissions:
@@ -33,8 +35,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium webkit
 
       - name: Run Astro quality gate
         run: npm run check

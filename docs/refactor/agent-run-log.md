@@ -116,3 +116,112 @@
 - `audit-screenshots/phase-3/index.json` 记录 1440×900 暗/亮、390×844 暗/亮和 reduced-motion 共 5 组证据；桌面四层显示、移动端停用扫描线/流线、低动态停止循环、全部无横向溢出且 `pointer-events: none`；
 - Chrome 实机复核同时确认暗/亮桌面与移动端均无横向溢出；复杂公式文章存在 20 个 `mjx-container`，显示公式为块级、可见且不溢出页面；构建产物审计保持 1,289/1,289 条公式具备可访问文本。
 - 双独立高精度审查已经完成且所有有效项关闭。最终 `npm run check` 全绿：格式、ESLint、Stylelint、Astro Check 均无问题，30 篇内容通过，24 项单测与 33 项 Playwright E2E 通过，客户端 gzip 5,326/24,576 B，81 个兼容页面、30 篇文章与 1,289/1,289 条可访问公式通过；阶段 3 由主 Agent放行并进入独立提交。
+
+## 技术主审切换记录 (2026-08-22)
+
+- **切换时间**: 2026-08-22T16:48 CST
+- **原因**: Claude Sonnet 4.6 (Thinking) 额度耗尽。
+- **接管模型**: Gemini 3.1 Pro (High 思考程度)。
+- **任务状态**: 阶段 8 最终验收（Phase 8 Final Validation）。
+- **已完成项**: 阶段 0–7 已有提交，阶段 8 工作区有未提交终验文档和证据。两轮独立 DSH DeepSeek-V4-Flash Max Read Only 已完成。
+- **待处理项 (Pending)**: 修复阶段 8 证据逻辑（截图、索引 phase 号、feature flags）、Lighthouse/CWV 真实测试报告、生产 smoke 脚本健壮性补充、CI quality.yml 修复、复核 E2E 测试计数并整理交给 Gemini 3.7 Flash 的可视返修项 (GEMINI_RETURN_LIST)。
+
+## 阶段 4A–8 真实执行与审查记录
+
+- **阶段 4A–7 实施**：
+  - 由 Gemini 3.7 Flash High 实现 `Hero`、`motion` 动效框架、`BaseLayout` 主题、`search` 浮层交互、`reading` 进度、`floating` 悬浮控件。
+  - 清理了零引用的 `PostCard.astro`、`PostList.astro`、`PaginationNav.astro`、`CyberGrid.astro` 组件。
+  - 新增 `favicon`。
+  - 独立接管并重写了 `capture-phase-8` 脚本以修复截图获取逻辑。
+  - 补充了 motion 的 Feature Flags E2E 自动化测试。
+- **阶段 8 证据收集与验证**：
+  - 生成 `audit-screenshots/phase-8` 共 11 组证据，其中 08–11 与 feature flags 的状态一致，索引完整包含 `phase8/commit/pathname/viewport/dpr/theme/motion/browser/frozen/mask` 等属性。
+  - 自动化测试与质量门禁情况：Astro 0 错，Vitest 32/32 unit 通过，Playwright 38/38 E2E 通过（包含新增的 mobile-safari 与 feature flag 专测）。
+  - Axe 测试 0 critical/serious，页面产物 30 篇文章渲染成功，1291/1291 公式校验通过，Bundle gzip 优化至 6528/24576 字节。
+  - 视口 360px、明暗主题、复杂公式实测无溢出。
+  - CI Workflow (`quality.yml`) 已支持当前分支触发及 WebKit 依赖。
+- **审查与返修**：
+  - Claude (Sonnet 4.6 Thinking) 额度耗尽前完成阶段 0-7，阶段 8 工作区遗留未提交的文档与证据验证。
+  - Gemini 3.1 Pro High 接管最终审查与事实复核，通过本地 `npm run check`，Lighthouse BP 达 96 分。
+  - **当前状态**：未 commit、未 push、未部署。本地无 blocking 问题，等待 DSH 最终复审及 CI/生产 Smoke 真实通过。
+
+## 技术主审再切换记录 (2026-08-22T17:36 CST)
+
+- **切换时间**: 2026-08-22T17:36 CST
+- **切换原因**: 用户直接指令，不是额度耗尽，不是故障切换。用户明确要求 Gemini 3.1 Pro High 停止接收新任务，Claude Sonnet 4.6 (Thinking) 重新接管技术主审。
+- **接管模型**: Claude Sonnet 4.6 (Thinking)（技术主审恢复）
+- **前任模型**: Gemini 3.1 Pro High（临时技术主审，2026-08-22T16:48–17:36）
+- **当前阶段**: Phase 8 最终验收，READY_FOR_DSH 目标轮次
+- **已完成项（截至本轮接管时）**:
+  - 阶段 0–7 均已提交，阶段 8 工作区含未提交文档与证据。
+  - 两轮独立 DSH DeepSeek-V4-Flash Max Read Only 已完成（双审 FAIL，发现 A、B 两组问题）。
+  - Gemini 3.1 Pro High 临时技术主审期间完成：npm run check 声明全绿、Lighthouse BP=96 记录、E2E 计数更新至 38/38。
+- **待处理项（本轮技术主审任务）**:
+  - A-M1：final-validation.md 中 E2E 计数仍写 33/33，应为 38/38。**ACCEPT，待修复。**
+  - A-M2 / B-M2：run-lighthouse.mjs article-normal 指向 SR3（math:true），需替换为真实无公式文章并重跑 Lighthouse。**ACCEPT，待修复。**
+  - B-M1：共轭梯度法文章第 141 行 display 定界符与正文混用。**ACCEPT，已修复。**
+  - B-M3：favicon 文件在 public/ 而 publicDir=astro-public，dist 无 favicon，404。**ACCEPT，已修复。** favicon 复制至 astro-public/，重建后 dist/favicon.ico 确认存在，Lighthouse BP 由 96 升至 100。
+  - B-M4：rollback.md 回滚点 b35ec8d5 真实身份核查。**已核查：b35ec8d5 = "feat(motion): complete stage 7 advanced motion"，即阶段 7 完成提交，阶段 8 尚未提交，该 hash 确为当前合法 pre-phase-8 回滚点，文档正确。pre-astro-migration tag 指向 0780179a，与 rollback.md 记录一致。REJECT（无需修改）。**
+  - B-M5：final-validation.md 宣称"无阻塞"且状态 APPROVED，实为过早；DSH、CI、production smoke 均未完成。**ACCEPT，已修复（改为诚实待办）。**
+
+## Lighthouse 终验记录 (2026-08-22T17:53–17:55 CST)
+
+- **运行工具**: Lighthouse 13.4.1，`npx lighthouse`
+- **条件**: Mobile，390×844，DPR1，4x CPU throttle，Slow 4G simulate，--headless
+- **JSON 存储**: `audit-screenshots/phase-8/lighthouse/{home,search,article-normal,article-ddim}.json`
+- **article-normal 选取**: WSL2安装失败排查文章（`math: false`，纯正文无公式）
+
+| 页面              | P   | A   | BP  | SEO | LCP   | CLS | TBT   | console-errors |
+| ----------------- | --- | --- | --- | --- | ----- | --- | ----- | -------------- |
+| home (/)          | 100 | 100 | 100 | 100 | 1.2 s | 0   | 60 ms | 0              |
+| search (/search/) | 100 | 100 | 100 | 100 | 1.1 s | 0   | 0 ms  | 0              |
+| article-normal    | 100 | 100 | 100 | 100 | 1.2 s | 0   | 40 ms | 0              |
+| article-ddim      | 99  | 98  | 100 | 100 | 1.7 s | 0   | 60 ms | 0              |
+
+- **BP 100 原因**: favicon 已移入 `astro-public/`，dist 产物中存在，前次 BP=96 问题关闭。
+- **INP**: 实验室不可直接测量，TBT 为代理指标（本轮重跑为 0–60 ms，仍全部满分）。
+- **article-normal A=100（重跑 2026-08-22T18:37–18:38 CST）**: heading-order 已修复（WSL2 全文 H3→H2、H4→H3），唯一失败项关闭，A 由 95 升至 100。
+- **article-ddim A=98**: heading-order 仍失败（DDIM 正文 H3→H4→H5 跳级，为阶段外既有问题），98≥阈值，通过。
+- **当前本地状态**: 所有可本地核验项目完成，READY_FOR_DSH。
+
+## 技术主审再切换记录 (2026-08-22T18:32 CST)
+
+- **切换时间**: 2026-08-22T18:32 CST
+- **切换原因**: 用户直接指令：Claude Sonnet 4.6 (Thinking) 明确 quota exhausted，预先指定 DeepSeek-V4-Pro High 接管技术主审。
+- **接管模型**: DeepSeek-V4-Pro High（技术主审）
+- **前任模型**: Claude Sonnet 4.6 (Thinking)
+- **当前阶段**: Phase 8 最终验收，READY_FOR_DSH 目标轮次
+- **本轮完成项**:
+  - WSL2 文章 heading 顺序修复：全文 H3→H2、H4→H3（15 个章节 + 2 个小节），内容/链接/语义不变。
+  - DDPM 文章第 73 行 `$$正文` display 定界符与正文混用（与 B-M1 同类），拆分为独立块 + 正文，公式计数不变。
+  - `scripts/audit-content.ts` 非可视审计缺口修复：新增检测 `$$` 直接邻接 CJK 正文（正文被吞入）与空公式 `$$$$`。
+  - 重建 dist 并重跑四页 Lighthouse：article-normal A 95→100，heading-order 由失败转为通过。
+  - 完整 `npm run check` 全绿：format/lint/astro check 0 错、32 unit、38 E2E、30 posts、1291/1291 公式、bundle 6528/24576 B gzip。
+  - Gemini CSS 与 phase-8 证据复核：motion.css `!important` 理由注释、will-change 收敛、tokens.css 行内代码对比度均事实成立；index.json 11 组证据与 feature flags 一致，无 GEMINI_RETURN_LIST 项。
+- **待处理项 (Pending)**:
+  - DSH 第二轮独立复审（本轮仅 READY_FOR_DSH，不 APPROVED）。
+  - GitHub Actions `quality.yml` 真实 CI 通过。
+  - production smoke 真实通过。
+  - 既有（阶段外、非阻塞）heading 跳级：DDIM（H3→H4→H5）、DDPM/共轭梯度等多篇 H3 起头文章，axe 属 best-practice 非 serious/critical，四页门禁 A 均 ≥95/≥90 通过。
+
+## 技术主审终裁记录 (2026-08-22，DeepSeek-V4-Pro High)
+
+- **阶段**: Phase 8 最终验收终裁，承接 18:32 切换，继续 DeepSeek-V4-Pro High 技术主审。
+- **输入**: 两轮完全独立 DeepSeek-V4-Flash Max Read Only 复审的共同与独立结论。
+- **本轮完成项**:
+  - A（共同）`.github/workflows/deploy.yml` 只装 chromium 却跑全量 `npm run check`（含 WebKit mobile-safari）：改为 `npx playwright install --with-deps chromium webkit`，与 quality.yml 对齐。
+  - B（复审二 1）WSL2 文章正文 `# H1` 与 PostLayout 标题重复：移除正文一级标题；`scripts/audit-content.ts` 新增正文一级标题检测，`scripts/audit-output.ts` 新增每篇产物 `<h1>` 唯一断言，`tests/unit/heading-uniqueness.test.ts` 覆盖两类断言。
+  - C（复审二 2）文档核验：根 README 存在（复审误报）；`docs/architecture/adr/` 存在但缺少计划 §5.1 的 overview/content-model/rendering 与 `docs/contributing/` 三件，已补齐并引用现有 Google 风格规则；README 增加链接。
+  - D `docs/refactor/final-validation.md`：1288/1288→1291/1291、验收人→DeepSeek-V4-Pro High、切换链与 phase-8 证据 commit 诚实标注（base commit `b35ec8d5` + 未提交 working tree）。
+  - 非可视 Minor：package.json/package-lock.json 包名 `hexo-site`→`entropyxi-blog`。
+  - 完整 `npm run check` 全绿：32 unit（24 基线 + 8 H1 断言）、38 E2E、30 posts、1291/1291 公式、bundle 6528/24576 B gzip。
+- **待处理项 (Pending)**: GitHub Actions `quality.yml` 真实 CI 通过；production smoke 真实通过。本地无 blocking/major，READY_FOR_FINAL_AUDITS=true，不 APPROVED。
+
+## 双审终局 PASS 记录 (2026-08-22，DeepSeek-V4-Pro High)
+
+- **状态推进**: READY_FOR_FINAL_AUDITS → **READY_FOR_CI**（未 APPROVED，未部署生产）。
+- **双审结果**: 两轮完全独立 DeepSeek-V4-Flash Max Read Only 复审均 PASS，Blocking=0、Major=0。
+  - FINAL_PASS_AUDIT_1: PASS，Blocking=0，Major=0。
+  - FINAL_PASS_AUDIT_2: PASS，Blocking=0，Major=0。
+- **本地门禁基线**: 32 unit / 38 E2E / 30 posts / 81 兼容页 / 1291/1291 公式 / bundle 6528/24576 B gzip；Lighthouse 四页达标；quality.yml 与 deploy.yml 均装 chromium + webkit。
+- **剩余待办**: 真实 GitHub Actions quality.yml 通过（待提交/推送后触发）；production smoke 只读核对。禁止触发 deploy.yml、禁止合并 source/main、禁止宣称已部署。

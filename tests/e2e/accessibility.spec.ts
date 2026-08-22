@@ -12,7 +12,9 @@ for (const path of pages) {
   test(`has no serious or critical axe violations: ${path}`, async ({
     page,
   }) => {
-    await page.goto(path);
+    await page.goto(path, { waitUntil: "networkidle" });
+    // Wait for reveal animations to reach static final state
+    await page.waitForTimeout(500);
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
       .analyze();

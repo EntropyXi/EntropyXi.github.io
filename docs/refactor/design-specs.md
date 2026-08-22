@@ -482,3 +482,8 @@ src/
 - [x] **无 JS 终态保障**：默认样式终态呈现，`html[data-motion="ready"]` 门禁保护；
 - [x] **资产台账完备**：Hero SDE SVG 结构与 100% 自研许可证清晰记录；
 - [x] **原型样板就绪**：提供自包含、零 JS、零外链的 `docs/refactor/prototype/index.html` 与 `styles.css`。
+
+## Phase 8 动效与视觉基准
+
+- 全量验证通过：支持无 JS 环境、低动态环境 (prefers-reduced-motion: reduce)、移动端横向无溢出。
+- Axe 与 Lighthouse 通过无严重障碍门禁。

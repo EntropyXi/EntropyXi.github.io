@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { countH1Elements } from "../src/lib/audit/heading-uniqueness";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distRoot = path.join(root, "dist");
@@ -40,6 +41,12 @@ function main(): void {
     if (record.kind === "article") {
       articleHtmlCount += 1;
       const html = readFileSync(file, "utf8");
+
+      const h1Count = countH1Elements(html);
+      if (h1Count !== 1) {
+        errors.push(`${record.pathname}: expected exactly 1 <h1>, found ${h1Count}`);
+      }
+
       const htmlWithoutMathLabels = html.replace(/aria-label="数学公式：[^"]*"/gu, "");
       if (htmlWithoutMathLabels.includes("$$")) {
         errors.push(`${record.pathname}: raw $$ delimiter leaked outside an accessible name`);

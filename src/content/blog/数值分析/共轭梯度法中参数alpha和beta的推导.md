@@ -138,7 +138,9 @@ $$
 
 $$
 -\frac{1}{\alpha_k} \mathbf{r}_{k+1}^T \mathbf{r}_{k+1}
-$$现在看分母，回顾 $\alpha_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}$，所以分母其实等于：
+$$
+
+现在看分母，回顾 $\alpha_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{p}_k^T \mathbf{A} \mathbf{p}_k}$，所以分母其实等于：
 
 $$
 \mathbf{p}_k^T \mathbf{A} \mathbf{p}_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\alpha_k}

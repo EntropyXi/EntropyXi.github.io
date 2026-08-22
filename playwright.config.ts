@@ -37,6 +37,13 @@ export default defineConfig({
       },
     },
     {
+      name: "mobile-safari",
+      testMatch: /client-matrix\.spec\.ts/,
+      use: {
+        ...devices["iPhone 13"],
+      },
+    },
+    {
       name: "reduced-motion",
       testMatch: /client-matrix\.spec\.ts/,
       use: {

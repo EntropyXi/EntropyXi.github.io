@@ -27,13 +27,13 @@
       var(--color-accent-cyan)
     );
     box-shadow: 0 0 10px var(--color-accent-primary-glow);
-    transition: width 50ms linear;
+    transition: width var(--motion-duration-instant) linear;
     pointer-events: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .reading-progress-bar {
-      transition: none !important;
+      transition: none !important; /* A11y reduced-motion override */
     }
   }
 </style>

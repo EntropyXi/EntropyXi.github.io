@@ -38,7 +38,10 @@
   transform: none;
 }
 
-/* Feature flag fallback: instantly visible with zero delay */
+/* Feature flag fallback: instantly visible with zero delay
+   Factual rationale for !important: Cascade insurance for feature flag disablement.
+   Force-overrides Astro scoped classes, component stagger delays (.post-list-item:nth-child(n) .post-card),
+   and active reveal hidden selectors (html[data-motion="ready"] [data-reveal]) to guarantee instant visibility. */
 html[data-feature-reveal="false"] [data-reveal] {
   opacity: 1 !important;
   visibility: visible !important;
@@ -46,7 +49,9 @@ html[data-feature-reveal="false"] [data-reveal] {
   transition: none !important;
 }
 
-/* Reduced-motion data attribute override */
+/* Reduced-motion data attribute override
+   Factual rationale for !important: Cascade insurance for user manual reduced-motion toggle.
+   Guarantees immediate neutral visibility overriding all component-scoped transition and transform rules. */
 html[data-motion-preference="reduced"] [data-reveal] {
   opacity: 1 !important;
   visibility: visible !important;
@@ -103,10 +108,6 @@ html[data-motion="ready"]:not([data-feature-reveal="false"])
    Strictly applies to whitelisted elements: Logo, Main Nav, Hero CTA, Post Cards
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
-  [data-magnetic] {
-    will-change: transform;
-  }
-
   /* Inactive reset transition */
   [data-magnetic]:not([data-magnetic-state="active"]) {
     transition:
@@ -115,10 +116,11 @@ html[data-motion="ready"]:not([data-feature-reveal="false"])
       border-color var(--motion-duration-normal) var(--motion-ease-standard);
   }
 
-  /* Active tracking transition */
+  /* Active tracking transition with ephemeral will-change */
   [data-magnetic][data-magnetic-state="active"] {
+    will-change: transform;
     transition:
-      transform 100ms cubic-bezier(0.2, 0, 0, 1),
+      transform var(--motion-duration-instant) var(--motion-ease-standard),
       box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
       border-color var(--motion-duration-fast) var(--motion-ease-standard);
   }
@@ -171,14 +173,20 @@ html[data-motion="ready"]:not([data-feature-reveal="false"])
   }
 }
 
-/* Touch & Coarse Pointer Fallback */
+/* Touch & Coarse Pointer Fallback
+   Factual rationale for !important: Cascade insurance for touch / coarse pointer degradation.
+   Overrides high-specificity active state selectors (.hero-btn-primary[data-magnetic][data-magnetic-state="active"] (0,3,0))
+   to guarantee zero magnetic transform on mobile/touch viewports regardless of state attributes. */
 @media (hover: none), (pointer: coarse) {
   [data-magnetic] {
     transform: none !important;
   }
 }
 
-/* Feature flag fallback for magnetic behavior */
+/* Feature flag & reduced-motion fallback for magnetic behavior
+   Factual rationale for !important: Cascade insurance for feature flag (data-feature-magnetic="false")
+   and motion-preference attributes. Root selector (0,2,0) requires !important to reliably override
+   active component compound selectors (0,3,0). */
 html[data-feature-magnetic="false"] [data-magnetic] {
   transform: none !important;
 }
@@ -191,7 +199,9 @@ html[data-motion-preference="reduced"] [data-magnetic] {
    3. Ambient & Page Visibility Pause Contracts (ambient-controller integration)
    ========================================================================== */
 
-/* Ambient Feature Flag Disabled Fallback */
+/* Ambient Feature Flag Disabled Fallback
+   Factual rationale for !important: Cascade insurance for data-feature-ambient="false".
+   Forces scanline/flow layers to display: none and eliminates orb animation to achieve 0% CPU overhead. */
 html[data-feature-ambient="false"] .ambient-scanline-layer,
 html[data-feature-ambient="false"] .ambient-flow-layer {
   display: none !important;
@@ -202,7 +212,10 @@ html[data-feature-ambient="false"] .ambient-glow-orb {
   animation: none !important;
 }
 
-/* Out-of-view pause */
+/* Out-of-view pause
+   Factual rationale for !important: Cascade insurance for IntersectionObserver out-of-view pause.
+   Universal child selector requires !important to prevent component shorthand animation declarations
+   from resetting animation-play-state back to running. */
 [data-ambient][data-ambient-visible="false"] * {
   animation-play-state: paused !important;
 }
@@ -214,7 +227,9 @@ html[data-feature-ambient="false"] .ambient-glow-orb {
   animation-play-state: paused !important;
 }
 
-/* Page Visibility Pause (0% CPU) */
+/* Page Visibility Pause (0% CPU)
+   Factual rationale for !important: Cascade insurance for Page Visibility API contract.
+   Enforces animation-play-state: paused on all ambient or footer keyframes when tab is backgrounded. */
 html[data-page-visibility="hidden"] .site-footer .status-pulse,
 html[data-page-visibility="hidden"] .ambient-background .ambient-layer,
 html[data-page-visibility="hidden"] .ambient-background .ambient-glow-orb,
@@ -227,6 +242,9 @@ html[data-page-visibility="hidden"] .ambient-background .ambient-flow-layer {
    4. Reduced Motion: Instant duration & zero unnecessary motion
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
+  /* Factual rationale for !important: Standard WCAG 2.2 reduced-motion universal contract.
+     Universal selector *, *::before, *::after has specificity (0,0,0); !important is mandatory
+     to override component-level transition-duration and animation-duration across the entire cascade. */
   html {
     scroll-behavior: auto !important;
   }
@@ -244,8 +262,7 @@ html[data-page-visibility="hidden"] .ambient-background .ambient-flow-layer {
   .ambient-layer,
   .ambient-glow-orb,
   .hero-title-segment,
-  .segment-brand,
-  .hero-scroll-chevron {
+  .segment-brand {
     animation: none !important;
   }
 

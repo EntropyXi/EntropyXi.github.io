@@ -115,6 +115,15 @@ export function initializeSearch(): () => void {
     }
   };
 
+  const form = input.closest("form");
+  form?.addEventListener(
+    "submit",
+    (event) => {
+      event.preventDefault();
+    },
+    { signal: events.signal },
+  );
+
   window.addEventListener(
     "keydown",
     (event) => {

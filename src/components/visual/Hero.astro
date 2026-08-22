@@ -98,32 +98,6 @@ const researchTopics: ResearchTopic[] = [
           <span>关于博主</span>
         </a>
       </div>
-
-      <!-- Scroll Indicator Hint -->
-      <div class="hero-scroll-prompt">
-        <a
-          href="#latest-posts"
-          class="hero-scroll-btn"
-          aria-label="向下滚动至最新文章"
-        >
-          <span class="hero-scroll-text">向下探索</span>
-          <svg
-            class="hero-scroll-chevron"
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M7 13l5 5 5-5M7 6l5 5 5-5"></path>
-          </svg>
-        </a>
-      </div>
     </div>
 
     <!-- Right Demand-Loaded SDE Flowfield Graphic Column (Desktop Only Asset) -->
@@ -151,7 +125,7 @@ const researchTopics: ResearchTopic[] = [
             />
             <img
               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-              alt="Reverse-Time SDE Flowfield Graphic"
+              alt=""
               class="hero-sde-svg"
               loading="lazy"
               decoding="async"
@@ -263,45 +237,31 @@ const researchTopics: ResearchTopic[] = [
   }
 
   .segment-sub {
-    animation-delay: 100ms;
+    animation-delay: var(--motion-stagger-sm);
   }
 
   .segment-brand {
     background: linear-gradient(
-      120deg,
+      135deg,
       var(--color-text-primary) 0%,
-      var(--color-accent-primary) 45%,
-      var(--color-accent-cyan) 80%,
-      var(--color-text-primary) 100%
+      var(--color-accent-primary) 50%,
+      var(--color-accent-cyan) 100%
     );
-    background-size: 200% auto;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation:
-      hero-title-reveal var(--motion-duration-slow) var(--motion-ease-standard)
-        both,
-      cyber-shimmer 8000ms linear infinite 800ms;
+    animation: hero-title-reveal var(--motion-duration-slow)
+      var(--motion-ease-standard) both;
   }
 
   @keyframes hero-title-reveal {
     from {
       opacity: 0.3;
-      transform: translateY(4px);
+      transform: translateY(var(--motion-distance-xs));
     }
 
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  @keyframes cyber-shimmer {
-    0% {
-      background-position: 0% 50%;
-    }
-
-    100% {
-      background-position: 200% 50%;
     }
   }
 
@@ -465,51 +425,6 @@ const researchTopics: ResearchTopic[] = [
     transform: translateY(0) scale(0.98);
   }
 
-  /* Scroll Indicator Hint */
-  .hero-scroll-prompt {
-    display: none;
-  }
-
-  .hero-scroll-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    text-decoration: none;
-    padding: 0.3rem 0.5rem;
-    border-radius: var(--radius-sm);
-    transition:
-      color var(--motion-duration-fast) var(--motion-ease-standard),
-      transform var(--motion-duration-fast) var(--motion-ease-standard);
-  }
-
-  .hero-scroll-btn:hover,
-  .hero-scroll-btn:focus-visible {
-    color: var(--color-accent-primary);
-    transform: translateY(2px);
-    outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
-  }
-
-  .hero-scroll-chevron {
-    animation: scroll-bounce 2400ms ease-in-out infinite;
-  }
-
-  @keyframes scroll-bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-      opacity: 0.7;
-    }
-
-    50% {
-      transform: translateY(3px);
-      opacity: 1;
-    }
-  }
-
   /* Right Graphic Panel */
   .hero-graphic {
     display: flex;
@@ -666,20 +581,17 @@ const researchTopics: ResearchTopic[] = [
   @media (prefers-reduced-motion: reduce) {
     .hero-title-segment,
     .segment-brand,
-    .hero-scroll-chevron,
     .hero-status-pulse {
-      animation: none !important;
+      animation: none !important; /* A11y reduced-motion override */
     }
 
     .hero-btn-primary:hover,
     .hero-btn-primary:focus-visible,
     .hero-btn-secondary:hover,
     .hero-btn-secondary:focus-visible,
-    .hero-scroll-btn:hover,
-    .hero-scroll-btn:focus-visible,
     .hero-topic-chip:hover,
     .hero-topic-chip:focus-visible {
-      transform: none !important;
+      transform: none !important; /* A11y reduced-motion override */
     }
   }
 </style>

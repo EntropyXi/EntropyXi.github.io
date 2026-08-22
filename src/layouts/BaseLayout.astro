@@ -40,6 +40,25 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
     <meta property="og:url" content={canonicalUrl} />
     <meta name="twitter:card" content="summary" />
 
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon-32x32-next.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon-16x16-next.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/apple-touch-icon-next.png"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
     <!-- Theme & Client initialization script to prevent FOUC -->
     <script is:inline>
       (function () {
@@ -55,6 +74,37 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
         } catch {
           document.documentElement.dataset.theme = systemTheme;
         }
+
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const fReveal =
+            params.get("feature-reveal") ??
+            localStorage.getItem("entropyxi-feature-reveal");
+          if (fReveal !== null) {
+            document.documentElement.setAttribute(
+              "data-feature-reveal",
+              fReveal,
+            );
+          }
+          const fAmbient =
+            params.get("feature-ambient") ??
+            localStorage.getItem("entropyxi-feature-ambient");
+          if (fAmbient !== null) {
+            document.documentElement.setAttribute(
+              "data-feature-ambient",
+              fAmbient,
+            );
+          }
+          const fMagnetic =
+            params.get("feature-magnetic") ??
+            localStorage.getItem("entropyxi-feature-magnetic");
+          if (fMagnetic !== null) {
+            document.documentElement.setAttribute(
+              "data-feature-magnetic",
+              fMagnetic,
+            );
+          }
+        } catch {}
       })();
     </script>
   </head>

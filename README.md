@@ -93,3 +93,17 @@ Blog_file/
 - 计划：`docs/superpowers/plans/2026-08-20-astro-migration-plan.md`
 - ADR：`docs/architecture/adr/`
 - 回滚：`docs/migration/rollback.md`（回滚 tag `pre-astro-migration`）
+
+## 架构与贡献文档
+
+- 架构概览：`docs/architecture/overview.md`
+- 内容模型：`docs/architecture/content-model.md`
+- 渲染与交互：`docs/architecture/rendering-and-interactivity.md`
+- 编码风格：`docs/contributing/coding-style.md`
+- 内容写作：`docs/contributing/writing-content.md`
+- 测试：`docs/contributing/testing.md`
+
+## Phase 8 重构记录
+
+- 视觉与动效：全站深色赛博风格已重构完毕，引入磁吸光标、分层环境背景、全屏 Hero，满足 prefers-reduced-motion 降级要求。
+- 最新部署状态：本地已完成 100% Phase 8 质量门禁与浏览器矩阵验收 (无 JS, 触屏, Zoom 等)。

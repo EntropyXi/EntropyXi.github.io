@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { JSON_SCHEMA, load as yamlLoad } from "js-yaml";
+import { hasTopLevelMarkdownHeading } from "../src/lib/audit/heading-uniqueness";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const migratedRoot = path.join(root, "src", "content", "blog");
@@ -87,6 +88,20 @@ function main(): void {
 
     if (body.includes("<!-- more -->")) errors.push(`${file}: contains <!-- more -->`);
     if (/!\[\[[^\]]+\]\]/.test(body)) errors.push(`${file}: contains Obsidian image syntax`);
+    if (hasTopLevelMarkdownHeading(body)) {
+      errors.push(`${file}: body must not contain a top-level H1 heading (single H1 is rendered by PostLayout)`);
+    }
+
+    // Math delimiter sanity: protect against body text swallowed by display math
+    // ($$ directly adjacent to CJK text) and empty display formulas ($$$$).
+    if (body.includes("$$")) {
+      if (/\$\$[\u4e00-\u9fff]|[\u4e00-\u9fff]\$\$/.test(body)) {
+        errors.push(`${file}: display math delimiter ($$) directly adjacent to CJK body text`);
+      }
+      if (/\$\$\$\$/.test(body)) {
+        errors.push(`${file}: empty display math formula ($$$$)`);
+      }
+    }
 
     const refs = [
       ...Array.from(body.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g), (m) => m[1] ?? ""),

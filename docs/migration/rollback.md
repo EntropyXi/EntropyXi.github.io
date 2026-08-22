@@ -35,3 +35,9 @@ npm run check
 
 `npm run check` 包含格式、Lint、类型、内容审计、单测、E2E（含构建
 Pagefind 索引）与输出审计。
+
+## Phase 8 重构回滚
+
+如果需要回滚 Phase 8，切换到以下 tag/commit：
+
+- Commit Hash: b35ec8d5d4cec033efe97bb87c37b8a96875623c

@@ -1,5 +1,5 @@
 {
-  "name": "hexo-site",
+  "name": "entropyxi-blog",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "check:types": "astro check",
     "capture:ui-baseline": "tsx scripts/capture-ui-baseline.ts",
     "capture:phase-3": "tsx scripts/capture-phase-3.ts",
+    "capture:phase-8": "tsx scripts/capture-phase-8.ts",
     "audit:content": "tsx scripts/audit-content.ts",
     "audit:bundle": "tsx scripts/audit-bundle.ts",
     "audit:output": "tsx scripts/audit-output.ts",
