@@ -2,7 +2,7 @@
 
 ## 验收概述 (Executive Summary)
 
-- **状态 (Status)**: READY_FOR_CI（两轮完全独立 DeepSeek-V4-Flash Max Read Only 复审均 PASS：Blocking=0、Major=0；待 GitHub Actions quality.yml 真实 CI 通过）
+- **状态 (Status)**: READY_FOR_FINAL_ACCEPTANCE（双审 PASS；本地 `npm run check` 与 GitHub Actions quality.yml 真实 CI 均全绿；production smoke 只读核对通过；未部署生产环境）
 - **验收人**: DeepSeek-V4-Pro High（技术主审，经额度耗尽切换链接管，见 `docs/refactor/agent-run-log.md`）
 - **验证日期**: 2026-08-22
 - **测试结果**: `npm run check` (包含 E2E、类型、Lint、内容审计、产物审计等) 均通过。无新增 major/blocking 问题。
@@ -73,6 +73,17 @@
 
 两轮结论一致：无可阻断（Blocking）、无重大（Major）问题。本地门禁（32 unit / 38 E2E / 30 posts / 81 兼容页 / 1291/1291 公式 / bundle 6528/24576 B gzip）与 Lighthouse 四页均达标；quality.yml 与 deploy.yml 均已对齐 chromium + webkit 依赖。据此状态由 READY_FOR_FINAL_AUDITS 推进至 READY_FOR_CI，仅剩真实 GitHub Actions CI 通过与 production smoke 只读核对。未部署生产环境。
 
+## CI 与 Production Smoke 终局记录 (CI & Production Smoke Final Results)
+
+- **GitHub Actions quality.yml（真实 CI）**: ✅ 通过（`conclusion=success`）。
+  - Run: `32573104999` — https://github.com/EntropyXi/EntropyXi.github.io/actions/runs/32573104999
+  - 触发提交 SHA: `2491e3af166b2621a68c2096e8ab3b3842482f75`（`chore(release): complete phase 8 validation`）
+  - 时间: 2026-08-22T12:29:00Z → 12:31:05Z（约 2 分钟），job `quality` 全步骤通过。
+  - CI 内实跑关键门禁：`CONTENT: 30 posts passed`、`Tests 32 passed`、`38 passed (32.7s)`、`BUNDLE … 6528/24576 B gzip passed`、`OUTPUT: 81 legacy pages, 30 articles, and 1291/1291 accessible formulas passed`。
+- **Production Smoke（只读兼容核对）**: ✅ 通过（`SMOKE: 81 HTML and 4 assets passed`）。
+  - 说明：`npm run smoke:production` 仅对现有生产站 `https://entropyxi.github.io` 做只读 URL 兼容核对（HTTP 200 + canonical 一致），不代表本分支已部署到生产。
+- **未部署生产**：本分支未触发 `deploy.yml`，未合并 `source`/`main`，生产环境保持迁移前状态。
+
 ## 上线 Smoke 检查清单 (Smoke Checklist)
 
 部署后需核对（不执行自动部署）：
@@ -88,11 +99,11 @@
 
 ## 阻塞项 (Remaining Blockers)
 
-> ⚠️ **状态：READY_FOR_CI，未 APPROVED**。两轮独立复审 PASS（Blocking=0、Major=0），本地无 blocking/major，但以下项目尚未完成，不得提前放行。
+> ✅ **状态：READY_FOR_FINAL_ACCEPTANCE**。双审 PASS（Blocking=0、Major=0）、本地全绿、GitHub Actions CI 全绿、production smoke 只读通过；未部署生产（不触发 deploy.yml、不合并 source/main）。
 
 - [x] **DSH 复审（双审 PASS）**：两轮完全独立 DeepSeek-V4-Flash Max Read Only 复审均判定 PASS，Blocking=0、Major=0（FINAL_PASS_AUDIT_1 / FINAL_PASS_AUDIT_2）；由技术主审 DeepSeek-V4-Pro High 逐项裁决并落地修复（见 `docs/refactor/agent-run-log.md`）。
-- [ ] **GitHub Actions CI**：quality.yml 尚未在真实 CI 环境中完整运行并通过。
-- [ ] **Production Smoke**：生产环境部署与 Smoke 检查清单尚未执行。
+- [x] **GitHub Actions CI**：quality.yml 已在真实 CI 环境完整运行并通过（run `32573104999`，SHA `2491e3a`，`conclusion=success`，约 2 分钟）。
+- [x] **Production Smoke（只读）**：现有生产站兼容性只读核对通过（`SMOKE: 81 HTML and 4 assets passed`）；生产部署未执行且不执行（本分支不触发 deploy.yml）。
 - [x] **Lighthouse 四页真实重跑**：2026-08-22T18:37–18:38 CST 重跑（重建后），JSON 存于 `audit-screenshots/phase-8/lighthouse/`。article-normal heading-order 修复后 A 升至 100；全四页无 console errors，CWV 达标。
 - [x] **Favicon 修复验证**：favicon 已移至 `astro-public/`，重建后 `dist/favicon.ico` 确认存在，BP 由 96 升至 100，问题已关闭。
 - [x] **WSL2 heading 顺序修复**：全文 H3→H2、H4→H3（15 章节 + 2 小节），article-normal heading-order 由失败转为通过，A 95→100。

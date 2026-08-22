@@ -225,3 +225,12 @@
   - FINAL_PASS_AUDIT_2: PASS，Blocking=0，Major=0。
 - **本地门禁基线**: 32 unit / 38 E2E / 30 posts / 81 兼容页 / 1291/1291 公式 / bundle 6528/24576 B gzip；Lighthouse 四页达标；quality.yml 与 deploy.yml 均装 chromium + webkit。
 - **剩余待办**: 真实 GitHub Actions quality.yml 通过（待提交/推送后触发）；production smoke 只读核对。禁止触发 deploy.yml、禁止合并 source/main、禁止宣称已部署。
+
+## 终局放行记录 (2026-08-22，DeepSeek-V4-Pro High)
+
+- **状态**: READY_FOR_FINAL_ACCEPTANCE（未部署生产）。
+- **本地门禁**: `npm run check` 全绿——format/lint/astro check 0 错、30 posts、32 unit、38 E2E、81 兼容页、1291/1291 公式、bundle 6528/24576 B gzip。
+- **GitHub Actions CI**: quality.yml 通过（`conclusion=success`），run `32573104999`，SHA `2491e3af166b2621a68c2096e8ab3b3842482f75`，2026-08-22T12:29:00Z→12:31:05Z；CI 内确认 30 posts / 32 unit / 38 E2E / 6528 gzip / 1291/1291 公式。
+- **Production Smoke（只读）**: `SMOKE: 81 HTML and 4 assets passed`（对现有生产站 https://entropyxi.github.io 只读核对）。
+- **提交**: `chore(release): complete phase 8 validation`（`2491e3a`）+ 本文档终验更新提交。
+- **未执行**: 未触发 deploy.yml、未合并 source/main、未部署生产。
