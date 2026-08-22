@@ -3,8 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - source # 只有源码分支有推送时触发
-  workflow_dispatch: # 允许手动触发
+      - source
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
