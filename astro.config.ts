@@ -12,7 +12,7 @@ export default defineConfig({
   site: "https://entropyxi.github.io",
   trailingSlash: "always",
   output: "static",
-  // 与 Hexo 的 public/ 完全隔离，避免共存期互相覆盖。
+  // 静态静态资源根目录
   publicDir: "astro-public",
   markdown: {
     processor: unified({

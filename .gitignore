@@ -16,12 +16,13 @@ _multiconfig.yml
 .obsidian/
 .vscode/
 .claude/
+.codegraph/
+.agents/
 audit-screenshots/**/*.png
 audit-screenshots/**/*.webp
 !audit-screenshots/
 !audit-screenshots/**/
 !audit-screenshots/**/index.json
+!audit-screenshots/**/evidence.json
 update_categories.js
 *.swp
-themes/*
-!themes/.gitkeep

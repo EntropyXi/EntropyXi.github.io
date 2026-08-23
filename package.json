@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "preview:test": "node scripts/run-preview.mjs",
+    "clean": "tsx scripts/clean.ts",
     "build": "npm run build:site && npm run build:search",
     "build:site": "astro build",
     "build:search": "pagefind --site dist",
@@ -24,9 +25,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "smoke:production": "tsx scripts/check-production-urls.ts"
-  },
-  "hexo": {
-    "version": "8.1.1"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.4",
