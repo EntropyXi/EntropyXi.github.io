@@ -104,9 +104,14 @@ a:hover {
 }
 
 img,
-svg,
 video,
 canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg:not(:where(mjx-container, mjx-container *)) {
   display: block;
   max-width: 100%;
   height: auto;
@@ -125,12 +130,32 @@ mjx-container[display="true"] {
   /* MathJax SVG sets inline min-width; !important override ensures proper container scroll */
   min-width: 0 !important;
   overflow: auto hidden;
+  text-align: center;
   box-shadow: inset 0 2px 4px rgb(0 0 0 / 20%);
 }
 
+mjx-container[display="true"] > svg {
+  display: inline-block !important;
+  margin: 0 auto;
+  min-width: min-content;
+  max-width: none;
+}
+
 mjx-container:not([display="true"]) {
-  display: inline;
+  display: inline-block;
+  vertical-align: -0.15em;
+  max-width: 100%;
+  overflow: auto hidden;
   padding: 0 0.15em;
+  line-height: normal;
+  text-indent: 0;
+  white-space: normal;
+}
+
+mjx-container:not([display="true"]) > svg {
+  display: inline-block !important;
+  vertical-align: inherit;
+  max-width: none;
 }
 
 main {
