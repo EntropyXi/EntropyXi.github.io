@@ -14,45 +14,54 @@ math: true
 draft: false
 ---
 
-在手动实现的softmax和交叉熵损失中，我们在这两步是分步计算的，即我们在计算评估函数Xw+b后，我们先调用softmax计算$\frac{exp(x_i)}{\sum exp(x_j)}$，然后再把计算出来的softmax概率直接传给 log 计算交叉熵。但是这种分步计算数值是及其不稳定的，因为我们的softmax计算出来的数值再0到1的区间内，而当数值趋近于0时，很容易遇到数值下溢出导致log(0)报错。这在数值上是十分脆弱的。
+在手动实现 Softmax 与交叉熵损失（Cross Entropy Loss）时，若分步计算：先在模型输出得分 $\mathbf{z} = \mathbf{X}\mathbf{w} + b$ 上计算 Softmax 概率 $\hat{y}_i = \frac{\exp(z_i)}{\sum_j \exp(z_j)}$，再将预测概率传入 $\log$ 函数计算交叉熵损失 $L = -\log \hat{y}_y$。这种分步计算在数值上极其不稳定：当得分 $z_i$ 很大时 $\exp(z_i)$ 容易发生**数值上溢**（Overflow，导致 `inf`）；而当概率 $\hat{y}_y$ 极小时又容易发生**数值下溢**（Underflow，导致 $\log(0) \to -\infty$ 或 `NaN`）。
 
-所以我们使用LSE技巧，在损失函数内部，将这两部合并计算
-- 核心逻辑：框架（如 PyTorch 的 nn.CrossEntropyLoss ）要求你传入未规范化的预测
-- 内部黑盒：在损失函数内部，它并不会先算概率再算对数，而是利用数学恒等式将这两步合并计算
-- 数学原理：它计算的是$\log(\sum exp(x_i))$，并使用了平移技巧（减去最大值c）
+为了解决这一问题，深度学习框架（如 PyTorch 的 `nn.CrossEntropyLoss`）在损失函数内部将 Softmax 与对数运算合并为 **Log-Sum-Exp（LSE）** 技巧进行统一计算。
 
-$$
-LogSumExp(x)=c+\log\sum exp(x_i-c),\quad \text{其中c=max(x)}
-$$
-
-- 优势：这种合并计算的方式在计算机底层是极其稳定的，永远不会出现NaN（不是数字）或无穷大的错误
-
-接下来我们证明等价性：
-其中softmax公式：$\tilde{y}_i=\frac{exp(x_i)}{\sum_j exp(x_j)}$
-交叉熵损失（针对单样本）：$L=-\log(\tilde{y}_y)$
-
-将softmax的定义带入到损失函数L中
+- **核心逻辑**：模型直接输出未归一化的 logits（对数几率 $\mathbf{z}$），损失函数内部将 Softmax 与 Cross-Entropy 融合成单一算子；
+- **数值稳定原理**：在指数求和前减去最大值 $c = \max_i z_i$，保证所有指数项的幂次不超过 0（$\exp(z_i - c) \leq 1$），彻底杜绝溢出：
 
 $$
-L=-\log(\tilde{y}_i=\frac{exp(x_i)}{\sum_j exp(x_j)})
+\operatorname{LogSumExp}(\mathbf{z}) = c + \log\left(\sum_i \exp(z_i - c)\right), \quad \text{其中 } c = \max_i z_i
 $$
 
-利用对数的运算法则展开
+### 数学等价性证明
+
+对于真实类别标签为 $y$ 的单样本，交叉熵损失定义为：
 
 $$
-L=-[\log(exp(x_i))-log(\sum_{j}exp(x_j))]
+L = -\log \hat{y}_y
 $$
 
-因为$\log(exp(x))=x$，所以
+将 Softmax 概率公式 $\hat{y}_y = \frac{\exp(z_y)}{\sum_j \exp(z_j)}$ 代入损失函数 $L$：
 
 $$
-L=-[x_i-log(\sum_{j}exp(x_j))]
+L = -\log\left(\frac{\exp(z_y)}{\sum_j \exp(z_j)}\right)
 $$
 
-展开
+利用对数的除法性质展开：
 
 $$
-L=-x_i+\log(\sum_{j}exp(x_j))
+\begin{aligned}
+L &= -\left[ \log(\exp(z_y)) - \log\left(\sum_j \exp(z_j)\right) \right] \\
+&= -z_y + \log\left(\sum_j \exp(z_j)\right)
+\end{aligned}
 $$
 
-得证
+对第二项应用减最大值平移恒等式：
+
+$$
+\begin{aligned}
+\log\left(\sum_j \exp(z_j)\right) &= \log\left(\sum_j \exp(z_j - c) \cdot \exp(c)\right) \\
+&= \log\left(\exp(c) \cdot \sum_j \exp(z_j - c)\right) \\
+&= c + \log\left(\sum_j \exp(z_j - c)\right)
+\end{aligned}
+$$
+
+代入最终损失函数，得到数值极度稳定的解析表达式：
+
+$$
+L = -z_y + c + \log\left(\sum_j \exp(z_j - c)\right)
+$$
+
+这样，所有中间项的最大指数均为 0（$\exp(0) = 1$），既避免了 $\exp$ 溢出，又避免了 $\log(0)$ 产生 `NaN`，在计算机底层保证了极高的数值鲁棒性。

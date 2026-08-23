@@ -14,11 +14,18 @@ math: true
 draft: false
 ---
 
-本系列笔记从SDE出发，经过DDPM反向推导、ODE概率流、连续正则化流到流匹配条件路径，最终揭示了扩散模型与连续归一化流之间的深层统一关系。
+本系列笔记从 SDE 出发，经过 DDPM 反向推导、ODE 概率流、连续正则化流（CNF）到流匹配条件路径，最终揭示了扩散模型与连续归一化流之间的深层统一关系：
 
-$$s_\theta \approx \nabla_x\log p_t(x)$$
-$$\frac{dx}{dt}=f_t(x)-\frac{1}{2}g_t^2s_\theta(x,t)$$
-所以 Diffusion 可以被解释为一个以 score 间接定义速度场的 CNF 
-Diffusion：先学 score，再得到 ODE
-CNF：直接学 ODE 速度场
-总的体系可以用以下这幅图描述
+$$
+s_\theta(x, t) \approx \nabla_x\log p_t(x)
+$$
+
+$$
+\frac{dx}{dt} = f_t(x) - \frac{1}{2}g_t^2 s_\theta(x, t)
+$$
+
+所以 Diffusion 可以被解释为一个以 score 间接定义速度场的连续归一化流（CNF）：
+- **Diffusion**：先学习分布的 score $\nabla_x \log p_t(x)$，再导出概率流 ODE；
+- **CNF / Flow Matching**：直接在条件路径上回归 ODE 的速度场 $v_\theta(x, t)$。
+
+从生成模型的全局视角来看，二者本质上都是在求解一个将简单先验分布连续推运（pushforward）至复杂真实数据分布的动力学系统。
