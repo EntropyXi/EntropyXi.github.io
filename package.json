@@ -27,7 +27,7 @@
     "smoke:production": "tsx scripts/check-production-urls.ts"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "^7.2.4",
+    "@astrojs/markdown-remark": "^7.3.0",
     "astro": "^7.2.4",
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0"
