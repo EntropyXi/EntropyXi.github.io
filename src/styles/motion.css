@@ -31,6 +31,19 @@
    1. Scroll Reveal Presentation Contracts (reveal-controller integration)
    ========================================================================== */
 
+/* Hero entrance gate (plan §4.4): set by the anti-FOUC inline script only
+   when the choreography is eligible (home + full motion + gsap flag on).
+   The choreography removes it on start; a 1.6s inline timeout forces the
+   visible state if GSAP never boots. No JS / reduced motion never sets it. */
+html[data-hero-pending] .welcome-line-1,
+html[data-hero-pending] .welcome-line-2,
+html[data-hero-pending] .narrative-line,
+html[data-hero-pending] .narrative-lead,
+html[data-hero-pending] .narrative-tech-bracket,
+html[data-hero-pending] .hero-scroll-wrapper {
+  opacity: 0;
+}
+
 /* Safe No-JS & Default Fallback: visible by default */
 [data-reveal] {
   opacity: 1;

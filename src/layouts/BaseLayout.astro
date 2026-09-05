@@ -25,6 +25,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
   lang={SITE_LANG}
   class="no-js"
   data-theme="dark"
+  data-is-home={isHome ? "true" : "false"}
   data-feature-reveal="true"
   data-feature-ambient="true"
   data-feature-magnetic="true"
@@ -116,6 +117,23 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
             localStorage.getItem("entropyxi-feature-gsap");
           if (fGsap !== null) {
             document.documentElement.setAttribute("data-feature-gsap", fGsap);
+          }
+
+          // Hero entrance gate (plan §4.4): hide the hero only when the
+          // choreography is actually eligible, and force-visibility after
+          // 1.6s no matter what so a failed chunk load can never blank it.
+          const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+          const heroEligible =
+            document.documentElement.dataset.isHome === "true" &&
+            fGsap !== "false" &&
+            !reducedMotion;
+          if (heroEligible) {
+            document.documentElement.setAttribute("data-hero-pending", "true");
+            window.setTimeout(() => {
+              document.documentElement.removeAttribute("data-hero-pending");
+            }, 1600);
           }
         } catch {}
       })();

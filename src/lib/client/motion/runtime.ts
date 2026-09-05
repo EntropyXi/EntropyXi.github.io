@@ -1,7 +1,7 @@
 import { readMotionGateInput, resolveMotionGate } from "./gsap-gate";
 
 function scheduleIdle(callback: () => void): void {
-  if ("requestIdleCallback" in window) {
+  if (typeof window.requestIdleCallback === "function") {
     window.requestIdleCallback(() => callback());
   } else {
     window.setTimeout(callback, 0);
@@ -35,5 +35,10 @@ async function boot(lenisEnabled: boolean): Promise<void> {
     const { initializeLenis } = await import("./lenis-controller");
     initializeLenis();
   }
-  // Phase 3/4 mount hero choreography and scroll narrative behind this gate.
+
+  if (document.documentElement.hasAttribute("data-hero-pending")) {
+    const { runHeroChoreography } = await import("./hero-choreography");
+    runHeroChoreography();
+  }
+  // Phase 4 mounts scroll narrative (parallax + batch reveal) here.
 }

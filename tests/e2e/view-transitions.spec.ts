@@ -16,7 +16,9 @@ test.describe("view transitions preserve the persistent wallpaper across navigat
     });
   });
 
-  async function markWallpaper(page: import("@playwright/test").Page): Promise<void> {
+  async function markWallpaper(
+    page: import("@playwright/test").Page,
+  ): Promise<void> {
     await page.evaluate(() => {
       const wallpaper = document.querySelector(
         ".ambient-background",
@@ -26,7 +28,9 @@ test.describe("view transitions preserve the persistent wallpaper across navigat
     });
   }
 
-  async function navigateToArchives(page: import("@playwright/test").Page): Promise<void> {
+  async function navigateToArchives(
+    page: import("@playwright/test").Page,
+  ): Promise<void> {
     await page.click('.desktop-nav .nav-link[href="/archives/"]');
     await page.waitForURL(/\/archives\/$/);
     await page.waitForLoadState("load");
