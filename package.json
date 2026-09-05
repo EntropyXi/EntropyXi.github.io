@@ -46,7 +46,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "stylelint": "^17.14.1",
     "stylelint-config-standard": "^40.0.0",
-    "tsx": "^4.23.12",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.11"
