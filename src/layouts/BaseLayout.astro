@@ -137,6 +137,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       import { initializeRevealController } from "@/lib/client/reveal-controller";
       import { initializeAmbientController } from "@/lib/client/ambient-controller";
       import { initializePointerController } from "@/lib/client/pointer-controller";
+      import { initializeMotionRuntime } from "@/lib/client/motion/runtime";
 
       // View-transition attribute relay (plan §4.2): the swap replaces every
       // <html> attribute with the new page's SSR values, dropping the runtime
@@ -169,6 +170,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       registerClientFeature("reveal-controller", initializeRevealController);
       registerClientFeature("ambient-controller", initializeAmbientController);
       registerClientFeature("pointer-controller", initializePointerController);
+      registerClientFeature("motion-runtime", initializeMotionRuntime);
     </script>
   </body>
 </html>

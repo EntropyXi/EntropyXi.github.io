@@ -93,3 +93,83 @@ test("client foundation matches its configured environment", async ({
       .toBe(true);
   }
 });
+
+test("motion runtime matches its capability gate", async ({
+  page,
+}, testInfo) => {
+  if (testInfo.project.name === "reduced-motion") {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+  }
+  if (testInfo.project.name === "zoom-200") {
+    // Set CSS zoom before app scripts run so the gate reads it at boot.
+    await page.addInitScript(() => {
+      document.documentElement.style.zoom = "200%";
+    });
+  }
+  await page.goto("/");
+  const root = page.locator("html");
+
+  if (testInfo.project.name === "javascript-disabled") {
+    await expect(root).not.toHaveAttribute("data-motion-runtime-init");
+    return;
+  }
+
+  if (
+    testInfo.project.name === "reduced-motion" ||
+    testInfo.project.name === "zoom-200"
+  ) {
+    // Reduced motion never loads the stack; CSS zoom disables Lenis only.
+    await expect
+      .poll(() =>
+        page.evaluate(() => ({
+          lenisActive: document.documentElement.dataset.lenisActive ?? null,
+          lenisClass: document.documentElement.classList.contains("lenis"),
+        })),
+      )
+      .toEqual({ lenisActive: null, lenisClass: false });
+    return;
+  }
+
+  if (
+    testInfo.project.name === "mobile-390" ||
+    testInfo.project.name === "mobile-360" ||
+    testInfo.project.name === "mobile-safari"
+  ) {
+    // Touch keeps GSAP-driven scroll work (Phase 4) but never Lenis.
+    await expect
+      .poll(() =>
+        page.evaluate(() => ({
+          lenisActive: document.documentElement.dataset.lenisActive ?? null,
+          lenisClass: document.documentElement.classList.contains("lenis"),
+        })),
+      )
+      .toEqual({ lenisActive: null, lenisClass: false });
+    return;
+  }
+
+  // Desktop with full motion: Lenis drives real scroll positions.
+  await expect
+    .poll(() =>
+      page.evaluate(() => ({
+        lenisActive: document.documentElement.dataset.lenisActive ?? null,
+        lenisClass: document.documentElement.classList.contains("lenis"),
+      })),
+    )
+    .toEqual({ lenisActive: "true", lenisClass: true });
+
+  await page.getByRole("link", { name: "向下滚动至最新文章" }).click();
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBeGreaterThan(300);
+
+  // The anchor must land below the sticky header, honoring scroll-padding.
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const section = document.querySelector("#latest-posts");
+        if (!section) return Number.POSITIVE_INFINITY;
+        return section.getBoundingClientRect().top;
+      }),
+    )
+    .toBeGreaterThanOrEqual(56);
+});

@@ -35,6 +35,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Lenis smooth-scroll contract (ADR 0003, official snippet): the
+   !important below is the hard guarantee against double smoothing while
+   Lenis drives the real scrollTop. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 ::selection {
   background-color: var(--color-selection-bg);
   color: var(--color-selection-text);

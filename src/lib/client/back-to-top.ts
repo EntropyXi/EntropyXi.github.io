@@ -1,3 +1,5 @@
+import { getLenis } from "./motion/lenis-bridge";
+
 export function initializeBackToTop(): () => void {
   const button = document.getElementById("back-to-top");
   if (!(button instanceof HTMLAnchorElement)) return () => undefined;
@@ -20,6 +22,11 @@ export function initializeBackToTop(): () => void {
     "click",
     (event) => {
       event.preventDefault();
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: reducedMotion.matches });
+        return;
+      }
       window.scrollTo({
         top: 0,
         behavior: reducedMotion.matches ? "auto" : "smooth",
