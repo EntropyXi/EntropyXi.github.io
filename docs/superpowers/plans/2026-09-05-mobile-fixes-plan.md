@@ -81,7 +81,7 @@
 ### 3.3 REQ-3 页脚热区
 
 - `.site-footer a` 改 `display: inline-block; padding: 0.3rem 0.2rem;
-  margin: -0.3rem -0.2rem;`——命中区高约 19+9.6≈28px ≥24px，负 margin
+margin: -0.3rem -0.2rem;`——命中区高约 19+9.6≈28px ≥24px，负 margin
   抵消布局位移，视觉零变化。
 
 ### 3.4 REQ-4 测试补强
@@ -106,12 +106,12 @@
 
 ## 5. 风险
 
-| 风险 | 缓解 |
-| --- | --- |
-| 抽屉移出后 scoped 样式丢失导致样式回归 | 样式随组件整体迁移；e2e 视觉断言 + 截图复验 |
-| mask-image 兼容性（旧 Android） | `@supports (mask-image)` 包裹，不支持则维持现状 |
-| 负 margin 页脚在窄屏折行错位 | 320px 项目 + 截图复验 |
-| mobile-320 暴露既有 320px 溢出 | 属审计目标本身；发现即修（hero clamp 已支持，预计安全） |
+| 风险                                   | 缓解                                                    |
+| -------------------------------------- | ------------------------------------------------------- |
+| 抽屉移出后 scoped 样式丢失导致样式回归 | 样式随组件整体迁移；e2e 视觉断言 + 截图复验             |
+| mask-image 兼容性（旧 Android）        | `@supports (mask-image)` 包裹，不支持则维持现状         |
+| 负 margin 页脚在窄屏折行错位           | 320px 项目 + 截图复验                                   |
+| mobile-320 暴露既有 320px 溢出         | 属审计目标本身；发现即修（hero clamp 已支持，预计安全） |
 
 ## 6. 回滚
 
@@ -119,21 +119,21 @@
 
 ## 7. 审查对账闭环表
 
-| # | 级别 | 修订项 | 处置 | 状态 |
-| --- | --- | --- | --- | --- |
-| 1 | P1 | mobile-320 补 `testMatch: /client-matrix\.spec\.ts/` | §3.4 | ✅ |
-| 2 | P1 | `registerClientFeature("mobile-drawer")` 单点注册 | 保留在 SiteHeader（与汉堡按钮同交互对），不随抽屉迁移 | ✅ |
-| 3 | P1 | 滚动断言置于开抽屉之前、用 `toBeVisible()` 自动等待 reveal | §3.4 | ✅ |
-| 4 | P1 | mask 前缀策略 | `-webkit-mask-image` + `mask-image`，前者配 stylelint-disable 行注释；`@supports` 包裹 | ✅ |
-| 5 | P2 | `startsWith("mobile-")` 使 mobile-safari 获得溢出/遮罩/抽屉断言（扩围声明） | 接受扩围，WebKit 上验证 | ✅ |
-| 6 | P2 | navItems/isActive 两组件重复 | 提取 `src/lib/navigation.ts` 共享模块 | ✅ |
-| 7 | P2 | 面板宽度断言仅对 390 视口成立（max-width 85vw） | 断言写死 288px 并注明仅 390 视口 | ✅ |
-| 8 | P2 | §4 措辞：抽屉焦点断言在 client-behavior + client-matrix（无 view-transitions） | 已改 | ✅ |
-| 9 | P2 | data-scroll-hint 覆盖 display 与 inline 容器；订正 svg `!important` 转述 | 属性选择器不限 display；JS 对全部 mjx-container 测量 | ✅ |
-| 10 | P2 | 页脚聚焦描边随 padding 外移约 5px | 验收豁免留档 | ✅ |
-| 11 | P2 | clean.ts 会清掉新审计截图 | clean.ts 豁免 `mobile-audit` 目录 | ✅ |
-| 12 | P2 | 文档同步：testing.md / quality-gates.md 7→8 项目；以 e2e computed-style 断言替代 dist CSS 断言 | §3.4/§6 | ✅ |
-| 13 | P2 | hint 测量加 fonts.ready 一次性重测 | 采纳（廉价保险） | ✅ |
+| #   | 级别 | 修订项                                                                                         | 处置                                                                                   | 状态 |
+| --- | ---- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---- |
+| 1   | P1   | mobile-320 补 `testMatch: /client-matrix\.spec\.ts/`                                           | §3.4                                                                                   | ✅   |
+| 2   | P1   | `registerClientFeature("mobile-drawer")` 单点注册                                              | 保留在 SiteHeader（与汉堡按钮同交互对），不随抽屉迁移                                  | ✅   |
+| 3   | P1   | 滚动断言置于开抽屉之前、用 `toBeVisible()` 自动等待 reveal                                     | §3.4                                                                                   | ✅   |
+| 4   | P1   | mask 前缀策略                                                                                  | `-webkit-mask-image` + `mask-image`，前者配 stylelint-disable 行注释；`@supports` 包裹 | ✅   |
+| 5   | P2   | `startsWith("mobile-")` 使 mobile-safari 获得溢出/遮罩/抽屉断言（扩围声明）                    | 接受扩围，WebKit 上验证                                                                | ✅   |
+| 6   | P2   | navItems/isActive 两组件重复                                                                   | 提取 `src/lib/navigation.ts` 共享模块                                                  | ✅   |
+| 7   | P2   | 面板宽度断言仅对 390 视口成立（max-width 85vw）                                                | 断言写死 288px 并注明仅 390 视口                                                       | ✅   |
+| 8   | P2   | §4 措辞：抽屉焦点断言在 client-behavior + client-matrix（无 view-transitions）                 | 已改                                                                                   | ✅   |
+| 9   | P2   | data-scroll-hint 覆盖 display 与 inline 容器；订正 svg `!important` 转述                       | 属性选择器不限 display；JS 对全部 mjx-container 测量                                   | ✅   |
+| 10  | P2   | 页脚聚焦描边随 padding 外移约 5px                                                              | 验收豁免留档                                                                           | ✅   |
+| 11  | P2   | clean.ts 会清掉新审计截图                                                                      | clean.ts 豁免 `mobile-audit` 目录                                                      | ✅   |
+| 12  | P2   | 文档同步：testing.md / quality-gates.md 7→8 项目；以 e2e computed-style 断言替代 dist CSS 断言 | §3.4/§6                                                                                | ✅   |
+| 13  | P2   | hint 测量加 fonts.ready 一次性重测                                                             | 采纳（廉价保险）                                                                       | ✅   |
 
 审查结论：修订后可执行（0 P0 / 4 P1 / 9 P2），13 条全部闭合。验收中的抽屉焦点断言归属为 client-behavior.spec.ts + client-matrix.spec.ts。
 
