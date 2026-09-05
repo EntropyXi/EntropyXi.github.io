@@ -108,6 +108,41 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     gap: 0.25rem;
   }
 
+  /* One-shot glitch entrance (plan §4.6): steps() keyframes, transform and
+     opacity only; frozen by the global reduced-motion contract. */
+  .error-singularity-code span {
+    animation: glitch-in 0.55s steps(6, end) both;
+  }
+
+  .error-singularity-code span:nth-child(2) {
+    animation-delay: 0.12s;
+  }
+
+  @keyframes glitch-in {
+    0% {
+      opacity: 0;
+      transform: translateX(-6px);
+    }
+
+    25% {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    50% {
+      transform: translateX(-3px);
+    }
+
+    75% {
+      transform: translateX(2px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   .glitch-zero {
     color: var(--color-accent-primary);
     text-shadow: 0 0 25px var(--color-accent-primary-glow);

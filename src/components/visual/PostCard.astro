@@ -151,6 +151,26 @@ const primaryCategory = data.categories[data.categories.length - 1];
       var(--motion-ease-standard);
   }
 
+  /* Sheen sweep on hover: transform-only, sits above the card surface */
+  .post-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 42%,
+      rgb(245 158 11 / 9%) 50%,
+      transparent 58%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.8s var(--motion-ease-standard);
+    pointer-events: none;
+  }
+
+  .post-card:hover::after {
+    transform: translateX(130%);
+  }
+
   .post-card:hover,
   .post-card:focus-within {
     border-color: var(--color-accent-primary);

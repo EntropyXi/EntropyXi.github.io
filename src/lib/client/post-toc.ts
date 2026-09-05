@@ -21,11 +21,46 @@ export function initializeTocHighlight(): () => void {
 
   const events = new AbortController();
   let animationFrame = 0;
+  let activeId: string | null = null;
+
+  // Sliding TOC indicator (plan §4.6): created only when the motion stack is
+  // live; no-JS and reduced-motion keep the class-toggle-only behavior.
+  const desktopList = document.querySelector<HTMLElement>(".post-toc-list");
+  let indicator: HTMLElement | null = null;
+
+  const syncIndicator = (): void => {
+    if (!indicator || !desktopList) return;
+    const activeLink = desktopLinks.find(
+      (link) => link.getAttribute("href") === `#${activeId}`,
+    );
+    if (!activeLink) return;
+    const listTop = desktopList.getBoundingClientRect().top;
+    const linkTop = activeLink.getBoundingClientRect().top;
+    indicator.style.transform = `translateY(${(linkTop - listTop).toString()}px)`;
+    indicator.dataset.indicatorVisible = "true";
+  };
+
+  const attachIndicator = (): void => {
+    if (indicator || !desktopList) return;
+    indicator = document.createElement("span");
+    indicator.className = "post-toc-indicator";
+    indicator.setAttribute("aria-hidden", "true");
+    desktopList.prepend(indicator);
+    syncIndicator();
+  };
+
+  if (document.documentElement.dataset.gsapActive === "true") {
+    attachIndicator();
+  } else {
+    document.addEventListener("motion:narrative-ready", attachIndicator, {
+      signal: events.signal,
+      once: true,
+    });
+  }
 
   const render = (): void => {
     animationFrame = 0;
 
-    let activeId: string | null = null;
     const scrollY = window.scrollY;
     const offset = 120; // Accounts for sticky header and spacing
 
@@ -42,6 +77,7 @@ export function initializeTocHighlight(): () => void {
     }
 
     if (activeId) {
+      syncIndicator();
       desktopLinks.forEach((link) => {
         link.classList.toggle(
           "active",

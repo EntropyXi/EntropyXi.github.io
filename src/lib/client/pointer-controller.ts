@@ -1,20 +1,8 @@
 import type { ClientCleanup } from "./lifecycle";
+import { readMotionGateInput, resolveMotionGate } from "./motion/gsap-gate";
 
-export function initializePointerController(): ClientCleanup | void {
-  const isEnabled =
-    document.documentElement.getAttribute("data-feature-magnetic") !== "false";
-  if (!isEnabled) return;
-
-  const motionPref = document.documentElement.dataset.motionPreference;
-  if (motionPref === "reduced") return;
-
-  // Initialize magnetic behavior only for fine pointers and abort on touch
-  const isFinePointer = window.matchMedia(
-    "(hover: hover) and (pointer: fine)",
-  ).matches;
-  if (!isFinePointer) return;
-
-  const events = new AbortController();
+function setupCssMagnetic(events: AbortController): ClientCleanup {
+  const root = document.documentElement;
   let rAfId: number | null = null;
   let currentX = 0;
   let currentY = 0;
@@ -24,8 +12,8 @@ export function initializePointerController(): ClientCleanup | void {
   let activeMagneticCenterY = 0;
 
   const updatePointer = () => {
-    document.documentElement.style.setProperty("--pointer-x", `${currentX}px`);
-    document.documentElement.style.setProperty("--pointer-y", `${currentY}px`);
+    root.style.setProperty("--pointer-x", `${currentX}px`);
+    root.style.setProperty("--pointer-y", `${currentY}px`);
 
     if (activeMagneticElement) {
       const deltaX = currentX - activeMagneticCenterX;
@@ -92,13 +80,56 @@ export function initializePointerController(): ClientCleanup | void {
     if (rAfId !== null) {
       cancelAnimationFrame(rAfId);
     }
-    document.documentElement.style.removeProperty("--pointer-x");
-    document.documentElement.style.removeProperty("--pointer-y");
+    root.style.removeProperty("--pointer-x");
+    root.style.removeProperty("--pointer-y");
     magneticElements.forEach((el) => {
       const htmlEl = el as HTMLElement;
       htmlEl.removeAttribute("data-magnetic-state");
       htmlEl.style.removeProperty("--magnetic-x");
       htmlEl.style.removeProperty("--magnetic-y");
     });
+  };
+}
+
+export function initializePointerController(): ClientCleanup | void {
+  const root = document.documentElement;
+  const isEnabled = root.getAttribute("data-feature-magnetic") !== "false";
+  if (!isEnabled) return;
+
+  const motionPref = root.dataset.motionPreference;
+  if (motionPref === "reduced") return;
+
+  // Initialize magnetic behavior only for fine pointers and abort on touch
+  const isFinePointer = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  ).matches;
+  if (!isFinePointer) return;
+
+  const events = new AbortController();
+
+  // The CSS path installs immediately so the effect works during the chunk
+  // fetch; when the spring path takes over it owns the transform inline and
+  // the CSS transition is disabled via data-motion-gsap.
+  let cleanup: ClientCleanup = setupCssMagnetic(events);
+
+  if (resolveMotionGate(readMotionGateInput(root)).gsap) {
+    // Springy GSAP path; falls back to the CSS variables path if the
+    // chunk cannot be loaded.
+    void import("./motion/magnetic-spring")
+      .then(({ initializeMagneticSpring }) => {
+        const teardown = initializeMagneticSpring(events);
+        const previousCleanup = cleanup;
+        cleanup = () => {
+          teardown();
+          previousCleanup();
+        };
+      })
+      .catch(() => {
+        // Chunk failure: the CSS path above keeps the effect working.
+      });
+  }
+
+  return () => {
+    cleanup();
   };
 }

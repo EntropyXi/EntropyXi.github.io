@@ -194,6 +194,12 @@ html[data-motion-preference="reduced"] [data-magnetic] {
   transform: none !important;
 }
 
+/* GSAP spring path owns the transform inline (plan §4.6): disable the CSS
+   transitions so per-frame quickTo updates never fight a transition. */
+html[data-motion-gsap] [data-magnetic] {
+  transition: none !important;
+}
+
 /* ==========================================================================
    3. Ambient & Page Visibility Pause Contracts (ambient-controller integration)
    ========================================================================== */

@@ -518,11 +518,34 @@
 }
 
 .post-toc-list {
+  position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
   font-size: 0.85rem;
   line-height: 1.55;
+}
+
+/* Sliding active indicator (plan §4.6): JS-created only when the motion
+   stack is live; slides via transform-only transition. */
+.post-toc-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 1.4rem;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-primary);
+  box-shadow: 0 0 8px var(--color-accent-primary-glow);
+  opacity: 0;
+  transition:
+    transform var(--motion-duration-normal) var(--motion-ease-standard),
+    opacity var(--motion-duration-fast) var(--motion-ease-standard);
+  pointer-events: none;
+}
+
+.post-toc-indicator[data-indicator-visible="true"] {
+  opacity: 1;
 }
 
 .post-toc-item {

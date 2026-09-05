@@ -57,6 +57,7 @@ async function boot(root: HTMLElement): Promise<void> {
 
     const { initializeScrollNarrative } = await import("./scroll-narrative");
     narrativeCleanup = initializeScrollNarrative() ?? null;
+    document.dispatchEvent(new CustomEvent("motion:narrative-ready"));
   } catch {
     // Chunk loading failed: restore the CSS-only visibility contract so no
     // content stays hidden behind the GSAP takeover.
