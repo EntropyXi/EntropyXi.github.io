@@ -9,8 +9,7 @@ interface Props {
   isHome?: boolean;
 }
 
-const { isHome: _isHome } = Astro.props;
-void _isHome;
+const { isHome = false } = Astro.props;
 ---
 
 <div class="ambient-background" aria-hidden="true">
@@ -31,8 +30,8 @@ void _isHome;
         src="/images/hero/suisen-hero-1440w.webp"
         alt=""
         class="ambient-wallpaper-img"
-        loading="eager"
-        fetchpriority="high"
+        loading={isHome ? "eager" : "lazy"}
+        fetchpriority={isHome ? "high" : "low"}
         decoding="async"
         width="1920"
         height="1080"
