@@ -198,6 +198,7 @@ const { isHome = false } = Astro.props;
       var(--color-accent-primary) 0%,
       transparent 70%
     );
+    animation: orb-drift-primary 90s ease-in-out infinite alternate;
   }
 
   .glow-orb-cyan {
@@ -212,6 +213,29 @@ const { isHome = false } = Astro.props;
       transparent 70%
     );
     opacity: 0.12;
+    animation: orb-drift-cyan 70s ease-in-out infinite alternate;
+  }
+
+  /* Slow ambient drift for the two static orbs only — the pointer orb's
+     transform is owned by --pointer-x/y (plan §4.5). */
+  @keyframes orb-drift-primary {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-6%, 8%, 0);
+    }
+  }
+
+  @keyframes orb-drift-cyan {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(5%, -6%, 0);
+    }
   }
 
   .glow-orb-pointer {

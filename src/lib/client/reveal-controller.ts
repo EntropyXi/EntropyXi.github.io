@@ -1,8 +1,15 @@
 import type { ClientCleanup } from "./lifecycle";
+import { readMotionGateInput, resolveMotionGate } from "./motion/gsap-gate";
 
 export function initializeRevealController(): ClientCleanup | void {
-  const isEnabled =
-    document.documentElement.getAttribute("data-feature-reveal") !== "false";
+  const root = document.documentElement;
+
+  // Reveal mutex (plan §4.5): when the GSAP motion stack is gated on, its
+  // ScrollTrigger.batch owns [data-reveal] and this controller stays idle.
+  // If that stack later fails to boot, runtime's catch restores visibility.
+  if (resolveMotionGate(readMotionGateInput(root)).gsap) return;
+
+  const isEnabled = root.getAttribute("data-feature-reveal") !== "false";
   if (!isEnabled) return;
 
   const motionPref = document.documentElement.dataset.motionPreference;

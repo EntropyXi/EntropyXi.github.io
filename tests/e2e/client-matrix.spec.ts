@@ -101,9 +101,17 @@ test("motion runtime matches its capability gate", async ({
     await page.emulateMedia({ reducedMotion: "reduce" });
   }
   if (testInfo.project.name === "zoom-200") {
-    // Set CSS zoom before app scripts run so the gate reads it at boot.
+    // Set CSS zoom before the idle-time gate runs; documentElement may not
+    // exist at init-script time, so fall back to DOMContentLoaded.
     await page.addInitScript(() => {
-      document.documentElement.style.zoom = "200%";
+      const apply = (): void => {
+        document.documentElement.style.zoom = "200%";
+      };
+      if (document.documentElement) {
+        apply();
+      } else {
+        document.addEventListener("DOMContentLoaded", apply, { once: true });
+      }
     });
   }
   await page.goto("/");
@@ -114,19 +122,57 @@ test("motion runtime matches its capability gate", async ({
     return;
   }
 
-  if (
-    testInfo.project.name === "reduced-motion" ||
-    testInfo.project.name === "zoom-200"
-  ) {
-    // Reduced motion never loads the stack; CSS zoom disables Lenis only.
+  if (testInfo.project.name === "reduced-motion") {
+    // Reduced motion never loads the stack and GSAP must not touch
+    // inline transforms — CSS animation-name assertions alone cannot see
+    // GSAP-driven movement (plan §4.0 marker contract + R2-5).
     await expect
       .poll(() =>
         page.evaluate(() => ({
           lenisActive: document.documentElement.dataset.lenisActive ?? null,
           lenisClass: document.documentElement.classList.contains("lenis"),
+          gsapActive: document.documentElement.dataset.gsapActive ?? null,
         })),
       )
-      .toEqual({ lenisActive: null, lenisClass: false });
+      .toEqual({ lenisActive: null, lenisClass: false, gsapActive: null });
+    await expect(page.locator(".welcome-line-1")).toHaveCSS(
+      "transform",
+      "none",
+    );
+    await expect(page.locator(".post-card").first()).toHaveCSS(
+      "transform",
+      "none",
+    );
+    await expect
+      .poll(() =>
+        page.evaluate(async () => {
+          const line = document.querySelector(".welcome-line-1");
+          const readTop = () =>
+            new Promise<number | undefined>((resolve) => {
+              requestAnimationFrame(() =>
+                resolve(line?.getBoundingClientRect().top),
+              );
+            });
+          const first = await readTop();
+          const second = await readTop();
+          return first === second;
+        }),
+      )
+      .toBe(true);
+    return;
+  }
+
+  if (testInfo.project.name === "zoom-200") {
+    // CSS zoom disables Lenis only — GSAP scroll work stays on.
+    await expect
+      .poll(() =>
+        page.evaluate(() => ({
+          lenisActive: document.documentElement.dataset.lenisActive ?? null,
+          lenisClass: document.documentElement.classList.contains("lenis"),
+          gsapActive: document.documentElement.dataset.gsapActive ?? null,
+        })),
+      )
+      .toEqual({ lenisActive: null, lenisClass: false, gsapActive: "true" });
     return;
   }
 
@@ -135,15 +181,16 @@ test("motion runtime matches its capability gate", async ({
     testInfo.project.name === "mobile-360" ||
     testInfo.project.name === "mobile-safari"
   ) {
-    // Touch keeps GSAP-driven scroll work (Phase 4) but never Lenis.
+    // Touch keeps GSAP-driven scroll work but never Lenis.
     await expect
       .poll(() =>
         page.evaluate(() => ({
           lenisActive: document.documentElement.dataset.lenisActive ?? null,
           lenisClass: document.documentElement.classList.contains("lenis"),
+          gsapActive: document.documentElement.dataset.gsapActive ?? null,
         })),
       )
-      .toEqual({ lenisActive: null, lenisClass: false });
+      .toEqual({ lenisActive: null, lenisClass: false, gsapActive: "true" });
     return;
   }
 
@@ -153,9 +200,14 @@ test("motion runtime matches its capability gate", async ({
       page.evaluate(() => ({
         lenisActive: document.documentElement.dataset.lenisActive ?? null,
         lenisClass: document.documentElement.classList.contains("lenis"),
+        gsapActive: document.documentElement.dataset.gsapActive ?? null,
       })),
     )
-    .toEqual({ lenisActive: "true", lenisClass: true });
+    .toEqual({
+      lenisActive: "true",
+      lenisClass: true,
+      gsapActive: "true",
+    });
 
   await page.getByRole("link", { name: "向下滚动至最新文章" }).click();
   await expect
