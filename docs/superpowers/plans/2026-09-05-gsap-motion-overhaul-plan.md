@@ -347,7 +347,10 @@ src/lib/client/motion/
 
 - [x] `npm run check` 九步全绿；
 - [x] 新预算下 `audit:bundle` 通过且实测值回填文档（67,798/81,920 B，最大单块 26,871 B）；
-- [ ] Lighthouse 四分类 ≥90 / A11y ≥95（含 mobile profile）；
+- [x] Lighthouse 四分类 ≥90 / A11y ≥95（mobile profile，2026-09-05 实测：
+      home perf 99/a11y 100、search 100/100、article-normal 100/100、
+      article-ddim 97/98，CLS 全部 0.000，LCP ≤2.1s，
+      报告见 `audit-screenshots/phase-8/lighthouse/`）；
 - [x] 7 项目 Playwright 矩阵全绿（49 例）+ 新增 view-transitions spec（2 例）；
 - [ ] reduced-motion / 无 JS / 触屏三路降级人工抽查截图
       （`audit-screenshots/motion-overhaul/`）；
