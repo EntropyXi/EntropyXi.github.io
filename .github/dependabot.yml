@@ -5,3 +5,10 @@ updates:
     schedule:
       interval: daily
     open-pull-requests-limit: 20
+    groups:
+      # astro pins @astrojs/markdown-remark as an exact optional peer
+      # dependency; they must always be bumped in the same PR.
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
