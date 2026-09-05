@@ -105,7 +105,7 @@ html[data-motion="ready"]:not([data-feature-reveal="false"])
 
 /* ==========================================================================
    2. Magnetic Dynamic Visuals (pointer-controller integration)
-   Strictly applies to whitelisted elements: Logo, Main Nav, Hero CTA, Post Cards
+   Strictly applies to whitelisted elements: Logo, Main Nav, Post Cards
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
   /* Inactive reset transition */
@@ -145,21 +145,7 @@ html[data-motion="ready"]:not([data-feature-reveal="false"])
     );
   }
 
-  /* Whitelist 3: Hero Primary CTA */
-  .hero-btn-primary[data-magnetic][data-magnetic-state="active"] {
-    --magnetic-factor: 0.28;
-
-    transform: translate(
-        calc(var(--magnetic-x, 0px) * var(--magnetic-factor)),
-        calc(var(--magnetic-y, 0px) * var(--magnetic-factor))
-      )
-      scale(1.02);
-    box-shadow:
-      0 0 32px var(--color-accent-primary-glow),
-      0 0 12px var(--color-accent-primary);
-  }
-
-  /* Whitelist 4: Post Cards */
+  /* Whitelist 3: Post Cards */
   .post-card[data-magnetic][data-magnetic-state="active"] {
     --magnetic-factor: 0.05;
 
@@ -175,7 +161,7 @@ html[data-motion="ready"]:not([data-feature-reveal="false"])
 
 /* Touch & Coarse Pointer Fallback
    Factual rationale for !important: Cascade insurance for touch / coarse pointer degradation.
-   Overrides high-specificity active state selectors (.hero-btn-primary[data-magnetic][data-magnetic-state="active"] (0,3,0))
+   Overrides high-specificity active state selectors (.post-card[data-magnetic][data-magnetic-state="active"] (0,3,0))
    to guarantee zero magnetic transform on mobile/touch viewports regardless of state attributes. */
 @media (hover: none), (pointer: coarse) {
   [data-magnetic] {

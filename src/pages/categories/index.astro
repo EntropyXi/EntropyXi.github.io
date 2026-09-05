@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import SectionHeader from "@/components/visual/SectionHeader.astro";
 import { buildCategoryPath, postsInCategory } from "@/lib/content/aggregate";
-import "@/styles/home.css";
 
 const posts = await getCollection("blog", ({ data }) => data.draft !== true);
 const categoryPaths = [

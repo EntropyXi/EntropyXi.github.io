@@ -10,7 +10,6 @@ import {
   sortPostsByDateDesc,
 } from "@/lib/content/aggregate";
 import { paginate, totalPages } from "@/lib/routing/pagination";
-import "@/styles/home.css";
 
 export async function getStaticPaths() {
   const allPosts = sortPostsByDateDesc(

@@ -13,12 +13,14 @@ npm run check
 ```
 
 按序执行：`format:check` → `lint`（ESLint + Stylelint）→ `check:types`（astro check）→
-`audit:content` → `test:unit` → `test:e2e` → `audit:bundle` → `audit:output`。任何一步失败即非零退出。
+`audit:content` → `audit:assets` → `test:unit` → `test:e2e` → `audit:bundle` → `audit:output`。
+任何一步失败即非零退出。
 
 ## 单元测试（Vitest）
 
 - 目录：`tests/unit/**/*.test.ts`；运行：`npm run test:unit -- --run`。
-- 覆盖纯函数与组件输出：分页、路径、标题、主题解析、阅读进度、页头状态、数学可访问性与标题唯一性。
+- 覆盖纯函数与组件输出：分页、路径、标题、主题锁定（`resolveTheme` 固定返回 dark）、
+  阅读进度、页头状态、数学可访问性与标题唯一性。
 
 ## 端到端测试（Playwright）
 
@@ -40,6 +42,6 @@ npm run check
 
 ## 质量门禁阈值
 
-- 公式可访问名称计数与渲染数量一致（当前 1291/1291）。
+- 公式可访问名称计数与渲染数量一致（当前 1351/1351）。
 - 30 篇内容、产物文章页、兼容页面与关键资源（404、search、about、sitemap、atom、search.xml、pagefind）齐全。
 - Lighthouse 四分类（home/search/article-normal/article-ddim）均 ≥90，Accessibility ≥95。

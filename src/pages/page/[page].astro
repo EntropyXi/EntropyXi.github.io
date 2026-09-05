@@ -5,7 +5,6 @@ import Pagination from "@/components/visual/Pagination.astro";
 import SectionHeader from "@/components/visual/SectionHeader.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { pagePath, paginate, totalPages } from "@/lib/routing/pagination";
-import "@/styles/home.css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => data.draft !== true);

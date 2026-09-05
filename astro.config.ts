@@ -12,7 +12,7 @@ export default defineConfig({
   site: "https://entropyxi.github.io",
   trailingSlash: "always",
   output: "static",
-  // 静态静态资源根目录
+  // 静态资源根目录
   publicDir: "astro-public",
   markdown: {
     processor: unified({

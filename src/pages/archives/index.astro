@@ -6,7 +6,6 @@ import SectionHeader from "@/components/visual/SectionHeader.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { sortPostsByDateDesc } from "@/lib/content/aggregate";
 import { paginate, totalPages } from "@/lib/routing/pagination";
-import "@/styles/home.css";
 
 const posts = sortPostsByDateDesc(
   await getCollection("blog", ({ data }) => data.draft !== true),

@@ -41,7 +41,9 @@
 - 使用原生 CSS，不引入 Sass/Less/CSS-in-JS/utility-first 框架。
 - `tokens.css` 是颜色、间距、圆角、阴影、层级、动效时间与排版尺度的唯一 token 来源。
 - 选择器低特异性，优先单类选择器与 `:where()`；禁止 ID 选择器做样式；嵌套最多两层。
-- 移动优先；断点来自 token；light/dark 必须成对；关键动画提供 reduced-motion 静态替代。
+- 移动优先；断点来自 token；站点自 2026-08-23 起永久锁定暗色主题（`data-theme="dark"`，
+  无亮色变体与切换按钮），新样式只需保证暗色下对比达标，不得再引入亮色分支；
+  关键动画提供 reduced-motion 静态替代。
 - `!important` 默认禁止，仅第三方嵌入覆盖层允许并注释原因；不使用远程 CSS `@import`。
 
 ## JavaScript/浏览器脚本
