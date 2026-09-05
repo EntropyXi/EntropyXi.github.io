@@ -38,7 +38,7 @@ npm run check
   禁止模式（`<!-- more -->`、Obsidian 语法、正文 H1、`$$` 邻接 CJK、空公式 `$$$$`）。
 - `scripts/audit-output.ts`：校验 `dist/` 每篇产物页面恰有一个 `<h1>`、无 TeX 分隔符泄漏、
   无 MathJax 错误标记、全部 `mjx-container` SVG 具有可访问名称。
-- `scripts/audit-bundle.ts`：校验第一方客户端脚本 gzip 总量上限（24 KiB，单文件 8 KiB）。
+- `scripts/audit-bundle.ts`：校验第一方客户端脚本 gzip 总量上限（80 KiB，单文件 32 KiB；ADR 0003）。
 
 ## 质量门禁阈值
 

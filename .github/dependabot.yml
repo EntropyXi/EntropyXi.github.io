@@ -12,3 +12,9 @@ updates:
         patterns:
           - "astro"
           - "@astrojs/*"
+      # Motion stack (ADR 0003): keep the animation engine and its plugins
+      # bumping together, reviewed as one unit.
+      motion-stack:
+        patterns:
+          - "gsap"
+          - "lenis"

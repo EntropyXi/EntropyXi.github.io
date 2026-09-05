@@ -29,10 +29,11 @@ iOS Safari 由主 Agent 在阶段 3、6、8 分别抽查一次；最低页面集
 
 ## 资源预算
 
-- `dist/_astro/*.js` 第一方客户端脚本 gzip 总量上限：24 KiB；
-- 任一第一方客户端脚本 gzip 上限：8 KiB；
+- `dist/_astro/*.js` 第一方客户端脚本 gzip 总量上限：80 KiB（ADR 0003，原 24 KiB，为 GSAP + Lenis 动效栈上调）；
+- 任一第一方客户端脚本 gzip 上限：32 KiB（原 8 KiB；分 chunk 后最大单文件为 gsap core ≈28 KiB）；
 - Pagefind 搜索索引和构建期 MathJax SVG 不计入首屏 JavaScript，但继续由产物审计单独检查；
-- 相对阶段 0 的新增首屏 JavaScript 仍以 ≤15 KiB gzip 为目标。触顶时必须先拆分按页加载；超过需要 ADR。
+- 原「新增首屏 JavaScript ≤15 KiB gzip」子目标自 ADR 0003 起废除，由 80 KiB 总预算与 Lighthouse TBT / Long Task 门禁替代；
+- GSAP/Lenis 必须经能力门控动态加载：reduced-motion 与无 JS 环境不得产生对应资源请求（E2E 以 `data-gsap-active` / `data-lenis-active` 标记与 resource entries 断言）。
 
 `npm run audit:bundle` 在构建后生成实际 raw/gzip 总数并以非零状态阻断超限。
 

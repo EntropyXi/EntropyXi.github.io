@@ -27,6 +27,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
   data-feature-reveal="true"
   data-feature-ambient="true"
   data-feature-magnetic="true"
+  data-feature-gsap="true"
 >
   <head>
     <meta charset="utf-8" />
@@ -107,6 +108,12 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
               "data-feature-magnetic",
               fMagnetic,
             );
+          }
+          const fGsap =
+            params.get("feature-gsap") ??
+            localStorage.getItem("entropyxi-feature-gsap");
+          if (fGsap !== null) {
+            document.documentElement.setAttribute("data-feature-gsap", fGsap);
           }
         } catch {}
       })();

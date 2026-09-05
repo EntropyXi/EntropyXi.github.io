@@ -4,8 +4,10 @@ import path from "node:path";
 
 async function main(): Promise<void> {
   const assetDirectory = path.resolve("dist", "_astro");
-  const totalGzipBudget = 24 * 1024;
-  const singleAssetGzipBudget = 8 * 1024;
+  // ADR 0003: budget raised from 24 KiB / 8 KiB to admit the GSAP + Lenis
+  // motion stack (user-approved; see docs/architecture/adr/0003-motion-stack.md).
+  const totalGzipBudget = 80 * 1024;
+  const singleAssetGzipBudget = 32 * 1024;
 
   const assetNames = (await readdir(assetDirectory))
     .filter((name) => name.endsWith(".js"))
