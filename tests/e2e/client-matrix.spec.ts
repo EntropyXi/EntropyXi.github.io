@@ -51,10 +51,7 @@ test("client foundation matches its configured environment", async ({
     return;
   }
 
-  if (
-    testInfo.project.name === "mobile-390" ||
-    testInfo.project.name === "mobile-360"
-  ) {
+  if (testInfo.project.name.startsWith("mobile-")) {
     await expect
       .poll(() =>
         page.evaluate(
@@ -72,6 +69,11 @@ test("client foundation matches its configured environment", async ({
       "display",
       "none",
     );
+    // Cards must reveal on a real scroll (mobile audit finding: invisible
+    // in fullPage captures). Assert before opening the drawer, whose
+    // body overflow:hidden would freeze scrolling.
+    await page.locator("#latest-posts").scrollIntoViewIfNeeded();
+    await expect(page.locator(".post-card").first()).toBeVisible();
     await page.getByRole("button", { name: "打开导航菜单" }).click();
     await expect(page.getByRole("button", { name: "关闭菜单" })).toBeFocused();
     return;
@@ -176,11 +178,7 @@ test("motion runtime matches its capability gate", async ({
     return;
   }
 
-  if (
-    testInfo.project.name === "mobile-390" ||
-    testInfo.project.name === "mobile-360" ||
-    testInfo.project.name === "mobile-safari"
-  ) {
+  if (testInfo.project.name.startsWith("mobile-")) {
     // Touch keeps GSAP-driven scroll work but never Lenis.
     await expect
       .poll(() =>

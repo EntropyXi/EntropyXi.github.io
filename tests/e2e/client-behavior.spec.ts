@@ -38,6 +38,29 @@ test("mobile drawer traps focus and restores it after dismissal", async ({
   await expect(drawer).toHaveAttribute("aria-hidden", "false");
   await expect(close).toBeFocused();
 
+  // Drawer paint contract (mobile fixes plan §3.4): the backdrop must cover
+  // the full viewport and the panel must be opaque — guards against the
+  // header's backdrop-filter hijacking the fixed containing block again.
+  const paint = await page.evaluate(() => {
+    const backdrop = document
+      .querySelector(".mobile-drawer-backdrop")
+      ?.getBoundingClientRect();
+    const content = document.querySelector(".mobile-drawer-content");
+    return {
+      backdropHeight: backdrop?.height ?? 0,
+      backdropWidth: backdrop?.width ?? 0,
+      panelBackground: content
+        ? getComputedStyle(content).backgroundColor
+        : "rgba(0, 0, 0, 0)",
+      panelWidth: content ? content.getBoundingClientRect().width : 0,
+    };
+  });
+  expect(paint.backdropHeight).toBeGreaterThanOrEqual(843);
+  expect(paint.backdropWidth).toBeGreaterThanOrEqual(389);
+  expect(paint.panelBackground).not.toBe("rgba(0, 0, 0, 0)");
+  expect(paint.panelWidth).toBe(288); // 18rem; the 85vw cap is not binding at 390
+  await expect(page.locator("#mobile-drawer-content")).toBeVisible();
+
   const lastLink = page.locator("#mobile-drawer a[href]").last();
   await lastLink.focus();
   await page.keyboard.press("Tab");

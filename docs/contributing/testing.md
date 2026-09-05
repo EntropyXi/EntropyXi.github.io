@@ -25,9 +25,9 @@ npm run check
 ## 端到端测试（Playwright）
 
 - 目录：`tests/e2e/`；运行：`npm run test:e2e`。
-- 在 `npm run build` + `npm run preview:test` 的生产预览上运行，覆盖 7 种项目：
-  desktop-chromium、mobile-390、mobile-360、mobile-safari（WebKit，iOS 替代）、
-  reduced-motion、javascript-disabled、zoom-200。
+- 在 `npm run build` + `npm run preview:test` 的生产预览上运行，覆盖 8 种项目：
+  desktop-chromium、mobile-390、mobile-360、mobile-320、mobile-safari（WebKit，
+  iOS 替代）、reduced-motion、javascript-disabled、zoom-200。
 - CI 需安装对应浏览器：`npx playwright install --with-deps chromium webkit`
   （见 `.github/workflows/quality.yml` 与 `.github/workflows/deploy.yml`）。
 - axe 检查首页、归档、搜索与 DDIM 文章，`serious`/`critical` 必须为 0。

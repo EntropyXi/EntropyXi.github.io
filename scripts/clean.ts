@@ -41,7 +41,8 @@ if (existsSync(auditScreenshotsDir)) {
         (entry.name.endsWith(".png") || entry.name.endsWith(".webp")) &&
         !entry.name.startsWith("article-ddim") &&
         !dir.endsWith("phase-6") &&
-        !dir.endsWith("phase-7")
+        !dir.endsWith("phase-7") &&
+        !dir.endsWith("mobile-audit")
       ) {
         rmSync(fullPath, { force: true });
       }

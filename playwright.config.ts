@@ -45,6 +45,16 @@ export default defineConfig({
       },
     },
     {
+      name: "mobile-320",
+      testMatch: /client-matrix\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 320, height: 568 },
+        hasTouch: true,
+        isMobile: true,
+      },
+    },
+    {
       name: "reduced-motion",
       testMatch: /client-matrix\.spec\.ts/,
       use: {

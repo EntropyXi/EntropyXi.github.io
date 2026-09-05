@@ -177,6 +177,44 @@ mjx-container:not([display="true"]) > svg {
   max-width: none;
 }
 
+/* Horizontal scroll hint for overflowing formulas (mobile fixes plan §3.2):
+   fade the clipped edge(s) only when the container is actually scrollable. */
+@supports (mask-image: linear-gradient(#000, #000)) {
+  mjx-container[data-scroll-hint="right"] {
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - 28px),
+      transparent
+    );
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+
+  mjx-container[data-scroll-hint="left"] {
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 28px);
+    mask-image: linear-gradient(to right, transparent, #000 28px);
+  }
+
+  mjx-container[data-scroll-hint="both"] {
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 28px,
+      #000 calc(100% - 28px),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 28px,
+      #000 calc(100% - 28px),
+      transparent
+    );
+  }
+}
+
 main {
   flex: 1 0 auto;
   width: 100%;

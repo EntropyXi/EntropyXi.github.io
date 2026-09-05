@@ -96,13 +96,13 @@ margin: -0.3rem -0.2rem;`——命中区高约 19+9.6≈28px ≥24px，负 margi
 
 ## 4. 验收标准
 
-- [ ] 全量 `npm run check` 绿（矩阵从 7 → 8 项目）；
-- [ ] 抽屉截图复验（390 视口）与 `backdropRect` = 全屏；
-- [ ] view-transitions / client-behavior 既有抽屉焦点断言不放宽且全绿；
-- [ ] 公式提示：DDIM 页存在 `data-scroll-hint="right"` 的容器且首个完全
+- [x] 全量 `npm run check` 绿（矩阵从 7 → 8 项目）；
+- [x] 抽屉截图复验（390 视口）与 `backdropRect` = 全屏；
+- [x] view-transitions / client-behavior 既有抽屉焦点断言不放宽且全绿；
+- [x] 公式提示：DDIM 页 25 个超宽容器获得 `data-scroll-hint`（34 个公式中其余完全可见无标记）；
       可见公式无该属性；
-- [ ] 页脚链接高度 ≥24px；
-- [ ] `mobile-320` 项目全绿。
+- [x] 页脚链接高度 ≥24px；
+- [x] `mobile-320` 项目全绿。
 
 ## 5. 风险
 
@@ -139,6 +139,6 @@ margin: -0.3rem -0.2rem;`——命中区高约 19+9.6≈28px ≥24px，负 margi
 
 ## 8. DoD
 
-- [ ] 审查意见全部闭合；
-- [ ] §4 验收全过；
-- [ ] 计划勾选 + 审计证据归档。
+- [x] 审查意见全部闭合；
+- [x] §4 验收全过；
+- [x] 计划勾选 + 审计证据归档。

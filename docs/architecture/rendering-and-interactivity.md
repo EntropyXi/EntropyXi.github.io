@@ -26,7 +26,7 @@
 `src/lib/client/` 保持 UI 无关，每个模块只承担一个职责并通过 `registerClientFeature`
 幂等初始化（页面恢复或视图过渡后重复初始化安全）：
 
-- 主题（2026-08-23 起永久锁定暗色，无切换按钮）：`theme.ts`；移动抽屉：`mobile-drawer.ts`；页头状态：`site-header.ts`。
+- 主题（2026-08-23 起永久锁定暗色，无切换按钮）：`theme.ts`；移动抽屉：`mobile-drawer.ts`（抽屉 DOM 在 `MobileDrawer.astro`，作为 body 直接子元素渲染——header 的 backdrop-filter 会劫持 fixed 后代的包含块）；页头状态：`site-header.ts`；公式横向裁切提示：`math-scroll-hint.ts`。
 - 搜索：`search.ts`；代码复制：`code-copy.ts`；目录高亮：`post-toc.ts`。
 - 阅读进度：`reading-progress.ts`；运动偏好：`motion-environment.ts`。
 - 背景/显现/指针动效：`ambient-controller.ts`、`reveal-controller.ts`、`pointer-controller.ts`。

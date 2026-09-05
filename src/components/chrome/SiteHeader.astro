@@ -1,5 +1,6 @@
 ---
 import { SITE_TITLE } from "@/data/site";
+import { isNavActive, NAV_ITEMS } from "@/lib/navigation";
 
 interface Props {
   isHome?: boolean;
@@ -7,20 +8,6 @@ interface Props {
 
 const { isHome = false } = Astro.props;
 const currentPath = Astro.url.pathname;
-
-const navItems = [
-  { label: "首页", href: "/" },
-  { label: "归档", href: "/archives/" },
-  { label: "分类", href: "/categories/" },
-  { label: "标签", href: "/tags/" },
-  { label: "关于", href: "/about/" },
-  { label: "搜索", href: "/search/" },
-];
-
-function isActive(href: string): boolean {
-  if (href === "/") return currentPath === "/";
-  return currentPath.startsWith(href);
-}
 ---
 
 <header
@@ -48,11 +35,16 @@ function isActive(href: string): boolean {
     <!-- Desktop Navigation -->
     <nav class="desktop-nav" aria-label="主导航">
       {
-        navItems.map((item) => (
+        NAV_ITEMS.map((item) => (
           <a
             href={item.href}
-            class:list={["nav-link", { active: isActive(item.href) }]}
-            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "nav-link",
+              { active: isNavActive(item.href, currentPath) },
+            ]}
+            aria-current={
+              isNavActive(item.href, currentPath) ? "page" : undefined
+            }
             data-magnetic
           >
             {item.label}
@@ -121,14 +113,16 @@ function isActive(href: string): boolean {
     <div class="mobile-noscript-nav-container">
       <nav class="mobile-noscript-nav" aria-label="无脚本主导航">
         {
-          navItems.map((item) => (
+          NAV_ITEMS.map((item) => (
             <a
               href={item.href}
               class:list={[
                 "mobile-noscript-nav-link",
-                { active: isActive(item.href) },
+                { active: isNavActive(item.href, currentPath) },
               ]}
-              aria-current={isActive(item.href) ? "page" : undefined}
+              aria-current={
+                isNavActive(item.href, currentPath) ? "page" : undefined
+              }
             >
               {item.label}
             </a>
@@ -137,58 +131,6 @@ function isActive(href: string): boolean {
       </nav>
     </div>
   </noscript>
-
-  <!-- Mobile Drawer (JS Enhanced) -->
-  <div
-    id="mobile-drawer"
-    class="mobile-drawer"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="mobile-drawer-title"
-    aria-hidden="true"
-  >
-    <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
-    <div
-      class="mobile-drawer-content"
-      id="mobile-drawer-content"
-      data-lenis-prevent
-    >
-      <div class="mobile-drawer-header">
-        <span id="mobile-drawer-title" class="mobile-drawer-title">
-          导航目录
-        </span>
-        <button
-          type="button"
-          id="mobile-drawer-close"
-          class="mobile-drawer-close"
-          aria-label="关闭菜单"
-        >
-          ✕
-        </button>
-      </div>
-      <nav class="mobile-nav" aria-label="移动端导航">
-        {
-          navItems.map((item) => (
-            <a
-              href={item.href}
-              class:list={["mobile-nav-link", { active: isActive(item.href) }]}
-              aria-current={isActive(item.href) ? "page" : undefined}
-            >
-              {item.label}
-            </a>
-          ))
-        }
-        <a
-          href="https://github.com/EntropyXi"
-          class="mobile-nav-link mobile-nav-link-external"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub 个人主页
-        </a>
-      </nav>
-    </div>
-  </div>
 </header>
 
 <style>
@@ -423,126 +365,6 @@ function isActive(href: string): boolean {
   .mobile-noscript-nav-link.active {
     color: var(--color-accent-primary);
     background: var(--color-accent-primary-subtle);
-  }
-
-  /* Mobile Drawer (JS Enhanced) */
-  .mobile-drawer {
-    position: fixed;
-    inset: 0;
-    z-index: var(--z-drawer);
-    display: none;
-  }
-
-  .mobile-drawer.open {
-    display: block;
-  }
-
-  .mobile-drawer-backdrop {
-    position: absolute;
-    inset: 0;
-    background: var(--color-drawer-backdrop);
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: opacity var(--motion-duration-normal)
-      var(--motion-ease-standard);
-  }
-
-  .mobile-drawer.open .mobile-drawer-backdrop {
-    opacity: 1;
-  }
-
-  .mobile-drawer-content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 18rem;
-    max-width: 85vw;
-    background: var(--color-surface-raised);
-    border-left: 1px solid var(--color-border-default);
-    box-shadow: -4px 0 25px rgb(0 0 0 / 50%);
-    transform: translateX(100%);
-    transition: transform var(--motion-duration-normal)
-      var(--motion-ease-standard);
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 1.25rem;
-    backdrop-filter: var(--glass-blur);
-  }
-
-  .mobile-drawer.open .mobile-drawer-content {
-    transform: translateX(0);
-  }
-
-  .mobile-drawer-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border-default);
-    margin-bottom: 1.25rem;
-  }
-
-  .mobile-drawer-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-  }
-
-  .mobile-drawer-close {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-    padding: 0.25rem 0.5rem;
-    background: var(--color-surface-base);
-    border: 1px solid var(--color-border-default);
-    border-radius: var(--radius-sm);
-    color: var(--color-text-muted);
-    font-size: 1rem;
-    cursor: pointer;
-    transition:
-      border-color var(--motion-duration-fast) var(--motion-ease-standard),
-      color var(--motion-duration-fast) var(--motion-ease-standard);
-  }
-
-  .mobile-drawer-close:hover {
-    border-color: var(--color-accent-primary);
-    color: var(--color-accent-primary);
-  }
-
-  .mobile-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .mobile-nav-link {
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0.65rem 1rem;
-    border-radius: var(--radius-md);
-    color: var(--color-text-primary);
-    font-size: 0.98rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition:
-      background-color var(--motion-duration-fast) var(--motion-ease-standard),
-      color var(--motion-duration-fast) var(--motion-ease-standard);
-  }
-
-  .mobile-nav-link:hover {
-    background: var(--color-accent-primary-subtle);
-    color: var(--color-accent-primary);
-  }
-
-  .mobile-nav-link.active {
-    background: var(--color-accent-primary-subtle);
-    color: var(--color-accent-primary);
-    font-weight: 600;
-    border-left: 3px solid var(--color-accent-primary);
   }
 
   @media (width <= 48rem) {

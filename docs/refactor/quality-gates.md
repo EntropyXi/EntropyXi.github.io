@@ -11,14 +11,13 @@
 | `desktop-chromium`    | Desktop Chrome                   | 全量 E2E、行为与 axe               |
 | `mobile-390`          | 390×844、touch                   | 无横向溢出、抽屉焦点               |
 | `mobile-360`          | 360×800、touch                   | 无横向溢出、抽屉焦点               |
+| `mobile-320`          | 320×568、touch                   | 无横向溢出、抽屉焦点、卡片滚动可见 |
 | `reduced-motion`      | `prefers-reduced-motion: reduce` | 根运动偏好为 reduced、内容可见     |
 | `javascript-disabled` | JavaScript disabled              | Hero、卡片与文章静态内容可见       |
 | `zoom-200`            | Desktop Chrome、页面 200% 缩放   | 核心内容可见且不产生页面级横向溢出 |
 | `mobile-safari`       | Playwright WebKit（iOS 替代）    | 客户端基础环境契约                 |
 
-iOS Safari 由主 Agent 在阶段 3、6、8 分别抽查一次；最低页面集为首页、移动菜单、搜索和一篇复杂公式文章。无真实设备时，以 Playwright WebKit（`mobile-safari` 项目）记录替代结果，并在最终验收中明确标注"WebKit 替代，非真实 iOS 设备"。当前阶段 8 即采用此方案。
-
-动效栈（ADR 0003）补充：`client-matrix.spec.ts` 的门控用例在全部 7 个项目上断言 `data-gsap-active` / `data-lenis-active` / `.lenis` 标记与环境一致（触屏与 reduced-motion 无 Lenis、reduced-motion 无 GSAP inline transform、zoom-200 禁用 Lenis），并用 view-transitions.spec 验证持久化壁纸的节点 identity。
+iOS Safari 由主 Agent 在阶段 3、6、8 分别抽查一次；最低页面集为首页、移动菜单、搜索和一篇复杂公式文章。无真实设备时，以 Playwright WebKit（`mobile-safari` 项目）记录替代结果，并在最终验收中明确标注"WebKit 替代，非真实 iOS 设备"。当前阶段 8 即采用此方案。动效栈（ADR 0003）补充：`client-matrix.spec.ts` 的门控用例在全部 8 个项目上断言 `data-gsap-active` / `data-lenis-active` / `.lenis` 标记与环境一致（触屏与 reduced-motion 无 Lenis、reduced-motion 无 GSAP inline transform、zoom-200 禁用 Lenis），并用 view-transitions.spec 验证持久化壁纸的节点 identity。抽屉在移动端另有绘制契约断言（遮罩覆盖全视口、面板不透明）。
 
 ## 可访问性
 

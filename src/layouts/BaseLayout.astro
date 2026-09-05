@@ -5,6 +5,7 @@ import { SITE_DESCRIPTION, SITE_LANG, SITE_URL } from "@/data/site";
 import { buildPageTitle } from "@/lib/seo/page-title";
 import AmbientBackground from "@/components/visual/AmbientBackground.astro";
 import SiteHeader from "@/components/chrome/SiteHeader.astro";
+import MobileDrawer from "@/components/chrome/MobileDrawer.astro";
 import SiteFooter from "@/components/chrome/SiteFooter.astro";
 
 interface Props {
@@ -144,6 +145,9 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
     <div id="top"></div>
     <AmbientBackground isHome={isHome} />
     <SiteHeader isHome={isHome} />
+    <!-- Body-level child (not inside <header>): the header's backdrop-filter
+         would otherwise become the containing block for this fixed drawer. -->
+    <MobileDrawer />
     <slot name="hero" />
     <main id="main-content" tabindex="-1">
       <slot />
@@ -156,6 +160,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       import { initializeAmbientController } from "@/lib/client/ambient-controller";
       import { initializePointerController } from "@/lib/client/pointer-controller";
       import { initializeMotionRuntime } from "@/lib/client/motion/runtime";
+      import { initializeMathScrollHints } from "@/lib/client/math-scroll-hint";
 
       // View-transition attribute relay (plan §4.2): the swap replaces every
       // <html> attribute with the new page's SSR values, dropping the runtime
@@ -189,6 +194,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       registerClientFeature("ambient-controller", initializeAmbientController);
       registerClientFeature("pointer-controller", initializePointerController);
       registerClientFeature("motion-runtime", initializeMotionRuntime);
+      registerClientFeature("math-scroll-hint", initializeMathScrollHints);
     </script>
   </body>
 </html>

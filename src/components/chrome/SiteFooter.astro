@@ -78,6 +78,12 @@
   }
 
   .site-footer a {
+    /* Inline-block + negative margin enlarges the touch target to ≥24px
+       tall (mobile fixes plan §3.3) without shifting the line layout. The
+       focus outline shifts outward by the padding — accepted deviation. */
+    display: inline-block;
+    padding: 0.3rem 0.2rem;
+    margin: -0.3rem -0.2rem;
     color: var(--color-text-secondary);
     text-decoration: underline;
     text-underline-offset: 2px;

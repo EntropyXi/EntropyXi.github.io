@@ -1,0 +1,270 @@
+{
+  "home-390x844": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 390
+  },
+  "article-ddim-390x844": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]",
+        "right": 435,
+        "width": 377
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 434,
+        "width": 375
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 434,
+        "width": 375
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 399,
+        "width": 15
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 393,
+        "width": 9
+      },
+      {
+        "tag": "use",
+        "cls": "[object SVGAnimatedString]",
+        "right": 393,
+        "width": 9
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 399,
+        "width": 4
+      },
+      {
+        "tag": "use",
+        "cls": "[object SVGAnimatedString]",
+        "right": 399,
+        "width": 4
+      }
+    ],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 390
+  },
+  "article-cnn-390x844": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 390
+  },
+  "search-390x844": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 390
+  },
+  "archives-390x844": {
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 390
+  },
+  "home-360x800": {
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 360
+  },
+  "article-ddim-360x800": {
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "overflow": false,
+    "offenders": [
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]",
+        "right": 365,
+        "width": 307
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 362,
+        "width": 303
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 362,
+        "width": 303
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 362,
+        "width": 176
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 362,
+        "width": 5
+      },
+      {
+        "tag": "use",
+        "cls": "[object SVGAnimatedString]",
+        "right": 362,
+        "width": 5
+      },
+      {
+        "tag": "svg",
+        "cls": "[object SVGAnimatedString]",
+        "right": 386,
+        "width": 328
+      },
+      {
+        "tag": "g",
+        "cls": "[object SVGAnimatedString]",
+        "right": 383,
+        "width": 324
+      }
+    ],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 360
+  },
+  "article-cnn-360x800": {
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 360
+  },
+  "search-360x800": {
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 360
+  },
+  "archives-360x800": {
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "overflow": false,
+    "offenders": [],
+    "smallTargets": [
+      {
+        "cls": "",
+        "h": 19
+      },
+      {
+        "cls": "",
+        "h": 19
+      }
+    ],
+    "visualViewport": 360
+  }
+}
