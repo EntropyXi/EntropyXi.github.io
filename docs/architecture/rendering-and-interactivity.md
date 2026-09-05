@@ -30,6 +30,11 @@
 - 搜索：`search.ts`；代码复制：`code-copy.ts`；目录高亮：`post-toc.ts`。
 - 阅读进度：`reading-progress.ts`；运动偏好：`motion-environment.ts`。
 - 背景/显现/指针动效：`ambient-controller.ts`、`reveal-controller.ts`、`pointer-controller.ts`。
+- 动效运行时（ADR 0003）：`motion/runtime.ts` 经 `motion/gsap-gate.ts`
+  能力门控在 idle 时动态加载 Lenis 与 GSAP（ScrollTrigger/SplitText），
+  运行时状态以 `data-gsap-active`/`data-lenis-active`/`data-hero-ready`
+  写于 `<html>` 供 E2E 断言；页面动画由 `gsap.context` 承载并在视图过渡
+  前 revert。
 
 ## 降级与可访问性
 

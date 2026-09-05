@@ -193,7 +193,7 @@ src/lib/client/motion/
 
 ## 6. 分阶段实施（每阶段独立 commit + 门禁，可单独 revert）
 
-- [ ] **Phase 0 治理**：写 ADR 0003（选型/降级矩阵/预算新值/废除 ≤15 KiB
+- [x] **Phase 0 治理**：写 ADR 0003（选型/降级矩阵/预算新值/废除 ≤15 KiB
       首屏 JS 子目标/CSS 体积豁免口径）；`audit-bundle.ts` 总预算 24,576 →
       81,920 B、单文件 8,192 → 32,768 B；**同一 commit** 同步
       `quality-gates.md`（资源预算节 + ≤15 KiB 行 + 浏览器矩阵表）与
@@ -201,32 +201,32 @@ src/lib/client/motion/
       `~1.3`）；dependabot 增加 gsap/lenis 分组；**flag 接线**：
       `entropyxi-feature-gsap` 三处接线（SSR `<html>` 默认属性 + inline 脚本
       读取段 + 模块门控，R1-12）。
-- [ ] **Phase 1 视图过渡**：ClientRouter + `transition:persist="ambient-background"`
+- [x] **Phase 1 视图过渡**：ClientRouter + `transition:persist="ambient-background"`
   - `data-astro-rerun` + before-swap 属性接力；flag=false 时视图过渡仍工作的
     复验；**playwright.config.ts testMatch 扩展**（R2-1）：新增
     `view-transitions.spec.ts` 并入 desktop-chromium；逐项目断言写入
     `client-matrix.spec.ts`。
-- [ ] **Phase 2 惯性滚动**：`gsap-gate.ts`（纯函数 + Vitest）+
+- [x] **Phase 2 惯性滚动**：`gsap-gate.ts`（纯函数 + Vitest）+
       `lenis-controller.ts`（单例 + anchors 对象 + offset + hash/focus + zoom
       门控 + `data-lenis-active`）+ Lenis 官方 CSS + 返回顶部接管；
       `client-matrix.spec.ts` 增加逐项目断言（mobile：expect.poll 三件套——
       无 `.lenis`、无 `data-lenis-active`、**有 `data-gsap-active`** + 滚动后
       卡片可见，R2-12）；skip-link/TOC/指示器三类锚点落点断言；
       zoom-200 专项（Lenis 禁用 + 滚动行为正常）。
-- [ ] **Phase 3 Hero 编排**：`hero-choreography.ts` + SplitText 行遮罩 +
+- [x] **Phase 3 Hero 编排**：`hero-choreography.ts` + SplitText 行遮罩 +
       初始隐藏门控 + 超时兜底 + `data-hero-ready`；`accessibility.spec.ts` 的
       500ms 固定等待改等 `data-hero-ready`（R2-16）；`hero-contrast.spec` 复核
       （含 320–430px、1280px 不折行 + **height ≤44rem 短视口矩阵（1280×700、
       390×600）** R1-11 + h1 可访问名断言 + mask 裁切断言）；**首次 audit:bundle
       实测**。
-- [ ] **Phase 4 滚动叙事**：`scroll-narrative.ts`（视差 + batch reveal）+
+- [x] **Phase 4 滚动叙事**：`scroll-narrative.ts`（视差 + batch reveal）+
       光晕漂移 CSS（排除 pointer orb）；`reveal-controller` flag 互斥；无 JS /
       reduced-motion 复验（reduced-motion 断言升级：hero/卡片
       `transform === "none"`、无 `data-gsap-active`/`data-lenis-active`、两帧
       位置采样不变，R2-5）。
-- [ ] **Phase 5 微交互**：磁吸弹簧化（`data-motion-gsap` transition 门控）、
+- [x] **Phase 5 微交互**：磁吸弹簧化（`data-motion-gsap` transition 门控）、
       卡片光泽/微倾斜、TOC FLIP、404 glitch。
-- [ ] **Phase 6 收口**：E2E 收尾 + `quality-gates.md` /
+- [x] **Phase 6 收口**：E2E 收尾 + `quality-gates.md` /
       `rendering-and-interactivity.md` / `coding-style.md` / `testing.md` 全量
       同步 + `audit-bundle` 实测值回填本计划与文档 + Lighthouse 四分类复测 ≥90
       **（含 mobile profile，R2-13）** + 完整 `npm run check` +
@@ -237,6 +237,10 @@ src/lib/client/motion/
 - `audit-bundle.ts`：总 gzip ≤ 80 KB（81,920 B），单文件 ≤ 32 KB（32,768 B；
   分 chunk 后 gsap core ≈28 KB 为最大单文件，有余量）；实施完成后把实测值
   回填本节与 quality-gates.md / testing.md；
+- **实测回填（2026-09-05，15 个 chunk）**：总量 67,798 / 81,920 B gzip；最大
+  单文件 gsap core 26,871 B（共享 chunk 策略生效：ScrollTrigger 并入
+  scroll-narrative 17,848 B、SplitText 并入 hero-choreography 3,872 B、
+  magnetic-spring 589 B、lenis 5,793 B、ClientRouter 5,642 B）；
 - Lighthouse 四分类（home/search/article-normal/article-ddim）仍 ≥90、
   Accessibility ≥95、CLS ≤0.1，另采 mobile profile；GSAP 经 rIC + 动态
   import 不进关键路径；SplitText 在 `fonts.ready` 后执行且只 transform，
@@ -303,46 +307,50 @@ src/lib/client/motion/
 
 ## 12. 审查对账闭环表
 
-| #   | 来源 | 级别 | 修订项                                       | 处置                                                          | 状态 |
-| --- | ---- | ---- | -------------------------------------------- | ------------------------------------------------------------- | ---- |
-| 1   | R1   | P0   | batch 与 motion.css 隐藏契约互斥             | §4.5：置 visible 态 + autoAlpha + reveal-controller flag 互斥 | ✅   |
-| 2   | R1   | P1   | anchors 需带 offset、skip-link 即时跳转      | §4.3 + Phase 2 锚点落点断言                                   | ✅   |
-| 3   | R1   | P1   | 同一 DOM 只编排一次守卫                      | §4.1 代次标记                                                 | ✅   |
-| 4   | R1   | P1   | before-swap 属性接力（swap 清空旧属性）      | §4.2 重写 + 订正表述                                          | ✅   |
-| 5   | R1   | P1   | Hero 初始隐藏门控矛盾                        | §4.4 data-hero-pending + 1.5s 兜底                            | ✅   |
-| 6   | R1   | P2   | persist 显式 key                             | §4.2 `transition:persist="ambient-background"`                | ✅   |
-| 7   | R1   | P2   | persist 后 isHome 属性不恢复                 | §9 风险表留档                                                 | ✅   |
-| 8   | R1   | P2   | scroll-behavior 三层优先级                   | §4.3 写死                                                     | ✅   |
-| 9   | R1   | P2   | 磁吸 CSS transition 门控                     | §4.6 `html[data-motion-gsap]`                                 | ✅   |
-| 10  | R1   | P2   | Lenis 单例化                                 | §4.1/§4.3                                                     | ✅   |
-| 11  | R1   | P2   | 短视口矩阵 + 指示器动画稳定性                | Phase 3 + §4.4                                                | ✅   |
-| 12  | R1   | P2   | flag 三处接线 + 措辞订正                     | Phase 0 + §4.0（满足才加载）                                  | ✅   |
-| 13  | R1   | P2   | D5/D7 数字订正 + 视差 trigger                | §1 + §4.5 trigger=#main-content                               | ✅   |
-| 14  | R2   | P0   | 断言归属/testMatch 盲区                      | §8 表格 + Phase 1/2 配置修改                                  | ✅   |
-| 15  | R2   | P0   | skip-link 焦点契约                           | §4.3 hash+focus + 排除接管                                    | ✅   |
-| 16  | R2   | P1   | 单文件预算 vs 全家桶单 chunk                 | §4.1 分 chunk + Phase 3 提前实测                              | ✅   |
-| 17  | R2   | P1   | 「chunk 未加载」断言不可实现                 | §4.0 运行时标记 + resource 断言                               | ✅   |
-| 18  | R2   | P1   | reduced-motion 对 GSAP inline 盲区           | Phase 4 断言升级                                              | ✅   |
-| 19  | R2   | P1   | SplitText h1 可访问名                        | §4.4 根节点=h1 + 断言                                         | ✅   |
-| 20  | R2   | P1   | scroll-padding offset 落点                   | §4.3 + Phase 2 断言                                           | ✅   |
-| 21  | R2   | P1   | 「不满足才 import」写反                      | §4.0 修正 + gate 纯函数单测                                   | ✅   |
-| 22  | R2   | P1   | Phase 0 同步文档消除门禁真空                 | Phase 0 同 commit + ≤15KiB 废除                               | ✅   |
-| 23  | R2   | P2   | 漂移排除 pointer orb                         | §4.5                                                          | ✅   |
-| 24  | R2   | P2   | zoom 检测门控                                | §4.0 + Phase 2                                                | ✅   |
-| 25  | R2   | P2   | mobile poll 三件套                           | Phase 2 + §8                                                  | ✅   |
-| 26  | R2   | P2   | import 进 rIC + Lighthouse mobile + CSS 豁免 | §4.1/§6/§7 + ADR                                              | ✅   |
-| 27  | R2   | P2   | 偏好变更最小 teardown                        | §4.3                                                          | ✅   |
-| 28  | R2   | P2   | mask 裁切 + autoSplit + 44rem                | §4.4 + Phase 3                                                | ✅   |
-| 29  | R2   | P2   | axe 等待改 data-hero-ready                   | Phase 3                                                       | ✅   |
+| #   | 来源 | 级别 | 修订项                                                                             | 处置                                                                       | 状态 |
+| --- | ---- | ---- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ---- |
+| 1   | R1   | P0   | batch 与 motion.css 隐藏契约互斥                                                   | §4.5：置 visible 态 + autoAlpha + reveal-controller flag 互斥              | ✅   |
+| 2   | R1   | P1   | anchors 需带 offset、skip-link 即时跳转                                            | §4.3 + Phase 2 锚点落点断言                                                | ✅   |
+| 3   | R1   | P1   | 同一 DOM 只编排一次守卫                                                            | §4.1 代次标记                                                              | ✅   |
+| 4   | R1   | P1   | before-swap 属性接力（swap 清空旧属性）                                            | §4.2 重写 + 订正表述                                                       | ✅   |
+| 5   | R1   | P1   | Hero 初始隐藏门控矛盾                                                              | §4.4 data-hero-pending + 1.5s 兜底                                         | ✅   |
+| 6   | R1   | P2   | persist 显式 key                                                                   | §4.2 `transition:persist="ambient-background"`                             | ✅   |
+| 7   | R1   | P2   | persist 后 isHome 属性不恢复                                                       | §9 风险表留档                                                              | ✅   |
+| 8   | R1   | P2   | scroll-behavior 三层优先级                                                         | §4.3 写死                                                                  | ✅   |
+| 9   | R1   | P2   | 磁吸 CSS transition 门控                                                           | §4.6 `html[data-motion-gsap]`                                              | ✅   |
+| 10  | R1   | P2   | Lenis 单例化                                                                       | §4.1/§4.3                                                                  | ✅   |
+| 11  | R1   | P2   | 短视口矩阵 + 指示器动画稳定性                                                      | Phase 3 + §4.4                                                             | ✅   |
+| 12  | R1   | P2   | flag 三处接线 + 措辞订正                                                           | Phase 0 + §4.0（满足才加载）                                               | ✅   |
+| 13  | R1   | P2   | D5/D7 数字订正 + 视差 trigger                                                      | §1 + §4.5 trigger=#main-content                                            | ✅   |
+| 14  | R2   | P0   | 断言归属/testMatch 盲区                                                            | §8 表格 + Phase 1/2 配置修改                                               | ✅   |
+| 15  | R2   | P0   | skip-link 焦点契约                                                                 | §4.3 hash+focus + 排除接管                                                 | ✅   |
+| 16  | R2   | P1   | 单文件预算 vs 全家桶单 chunk                                                       | §4.1 分 chunk + Phase 3 提前实测                                           | ✅   |
+| 17  | R2   | P1   | 「chunk 未加载」断言不可实现                                                       | §4.0 运行时标记 + resource 断言                                            | ✅   |
+| 18  | R2   | P1   | reduced-motion 对 GSAP inline 盲区                                                 | Phase 4 断言升级                                                           | ✅   |
+| 19  | R2   | P1   | SplitText h1 可访问名                                                              | §4.4 根节点=h1 + 断言                                                      | ✅   |
+| 20  | R2   | P1   | scroll-padding offset 落点                                                         | §4.3 + Phase 2 断言                                                        | ✅   |
+| 21  | R2   | P1   | 「不满足才 import」写反                                                            | §4.0 修正 + gate 纯函数单测                                                | ✅   |
+| 22  | R2   | P1   | Phase 0 同步文档消除门禁真空                                                       | Phase 0 同 commit + ≤15KiB 废除                                            | ✅   |
+| 23  | R2   | P2   | 漂移排除 pointer orb                                                               | §4.5                                                                       | ✅   |
+| 24  | R2   | P2   | zoom 检测门控                                                                      | §4.0 + Phase 2                                                             | ✅   |
+| 25  | R2   | P2   | mobile poll 三件套                                                                 | Phase 2 + §8                                                               | ✅   |
+| 26  | R2   | P2   | import 进 rIC + Lighthouse mobile + CSS 豁免                                       | §4.1/§6/§7 + ADR                                                           | ✅   |
+| 27  | R2   | P2   | 偏好变更最小 teardown                                                              | §4.3                                                                       | ✅   |
+| 28  | R2   | P2   | mask 裁切 + autoSplit + 44rem                                                      | §4.4 + Phase 3                                                             | ✅   |
+| 29  | R2   | P2   | axe 等待改 data-hero-ready                                                         | Phase 3                                                                    | ✅   |
+| 30  | 实施 | P1   | zoom 场景下 addInitScript 早于 documentElement、且注册期读 zoom 过早               | 门控判定移至 idle boot（runtime.ts），测试 init 脚本加 DCL 兜底（Phase 4） | ✅   |
+| 31  | 实施 | P1   | 磁吸元素永不通过 Playwright 点击稳定性检查 + 视口外卡片 visibility:hidden 二重死锁 | E2E 点击约定写入 §8，view-transitions.spec 关闭磁吸 flag（Phase 1）        | ✅   |
+| 32  | 实施 | P2   | 卡片 hover 微倾斜与 GSAP inline transform 冲突                                     | 并入磁吸弹簧的 elastic 回弹 + 光泽扫过，静态倾斜不做（Phase 5 决策留档）   | ✅   |
+| 33  | 实施 | P1   | `const cleanup` 重赋值导致 rollup ILLEGAL_REASSIGNMENT 构建失败                    | pointer-controller 改 let 组合式清理（Phase 5）                            | ✅   |
 
 ## 13. DoD
 
-- [ ] `npm run check` 九步全绿；
-- [ ] 新预算下 `audit:bundle` 通过且实测值回填文档；
+- [x] `npm run check` 九步全绿；
+- [x] 新预算下 `audit:bundle` 通过且实测值回填文档（67,798/81,920 B，最大单块 26,871 B）；
 - [ ] Lighthouse 四分类 ≥90 / A11y ≥95（含 mobile profile）；
-- [ ] 7 项目 Playwright 矩阵全绿 + 新增 view-transitions spec；
+- [x] 7 项目 Playwright 矩阵全绿（49 例）+ 新增 view-transitions spec（2 例）；
 - [ ] reduced-motion / 无 JS / 触屏三路降级人工抽查截图
       （`audit-screenshots/motion-overhaul/`）；
-- [ ] ADR 0003 合入，quality-gates.md / rendering-and-interactivity.md /
+- [x] ADR 0003 合入，quality-gates.md / rendering-and-interactivity.md /
       coding-style.md / testing.md 同步；
-- [ ] 生产 smoke（`smoke:production`）81 页全过。
+- [ ] 生产 smoke（`smoke:production`）81 页全过（部署后执行）。

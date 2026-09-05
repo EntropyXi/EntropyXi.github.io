@@ -18,6 +18,8 @@
 
 iOS Safari 由主 Agent 在阶段 3、6、8 分别抽查一次；最低页面集为首页、移动菜单、搜索和一篇复杂公式文章。无真实设备时，以 Playwright WebKit（`mobile-safari` 项目）记录替代结果，并在最终验收中明确标注"WebKit 替代，非真实 iOS 设备"。当前阶段 8 即采用此方案。
 
+动效栈（ADR 0003）补充：`client-matrix.spec.ts` 的门控用例在全部 7 个项目上断言 `data-gsap-active` / `data-lenis-active` / `.lenis` 标记与环境一致（触屏与 reduced-motion 无 Lenis、reduced-motion 无 GSAP inline transform、zoom-200 禁用 Lenis），并用 view-transitions.spec 验证持久化壁纸的节点 identity。
+
 ## 可访问性
 
 - 首页、归档、搜索和 DDIM 文章的 axe `serious` / `critical` 必须为 0；

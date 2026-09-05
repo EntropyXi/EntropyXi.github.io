@@ -69,8 +69,8 @@ export function initializeMagneticSpring(events: AbortController): () => void {
         () => {
           moveEvents?.abort();
           moveEvents = null;
-          releaseX();
-          releaseY();
+          releaseX(0);
+          releaseY(0);
           element.setAttribute("data-magnetic-state", "inactive");
         },
         { signal: events.signal },
