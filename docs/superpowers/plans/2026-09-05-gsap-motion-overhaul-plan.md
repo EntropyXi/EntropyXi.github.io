@@ -260,6 +260,12 @@ src/lib/client/motion/
 `client-behavior.spec.ts` 的动效 feature-flag 契约扩展
 `entropyxi-feature-gsap`（localStorage + URL 参数双通道，与现有 flag 同构）。
 
+**E2E 点击约定（Phase 1 实测新增）**：磁吸元素（卡片/导航/logo）会跟随指针
+移动，Playwright 的 click 稳定性检查永远无法通过；视口外的卡片又处于
+`visibility:hidden`（reveal 未触发）构成二重死锁。涉及点击磁吸目标的用例须
+`entropyxi-feature-magnetic=false`（view-transitions.spec 已采用），或点击
+视口内非磁吸目标；不得用 `force: true` 绕过。
+
 ## 9. 风险登记表
 
 | 风险                                                   | 概率         | 影响 | 缓解                                               | 阻塞上线 |

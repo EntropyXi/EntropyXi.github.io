@@ -12,7 +12,11 @@ interface Props {
 const { isHome = false } = Astro.props;
 ---
 
-<div class="ambient-background" aria-hidden="true">
+<div
+  class="ambient-background"
+  aria-hidden="true"
+  transition:persist="ambient-background"
+>
   <div class="ambient-wallpaper-container">
     <picture class="ambient-wallpaper-picture">
       <source

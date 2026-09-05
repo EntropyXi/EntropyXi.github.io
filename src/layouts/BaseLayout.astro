@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import { SITE_DESCRIPTION, SITE_LANG, SITE_URL } from "@/data/site";
 import { buildPageTitle } from "@/lib/seo/page-title";
 import AmbientBackground from "@/components/visual/AmbientBackground.astro";
@@ -32,6 +33,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ClientRouter />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="generator" content={Astro.generator} />
@@ -74,8 +76,8 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       )
     }
 
-    <!-- Theme & Client initialization script to prevent FOUC -->
-    <script is:inline>
+    <!-- Theme & Client initialization script to prevent FOUC (reruns after every view-transition swap) -->
+    <script is:inline data-astro-rerun>
       (function () {
         document.documentElement.classList.remove("no-js");
         document.documentElement.dataset.theme = "dark";
@@ -135,6 +137,33 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
       import { initializeRevealController } from "@/lib/client/reveal-controller";
       import { initializeAmbientController } from "@/lib/client/ambient-controller";
       import { initializePointerController } from "@/lib/client/pointer-controller";
+
+      // View-transition attribute relay (plan §4.2): the swap replaces every
+      // <html> attribute with the new page's SSR values, dropping the runtime
+      // state set by JS. Copy it onto the incoming document before the swap.
+      interface BeforeSwapEvent extends Event {
+        newDocument: Document;
+      }
+
+      const RUNTIME_ATTRIBUTES = [
+        "data-motion",
+        "data-motion-preference",
+        "data-page-visibility",
+        "data-feature-reveal",
+        "data-feature-ambient",
+        "data-feature-magnetic",
+        "data-feature-gsap",
+      ] as const;
+
+      document.addEventListener("astro:before-swap", (event) => {
+        const { newDocument } = event as BeforeSwapEvent;
+        for (const attribute of RUNTIME_ATTRIBUTES) {
+          const value = document.documentElement.getAttribute(attribute);
+          if (value !== null) {
+            newDocument.documentElement.setAttribute(attribute, value);
+          }
+        }
+      });
 
       registerClientFeature("motion-environment", initializeMotionEnvironment);
       registerClientFeature("reveal-controller", initializeRevealController);
