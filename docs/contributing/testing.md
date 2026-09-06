@@ -31,6 +31,8 @@ npm run check
 - CI 需安装对应浏览器：`npx playwright install --with-deps chromium webkit`
   （见 `.github/workflows/quality.yml` 与 `.github/workflows/deploy.yml`）。
 - axe 检查首页、归档、搜索与 DDIM 文章，`serious`/`critical` 必须为 0。
+- `mobile-overflow.spec.ts`（desktop-chromium）：34 页样本（30 篇文章 + 4 个
+  聚合页）× 360/320 两视口断言页面级无横向溢出，失败信息附带逐元素明细。
 
 ## 内容与产物审计
 

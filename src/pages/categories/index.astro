@@ -78,6 +78,7 @@ const categoriesWithCount = categoryPaths.map((catPath) => {
   }
 
   .category-atlas-card {
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -145,7 +146,11 @@ const categoriesWithCount = categoryPaths.map((catPath) => {
 
   @media (width <= 40rem) {
     .category-grid {
-      grid-template-columns: 1fr;
+      /* minmax(0, 1fr): `1fr` equals `minmax(auto, 1fr)` and the auto
+         minimum is inflated by the widest card's min-content (long nowrap
+         category names), which forced the whole track to 369px and broke
+         the page on narrow viewports (mobile overflow plan REQ-1). */
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>
