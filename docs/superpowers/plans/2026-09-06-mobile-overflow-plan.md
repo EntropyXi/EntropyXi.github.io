@@ -132,8 +132,7 @@ revert；不涉及依赖与管线。
 
 ## 8. DoD
 
-- [ ] 双审查意见全部闭合（§7）；
-- [ ] §4 验收全过；
-- [ ] 完整 `npm run check` 绿并提交；
-- [ ] push → GitHub Actions 部署成功 → `smoke:production` 通过 → quality-gates
-      CI 时长回填（desktop 测试数增加后的新数据）。
+- [x] 双审查意见全部闭合（§7，R1+R2 合计 14 条）；
+- [x] §4 验收全过（pageOverflow 2→0、SDE 页行内 offender 归零、CNN 用例 3 轮稳定、51+68 e2e 全绿）；
+- [x] 完整 `npm run check` 绿并提交（bce3a28）；
+- [x] push → GitHub Actions 部署成功（2m46s）→ `smoke:production` 通过 → quality-gates CI 时长已回填。

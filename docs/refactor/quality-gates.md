@@ -74,3 +74,7 @@ CI 真实耗时（GitHub Actions 运行记录回填，2026-08-22 至 2026-09-04�
 - Quality（PR 门禁，同一 `npm run check`）：成功运行 2m06s – 3m51s。
 
 均远低于 20 分钟分片阈值，维持单 job 不分片。
+
+2026-09-06 增补（`mobile-overflow.spec.ts` 新增 68 个用例、desktop-chromium
+测试数 37 → 105 后）：Deploy 成功运行 2m12s – 2m46s，增幅约 +20–30s，
+与预估一致；维持单 job 不分片。
