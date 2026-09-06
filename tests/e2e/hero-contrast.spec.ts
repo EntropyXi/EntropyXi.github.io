@@ -184,6 +184,12 @@ test.describe("Hero Component Accessibility, Typography and Contrast Verificatio
       { width: 390, height: 844 },
       { width: 360, height: 800 },
       { width: 320, height: 568 },
+      // Real Android browsers show a dynamic toolbar, so portrait layout
+      // heights are usually <= 44rem and hit the short-viewport clamp —
+      // that regime previously ignored the width-clamp reductions entirely
+      // (live probe: 41.6px at 390x660). Pin both regimes.
+      { width: 390, height: 660 },
+      { width: 360, height: 640 },
     ]) {
       await page.setViewportSize(viewport);
       await page.goto("/");
@@ -208,6 +214,7 @@ test.describe("Hero Component Accessibility, Typography and Contrast Verificatio
         );
         return {
           marker: title.dataset.heroFit ?? null,
+          computedFontSize: parseFloat(getComputedStyle(title).fontSize),
           widestLineRight: Math.round(widestLineRight),
           containerRight: Math.round(containerRight),
         };
@@ -229,6 +236,13 @@ test.describe("Hero Component Accessibility, Typography and Contrast Verificatio
           /^(native|scaled)$/,
         );
       }
+      // Pin BOTH clamp regimes (width-media and short-height media) to the
+      // reduced scale — the short-height regime previously ignored two
+      // font-size reduction rounds entirely (live probe: 41.6px @390x660).
+      expect(
+        fit!.computedFontSize,
+        `title font-size at ${viewport.width}x${viewport.height}`,
+      ).toBeLessThanOrEqual(30);
     }
   });
 });
