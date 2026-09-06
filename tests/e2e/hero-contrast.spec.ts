@@ -35,6 +35,15 @@ test.describe("Hero Component Accessibility, Typography and Contrast Verificatio
       page.getByRole("heading", { name: "WELCOME TO ENTROPYXI BLOG !" }),
     ).toBeVisible();
 
+    // The fit-title feature must have measured the title and left its
+    // decision marker; the value is environment-dependent (native when
+    // Impact resolves locally, scaled on font-poor CI Linux), so only the
+    // attribute presence is asserted here.
+    await expect(page.locator(".hero-welcome-title")).toHaveAttribute(
+      "data-hero-fit",
+      /^(native|scaled)$/,
+    );
+
     // Verify title lines do not wrap/overflow horizontally
     const line1NoWrap = await line1.evaluate((el) => {
       const style = window.getComputedStyle(el);
@@ -144,6 +153,79 @@ test.describe("Hero Component Accessibility, Typography and Contrast Verificatio
 
       const box = await page.locator(".hero-scroll-indicator").boundingBox();
       expect(box?.height).toBeGreaterThanOrEqual(44);
+    }
+  });
+
+  test("hero title scales to fit when Android-style font fallback applies", async ({
+    page,
+  }) => {
+    // Android resolves none of the condensed fonts in the title stack, so
+    // the fallback renders ~38% wider and was silently clipped. Force the
+    // sans-serif fallback to reproduce that environment (the audit probe
+    // measured 350px vs a 350px container at 390, 62px overflow at 320).
+    // The override must exist BEFORE the deferred module scripts run their
+    // first fit measurement, and documentElement may not exist at
+    // init-script time (client-matrix.spec.ts:105 lesson) — attach it the
+    // moment the element appears. DOMContentLoaded is too late.
+    await page.addInitScript(() => {
+      const observer = new MutationObserver(() => {
+        if (document.documentElement) {
+          const style = document.createElement("style");
+          style.textContent =
+            ".hero-welcome-title { font-family: sans-serif !important; }";
+          document.documentElement.appendChild(style);
+          observer.disconnect();
+        }
+      });
+      observer.observe(document, { childList: true, subtree: true });
+    });
+
+    for (const viewport of [
+      { width: 390, height: 844 },
+      { width: 360, height: 800 },
+      { width: 320, height: 568 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+      await waitForHeroSettled(page);
+
+      // Carrier assertion: the rendered lines must stay inside the layout
+      // container. (line scrollWidth alone is tautological here — the
+      // fit-content parent tracks the text width.)
+      const fit = await page.evaluate(() => {
+        const container = document.querySelector(
+          ".hero-content-container",
+        ) as HTMLElement | null;
+        const title = document.querySelector(
+          ".hero-welcome-title",
+        ) as HTMLElement | null;
+        if (!container || !title) return null;
+        const containerRight = container.getBoundingClientRect().right;
+        const widestLineRight = Math.max(
+          ...Array.from(title.querySelectorAll(":scope > span")).map(
+            (line) => line.getBoundingClientRect().right,
+          ),
+        );
+        return {
+          marker: title.dataset.heroFit ?? null,
+          widestLineRight: Math.round(widestLineRight),
+          containerRight: Math.round(containerRight),
+        };
+      });
+      expect(fit, `fit state at ${viewport.width}`).not.toBeNull();
+      expect(
+        fit!.widestLineRight,
+        `title must not exceed the container at ${viewport.width}`,
+      ).toBeLessThanOrEqual(fit!.containerRight + 2);
+      expect(fit!.marker, `fit marker must exist at ${viewport.width}`).toMatch(
+        /^(native|scaled)$/,
+      );
+      if (viewport.width < 390) {
+        // 390 is the algorithm's equality boundary (350px text vs 350px
+        // container) where native is acceptable; narrower viewports must
+        // actively scale.
+        expect(fit!.marker, `must scale at ${viewport.width}`).toBe("scaled");
+      }
     }
   });
 });

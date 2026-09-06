@@ -20,7 +20,7 @@ npm run check
 
 - 目录：`tests/unit/**/*.test.ts`；运行：`npm run test:unit -- --run`。
 - 覆盖纯函数与组件输出：分页、路径、标题、主题锁定（`resolveTheme` 固定返回 dark）、
-  阅读进度、页头状态、数学可访问性与标题唯一性。
+  阅读进度、页头状态、Hero 标题自适应缩放（`computeHeroFitFontSize`）、数学可访问性与标题唯一性。
 
 ## 端到端测试（Playwright）
 

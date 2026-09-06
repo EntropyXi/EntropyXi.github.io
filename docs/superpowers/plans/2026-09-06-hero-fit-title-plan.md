@@ -157,8 +157,8 @@ export function computeHeroFitFontSize(input: HeroFitInput): string;
 
 ## 8. DoD
 
-- [ ] 双审查意见全部闭合；
-- [ ] §4 验收全过；
-- [ ] 审查执行情况（实现 vs 计划逐项核对）并记录；
+- [x] 双审查意见全部闭合（R1 8 条 + R2 10 条 = 18 条，§7）；
+- [x] §4 验收全过（新 E2E 在 sans-serif 回退下 390 不裁切双态、360/320 scaled；36→42 单测全绿；bundle 68343/81920，增量 324B）；
+- [x] 审查执行情况：REQ-1..5 逐项核对通过——container 取 .hero-content-container、可重入无守卫、fonts.ready 同值不写 DOM、MutationObserver 注入、390 双态断言、注册先于 motion-environment、非首页 noop、bundle 增量 324B；
 - [ ] `docs/contributing/testing.md` 单测覆盖清单补 hero-fit 条目；
 - [ ] 提交 + push + Actions 部署成功 + 线上抽检。

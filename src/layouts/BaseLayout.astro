@@ -155,6 +155,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
     <SiteFooter />
     <script>
       import { registerClientFeature } from "@/lib/client/lifecycle";
+      import { initializeHeroFitTitle } from "@/lib/client/hero-fit-title";
       import { initializeMotionEnvironment } from "@/lib/client/motion-environment";
       import { initializeRevealController } from "@/lib/client/reveal-controller";
       import { initializeAmbientController } from "@/lib/client/ambient-controller";
@@ -189,6 +190,8 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).href;
         }
       });
 
+      // Layout fix before motion features (plan 2026-09-06-hero-fit-title §3.2).
+      registerClientFeature("hero-fit-title", initializeHeroFitTitle);
       registerClientFeature("motion-environment", initializeMotionEnvironment);
       registerClientFeature("reveal-controller", initializeRevealController);
       registerClientFeature("ambient-controller", initializeAmbientController);
