@@ -1,8 +1,20 @@
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { JSON_SCHEMA, load as yamlLoad } from "js-yaml";
 import { hasTopLevelMarkdownHeading } from "../src/lib/audit/heading-uniqueness";
+import { readPostSources } from "./lib/content-manifest";
+
+/**
+ * 内容审计。
+ *
+ * `tests/fixtures/legacy-baseline.json` 记录的是迁移前冻结的历史 URL，禁止
+ * 手工追加新文章；因此本脚本对新增文章采取增量语义：
+ *
+ * - 结构规则（frontmatter 字段、正文禁 H1、禁 Obsidian 图片语法、图片必须存在）
+ *   对**所有**文章生效；
+ * - 基线中每一条历史文章 URL 必须仍然由某篇文章产出（防止历史 URL 静默丢失）；
+ * - 文章总数不得少于基线 `postCount`。
+ */
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const migratedRoot = path.join(root, "src", "content", "blog");
@@ -21,40 +33,24 @@ interface LegacyBaseline {
 
 const errors: string[] = [];
 
-function walkMarkdown(dir: string, files: string[] = []): string[] {
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name.startsWith(".")) continue;
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) walkMarkdown(full, files);
-    else if (entry.name.endsWith(".md")) files.push(full);
-  }
-  return files;
-}
-
-function parseFrontmatter(file: string): { data: Record<string, unknown>; body: string } {
-  const raw = readFileSync(file, "utf8");
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
-  if (!match || match[1] === undefined) throw new Error(`Missing frontmatter block: ${file}`);
-  return {
-    data: yamlLoad(match[1], { schema: JSON_SCHEMA }) as Record<string, unknown>,
-    body: raw.slice(match[0].length),
-  };
-}
-
 function main(): void {
   const baseline = JSON.parse(readFileSync(baselineFile, "utf8")) as LegacyBaseline;
-  const legacyPathnames = new Set(
-    baseline.html.filter((record) => record.kind === "article").map((record) => decodeURIComponent(record.pathname)),
-  );
+  const legacyPermalinks = new Map<string, string>();
+  for (const record of baseline.html) {
+    if (record.kind !== "article") continue;
+    const pathname = decodeURIComponent(record.pathname);
+    legacyPermalinks.set(pathname, pathname.replace(/^\/+/, "").replace(/\/+$/, ""));
+  }
 
-  const migratedFiles = walkMarkdown(migratedRoot);
-  if (migratedFiles.length !== baseline.summary.postCount) {
-    errors.push(`expected ${baseline.summary.postCount} migrated posts, found ${migratedFiles.length}`);
+  const posts = readPostSources(migratedRoot);
+  if (posts.length < baseline.summary.postCount) {
+    errors.push(
+      `expected at least ${baseline.summary.postCount} posts (frozen legacy baseline), found ${posts.length}`,
+    );
   }
 
   const seenPermalinks = new Set<string>();
-  for (const file of migratedFiles) {
-    const { data, body } = parseFrontmatter(file);
+  for (const { file, data, body } of posts) {
     const title = data.title;
     const description = data.description;
     const date = data.date;
@@ -80,10 +76,6 @@ function main(): void {
     if (typeof permalink === "string" && permalink.trim() !== "") {
       if (seenPermalinks.has(permalink)) errors.push(`${file}: duplicate permalink ${permalink}`);
       seenPermalinks.add(permalink);
-      const expectedPathname = `/${permalink}/`;
-      if (!legacyPathnames.has(expectedPathname)) {
-        errors.push(`${file}: permalink pathname ${expectedPathname} not found in legacy URL manifest`);
-      }
     }
 
     if (body.includes("<!-- more -->")) errors.push(`${file}: contains <!-- more -->`);
@@ -117,12 +109,22 @@ function main(): void {
     }
   }
 
+  // 迁移基线是冻结的历史 URL 清单：迁移后新增文章属于增量，但历史 permalink
+  // 一个都不能消失（不得因改标题、移动文件或改分类而改变）。
+  let preservedLegacy = 0;
+  for (const [pathname, legacyPermalink] of legacyPermalinks) {
+    if (seenPermalinks.has(legacyPermalink)) preservedLegacy += 1;
+    else errors.push(`legacy URL ${pathname} is no longer produced by any post (expected permalink ${legacyPermalink})`);
+  }
+
   if (errors.length > 0) {
     for (const error of errors) console.error(`CONTENT: ${error}`);
     process.exit(1);
   }
 
-  console.log(`CONTENT: ${migratedFiles.length} posts passed`);
+  console.log(
+    `CONTENT: ${posts.length} posts passed (${preservedLegacy}/${legacyPermalinks.size} legacy URLs preserved, ${posts.length - preservedLegacy} added after migration)`,
+  );
 }
 
 main();

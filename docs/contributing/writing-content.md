@@ -25,6 +25,15 @@ draft: false
 ```
 
 `permalink` 全站唯一、不含首尾斜杠，发布后冻结（不得因改标题、移动文件或改分类而改变）。
+按既有文章的惯例，permalink 的末段由标题去掉空格而成（例如标题 `Rust：cargo`
+对应 `2026/09/18/Rust学习/Rust：cargo`）。
+
+迁移后的新文章是增量内容，**不写入** `tests/fixtures/legacy-baseline.json`——该
+manifest 只冻结迁移前的历史 URL，手工追加会破坏其语义。两个内容审计脚本以及
+移动端溢出闸门会自动把新文章纳入检查：`scripts/audit-content.ts` 校验全部文章的
+结构规则并确认历史 URL 一条都没丢，`scripts/audit-output.ts` 与
+`tests/e2e/mobile-overflow.spec.ts` 从 `src/content/blog` 的 frontmatter 推导新文章的
+pathname，因此新增文章无需改动任何清单文件。
 
 ## 标题规则（每页单 H1）
 

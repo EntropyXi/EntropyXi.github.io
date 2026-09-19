@@ -88,6 +88,10 @@ git diff --exit-code tests/fixtures/legacy-baseline.json
 - 输出使用 UTF-8、LF 换行，且不写入当前时间。
 - `tests/fixtures/legacy-baseline.json` 是迁移基线，**禁止手工编辑**。
 - 如需更新基线，应重新生成 Hexo `public/` 后运行捕获命令，并审查 diff。
+- 迁移后新增的文章不属于基线：基线只记录迁移前的历史 URL，新文章是增量内容，
+  由 `scripts/audit-content.ts`、`scripts/audit-output.ts` 和移动端溢出闸门直接从
+  `src/content/blog` 推导后纳入检查。向基线追加新文章会破坏“历史 URL 冻结清单”
+  的语义，并让生产 URL 核验把尚未部署的路径误判为回归。
 
 ## 与生产站交叉核对
 

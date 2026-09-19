@@ -27,8 +27,10 @@
 - 文章路由通过 catch-all 静态路由读取 `permalink`，输出 pathname 恒为 `/${permalink}/`。
 - `permalink` 一旦发布，不得因改标题、移动文件或调整分类而改变。
 - 分类和标签显示名使用原始中文；路由 slug 经过统一、可逆或显式映射。
-- 历史 URL 冻结于 `tests/fixtures/legacy-baseline.json`；每篇 `permalink` 的 pathname
-  必须出现在旧站 manifest 中（由 `scripts/audit-content.ts` 校验）。
+- 历史 URL 冻结于 `tests/fixtures/legacy-baseline.json`；manifest 中每条历史文章 URL
+  必须仍然由某篇文章产出（由 `scripts/audit-content.ts` 校验）。
+- 迁移后新增的文章是**增量**：不写入冻结基线，`permalink` 由作者在创建时确定并
+  同样冻结，发布后不得因改标题、移动文件或调整分类而改变。
 
 ## Markdown 规则
 
